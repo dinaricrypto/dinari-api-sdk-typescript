@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'dinari-api-sdk/internal/uploads';
-import { toFile } from 'dinari-api-sdk/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@dinari/api-sdk/internal/uploads';
+import { toFile } from '@dinari/api-sdk/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {
