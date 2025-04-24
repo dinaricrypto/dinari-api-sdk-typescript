@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Dinari from 'dinari-api-sdk';
+import Dinari from '@dinari/api-sdk';
 
 const client = new Dinari({
   apiKey: 'My API Key',

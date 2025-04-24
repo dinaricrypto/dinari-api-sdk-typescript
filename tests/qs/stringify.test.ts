@@ -1,7 +1,7 @@
 import iconv from 'iconv-lite';
-import { stringify } from 'dinari-api-sdk/internal/qs';
-import { encode } from 'dinari-api-sdk/internal/qs/utils';
-import { StringifyOptions } from 'dinari-api-sdk/internal/qs/types';
+import { stringify } from '@dinari/api-sdk/internal/qs';
+import { encode } from '@dinari/api-sdk/internal/qs/utils';
+import { StringifyOptions } from '@dinari/api-sdk/internal/qs/types';
 import { empty_test_cases } from './empty-keys-cases';
 import assert from 'assert';
 
