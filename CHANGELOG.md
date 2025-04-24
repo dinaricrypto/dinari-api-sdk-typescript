@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.1-alpha.2 (2025-04-24)
+
+Full Changelog: [v0.0.1-alpha.1...v0.0.1-alpha.2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.0.1-alpha.1...v0.0.1-alpha.2)
+
+### Chores
+
+* update SDK settings ([909c5d8](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/909c5d82e7e630d9b68f5bf1e60a9fb2d391b22e))
+
 ## 0.0.1-alpha.1 (2025-04-24)
 
 Full Changelog: [v0.0.1-alpha.0...v0.0.1-alpha.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.0.1-alpha.0...v0.0.1-alpha.1)
