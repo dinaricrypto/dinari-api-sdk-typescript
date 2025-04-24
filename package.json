@@ -1,6 +1,6 @@
 {
-  "name": "dinari",
-  "version": "0.0.1-alpha.0",
+  "name": "dinari-api-sdk",
+  "version": "0.0.1-alpha.1",
   "description": "The official TypeScript library for the Dinari API",
   "author": "Dinari <hello@dinari.com>",
   "types": "dist/index.d.ts",
@@ -54,8 +54,8 @@
     "./internal/shims/getBuiltinModule.js": "./internal/shims/nullGetBuiltinModule.js"
   },
   "imports": {
-    "dinari": ".",
-    "dinari/*": "./src/*"
+    "dinari-api-sdk": ".",
+    "dinari-api-sdk/*": "./src/*"
   },
   "exports": {
     ".": {

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Dinari } from 'dinari';
+import { Dinari } from 'dinari-api-sdk';
 
 const { stringifyQuery } = Dinari.prototype as any;
 
