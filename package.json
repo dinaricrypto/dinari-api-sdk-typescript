@@ -1,12 +1,12 @@
 {
-  "name": "@dinari/api-sdk",
+  "name": "dinari",
   "version": "0.0.1-alpha.2",
   "description": "The official TypeScript library for the Dinari API",
   "author": "Dinari <hello@dinari.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:dinaricrypto/dinari-api-sdk-typescript",
+  "repository": "github:stainless-sdks/dinari-typescript",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [
@@ -50,8 +50,8 @@
     "synckit": "0.8.8"
   },
   "imports": {
-    "@dinari/api-sdk": ".",
-    "@dinari/api-sdk/*": "./src/*"
+    "dinari": ".",
+    "dinari/*": "./src/*"
   },
   "exports": {
     ".": {

@@ -1,6 +1,6 @@
 # Dinari TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/@dinari/api-sdk.svg)](https://npmjs.org/package/@dinari/api-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@dinari/api-sdk)
+[![NPM version](https://img.shields.io/npm/v/dinari.svg)](https://npmjs.org/package/dinari) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/dinari)
 
 This library provides convenient access to the Dinari REST API from server-side TypeScript or JavaScript.
 
@@ -11,8 +11,11 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install @dinari/api-sdk
+npm install git+ssh://git@github.com:stainless-sdks/dinari-typescript.git
 ```
+
+> [!NOTE]
+> Once this package is [published to npm](https://app.stainless.com/docs/guides/publish), this will become: `npm install dinari`
 
 ## Usage
 
@@ -20,17 +23,15 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Dinari from '@dinari/api-sdk';
+import Dinari from 'dinari';
 
 const client = new Dinari({
-  apiKey: process.env['DINARI_API_KEY'], // This is the default and can be omitted
-  secret: process.env['DINARI_SECRET'], // This is the default and can be omitted
+  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted
+  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const response = await client.api.v2.marketData.getMarketHours();
-
-  console.log(response.is_market_open);
+  const stocks = await client.v2.marketData.stocks.list();
 }
 
 main();
@@ -42,16 +43,15 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Dinari from '@dinari/api-sdk';
+import Dinari from 'dinari';
 
 const client = new Dinari({
-  apiKey: process.env['DINARI_API_KEY'], // This is the default and can be omitted
-  secret: process.env['DINARI_SECRET'], // This is the default and can be omitted
+  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted
+  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const response: Dinari.API.V2.MarketDataGetMarketHoursResponse =
-    await client.api.v2.marketData.getMarketHours();
+  const stocks: Dinari.V2.MarketData.StockListResponse = await client.v2.marketData.stocks.list();
 }
 
 main();
@@ -70,38 +70,38 @@ Request parameters that correspond to file uploads can be passed in many differe
 
 ```ts
 import fs from 'fs';
-import Dinari, { toFile } from '@dinari/api-sdk';
+import Dinari, { toFile } from 'dinari';
 
 const client = new Dinari();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.api.v2.entities.kyc.uploadDocument('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
   entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   document_type: 'GOVERNMENT_ID',
   file: fs.createReadStream('/path/to/file'),
 });
 
 // Or if you have the web `File` API you can pass a `File` instance:
-await client.api.v2.entities.kyc.uploadDocument('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
   entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   document_type: 'GOVERNMENT_ID',
   file: new File(['my bytes'], 'file'),
 });
 
 // You can also pass a `fetch` `Response`:
-await client.api.v2.entities.kyc.uploadDocument('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
   entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   document_type: 'GOVERNMENT_ID',
   file: await fetch('https://somesite/file'),
 });
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.api.v2.entities.kyc.uploadDocument('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
   entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   document_type: 'GOVERNMENT_ID',
   file: await toFile(Buffer.from('my bytes'), 'file'),
 });
-await client.api.v2.entities.kyc.uploadDocument('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
   entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   document_type: 'GOVERNMENT_ID',
   file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
@@ -117,7 +117,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const response = await client.api.v2.marketData.getMarketHours().catch(async (err) => {
+  const stocks = await client.v2.marketData.stocks.list().catch(async (err) => {
     if (err instanceof Dinari.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -160,7 +160,7 @@ const client = new Dinari({
 });
 
 // Or, configure per-request:
-await client.api.v2.marketData.getMarketHours({
+await client.v2.marketData.stocks.list({
   maxRetries: 5,
 });
 ```
@@ -177,7 +177,7 @@ const client = new Dinari({
 });
 
 // Override per-request:
-await client.api.v2.marketData.getMarketHours({
+await client.v2.marketData.stocks.list({
   timeout: 5 * 1000,
 });
 ```
@@ -200,13 +200,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Dinari();
 
-const response = await client.api.v2.marketData.getMarketHours().asResponse();
+const response = await client.v2.marketData.stocks.list().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.api.v2.marketData.getMarketHours().withResponse();
+const { data: stocks, response: raw } = await client.v2.marketData.stocks.list().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.is_market_open);
+console.log(stocks);
 ```
 
 ### Logging
@@ -223,7 +223,7 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import Dinari from '@dinari/api-sdk';
+import Dinari from 'dinari';
 
 const client = new Dinari({
   logLevel: 'debug', // Show all log messages
@@ -251,7 +251,7 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import Dinari from '@dinari/api-sdk';
+import Dinari from 'dinari';
 import pino from 'pino';
 
 const logger = pino();
@@ -321,7 +321,7 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import Dinari from '@dinari/api-sdk';
+import Dinari from 'dinari';
 import fetch from 'my-fetch';
 
 const client = new Dinari({ fetch });
@@ -332,7 +332,7 @@ const client = new Dinari({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import Dinari from '@dinari/api-sdk';
+import Dinari from 'dinari';
 
 const client = new Dinari({
   fetchOptions: {
@@ -349,7 +349,7 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import Dinari from '@dinari/api-sdk';
+import Dinari from 'dinari';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
@@ -363,7 +363,7 @@ const client = new Dinari({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import Dinari from '@dinari/api-sdk';
+import Dinari from 'dinari';
 
 const client = new Dinari({
   fetchOptions: {
@@ -375,7 +375,7 @@ const client = new Dinari({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Dinari from 'npm:@dinari/api-sdk';
+import Dinari from 'npm:dinari';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new Dinari({
@@ -397,7 +397,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/dinaricrypto/dinari-api-sdk-typescript/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/dinari-typescript/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

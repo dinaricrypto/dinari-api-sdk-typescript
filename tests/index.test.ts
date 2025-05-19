@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from '@dinari/api-sdk/core/api-promise';
+import { APIPromise } from 'dinari/core/api-promise';
 
 import util from 'node:util';
-import Dinari from '@dinari/api-sdk';
-import { APIUserAbortError } from '@dinari/api-sdk';
+import Dinari from 'dinari';
+import { APIUserAbortError } from 'dinari';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
@@ -23,8 +23,8 @@ describe('instantiate client', () => {
     const client = new Dinari({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
-      apiKey: 'My API Key',
-      secret: 'My Secret',
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
     });
 
     test('they are used in the request', () => {
@@ -91,8 +91,8 @@ describe('instantiate client', () => {
       const client = new Dinari({
         logger: logger,
         logLevel: 'debug',
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
 
       await forceAPIResponseForClient(client);
@@ -100,7 +100,7 @@ describe('instantiate client', () => {
     });
 
     test('default logLevel is warn', async () => {
-      const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret' });
+      const client = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
       expect(client.logLevel).toBe('warn');
     });
 
@@ -116,8 +116,8 @@ describe('instantiate client', () => {
       const client = new Dinari({
         logger: logger,
         logLevel: 'info',
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
 
       await forceAPIResponseForClient(client);
@@ -134,7 +134,11 @@ describe('instantiate client', () => {
       };
 
       process.env['DINARI_LOG'] = 'debug';
-      const client = new Dinari({ logger: logger, apiKey: 'My API Key', secret: 'My Secret' });
+      const client = new Dinari({
+        logger: logger,
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
+      });
       expect(client.logLevel).toBe('debug');
 
       await forceAPIResponseForClient(client);
@@ -151,7 +155,11 @@ describe('instantiate client', () => {
       };
 
       process.env['DINARI_LOG'] = 'not a log level';
-      const client = new Dinari({ logger: logger, apiKey: 'My API Key', secret: 'My Secret' });
+      const client = new Dinari({
+        logger: logger,
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
+      });
       expect(client.logLevel).toBe('warn');
       expect(warnMock).toHaveBeenCalledWith(
         'process.env[\'DINARI_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
@@ -171,8 +179,8 @@ describe('instantiate client', () => {
       const client = new Dinari({
         logger: logger,
         logLevel: 'off',
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
 
       await forceAPIResponseForClient(client);
@@ -192,8 +200,8 @@ describe('instantiate client', () => {
       const client = new Dinari({
         logger: logger,
         logLevel: 'debug',
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
       expect(client.logLevel).toBe('debug');
       expect(warnMock).not.toHaveBeenCalled();
@@ -205,8 +213,8 @@ describe('instantiate client', () => {
       const client = new Dinari({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
@@ -215,8 +223,8 @@ describe('instantiate client', () => {
       const client = new Dinari({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
@@ -225,8 +233,8 @@ describe('instantiate client', () => {
       const client = new Dinari({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
@@ -235,8 +243,8 @@ describe('instantiate client', () => {
   test('custom fetch', async () => {
     const client = new Dinari({
       baseURL: 'http://localhost:5000/',
-      apiKey: 'My API Key',
-      secret: 'My Secret',
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -254,8 +262,8 @@ describe('instantiate client', () => {
     // make sure the global fetch type is assignable to our Fetch type
     const client = new Dinari({
       baseURL: 'http://localhost:5000/',
-      apiKey: 'My API Key',
-      secret: 'My Secret',
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
       fetch: defaultFetch,
     });
   });
@@ -263,8 +271,8 @@ describe('instantiate client', () => {
   test('custom signal', async () => {
     const client = new Dinari({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-      apiKey: 'My API Key',
-      secret: 'My Secret',
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -296,8 +304,8 @@ describe('instantiate client', () => {
 
     const client = new Dinari({
       baseURL: 'http://localhost:5000/',
-      apiKey: 'My API Key',
-      secret: 'My Secret',
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
       fetch: testFetch,
     });
 
@@ -309,8 +317,8 @@ describe('instantiate client', () => {
     test('trailing slash', () => {
       const client = new Dinari({
         baseURL: 'http://localhost:5000/custom/path/',
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
@@ -318,8 +326,8 @@ describe('instantiate client', () => {
     test('no trailing slash', () => {
       const client = new Dinari({
         baseURL: 'http://localhost:5000/custom/path',
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
@@ -331,37 +339,41 @@ describe('instantiate client', () => {
     test('explicit option', () => {
       const client = new Dinari({
         baseURL: 'https://example.com',
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
       process.env['DINARI_BASE_URL'] = 'https://example.com/from_env';
-      const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret' });
+      const client = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
       process.env['DINARI_BASE_URL'] = ''; // empty
-      const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret' });
+      const client = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
       expect(client.baseURL).toEqual('https://api-enterprise.sbt.dinari.com');
     });
 
     test('blank env variable', () => {
       process.env['DINARI_BASE_URL'] = '  '; // blank
-      const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret' });
+      const client = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
       expect(client.baseURL).toEqual('https://api-enterprise.sbt.dinari.com');
     });
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new Dinari({ maxRetries: 4, apiKey: 'My API Key', secret: 'My Secret' });
+    const client = new Dinari({
+      maxRetries: 4,
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
+    });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new Dinari({ apiKey: 'My API Key', secret: 'My Secret' });
+    const client2 = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
     expect(client2.maxRetries).toEqual(2);
   });
 
@@ -370,8 +382,8 @@ describe('instantiate client', () => {
       const client = new Dinari({
         baseURL: 'http://localhost:5000/',
         maxRetries: 3,
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
 
       const newClient = client.withOptions({
@@ -397,8 +409,8 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         defaultHeaders: { 'X-Test-Header': 'test-value' },
         defaultQuery: { 'test-param': 'test-value' },
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
 
       const newClient = client.withOptions({
@@ -416,8 +428,8 @@ describe('instantiate client', () => {
       const client = new Dinari({
         baseURL: 'http://localhost:5000/',
         timeout: 1000,
-        apiKey: 'My API Key',
-        secret: 'My Secret',
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
       });
 
       // Modify the client properties directly after creation
@@ -446,25 +458,25 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['DINARI_API_KEY'] = 'My API Key';
-    process.env['DINARI_SECRET'] = 'My Secret';
+    process.env['DINARI_API_KEY_ID'] = 'My API Key ID';
+    process.env['DINARI_API_SECRET_KEY'] = 'My API Secret Key';
     const client = new Dinari();
-    expect(client.apiKey).toBe('My API Key');
-    expect(client.secret).toBe('My Secret');
+    expect(client.apiKeyID).toBe('My API Key ID');
+    expect(client.apiSecretKey).toBe('My API Secret Key');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['DINARI_API_KEY'] = 'another My API Key';
-    process.env['DINARI_SECRET'] = 'another My Secret';
-    const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret' });
-    expect(client.apiKey).toBe('My API Key');
-    expect(client.secret).toBe('My Secret');
+    process.env['DINARI_API_KEY_ID'] = 'another My API Key ID';
+    process.env['DINARI_API_SECRET_KEY'] = 'another My API Secret Key';
+    const client = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
+    expect(client.apiKeyID).toBe('My API Key ID');
+    expect(client.apiSecretKey).toBe('My API Secret Key');
   });
 });
 
 describe('request building', () => {
-  const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret' });
+  const client = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
 
   describe('custom headers', () => {
     test('handles undefined', () => {
@@ -483,7 +495,7 @@ describe('request building', () => {
 });
 
 describe('default encoder', () => {
-  const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret' });
+  const client = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
 
   class Serializable {
     toJSON() {
@@ -568,7 +580,12 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret', timeout: 10, fetch: testFetch });
+    const client = new Dinari({
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
+      timeout: 10,
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -598,7 +615,12 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret', fetch: testFetch, maxRetries: 4 });
+    const client = new Dinari({
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
 
@@ -622,7 +644,12 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret', fetch: testFetch, maxRetries: 4 });
+    const client = new Dinari({
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
@@ -652,8 +679,8 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
     const client = new Dinari({
-      apiKey: 'My API Key',
-      secret: 'My Secret',
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
       fetch: testFetch,
       maxRetries: 4,
       defaultHeaders: { 'X-Stainless-Retry-Count': null },
@@ -685,7 +712,12 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret', fetch: testFetch, maxRetries: 4 });
+    const client = new Dinari({
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
@@ -715,7 +747,11 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret', fetch: testFetch });
+    const client = new Dinari({
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -745,7 +781,11 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Dinari({ apiKey: 'My API Key', secret: 'My Secret', fetch: testFetch });
+    const client = new Dinari({
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);

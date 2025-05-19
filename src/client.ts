@@ -24,18 +24,18 @@ import { FinalRequestOptions, RequestOptions } from './internal/request-options'
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { API as ApiapiAPI } from './resources/api/api';
+import { V2 } from './resources/v2/v2';
 
 export interface ClientOptions {
   /**
    * The API key ID provided on the [Partners Dashboard](https://partners.dinari.com).
    */
-  apiKey?: string | undefined;
+  apiKeyID?: string | undefined;
 
   /**
    * API Secret Key that is only shown once at API Key creation.
    */
-  secret?: string | undefined;
+  apiSecretKey?: string | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -108,8 +108,8 @@ export interface ClientOptions {
  * API Client for interfacing with the Dinari API.
  */
 export class Dinari {
-  apiKey: string;
-  secret: string;
+  apiKeyID: string;
+  apiSecretKey: string;
 
   baseURL: string;
   maxRetries: number;
@@ -126,8 +126,8 @@ export class Dinari {
   /**
    * API Client for interfacing with the Dinari API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['DINARI_API_KEY'] ?? undefined]
-   * @param {string | undefined} [opts.secret=process.env['DINARI_SECRET'] ?? undefined]
+   * @param {string | undefined} [opts.apiKeyID=process.env['DINARI_API_KEY_ID'] ?? undefined]
+   * @param {string | undefined} [opts.apiSecretKey=process.env['DINARI_API_SECRET_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['DINARI_BASE_URL'] ?? https://api-enterprise.sbt.dinari.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -138,24 +138,24 @@ export class Dinari {
    */
   constructor({
     baseURL = readEnv('DINARI_BASE_URL'),
-    apiKey = readEnv('DINARI_API_KEY'),
-    secret = readEnv('DINARI_SECRET'),
+    apiKeyID = readEnv('DINARI_API_KEY_ID'),
+    apiSecretKey = readEnv('DINARI_API_SECRET_KEY'),
     ...opts
   }: ClientOptions = {}) {
-    if (apiKey === undefined) {
+    if (apiKeyID === undefined) {
       throw new Errors.DinariError(
-        "The DINARI_API_KEY environment variable is missing or empty; either provide it, or instantiate the Dinari client with an apiKey option, like new Dinari({ apiKey: 'My API Key' }).",
+        "The DINARI_API_KEY_ID environment variable is missing or empty; either provide it, or instantiate the Dinari client with an apiKeyID option, like new Dinari({ apiKeyID: 'My API Key ID' }).",
       );
     }
-    if (secret === undefined) {
+    if (apiSecretKey === undefined) {
       throw new Errors.DinariError(
-        "The DINARI_SECRET environment variable is missing or empty; either provide it, or instantiate the Dinari client with an secret option, like new Dinari({ secret: 'My Secret' }).",
+        "The DINARI_API_SECRET_KEY environment variable is missing or empty; either provide it, or instantiate the Dinari client with an apiSecretKey option, like new Dinari({ apiSecretKey: 'My API Secret Key' }).",
       );
     }
 
     const options: ClientOptions = {
-      apiKey,
-      secret,
+      apiKeyID,
+      apiSecretKey,
       ...opts,
       baseURL: baseURL || `https://api-enterprise.sbt.dinari.com`,
     };
@@ -177,8 +177,8 @@ export class Dinari {
 
     this._options = options;
 
-    this.apiKey = apiKey;
-    this.secret = secret;
+    this.apiKeyID = apiKeyID;
+    this.apiSecretKey = apiSecretKey;
   }
 
   /**
@@ -193,8 +193,8 @@ export class Dinari {
       logger: this.logger,
       logLevel: this.logLevel,
       fetchOptions: this.fetchOptions,
-      apiKey: this.apiKey,
-      secret: this.secret,
+      apiKeyID: this.apiKeyID,
+      apiSecretKey: this.apiSecretKey,
       ...options,
     });
   }
@@ -212,11 +212,11 @@ export class Dinari {
   }
 
   protected apiKeyIDAuth(opts: FinalRequestOptions): NullableHeaders | undefined {
-    return buildHeaders([{ 'X-API-Key-Id': this.apiKey }]);
+    return buildHeaders([{ 'X-API-Key-Id': this.apiKeyID }]);
   }
 
   protected apiSecretKeyAuth(opts: FinalRequestOptions): NullableHeaders | undefined {
-    return buildHeaders([{ 'X-API-Secret-Key': this.secret }]);
+    return buildHeaders([{ 'X-API-Secret-Key': this.apiSecretKey }]);
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {
@@ -700,11 +700,11 @@ export class Dinari {
 
   static toFile = Uploads.toFile;
 
-  api: API.API = new API.API(this);
+  v2: API.V2 = new API.V2(this);
 }
-Dinari.API = ApiapiAPI;
+Dinari.V2 = V2;
 export declare namespace Dinari {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { ApiapiAPI as API };
+  export { V2 as V2 };
 }

@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^@dinari/api-sdk(/.*)?',
+              regex: '^dinari(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

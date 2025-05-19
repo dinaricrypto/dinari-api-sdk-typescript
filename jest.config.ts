@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^@dinari/api-sdk$': '<rootDir>/src/index.ts',
-    '^@dinari/api-sdk/(.*)$': '<rootDir>/src/$1',
+    '^dinari$': '<rootDir>/src/index.ts',
+    '^dinari/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',
