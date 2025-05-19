@@ -23,13 +23,13 @@ The full API of this library can be found in [api.md](api.md).
 import Dinari from '@dinari/api-sdk';
 
 const client = new Dinari({
-  apiKey: process.env['DINARI_API_KEY'], // This is the default and can be omitted
+  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted
+  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted
+  environment: 'sandbox', // defaults to 'production'
 });
 
 async function main() {
-  const response = await client.api.v2.getHealth();
-
-  console.log(response.status);
+  const stocks = await client.v2.marketData.stocks.list();
 }
 
 main();
@@ -44,17 +44,68 @@ This library includes TypeScript definitions for all request params and response
 import Dinari from '@dinari/api-sdk';
 
 const client = new Dinari({
-  apiKey: process.env['DINARI_API_KEY'], // This is the default and can be omitted
+  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted
+  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted
+  environment: 'sandbox', // defaults to 'production'
 });
 
 async function main() {
-  const response: Dinari.API.V2GetHealthResponse = await client.api.v2.getHealth();
+  const stocks: Dinari.V2.MarketData.StockListResponse = await client.v2.marketData.stocks.list();
 }
 
 main();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
+
+## File uploads
+
+Request parameters that correspond to file uploads can be passed in many different forms:
+
+- `File` (or an object with the same structure)
+- a `fetch` `Response` (or an object with the same structure)
+- an `fs.ReadStream`
+- the return value of our `toFile` helper
+
+```ts
+import fs from 'fs';
+import Dinari, { toFile } from '@dinari/api-sdk';
+
+const client = new Dinari();
+
+// If you have access to Node `fs` we recommend using `fs.createReadStream()`:
+await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  document_type: 'GOVERNMENT_ID',
+  file: fs.createReadStream('/path/to/file'),
+});
+
+// Or if you have the web `File` API you can pass a `File` instance:
+await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  document_type: 'GOVERNMENT_ID',
+  file: new File(['my bytes'], 'file'),
+});
+
+// You can also pass a `fetch` `Response`:
+await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  document_type: 'GOVERNMENT_ID',
+  file: await fetch('https://somesite/file'),
+});
+
+// Finally, if none of the above are convenient, you can use our `toFile` helper:
+await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  document_type: 'GOVERNMENT_ID',
+  file: await toFile(Buffer.from('my bytes'), 'file'),
+});
+await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  document_type: 'GOVERNMENT_ID',
+  file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
+});
+```
 
 ## Handling errors
 
@@ -65,7 +116,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const response = await client.api.v2.getHealth().catch(async (err) => {
+  const stocks = await client.v2.marketData.stocks.list().catch(async (err) => {
     if (err instanceof Dinari.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -79,7 +130,7 @@ async function main() {
 main();
 ```
 
-Error codes are as followed:
+Error codes are as follows:
 
 | Status Code | Error Type                 |
 | ----------- | -------------------------- |
@@ -108,7 +159,7 @@ const client = new Dinari({
 });
 
 // Or, configure per-request:
-await client.api.v2.getHealth({
+await client.v2.marketData.stocks.list({
   maxRetries: 5,
 });
 ```
@@ -125,7 +176,7 @@ const client = new Dinari({
 });
 
 // Override per-request:
-await client.api.v2.getHealth({
+await client.v2.marketData.stocks.list({
   timeout: 5 * 1000,
 });
 ```
@@ -148,13 +199,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Dinari();
 
-const response = await client.api.v2.getHealth().asResponse();
+const response = await client.v2.marketData.stocks.list().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.api.v2.getHealth().withResponse();
+const { data: stocks, response: raw } = await client.v2.marketData.stocks.list().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.status);
+console.log(stocks);
 ```
 
 ### Logging
@@ -354,7 +405,7 @@ TypeScript >= 4.9 is supported.
 The following runtimes are supported:
 
 - Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)
-- Node.js 18 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
+- Node.js 20 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
 - Deno v1.28.0 or higher.
 - Bun 1.0 or later.
 - Cloudflare Workers.
