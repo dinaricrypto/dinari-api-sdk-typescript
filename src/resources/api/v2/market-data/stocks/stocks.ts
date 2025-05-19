@@ -18,7 +18,7 @@ export class Stocks extends APIResource {
   splits: SplitsAPI.Splits = new SplitsAPI.Splits(this._client);
 
   /**
-   * Returns a list of stocks available for trading.
+   * Get a list of `Stocks`.
    */
   list(
     query: StockListParams | null | undefined = {},
@@ -28,17 +28,18 @@ export class Stocks extends APIResource {
   }
 
   /**
-   * Returns a list of announced stock dividend details for a specified stock. Note
-   * that this data applies only to actual stocks. Yield received for holding dShares
-   * may differ from this.
+   * Get a list of announced stock dividend details for a specified `Stock`.
+   *
+   * Note that this data applies only to actual stocks. Yield received for holding
+   * tokenized shares may differ from this.
    */
   retrieveDividends(stockID: string, options?: RequestOptions): APIPromise<StockRetrieveDividendsResponse> {
     return this._client.get(path`/api/v2/market_data/stocks/${stockID}/dividends`, options);
   }
 
   /**
-   * Returns a list of historical prices for a specified stock. Each index in the
-   * array represents a single tick in a price chart.
+   * Get historical price data for a specified `Stock`. Each index in the array
+   * represents a single tick in a price chart.
    */
   retrieveHistoricalPrices(
     stockID: string,
@@ -52,8 +53,8 @@ export class Stocks extends APIResource {
   }
 
   /**
-   * Get the most recent news articles relating to a stock, including a summary of
-   * the article and a link to the original source
+   * Get the most recent news articles relating to a `Stock`, including a summary of
+   * the article and a link to the original source.
    */
   retrieveNews(
     stockID: string,
@@ -64,7 +65,7 @@ export class Stocks extends APIResource {
   }
 
   /**
-   * Returns a stock quote for a specified stock.
+   * Get quote for a specified `Stock`.
    */
   retrieveQuote(stockID: string, options?: RequestOptions): APIPromise<StockRetrieveQuoteResponse> {
     return this._client.get(path`/api/v2/market_data/stocks/${stockID}/quote`, options);
@@ -79,54 +80,63 @@ export namespace StockListResponse {
    */
   export interface StockListResponseItem {
     /**
-     * Unique identifier for the stock
+     * ID of the `Stock`
      */
     id: string;
 
     /**
-     * Whether the stock allows for fractional trading. If it is not fractionable,
-     * Dinari only supports limit orders for the stock.
+     * Whether the `Stock` allows for fractional trading. If it is not fractionable,
+     * Dinari only supports limit orders for the `Stock`.
      */
     is_fractionable: boolean;
 
     /**
-     * Stock Name
+     * Whether the `Stock` is available for trading.
+     */
+    is_tradable: boolean;
+
+    /**
+     * Company name
      */
     name: string;
 
     /**
-     * Ticker symbol of the stock
+     * Ticker symbol
      */
     symbol: string;
 
     /**
      * SEC Central Index Key. Refer to
      * [this link](https://www.sec.gov/submit-filings/filer-support-resources/how-do-i-guides/understand-utilize-edgar-ciks-passphrases-access-codes)
+     * for more information.
      */
     cik?: string | null;
 
     /**
-     * Composite FIGI ID. Refer to [this link](https://www.openfigi.com/about/figi)
+     * Composite FIGI ID. Refer to [this link](https://www.openfigi.com/about/figi) for
+     * more information.
      */
     composite_figi?: string | null;
 
     /**
-     * CUSIP ID. Refer to [this link](https://www.cusip.com/identifiers.html)
+     * CUSIP ID. Refer to [this link](https://www.cusip.com/identifiers.html) for more
+     * information.
      */
     cusip?: string | null;
 
     /**
-     * Description of the company and what they do/offer.
+     * Description of the company and their services.
      */
     description?: string | null;
 
     /**
-     * Name of Stock for application display
+     * Name of `Stock` for application display. If defined, this supercedes the `name`
+     * field for displaying the name.
      */
     display_name?: string | null;
 
     /**
-     * The URL of the logo of the stock. The preferred format is svg.
+     * URL of the company's logo. Supported formats are SVG and PNG.
      */
     logo_url?: string | null;
   }
@@ -137,7 +147,7 @@ export type StockRetrieveDividendsResponse =
 
 export namespace StockRetrieveDividendsResponse {
   /**
-   * Details of a dividend announcement for a stock.
+   * Information about a dividend announcement for a `Stock`.
    */
   export interface StockRetrieveDividendsResponseItem {
     /**
@@ -151,55 +161,51 @@ export namespace StockRetrieveDividendsResponse {
     currency?: string;
 
     /**
-     * Date on which the dividend was announced.
+     * Date on which the dividend was announced. In ISO 8601 format, YYYY-MM-DD.
      */
     declaration_date?: string;
 
     /**
      * Type of dividend. Dividends that have been paid and/or are expected to be paid
-     * on consistent schedules are denoted as CD. Special Cash dividends that have been
-     * paid that are infrequent or unusual, and/or can not be expected to occur in the
-     * future are denoted as SC. Long-Term and Short-Term capital gain distributions
-     * are denoted as LT and ST, respectively.
+     * on consistent schedules are denoted as `CD`. Special Cash dividends that have
+     * been paid that are infrequent or unusual, and/or can not be expected to occur in
+     * the future are denoted as `SC`. Long-term and short-term capital gain
+     * distributions are denoted as `LT` and `ST`, respectively.
      */
     dividend_type?: string;
 
     /**
-     * Date on or after which a stock is traded without the right to receive the next
-     * dividend payment. (If you purchase a stock on or after the ex-dividend date, you
-     * will not receive the upcoming dividend.)
+     * Date on or after which a `Stock` is traded without the right to receive the next
+     * dividend payment. If you purchase a `Stock` on or after the ex-dividend date,
+     * you will not receive the upcoming dividend. In ISO 8601 format, YYYY-MM-DD.
      */
     ex_dividend_date?: string;
 
     /**
      * Frequency of the dividend. The following values are possible:
      *
-     *                     1 - Annual
-     *
-     *                     2 - Semi-Annual
-     *
-     *                     4 - Quarterly
-     *
-     *                     12 - Monthly
-     *
-     *                     52 - Weekly
-     *
-     *                     365 - Daily
+     * - `1` - Annual
+     * - `2` - Semi-Annual
+     * - `4` - Quarterly
+     * - `12` - Monthly
+     * - `52` - Weekly
+     * - `365` - Daily
      */
     frequency?: number;
 
     /**
-     * Date that the dividend is paid out.
+     * Date on which the dividend is paid out. In ISO 8601 format, YYYY-MM-DD.
      */
     pay_date?: string;
 
     /**
-     * Date that the stock must be held to receive the dividend; set by the company.
+     * Date that the shares must be held to receive the dividend; set by the company.
+     * In ISO 8601 format, YYYY-MM-DD.
      */
     record_date?: string;
 
     /**
-     * Ticker symbol of the stock.
+     * Ticker symbol of the `Stock`.
      */
     ticker?: string;
   }
@@ -210,31 +216,31 @@ export type StockRetrieveHistoricalPricesResponse =
 
 export namespace StockRetrieveHistoricalPricesResponse {
   /**
-   * Datapoint of historical price data for a stock.
+   * Datapoint of historical price data for a `Stock`.
    */
   export interface StockRetrieveHistoricalPricesResponseItem {
     /**
-     * Close price of the stock in the given time period.
+     * Close price from the given time period.
      */
     close: number;
 
     /**
-     * Highest price of the stock in the given time period.
+     * Highest price from the given time period.
      */
     high: number;
 
     /**
-     * Lowest price of the stock in the given time period.
+     * Lowest price from the given time period.
      */
     low: number;
 
     /**
-     * Open price of the stock in the given time period.
+     * Open price from the given time period.
      */
     open: number;
 
     /**
-     * The Unix timestamp in seconds for the start of the aggregate window.
+     * The UNIX timestamp in seconds for the start of the aggregate window.
      */
     timestamp: number;
   }
@@ -244,8 +250,8 @@ export type StockRetrieveNewsResponse = Array<StockRetrieveNewsResponse.StockRet
 
 export namespace StockRetrieveNewsResponse {
   /**
-   * This represents a news article relating to a stock ticker symbol which includes
-   * a summary of the article and a link to the original source.
+   * A news article relating to a `Stock` which includes a summary of the article and
+   * a link to the original source.
    */
   export interface StockRetrieveNewsResponseItem {
     /**
@@ -264,7 +270,7 @@ export namespace StockRetrieveNewsResponse {
     image_url: string;
 
     /**
-     * Timestamp when the article was published
+     * Datetime when the article was published. ISO 8601 timestamp.
      */
     published_dt: string;
 
@@ -274,7 +280,7 @@ export namespace StockRetrieveNewsResponse {
     publisher: string;
 
     /**
-     * The mobile friendly Accelerated Mobile Page (AMP) URL of the news article if
+     * Mobile-friendly Accelerated Mobile Page (AMP) URL of the news article, if
      * available
      */
     amp_url?: string;
@@ -287,6 +293,9 @@ export interface StockRetrieveQuoteResponse {
    */
   price: number;
 
+  /**
+   * ID of the `Stock`
+   */
   stock_id: string;
 
   /**
@@ -300,43 +309,43 @@ export interface StockRetrieveQuoteResponse {
   change_percent?: number;
 
   /**
-   * The close price for the stock in the given time period.
+   * The close price from the given time period.
    */
   close?: number;
 
   /**
-   * The highest price for the stock in the given time period
+   * The highest price from the given time period
    */
   high?: number;
 
   /**
-   * The lowest price for the stock in the given time period.
+   * The lowest price from the given time period.
    */
   low?: number;
 
   /**
    * The most recent close price of the ticker multiplied by weighted outstanding
-   * shares
+   * shares.
    */
   market_cap?: number;
 
   /**
-   * The open price for the stock in the given time period.
+   * The open price from the given time period.
    */
   open?: number;
 
   /**
-   * The close price for the stock for the previous trading day.
+   * The close price for the `Stock` from the previous trading session.
    */
   previous_close?: number;
 
   /**
-   * The trading volume of the stock in the given time period.
+   * The trading volume from the given time period.
    */
   volume?: number;
 
   /**
-   * The number of shares outstanding in the given time period
+   * The number of shares outstanding in the given time period.
    */
   weighted_shares_outstanding?: number;
 }
@@ -347,7 +356,7 @@ export interface StockListParams {
   page_size?: number;
 
   /**
-   * List of stock symbols to query. If not provided, all stocks are returned.
+   * List of `Stock` symbols to query. If not provided, all `Stocks` are returned.
    */
   symbols?: Array<string>;
 }
@@ -361,7 +370,7 @@ export interface StockRetrieveHistoricalPricesParams {
 
 export interface StockRetrieveNewsParams {
   /**
-   * The number of news articles to return, default is 10 max is 25
+   * The number of articles to return.
    */
   limit?: number;
 }

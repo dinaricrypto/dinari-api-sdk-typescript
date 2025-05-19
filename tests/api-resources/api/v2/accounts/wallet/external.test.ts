@@ -4,6 +4,7 @@ import Dinari from '@dinari/api-sdk';
 
 const client = new Dinari({
   apiKey: 'My API Key',
+  secret: 'My Secret',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
@@ -13,7 +14,7 @@ describe('resource external', () => {
     const responsePromise = client.api.v2.accounts.wallet.external.connect(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
-        chain_id: 0,
+        chain_id: 'eip155:1',
         nonce: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         signature: '0xeaF12bD1DfFd',
         wallet_address: 'wallet_address',
@@ -33,7 +34,7 @@ describe('resource external', () => {
     const response = await client.api.v2.accounts.wallet.external.connect(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
-        chain_id: 0,
+        chain_id: 'eip155:1',
         nonce: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         signature: '0xeaF12bD1DfFd',
         wallet_address: 'wallet_address',

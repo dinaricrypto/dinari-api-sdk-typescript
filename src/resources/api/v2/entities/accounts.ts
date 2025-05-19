@@ -7,14 +7,17 @@ import { path } from '../../../../internal/utils/path';
 
 export class Accounts extends APIResource {
   /**
-   * Creates a new Account for the given Entity.
+   * Create a new `Account` for a specific `Entity`. This `Entity` represents your
+   * organization itself, or an individual customer of your organization.
    */
   create(entityID: string, options?: RequestOptions): APIPromise<Account> {
     return this._client.post(path`/api/v2/entities/${entityID}/accounts`, options);
   }
 
   /**
-   * Retrieves a list of Accounts that belong to a specific Entity.
+   * Get a list of all `Accounts` that belong to a specific `Entity`. This `Entity`
+   * represents your organization itself, or an individual customer of your
+   * organization.
    */
   list(
     entityID: string,
@@ -26,26 +29,26 @@ export class Accounts extends APIResource {
 }
 
 /**
- * Information about an account owned by an entity
+ * Information about an `Account` owned by an `Entity`.
  */
 export interface Account {
   /**
-   * Unique identifier for the account
+   * Unique ID for the `Account`.
    */
   id: string;
 
   /**
-   * Timestamp when the account was created
+   * Datetime when the `Account` was created. ISO 8601 timestamp.
    */
   created_dt: string;
 
   /**
-   * Identifier for the Entity that owns the account
+   * ID for the `Entity` that owns the `Account`.
    */
   entity_id: string;
 
   /**
-   * Indicates whether the account is active
+   * Indicates whether the `Account` is active.
    */
   is_active: boolean;
 }

@@ -7,7 +7,6 @@ export {
   type KYCData,
   type KYCDocumentType,
   type KYCInfo,
-  type KYCGetURLResponse,
   type KYCUploadDocumentResponse,
   type KYCSubmitParams,
   type KYCUploadDocumentParams,

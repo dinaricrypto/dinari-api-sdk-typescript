@@ -16,7 +16,7 @@ export class WalletResource extends APIResource {
   external: ExternalAPI.External = new ExternalAPI.External(this._client);
 
   /**
-   * Retrieves details of the wallet connected to the account.
+   * Get the wallet connected to the `Account`.
    */
   retrieve(accountID: string, options?: RequestOptions): APIPromise<Wallet> {
     return this._client.get(path`/api/v2/accounts/${accountID}/wallet`, options);
@@ -24,21 +24,21 @@ export class WalletResource extends APIResource {
 }
 
 /**
- * Information about a digital wallet
+ * Information about a blockchain `Wallet`.
  */
 export interface Wallet {
   /**
-   * Address of the wallet
+   * Address of the `Wallet`.
    */
   address: string;
 
   /**
-   * Indicates whether the wallet is flagged for AML violations
+   * Indicates whether the `Wallet` is flagged for AML violation.
    */
   is_aml_flagged: boolean;
 
   /**
-   * Indicates whether the wallet is a Dinari-managed wallet
+   * Indicates whether the `Wallet` is a Dinari-managed wallet.
    */
   is_managed_wallet: boolean;
 }

@@ -2,14 +2,6 @@
 
 ## V2
 
-Types:
-
-- <code><a href="./src/resources/api/v2/v2.ts">V2GetHealthResponse</a></code>
-
-Methods:
-
-- <code title="get /api/v2/_health/">client.api.v2.<a href="./src/resources/api/v2/v2.ts">getHealth</a>() -> V2GetHealthResponse</code>
-
 ### MarketData
 
 Types:
@@ -84,13 +76,11 @@ Types:
 - <code><a href="./src/resources/api/v2/entities/kyc.ts">KYCData</a></code>
 - <code><a href="./src/resources/api/v2/entities/kyc.ts">KYCDocumentType</a></code>
 - <code><a href="./src/resources/api/v2/entities/kyc.ts">KYCInfo</a></code>
-- <code><a href="./src/resources/api/v2/entities/kyc.ts">KYCGetURLResponse</a></code>
 - <code><a href="./src/resources/api/v2/entities/kyc.ts">KYCUploadDocumentResponse</a></code>
 
 Methods:
 
 - <code title="get /api/v2/entities/{entity_id}/kyc">client.api.v2.entities.kyc.<a href="./src/resources/api/v2/entities/kyc.ts">retrieve</a>(entityID) -> KYCInfo</code>
-- <code title="get /api/v2/entities/{entity_id}/kyc/url">client.api.v2.entities.kyc.<a href="./src/resources/api/v2/entities/kyc.ts">getURL</a>(entityID) -> KYCGetURLResponse</code>
 - <code title="post /api/v2/entities/{entity_id}/kyc">client.api.v2.entities.kyc.<a href="./src/resources/api/v2/entities/kyc.ts">submit</a>(entityID, { ...params }) -> KYCInfo</code>
 - <code title="post /api/v2/entities/{entity_id}/kyc/{kyc_id}/document">client.api.v2.entities.kyc.<a href="./src/resources/api/v2/entities/kyc.ts">uploadDocument</a>(kycID, { ...params }) -> KYCUploadDocumentResponse</code>
 
@@ -108,8 +98,8 @@ Methods:
 - <code title="get /api/v2/accounts/{account_id}">client.api.v2.accounts.<a href="./src/resources/api/v2/accounts/accounts.ts">retrieve</a>(accountID) -> Account</code>
 - <code title="post /api/v2/accounts/{account_id}/deactivate">client.api.v2.accounts.<a href="./src/resources/api/v2/accounts/accounts.ts">deactivate</a>(accountID) -> Account</code>
 - <code title="get /api/v2/accounts/{account_id}/cash">client.api.v2.accounts.<a href="./src/resources/api/v2/accounts/accounts.ts">retrieveCash</a>(accountID) -> AccountRetrieveCashResponse</code>
-- <code title="get /api/v2/accounts/{account_id}/dividend_payments">client.api.v2.accounts.<a href="./src/resources/api/v2/accounts/accounts.ts">retrieveDividendPayments</a>(accountID) -> AccountRetrieveDividendPaymentsResponse</code>
-- <code title="get /api/v2/accounts/{account_id}/interest_payments">client.api.v2.accounts.<a href="./src/resources/api/v2/accounts/accounts.ts">retrieveInterestPayments</a>(accountID) -> AccountRetrieveInterestPaymentsResponse</code>
+- <code title="get /api/v2/accounts/{account_id}/dividend_payments">client.api.v2.accounts.<a href="./src/resources/api/v2/accounts/accounts.ts">retrieveDividendPayments</a>(accountID, { ...params }) -> AccountRetrieveDividendPaymentsResponse</code>
+- <code title="get /api/v2/accounts/{account_id}/interest_payments">client.api.v2.accounts.<a href="./src/resources/api/v2/accounts/accounts.ts">retrieveInterestPayments</a>(accountID, { ...params }) -> AccountRetrieveInterestPaymentsResponse</code>
 - <code title="get /api/v2/accounts/{account_id}/portfolio">client.api.v2.accounts.<a href="./src/resources/api/v2/accounts/accounts.ts">retrievePortfolio</a>(accountID) -> AccountRetrievePortfolioResponse</code>
 
 #### Wallet
@@ -139,15 +129,13 @@ Types:
 
 - <code><a href="./src/resources/api/v2/accounts/orders.ts">Order</a></code>
 - <code><a href="./src/resources/api/v2/accounts/orders.ts">OrderListResponse</a></code>
-- <code><a href="./src/resources/api/v2/accounts/orders.ts">OrderGetEstimatedFeeResponse</a></code>
 - <code><a href="./src/resources/api/v2/accounts/orders.ts">OrderRetrieveFulfillmentsResponse</a></code>
 
 Methods:
 
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}">client.api.v2.accounts.orders.<a href="./src/resources/api/v2/accounts/orders.ts">retrieve</a>(orderID, { ...params }) -> Order</code>
-- <code title="get /api/v2/accounts/{account_id}/orders">client.api.v2.accounts.orders.<a href="./src/resources/api/v2/accounts/orders.ts">list</a>(accountID) -> OrderListResponse</code>
+- <code title="get /api/v2/accounts/{account_id}/orders">client.api.v2.accounts.orders.<a href="./src/resources/api/v2/accounts/orders.ts">list</a>(accountID, { ...params }) -> OrderListResponse</code>
 - <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.api.v2.accounts.orders.<a href="./src/resources/api/v2/accounts/orders.ts">cancel</a>(orderID, { ...params }) -> Order</code>
-- <code title="post /api/v2/accounts/{account_id}/orders/estimated_fee">client.api.v2.accounts.orders.<a href="./src/resources/api/v2/accounts/orders.ts">getEstimatedFee</a>(accountID, { ...params }) -> OrderGetEstimatedFeeResponse</code>
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.api.v2.accounts.orders.<a href="./src/resources/api/v2/accounts/orders.ts">retrieveFulfillments</a>(orderID, { ...params }) -> OrderRetrieveFulfillmentsResponse</code>
 
 #### OrderFulfillments
@@ -159,8 +147,7 @@ Types:
 
 Methods:
 
-- <code title="get /api/v2/accounts/{account_id}/order_fulfillments/{fulfillment_id}">client.api.v2.accounts.orderFulfillments.<a href="./src/resources/api/v2/accounts/order-fulfillments.ts">retrieve</a>(fulfillmentID, { ...params }) -> OrderFulfillment</code>
-- <code title="get /api/v2/accounts/{account_id}/order_fulfillments">client.api.v2.accounts.orderFulfillments.<a href="./src/resources/api/v2/accounts/order-fulfillments.ts">query</a>(accountID) -> OrderFulfillmentQueryResponse</code>
+- <code title="get /api/v2/accounts/{account_id}/order_fulfillments">client.api.v2.accounts.orderFulfillments.<a href="./src/resources/api/v2/accounts/order-fulfillments.ts">query</a>(accountID, { ...params }) -> OrderFulfillmentQueryResponse</code>
 
 #### OrderRequests
 
@@ -172,8 +159,7 @@ Types:
 
 Methods:
 
-- <code title="get /api/v2/accounts/{account_id}/order_requests/{request_id}">client.api.v2.accounts.orderRequests.<a href="./src/resources/api/v2/accounts/order-requests.ts">retrieve</a>(requestID, { ...params }) -> OrderRequest</code>
-- <code title="get /api/v2/accounts/{account_id}/order_requests">client.api.v2.accounts.orderRequests.<a href="./src/resources/api/v2/accounts/order-requests.ts">list</a>(accountID) -> OrderRequestListResponse</code>
+- <code title="get /api/v2/accounts/{account_id}/order_requests">client.api.v2.accounts.orderRequests.<a href="./src/resources/api/v2/accounts/order-requests.ts">list</a>(accountID, { ...params }) -> OrderRequestListResponse</code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/limit_buy">client.api.v2.accounts.orderRequests.<a href="./src/resources/api/v2/accounts/order-requests.ts">createLimitBuy</a>(accountID, { ...params }) -> OrderRequest</code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/limit_sell">client.api.v2.accounts.orderRequests.<a href="./src/resources/api/v2/accounts/order-requests.ts">createLimitSell</a>(accountID, { ...params }) -> OrderRequest</code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/market_buy">client.api.v2.accounts.orderRequests.<a href="./src/resources/api/v2/accounts/order-requests.ts">createMarketBuy</a>(accountID, { ...params }) -> OrderRequest</code>

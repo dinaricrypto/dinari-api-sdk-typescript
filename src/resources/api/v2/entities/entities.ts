@@ -8,7 +8,6 @@ import {
   KYC,
   KYCData,
   KYCDocumentType,
-  KYCGetURLResponse,
   KYCInfo,
   KYCSubmitParams,
   KYCUploadDocumentParams,
@@ -23,30 +22,30 @@ export class Entities extends APIResource {
   kyc: KYCAPI.KYC = new KYCAPI.KYC(this._client);
 
   /**
-   * Creates a new Entity to be managed by your organization. The Entity represents
-   * an individual customer of your organization.
+   * Create a new `Entity` to be managed by your organization. This `Entity`
+   * represents an individual customer of your organization.
    */
   create(body: EntityCreateParams, options?: RequestOptions): APIPromise<Entity> {
     return this._client.post('/api/v2/entities/', { body, ...options });
   }
 
   /**
-   * Retrieves a specific customer Entity of your organization by their ID.
+   * Get a specific customer `Entity` of your organization by their ID.
    */
   retrieve(entityID: string, options?: RequestOptions): APIPromise<Entity> {
     return this._client.get(path`/api/v2/entities/${entityID}`, options);
   }
 
   /**
-   * Returns a list of all direct Entities your organization manages. An Entity
-   * represents an individual customer of your organization.
+   * Get a list of all direct `Entities` your organization manages. These `Entities`
+   * represent individual customers of your organization.
    */
   list(options?: RequestOptions): APIPromise<EntityListResponse> {
     return this._client.get('/api/v2/entities/', options);
   }
 
   /**
-   * Returns the current authenticated Entity.
+   * Get the current authenticated `Entity`, which represents your organization.
    */
   retrieveCurrent(options?: RequestOptions): APIPromise<Entity> {
     return this._client.get('/api/v2/entities/me', options);
@@ -54,32 +53,33 @@ export class Entities extends APIResource {
 }
 
 /**
- * Information about an entity, which can be either an individual or an
+ * Information about an `Entity`, which can be either an individual or an
  * organization.
  */
 export interface Entity {
   /**
-   * Unique identifier for the entity
+   * Unique ID of the `Entity`.
    */
   id: string;
 
   /**
-   * Type of entity
+   * Type of `Entity`. `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their
+   * individual customers.
    */
   entity_type: 'INDIVIDUAL' | 'ORGANIZATION';
 
   /**
-   * Indicates if Entity completed KYC
+   * Indicates if `Entity` completed KYC.
    */
   is_kyc_complete: boolean;
 
   /**
-   * Name of Entity
+   * Name of `Entity`.
    */
   name?: string;
 
   /**
-   * Nationality of the entity
+   * Nationality or home country of the `Entity`.
    */
   nationality?: string;
 }
@@ -88,7 +88,7 @@ export type EntityListResponse = Array<Entity>;
 
 export interface EntityCreateParams {
   /**
-   * Name of the entity
+   * Name of the `Entity`.
    */
   name: string;
 }
@@ -115,7 +115,6 @@ export declare namespace Entities {
     type KYCData as KYCData,
     type KYCDocumentType as KYCDocumentType,
     type KYCInfo as KYCInfo,
-    type KYCGetURLResponse as KYCGetURLResponse,
     type KYCUploadDocumentResponse as KYCUploadDocumentResponse,
     type KYCSubmitParams as KYCSubmitParams,
     type KYCUploadDocumentParams as KYCUploadDocumentParams,
