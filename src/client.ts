@@ -28,9 +28,14 @@ import { API as ApiapiAPI } from './resources/api/api';
 
 export interface ClientOptions {
   /**
-   * The provided API key should be set here
+   * The API key ID provided on the [Partners Dashboard](https://partners.dinari.com).
    */
   apiKey?: string | undefined;
+
+  /**
+   * API Secret Key that is only shown once at API Key creation.
+   */
+  secret?: string | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -104,6 +109,7 @@ export interface ClientOptions {
  */
 export class Dinari {
   apiKey: string;
+  secret: string;
 
   baseURL: string;
   maxRetries: number;
@@ -121,6 +127,7 @@ export class Dinari {
    * API Client for interfacing with the Dinari API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['DINARI_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.secret=process.env['DINARI_SECRET'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['DINARI_BASE_URL'] ?? https://api-enterprise.sbt.dinari.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -132,6 +139,7 @@ export class Dinari {
   constructor({
     baseURL = readEnv('DINARI_BASE_URL'),
     apiKey = readEnv('DINARI_API_KEY'),
+    secret = readEnv('DINARI_SECRET'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -139,9 +147,15 @@ export class Dinari {
         "The DINARI_API_KEY environment variable is missing or empty; either provide it, or instantiate the Dinari client with an apiKey option, like new Dinari({ apiKey: 'My API Key' }).",
       );
     }
+    if (secret === undefined) {
+      throw new Errors.DinariError(
+        "The DINARI_SECRET environment variable is missing or empty; either provide it, or instantiate the Dinari client with an secret option, like new Dinari({ secret: 'My Secret' }).",
+      );
+    }
 
     const options: ClientOptions = {
       apiKey,
+      secret,
       ...opts,
       baseURL: baseURL || `https://api-enterprise.sbt.dinari.com`,
     };
@@ -164,6 +178,7 @@ export class Dinari {
     this._options = options;
 
     this.apiKey = apiKey;
+    this.secret = secret;
   }
 
   /**
@@ -179,6 +194,7 @@ export class Dinari {
       logLevel: this.logLevel,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
+      secret: this.secret,
       ...options,
     });
   }
@@ -192,7 +208,15 @@ export class Dinari {
   }
 
   protected authHeaders(opts: FinalRequestOptions): NullableHeaders | undefined {
-    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
+    return buildHeaders([this.apiKeyIDAuth(opts), this.apiSecretKeyAuth(opts)]);
+  }
+
+  protected apiKeyIDAuth(opts: FinalRequestOptions): NullableHeaders | undefined {
+    return buildHeaders([{ 'X-API-Key-Id': this.apiKey }]);
+  }
+
+  protected apiSecretKeyAuth(opts: FinalRequestOptions): NullableHeaders | undefined {
+    return buildHeaders([{ 'X-API-Secret-Key': this.secret }]);
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {

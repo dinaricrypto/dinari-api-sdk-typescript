@@ -8,7 +8,7 @@ import { path } from '../../../../../internal/utils/path';
 
 export class External extends APIResource {
   /**
-   * Connects a wallet to the account using the nonce and signature
+   * Connect a `Wallet` to the `Account` after verifying the signature.
    */
   connect(
     accountID: string,
@@ -19,7 +19,7 @@ export class External extends APIResource {
   }
 
   /**
-   * Gets a nonce and message to be signed in order to verify wallet ownership.
+   * Get a nonce and message to be signed in order to verify `Wallet` ownership.
    */
   getNonce(
     accountID: string,
@@ -31,11 +31,11 @@ export class External extends APIResource {
 }
 
 /**
- * Wallet connection message for Dinari-managed wallets
+ * Connection message to sign to prove ownership of the `Wallet`.
  */
 export interface ExternalGetNonceResponse {
   /**
-   * Message to be signed by the wallet
+   * Message to be signed by the `Wallet`
    */
   message: string;
 
@@ -47,29 +47,29 @@ export interface ExternalGetNonceResponse {
 
 export interface ExternalConnectParams {
   /**
-   * Blockchain the wallet to link is on
+   * CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on.
    */
-  chain_id: number;
+  chain_id: 'eip155:1' | 'eip155:42161' | 'eip155:8453' | 'eip155:81457' | 'eip155:7887' | 'eip155:98866';
 
   /**
-   * Nonce used to sign the wallet connection message
+   * Nonce contained within the connection message.
    */
   nonce: string;
 
   /**
-   * Signature payload from signing the wallet connection message with the wallet
+   * Signature payload from signing the connection message with the `Wallet`.
    */
   signature: string;
 
   /**
-   * Address of the wallet
+   * Address of the `Wallet`.
    */
   wallet_address: string;
 }
 
 export interface ExternalGetNonceParams {
   /**
-   * Address of the wallet to connect
+   * Address of the `Wallet` to connect.
    */
   wallet_address: string;
 }

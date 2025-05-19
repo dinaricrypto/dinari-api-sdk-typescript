@@ -4,8 +4,8 @@ import { APIResource } from '../../../../core/resource';
 import * as OrderFulfillmentsAPI from './order-fulfillments';
 import {
   OrderFulfillment,
+  OrderFulfillmentQueryParams,
   OrderFulfillmentQueryResponse,
-  OrderFulfillmentRetrieveParams,
   OrderFulfillments,
 } from './order-fulfillments';
 import * as OrderRequestsAPI from './order-requests';
@@ -16,16 +16,15 @@ import {
   OrderRequestCreateLimitSellParams,
   OrderRequestCreateMarketBuyParams,
   OrderRequestCreateMarketSellParams,
+  OrderRequestListParams,
   OrderRequestListResponse,
-  OrderRequestRetrieveParams,
   OrderRequests,
 } from './order-requests';
 import * as OrdersAPI from './orders';
 import {
   Order,
   OrderCancelParams,
-  OrderGetEstimatedFeeParams,
-  OrderGetEstimatedFeeResponse,
+  OrderListParams,
   OrderListResponse,
   OrderRetrieveFulfillmentsParams,
   OrderRetrieveFulfillmentsResponse,
@@ -48,48 +47,56 @@ export class Accounts extends APIResource {
   orderRequests: OrderRequestsAPI.OrderRequests = new OrderRequestsAPI.OrderRequests(this._client);
 
   /**
-   * Retrieves a specific account by its ID.
+   * Get a specific `Account` by its ID.
    */
   retrieve(accountID: string, options?: RequestOptions): APIPromise<EntitiesAccountsAPI.Account> {
     return this._client.get(path`/api/v2/accounts/${accountID}`, options);
   }
 
   /**
-   * Sets the account to be inactive.
+   * Set the `Account` to be inactive. Inactive accounts cannot be used for trading.
    */
   deactivate(accountID: string, options?: RequestOptions): APIPromise<EntitiesAccountsAPI.Account> {
     return this._client.post(path`/api/v2/accounts/${accountID}/deactivate`, options);
   }
 
   /**
-   * Retrieves the cash amount in the account.
+   * Get the cash balances of the `Account`, including stablecoins and other cash
+   * equivalents.
    */
   retrieveCash(accountID: string, options?: RequestOptions): APIPromise<AccountRetrieveCashResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/cash`, options);
   }
 
   /**
-   * Retrieves dividend payments made to the account.
+   * Get dividend payments made to the `Account` from dividend-bearing stock
+   * holdings.
    */
   retrieveDividendPayments(
     accountID: string,
+    query: AccountRetrieveDividendPaymentsParams,
     options?: RequestOptions,
   ): APIPromise<AccountRetrieveDividendPaymentsResponse> {
-    return this._client.get(path`/api/v2/accounts/${accountID}/dividend_payments`, options);
+    return this._client.get(path`/api/v2/accounts/${accountID}/dividend_payments`, { query, ...options });
   }
 
   /**
-   * Retrieves interest payments made to the account.
+   * Get interest payments made to the `Account` from yield-bearing cash holdings.
+   *
+   * Currently, the only yield-bearing stablecoin accepted by Dinari is
+   * [USD+](https://usd.dinari.com/).
    */
   retrieveInterestPayments(
     accountID: string,
+    query: AccountRetrieveInterestPaymentsParams,
     options?: RequestOptions,
   ): APIPromise<AccountRetrieveInterestPaymentsResponse> {
-    return this._client.get(path`/api/v2/accounts/${accountID}/interest_payments`, options);
+    return this._client.get(path`/api/v2/accounts/${accountID}/interest_payments`, { query, ...options });
   }
 
   /**
-   * Retrieves the portfolio of the account, sans cash equivalents.
+   * Get the portfolio of the `Account`, excluding cash equivalents such as
+   * stablecoins.
    */
   retrievePortfolio(
     accountID: string,
@@ -99,19 +106,33 @@ export class Accounts extends APIResource {
   }
 }
 
-/**
- * Balance of cash and cash equivalents currently in the account.
- */
-export interface AccountRetrieveCashResponse {
-  /**
-   * Total amount of cash and cash equivalents
-   */
-  amount: number;
+export type AccountRetrieveCashResponse = Array<AccountRetrieveCashResponse.AccountRetrieveCashResponseItem>;
 
+export namespace AccountRetrieveCashResponse {
   /**
-   * Currency (e.g. USD)
+   * Balance of a payment token in an `Account`.
    */
-  currency: string;
+  export interface AccountRetrieveCashResponseItem {
+    /**
+     * Total amount of the payment token in the `Account`.
+     */
+    amount: number;
+
+    /**
+     * CAIP-2 chain ID of the payment token.
+     */
+    chain_id: 'eip155:1' | 'eip155:42161' | 'eip155:8453' | 'eip155:81457' | 'eip155:7887' | 'eip155:98866';
+
+    /**
+     * Symbol of the payment token.
+     */
+    symbol: string;
+
+    /**
+     * Address of the payment token.
+     */
+    token_address: string;
+  }
 }
 
 export type AccountRetrieveDividendPaymentsResponse =
@@ -119,7 +140,7 @@ export type AccountRetrieveDividendPaymentsResponse =
 
 export namespace AccountRetrieveDividendPaymentsResponse {
   /**
-   * AccountDividendPayment represents a stock dividend payment event for an account.
+   * Represents a dividend payment event for an `Account`.
    */
   export interface AccountRetrieveDividendPaymentsResponseItem {
     /**
@@ -133,12 +154,12 @@ export namespace AccountRetrieveDividendPaymentsResponse {
     currency: string;
 
     /**
-     * Date the dividend was distributed to the account.
+     * Date the dividend was distributed to the account. ISO 8601 format, YYYY-MM-DD.
      */
     payment_date: string;
 
     /**
-     * ID of the stock for which the dividend was paid.
+     * ID of the `Stock` for which the dividend was paid.
      */
     stock_id: string;
   }
@@ -149,57 +170,103 @@ export type AccountRetrieveInterestPaymentsResponse =
 
 export namespace AccountRetrieveInterestPaymentsResponse {
   /**
-   * An object representing interest payment details.
+   * An object representing an interest payment from stablecoin holdings.
    */
   export interface AccountRetrieveInterestPaymentsResponseItem {
     /**
-     * Amount of interest paid
+     * Amount of interest paid.
      */
     amount: number;
 
     /**
-     * Type of currency (e.g. USD)
+     * Currency in which the interest was paid (e.g. USD).
      */
     currency: string;
 
     /**
-     * Date of interest payment. In US Eastern time zone
+     * Date of interest payment in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
      */
     payment_date: string;
   }
 }
 
 /**
- * This is an object representing the balance of cash and stock assets in your
- * account.
+ * Balance information of `Stock` assets in your `Account`.
  */
 export interface AccountRetrievePortfolioResponse {
   /**
-   * Stock Balance details for all owned stocks
+   * Balance details for all owned `Stocks`.
    */
   assets: Array<AccountRetrievePortfolioResponse.Asset>;
 }
 
 export namespace AccountRetrievePortfolioResponse {
   /**
-   * Balance of a stock in the account
+   * Balance of a dShare in an `Account`.
    */
   export interface Asset {
     /**
-     * Total amount of the stock
+     * Total amount of the dShare asset token in the `Account`.
      */
     amount: number;
 
     /**
-     * Total market value of the stock
+     * CAIP-2 chain ID of the blockchain where the dShare asset token exists.
      */
-    market_value: number;
+    chain_id: 'eip155:1' | 'eip155:42161' | 'eip155:8453' | 'eip155:81457' | 'eip155:7887' | 'eip155:98866';
 
     /**
-     * ID of Stock
+     * ID of the underlying `Stock` represented by the dShare asset token.
      */
     stock_id: string;
+
+    /**
+     * Token symbol of the dShare asset token.
+     */
+    symbol: string;
+
+    /**
+     * Address of the dShare asset token.
+     */
+    token_address: string;
   }
+}
+
+export interface AccountRetrieveDividendPaymentsParams {
+  /**
+   * End date, exclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+   */
+  end_date: string;
+
+  /**
+   * Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+   */
+  start_date: string;
+
+  page?: number;
+
+  page_size?: number;
+
+  /**
+   * Optional ID of the `Stock` to filter by
+   */
+  stock_id?: string;
+}
+
+export interface AccountRetrieveInterestPaymentsParams {
+  /**
+   * End date, exclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+   */
+  end_date: string;
+
+  /**
+   * Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+   */
+  start_date: string;
+
+  page?: number;
+
+  page_size?: number;
 }
 
 Accounts.WalletResource = WalletResource;
@@ -213,6 +280,8 @@ export declare namespace Accounts {
     type AccountRetrieveDividendPaymentsResponse as AccountRetrieveDividendPaymentsResponse,
     type AccountRetrieveInterestPaymentsResponse as AccountRetrieveInterestPaymentsResponse,
     type AccountRetrievePortfolioResponse as AccountRetrievePortfolioResponse,
+    type AccountRetrieveDividendPaymentsParams as AccountRetrieveDividendPaymentsParams,
+    type AccountRetrieveInterestPaymentsParams as AccountRetrieveInterestPaymentsParams,
   };
 
   export { WalletResource as WalletResource, type Wallet as Wallet };
@@ -221,11 +290,10 @@ export declare namespace Accounts {
     Orders as Orders,
     type Order as Order,
     type OrderListResponse as OrderListResponse,
-    type OrderGetEstimatedFeeResponse as OrderGetEstimatedFeeResponse,
     type OrderRetrieveFulfillmentsResponse as OrderRetrieveFulfillmentsResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
+    type OrderListParams as OrderListParams,
     type OrderCancelParams as OrderCancelParams,
-    type OrderGetEstimatedFeeParams as OrderGetEstimatedFeeParams,
     type OrderRetrieveFulfillmentsParams as OrderRetrieveFulfillmentsParams,
   };
 
@@ -233,7 +301,7 @@ export declare namespace Accounts {
     OrderFulfillments as OrderFulfillments,
     type OrderFulfillment as OrderFulfillment,
     type OrderFulfillmentQueryResponse as OrderFulfillmentQueryResponse,
-    type OrderFulfillmentRetrieveParams as OrderFulfillmentRetrieveParams,
+    type OrderFulfillmentQueryParams as OrderFulfillmentQueryParams,
   };
 
   export {
@@ -241,7 +309,7 @@ export declare namespace Accounts {
     type LimitOrderRequestInput as LimitOrderRequestInput,
     type OrderRequest as OrderRequest,
     type OrderRequestListResponse as OrderRequestListResponse,
-    type OrderRequestRetrieveParams as OrderRequestRetrieveParams,
+    type OrderRequestListParams as OrderRequestListParams,
     type OrderRequestCreateLimitBuyParams as OrderRequestCreateLimitBuyParams,
     type OrderRequestCreateLimitSellParams as OrderRequestCreateLimitSellParams,
     type OrderRequestCreateMarketBuyParams as OrderRequestCreateMarketBuyParams,

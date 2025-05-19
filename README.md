@@ -24,12 +24,13 @@ import Dinari from '@dinari/api-sdk';
 
 const client = new Dinari({
   apiKey: process.env['DINARI_API_KEY'], // This is the default and can be omitted
+  secret: process.env['DINARI_SECRET'], // This is the default and can be omitted
 });
 
 async function main() {
-  const response = await client.api.v2.getHealth();
+  const response = await client.api.v2.marketData.getMarketHours();
 
-  console.log(response.status);
+  console.log(response.is_market_open);
 }
 
 main();
@@ -45,16 +46,67 @@ import Dinari from '@dinari/api-sdk';
 
 const client = new Dinari({
   apiKey: process.env['DINARI_API_KEY'], // This is the default and can be omitted
+  secret: process.env['DINARI_SECRET'], // This is the default and can be omitted
 });
 
 async function main() {
-  const response: Dinari.API.V2GetHealthResponse = await client.api.v2.getHealth();
+  const response: Dinari.API.V2.MarketDataGetMarketHoursResponse =
+    await client.api.v2.marketData.getMarketHours();
 }
 
 main();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
+
+## File uploads
+
+Request parameters that correspond to file uploads can be passed in many different forms:
+
+- `File` (or an object with the same structure)
+- a `fetch` `Response` (or an object with the same structure)
+- an `fs.ReadStream`
+- the return value of our `toFile` helper
+
+```ts
+import fs from 'fs';
+import Dinari, { toFile } from '@dinari/api-sdk';
+
+const client = new Dinari();
+
+// If you have access to Node `fs` we recommend using `fs.createReadStream()`:
+await client.api.v2.entities.kyc.uploadDocument('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  document_type: 'GOVERNMENT_ID',
+  file: fs.createReadStream('/path/to/file'),
+});
+
+// Or if you have the web `File` API you can pass a `File` instance:
+await client.api.v2.entities.kyc.uploadDocument('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  document_type: 'GOVERNMENT_ID',
+  file: new File(['my bytes'], 'file'),
+});
+
+// You can also pass a `fetch` `Response`:
+await client.api.v2.entities.kyc.uploadDocument('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  document_type: 'GOVERNMENT_ID',
+  file: await fetch('https://somesite/file'),
+});
+
+// Finally, if none of the above are convenient, you can use our `toFile` helper:
+await client.api.v2.entities.kyc.uploadDocument('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  document_type: 'GOVERNMENT_ID',
+  file: await toFile(Buffer.from('my bytes'), 'file'),
+});
+await client.api.v2.entities.kyc.uploadDocument('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  document_type: 'GOVERNMENT_ID',
+  file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
+});
+```
 
 ## Handling errors
 
@@ -65,7 +117,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const response = await client.api.v2.getHealth().catch(async (err) => {
+  const response = await client.api.v2.marketData.getMarketHours().catch(async (err) => {
     if (err instanceof Dinari.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -108,7 +160,7 @@ const client = new Dinari({
 });
 
 // Or, configure per-request:
-await client.api.v2.getHealth({
+await client.api.v2.marketData.getMarketHours({
   maxRetries: 5,
 });
 ```
@@ -125,7 +177,7 @@ const client = new Dinari({
 });
 
 // Override per-request:
-await client.api.v2.getHealth({
+await client.api.v2.marketData.getMarketHours({
   timeout: 5 * 1000,
 });
 ```
@@ -148,13 +200,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Dinari();
 
-const response = await client.api.v2.getHealth().asResponse();
+const response = await client.api.v2.marketData.getMarketHours().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.api.v2.getHealth().withResponse();
+const { data: response, response: raw } = await client.api.v2.marketData.getMarketHours().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.status);
+console.log(response.is_market_open);
 ```
 
 ### Logging

@@ -2,56 +2,63 @@
 
 import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
+import { type Uploadable } from '../../../../core/uploads';
 import { RequestOptions } from '../../../../internal/request-options';
+import { multipartFormRequestOptions } from '../../../../internal/uploads';
 import { path } from '../../../../internal/utils/path';
 
 export class KYC extends APIResource {
   /**
-   * Retrieves KYC data of the entity.
+   * Get most recent KYC data of the `Entity`.
+   *
+   * If there are any completed KYC checks, data from the most recent one will be
+   * returned. If there are no completed KYC checks, the most recent KYC check
+   * information, regardless of status, will be returned.
    */
   retrieve(entityID: string, options?: RequestOptions): APIPromise<KYCInfo> {
     return this._client.get(path`/api/v2/entities/${entityID}/kyc`, options);
   }
 
   /**
-   * Gets an iframe URL for managed (self-service) KYC.
-   */
-  getURL(entityID: string, options?: RequestOptions): APIPromise<KYCGetURLResponse> {
-    return this._client.get(path`/api/v2/entities/${entityID}/kyc/url`, options);
-  }
-
-  /**
-   * Submits KYC data manually (for Partner KYC-enabled entities).
+   * Submit KYC data directly, for partners that are provisioned to provide their own
+   * KYC data.
+   *
+   * This feature is available for everyone in sandbox mode, and for specifically
+   * provisioned partners in production.
    */
   submit(entityID: string, body: KYCSubmitParams, options?: RequestOptions): APIPromise<KYCInfo> {
     return this._client.post(path`/api/v2/entities/${entityID}/kyc`, { body, ...options });
   }
 
   /**
-   * Uploads KYC-related documentation (for Partner KYC-enabled entities).
+   * Upload KYC-related documentation for partners that are provisioned to provide
+   * their own KYC data.
    */
   uploadDocument(
     kycID: string,
     params: KYCUploadDocumentParams,
     options?: RequestOptions,
   ): APIPromise<KYCUploadDocumentResponse> {
-    const { entity_id, ...body } = params;
-    return this._client.post(path`/api/v2/entities/${entity_id}/kyc/${kycID}/document`, { body, ...options });
+    const { entity_id, document_type, ...body } = params;
+    return this._client.post(
+      path`/api/v2/entities/${entity_id}/kyc/${kycID}/document`,
+      multipartFormRequestOptions({ query: { document_type }, body, ...options }, this._client),
+    );
   }
 }
 
 /**
- * Object consisting of KYC data for an entity
+ * KYC data for an `Entity`.
  */
 export interface KYCData {
   /**
-   * ISO 3166-1 alpha 2 country code of citizenship or the country the organization
-   * is based out of.
+   * Country of citizenship or home country of the organization. ISO 3166-1 alpha 2
+   * country code.
    */
   country_code: string;
 
   /**
-   * Last name of the person
+   * Last name of the person.
    */
   last_name: string;
 
@@ -61,13 +68,13 @@ export interface KYCData {
   address_city?: string;
 
   /**
-   * ZIP or postal code of residence address. Not all international addresses use
-   * this attribute.
+   * Postal code of residence address. Not all international addresses use this
+   * attribute.
    */
   address_postal_code?: string;
 
   /**
-   * Street name of address.
+   * Street address of address.
    */
   address_street_1?: string;
 
@@ -78,32 +85,32 @@ export interface KYCData {
 
   /**
    * State or subdivision of address. In the US, this should be the unabbreviated
-   * name. Not all international addresses use this attribute.
+   * name of the state. Not all international addresses use this attribute.
    */
   address_subdivision?: string;
 
   /**
-   * Birth date of the individual
+   * Birth date of the individual. In ISO 8601 format, YYYY-MM-DD.
    */
   birth_date?: string;
 
   /**
-   * Email address
+   * Email address.
    */
-  email?: string | null;
+  email?: string;
 
   /**
-   * First name of the person, or name of the organization
+   * First name of the person.
    */
-  first_name?: string | null;
+  first_name?: string;
 
   /**
    * Middle name of the user
    */
-  middle_name?: string | null;
+  middle_name?: string;
 
   /**
-   * ID number of the official tax document of the country the entity belongs to
+   * ID number of the official tax document of the country the entity belongs to.
    */
   tax_id_number?: string;
 }
@@ -111,84 +118,63 @@ export interface KYCData {
 export type KYCDocumentType = 'GOVERNMENT_ID' | 'SELFIE' | 'RESIDENCY' | 'UNKNOWN';
 
 /**
- * KYC information for an entity
+ * KYC information for an `Entity`.
  */
 export interface KYCInfo {
   /**
-   * Unique identifier for the KYC check
+   * ID of the KYC check.
    */
   id: string;
 
   /**
-   * KYC status
+   * KYC check status.
    */
   status: 'PASS' | 'FAIL' | 'PENDING' | 'INCOMPLETE';
 
   /**
-   * Timestamp when the KYC was last checked
+   * Datetime when the KYC was last checked. ISO 8601 timestamp.
    */
   checked_dt?: string;
 
   /**
-   * Object consisting of KYC data for an entity
+   * KYC data for an `Entity`.
    */
   data?: KYCData;
-
-  /**
-   * Name of the KYC provider that provided the KYC check
-   */
-  provider_name?: string;
 }
 
 /**
- * URL for a managed KYC flow for the entity that can be shown in an iframe
- */
-export interface KYCGetURLResponse {
-  /**
-   * URL of a managed KYC flow interface for the entity. This URL is unique per KYC
-   * attempt.
-   */
-  embed_url: string;
-
-  /**
-   * Timestamp at which the KYC request will be expired
-   */
-  expiration_dt: string;
-}
-
-/**
- * Document associated with KYC for an entity
+ * A document associated with KYC for an `Entity`.
  */
 export interface KYCUploadDocumentResponse {
   /**
-   * ID of the document
+   * ID of the document.
    */
   id: string;
 
   /**
-   * Type of the document
+   * Type of document.
    */
   document_type: KYCDocumentType;
 
   /**
-   * Filename of the document
+   * Filename of document.
    */
   filename: string;
 
   /**
-   * URL to access the document. Expires in 1 hour
+   * Temporary URL to access the document. Expires in 1 hour.
    */
   url: string;
 }
 
 export interface KYCSubmitParams {
   /**
-   * Object consisting of KYC data for an entity
+   * KYC data for an `Entity`.
    */
   data: KYCData;
 
   /**
-   * Name of the KYC provider that provided the KYC information
+   * Name of the KYC provider that provided the KYC information.
    */
   provider_name: string;
 }
@@ -200,9 +186,15 @@ export interface KYCUploadDocumentParams {
   entity_id: string;
 
   /**
-   * Body param: Type of the document to be uploaded
+   * Query param: Type of `KYCDocument` to be uploaded.
    */
   document_type: KYCDocumentType;
+
+  /**
+   * Body param: File to be uploaded. Must be a valid image or PDF file (jpg, jpeg,
+   * png, pdf) less than 10MB in size.
+   */
+  file: Uploadable;
 }
 
 export declare namespace KYC {
@@ -210,7 +202,6 @@ export declare namespace KYC {
     type KYCData as KYCData,
     type KYCDocumentType as KYCDocumentType,
     type KYCInfo as KYCInfo,
-    type KYCGetURLResponse as KYCGetURLResponse,
     type KYCUploadDocumentResponse as KYCUploadDocumentResponse,
     type KYCSubmitParams as KYCSubmitParams,
     type KYCUploadDocumentParams as KYCUploadDocumentParams,

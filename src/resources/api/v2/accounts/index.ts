@@ -6,19 +6,21 @@ export {
   type AccountRetrieveDividendPaymentsResponse,
   type AccountRetrieveInterestPaymentsResponse,
   type AccountRetrievePortfolioResponse,
+  type AccountRetrieveDividendPaymentsParams,
+  type AccountRetrieveInterestPaymentsParams,
 } from './accounts';
 export {
   OrderFulfillments,
   type OrderFulfillment,
   type OrderFulfillmentQueryResponse,
-  type OrderFulfillmentRetrieveParams,
+  type OrderFulfillmentQueryParams,
 } from './order-fulfillments';
 export {
   OrderRequests,
   type LimitOrderRequestInput,
   type OrderRequest,
   type OrderRequestListResponse,
-  type OrderRequestRetrieveParams,
+  type OrderRequestListParams,
   type OrderRequestCreateLimitBuyParams,
   type OrderRequestCreateLimitSellParams,
   type OrderRequestCreateMarketBuyParams,
@@ -28,11 +30,10 @@ export {
   Orders,
   type Order,
   type OrderListResponse,
-  type OrderGetEstimatedFeeResponse,
   type OrderRetrieveFulfillmentsResponse,
   type OrderRetrieveParams,
+  type OrderListParams,
   type OrderCancelParams,
-  type OrderGetEstimatedFeeParams,
   type OrderRetrieveFulfillmentsParams,
 } from './orders';
 export { WalletResource, type Wallet } from './wallet/index';

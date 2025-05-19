@@ -7,89 +7,90 @@ import { path } from '../../../../internal/utils/path';
 
 export class OrderFulfillments extends APIResource {
   /**
-   * Retrieves details of a specific order fulfillment by its ID.
+   * Query `OrderFulfillments` under the `Account`.
    */
-  retrieve(
-    fulfillmentID: string,
-    params: OrderFulfillmentRetrieveParams,
+  query(
+    accountID: string,
+    query: OrderFulfillmentQueryParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<OrderFulfillment> {
-    const { account_id } = params;
-    return this._client.get(
-      path`/api/v2/accounts/${account_id}/order_fulfillments/${fulfillmentID}`,
-      options,
-    );
-  }
-
-  /**
-   * Queries all order fulfillments under the account.
-   */
-  query(accountID: string, options?: RequestOptions): APIPromise<OrderFulfillmentQueryResponse> {
-    return this._client.get(path`/api/v2/accounts/${accountID}/order_fulfillments`, options);
+  ): APIPromise<OrderFulfillmentQueryResponse> {
+    return this._client.get(path`/api/v2/accounts/${accountID}/order_fulfillments`, { query, ...options });
   }
 }
 
 /**
- * Information about a fulfillment of an order. An order may be fulfilled in
+ * Information about a fulfillment of an `Order`. An order may be fulfilled in
  * multiple transactions.
  */
 export interface OrderFulfillment {
   /**
-   * Identifier of the order fulfillment
+   * ID of the `OrderFulfillment`.
    */
   id: string;
 
   /**
-   * Amount of asset token filled
+   * Amount of dShare asset token filled for `BUY` orders.
    */
   asset_token_filled: number;
 
   /**
-   * Amount of asset token spent
+   * Amount of dShare asset token spent for `SELL` orders.
    */
   asset_token_spent: number;
 
   /**
-   * Identifier of the order this fulfillment is for
+   * Blockchain that the transaction was run on.
+   */
+  chain_id: 'eip155:1' | 'eip155:42161' | 'eip155:8453' | 'eip155:81457' | 'eip155:7887' | 'eip155:98866';
+
+  /**
+   * ID of the `Order` this `OrderFulfillment` is for.
    */
   order_id: string;
 
   /**
-   * Amount of payment token filled
+   * Amount of payment token filled for `SELL` orders.
    */
   payment_token_filled: number;
 
   /**
-   * Amount of payment token spent
+   * Amount of payment token spent for `BUY` orders.
    */
   payment_token_spent: number;
 
   /**
-   * Time when transaction occurred
+   * Time when transaction occurred.
    */
   transaction_dt: string;
 
   /**
-   * Transaction hash for this fulfillment
+   * Transaction hash for this fulfillment.
    */
   transaction_hash: string;
 
   /**
-   * Fee amount of payment token spent
+   * Fee amount, in payment tokens.
    */
   payment_token_fee?: number;
 }
 
 export type OrderFulfillmentQueryResponse = Array<OrderFulfillment>;
 
-export interface OrderFulfillmentRetrieveParams {
-  account_id: string;
+export interface OrderFulfillmentQueryParams {
+  /**
+   * List of `Order` IDs to query `OrderFulfillments` for.
+   */
+  order_ids?: Array<string>;
+
+  page?: number;
+
+  page_size?: number;
 }
 
 export declare namespace OrderFulfillments {
   export {
     type OrderFulfillment as OrderFulfillment,
     type OrderFulfillmentQueryResponse as OrderFulfillmentQueryResponse,
-    type OrderFulfillmentRetrieveParams as OrderFulfillmentRetrieveParams,
+    type OrderFulfillmentQueryParams as OrderFulfillmentQueryParams,
   };
 }

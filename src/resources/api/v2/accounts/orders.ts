@@ -8,7 +8,7 @@ import { path } from '../../../../internal/utils/path';
 
 export class Orders extends APIResource {
   /**
-   * Retrieves details of a specific order by its ID.
+   * Get a specific `Order` by its ID.
    */
   retrieve(orderID: string, params: OrderRetrieveParams, options?: RequestOptions): APIPromise<Order> {
     const { account_id } = params;
@@ -16,15 +16,27 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Lists all orders under the account.
+   * Get a list of all `Orders` under the `Account`.
    */
-  list(accountID: string, options?: RequestOptions): APIPromise<OrderListResponse> {
-    return this._client.get(path`/api/v2/accounts/${accountID}/orders`, options);
+  list(
+    accountID: string,
+    query: OrderListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OrderListResponse> {
+    return this._client.get(path`/api/v2/accounts/${accountID}/orders`, { query, ...options });
   }
 
   /**
-   * Cancels an order by its ID. Note that this requires the order ID, not the order
-   * request ID.
+   * Cancel an `Order` by its ID. Note that this requires the `Order` ID, not the
+   * `OrderRequest` ID. Once you submit a cancellation request, it cannot be undone.
+   * Be advised that orders with a status of PENDING_FILL, PENDING_ESCROW, FILLED,
+   * REJECTED, or CANCELLED cannot be cancelled.
+   *
+   * `Order` cancellation is not guaranteed nor is it immediate. The `Order` may
+   * still be executed if the cancellation request is not received in time.
+   *
+   * Check the status using the "Get Order by ID" endpoint to confirm whether the
+   * `Order` has been cancelled.
    */
   cancel(orderID: string, params: OrderCancelParams, options?: RequestOptions): APIPromise<Order> {
     const { account_id } = params;
@@ -32,45 +44,67 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Gets estimated fee data for an order to be placed directly through our
-   * contracts.
-   */
-  getEstimatedFee(
-    accountID: string,
-    body: OrderGetEstimatedFeeParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderGetEstimatedFeeResponse> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/orders/estimated_fee`, { body, ...options });
-  }
-
-  /**
-   * Retrieves order fulfillments for a specific order.
+   * Get `OrderFulfillments` for a specific `Order`.
    */
   retrieveFulfillments(
     orderID: string,
     params: OrderRetrieveFulfillmentsParams,
     options?: RequestOptions,
   ): APIPromise<OrderRetrieveFulfillmentsResponse> {
-    const { account_id } = params;
-    return this._client.get(path`/api/v2/accounts/${account_id}/orders/${orderID}/fulfillments`, options);
+    const { account_id, ...query } = params;
+    return this._client.get(path`/api/v2/accounts/${account_id}/orders/${orderID}/fulfillments`, {
+      query,
+      ...options,
+    });
   }
 }
 
 export interface Order {
   /**
-   * Identifier of the order
+   * ID of the `Order`.
    */
   id: string;
 
   /**
-   * Total amount of assets involved
+   * CAIP-2 formatted chain ID of the blockchain that the `Order` transaction was run
+   * on.
    */
-  asset_token_quantity: number;
+  chain_id: 'eip155:1' | 'eip155:42161' | 'eip155:8453' | 'eip155:81457' | 'eip155:7887' | 'eip155:98866';
 
   /**
-   * Status of the order
+   * Datetime at which the `Order` was created. ISO 8601 timestamp.
    */
-  brokerage_order_status:
+  created_dt: string;
+
+  /**
+   * Smart contract address that `Order` was created from.
+   */
+  order_contract_address: string;
+
+  /**
+   * Indicates whether `Order` is a buy or sell.
+   */
+  order_side: 'BUY' | 'SELL';
+
+  /**
+   * Time in force. Indicates how long `Order` is valid for.
+   */
+  order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
+
+  /**
+   * Transaction hash for the `Order` creation.
+   */
+  order_transaction_hash: string;
+
+  /**
+   * Type of `Order`.
+   */
+  order_type: 'MARKET' | 'LIMIT';
+
+  /**
+   * Status of the `Order`.
+   */
+  status:
     | 'PENDING_SUBMIT'
     | 'PENDING_CANCEL'
     | 'PENDING_ESCROW'
@@ -84,127 +118,48 @@ export interface Order {
     | 'ERROR';
 
   /**
-   * Blockchain that transaction was run on
+   * The `Stock` ID associated with the `Order`
    */
-  chain_id: number;
+  stock_id: string;
 
   /**
-   * Smart Contract address that order came from
+   * The dShare asset token address.
    */
-  order_contract_address: string;
+  asset_token?: string;
 
   /**
-   * Indicates if order is a buy or sell
+   * Total amount of assets involved.
    */
-  order_side: 'BUY' | 'SELL';
+  asset_token_quantity?: number;
 
   /**
-   * Indicates how long order is valid
-   */
-  order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
-
-  /**
-   * Transaction hash for the order
-   */
-  order_transaction_hash: string;
-
-  /**
-   * Indicates what type of order
-   */
-  order_type: 'MARKET' | 'LIMIT';
-
-  /**
-   * Total amount of payment involved
-   */
-  payment_token_quantity: number;
-
-  /**
-   * Unique identifier of this Order generated by the order contract.
-   */
-  smart_contract_order_id: string;
-
-  /**
-   * Transaction hash for cancellation of order
+   * Transaction hash for cancellation of `Order`, if the `Order` was cancelled.
    */
   cancel_transaction_hash?: string;
 
   /**
-   * List of fees associated with order
+   * Fee amount associated with `Order`.
    */
-  fees?: Array<Record<string, unknown>>;
+  fee?: number;
 
   /**
-   * Total amount of network fee taken in USD
+   * For limit `Orders`, the price per asset, specified in the `Stock`'s native
+   * currency (USD for US equities and ETFs).
    */
-  network_fee_in_usd?: number;
+  limit_price?: number;
+
+  /**
+   * The payment token (stablecoin) address.
+   */
+  payment_token?: string;
+
+  /**
+   * Total amount of payment involved.
+   */
+  payment_token_quantity?: number;
 }
 
 export type OrderListResponse = Array<Order>;
-
-export interface OrderGetEstimatedFeeResponse {
-  /**
-   * Chain where the order is placed
-   */
-  chain_id: number;
-
-  /**
-   * FeeQuote structure to pass into contracts
-   */
-  fee_quote: OrderGetEstimatedFeeResponse.FeeQuote;
-
-  /**
-   * Signed FeeQuote structure to pass into contracts
-   */
-  fee_quote_signature: string;
-
-  /**
-   * Breakdown of fees
-   */
-  fees: Array<OrderGetEstimatedFeeResponse.Fee>;
-
-  /**
-   * Address of payment token used for fees
-   */
-  payment_token: string;
-}
-
-export namespace OrderGetEstimatedFeeResponse {
-  /**
-   * FeeQuote structure to pass into contracts
-   */
-  export interface FeeQuote {
-    deadline: number;
-
-    fee: string;
-
-    orderId: string;
-
-    requester: string;
-
-    timestamp: number;
-  }
-
-  export interface Fee {
-    /**
-     * The quantity of the fee paid via payment token in ETH
-     * <a href='https://ethereum.org/en/developers/docs/intro-to-ether/#what-is-ether' target='_blank'>(what
-     * is ETH?)</a>
-     */
-    fee_in_eth: number;
-
-    /**
-     * The quantity of the fee paid via payment token in wei
-     * <a href='https://ethereum.org/en/developers/docs/intro-to-ether/#denominations' target='_blank'>(what
-     * is wei?)</a>
-     */
-    fee_in_wei: string;
-
-    /**
-     * Type of fee
-     */
-    type: 'SPONSORED_NETWORK' | 'NETWORK' | 'TRADING' | 'ORDER' | 'PARTNER_ORDER' | 'PARTNER_TRADING';
-  }
-}
 
 export type OrderRetrieveFulfillmentsResponse = Array<OrderFulfillmentsAPI.OrderFulfillment>;
 
@@ -212,40 +167,41 @@ export interface OrderRetrieveParams {
   account_id: string;
 }
 
+export interface OrderListParams {
+  page?: number;
+
+  page_size?: number;
+}
+
 export interface OrderCancelParams {
   account_id: string;
 }
 
-export interface OrderGetEstimatedFeeParams {
-  /**
-   * Chain where the order is placed
-   */
-  chain_id: number;
-
-  /**
-   * Order contract address
-   */
-  contract_address: string;
-
-  /**
-   * Order data from which to calculate the fees. To be specified in the future
-   */
-  order_data: Record<string, string>;
-}
-
 export interface OrderRetrieveFulfillmentsParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Query param:
+   */
+  page?: number;
+
+  /**
+   * Query param:
+   */
+  page_size?: number;
 }
 
 export declare namespace Orders {
   export {
     type Order as Order,
     type OrderListResponse as OrderListResponse,
-    type OrderGetEstimatedFeeResponse as OrderGetEstimatedFeeResponse,
     type OrderRetrieveFulfillmentsResponse as OrderRetrieveFulfillmentsResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
+    type OrderListParams as OrderListParams,
     type OrderCancelParams as OrderCancelParams,
-    type OrderGetEstimatedFeeParams as OrderGetEstimatedFeeParams,
     type OrderRetrieveFulfillmentsParams as OrderRetrieveFulfillmentsParams,
   };
 }

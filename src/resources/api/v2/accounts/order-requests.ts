@@ -7,26 +7,18 @@ import { path } from '../../../../internal/utils/path';
 
 export class OrderRequests extends APIResource {
   /**
-   * Retrieves details of a specific managed order request by its ID.
+   * Lists managed `OrderRequests`.
    */
-  retrieve(
-    requestID: string,
-    params: OrderRequestRetrieveParams,
+  list(
+    accountID: string,
+    query: OrderRequestListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<OrderRequest> {
-    const { account_id } = params;
-    return this._client.get(path`/api/v2/accounts/${account_id}/order_requests/${requestID}`, options);
+  ): APIPromise<OrderRequestListResponse> {
+    return this._client.get(path`/api/v2/accounts/${accountID}/order_requests`, { query, ...options });
   }
 
   /**
-   * Lists managed order requests.
-   */
-  list(accountID: string, options?: RequestOptions): APIPromise<OrderRequestListResponse> {
-    return this._client.get(path`/api/v2/accounts/${accountID}/order_requests`, options);
-  }
-
-  /**
-   * Creates a managed limit buy request.
+   * Create a managed limit buy `OrderRequest`.
    */
   createLimitBuy(
     accountID: string,
@@ -40,7 +32,7 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Creates a managed limit sell request.
+   * Create a managed limit sell `OrderRequest`.
    */
   createLimitSell(
     accountID: string,
@@ -54,7 +46,7 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Creates a managed market buy request.
+   * Create a managed market buy `OrderRequest`.
    */
   createMarketBuy(
     accountID: string,
@@ -68,7 +60,7 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Creates a managed market sell request.
+   * Create a managed market sell `OrderRequest`.
    */
   createMarketSell(
     accountID: string,
@@ -83,11 +75,11 @@ export class OrderRequests extends APIResource {
 }
 
 /**
- * Input parameters for placing a limit order.
+ * Input parameters for creating a limit `OrderRequest`.
  */
 export interface LimitOrderRequestInput {
   /**
-   * Quantity of stock to trade. Must be a positive integer.
+   * Quantity of shares to trade. Must be a positive integer.
    */
   asset_quantity: number;
 
@@ -98,52 +90,75 @@ export interface LimitOrderRequestInput {
   limit_price: number;
 
   /**
-   * ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+   * ID of `Stock`.
    */
   stock_id: string;
 }
 
 /**
- * Request to create an order
+ * A request to create an `Order`.
+ *
+ * An `OrderRequest` is created when a user places an order through the Dinari API.
+ * The `OrderRequest` is then fulfilled by creating an `Order` on-chain.
+ *
+ * The `OrderRequest` is a record of the user's intent to place an order, while the
+ * `Order` is the actual transaction that occurs on the blockchain.
  */
 export interface OrderRequest {
   /**
-   * ID of account placing the order
+   * ID of `OrderRequest`. This is the primary identifier for the `/order_requests`
+   * routes.
+   */
+  id: string;
+
+  /**
+   * ID of `Account` placing the `OrderRequest`.
    */
   account_id: string;
 
   /**
-   * Confirmation code of order request. This is the primary identifier for the
-   * `/order_requests` endpoint
-   */
-  confirmation_code: string;
-
-  /**
-   * Timestamp at which the order request was created.
+   * Datetime at which the `OrderRequest` was created. ISO 8601 timestamp.
    */
   created_dt: string;
 
   /**
-   * Status of order request
+   * Indicates whether `Order` is a buy or sell.
+   */
+  order_side: 'BUY' | 'SELL';
+
+  /**
+   * Indicates how long `Order` is valid for.
+   */
+  order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
+
+  /**
+   * Type of `Order`.
+   */
+  order_type: 'MARKET' | 'LIMIT';
+
+  /**
+   * Status of `OrderRequest`.
    */
   status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED';
 
   /**
-   * ID of order created from the order request. This is the primary identifier for
-   * the `/orders` endpoint
+   * ID of `Order` created from the `OrderRequest`. This is the primary identifier
+   * for the `/orders` routes.
    */
   order_id?: string;
 }
 
 export type OrderRequestListResponse = Array<OrderRequest>;
 
-export interface OrderRequestRetrieveParams {
-  account_id: string;
+export interface OrderRequestListParams {
+  page?: number;
+
+  page_size?: number;
 }
 
 export interface OrderRequestCreateLimitBuyParams {
   /**
-   * Quantity of stock to trade. Must be a positive integer.
+   * Quantity of shares to trade. Must be a positive integer.
    */
   asset_quantity: number;
 
@@ -154,14 +169,14 @@ export interface OrderRequestCreateLimitBuyParams {
   limit_price: number;
 
   /**
-   * ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+   * ID of `Stock`.
    */
   stock_id: string;
 }
 
 export interface OrderRequestCreateLimitSellParams {
   /**
-   * Quantity of stock to trade. Must be a positive integer.
+   * Quantity of shares to trade. Must be a positive integer.
    */
   asset_quantity: number;
 
@@ -172,38 +187,33 @@ export interface OrderRequestCreateLimitSellParams {
   limit_price: number;
 
   /**
-   * ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+   * ID of `Stock`.
    */
   stock_id: string;
 }
 
 export interface OrderRequestCreateMarketBuyParams {
   /**
-   * Amount of USD to pay or receive for the order. Must be a positive number with a
-   * precision of up to 2 decimal places.
+   * Amount of currency (USD for US equities and ETFS) to pay or receive for the
+   * order. Must be a positive number with a precision of up to 2 decimal places.
    */
   payment_amount: number;
 
   /**
-   * ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+   * ID of `Stock`.
    */
   stock_id: string;
-
-  /**
-   * Whether to include fees in the `payment_amount` input field.
-   */
-  include_fees?: boolean;
 }
 
 export interface OrderRequestCreateMarketSellParams {
   /**
-   * Quantity of stock to trade. Must be a positive number with a precision of up to
+   * Quantity of shares to trade. Must be a positive number with a precision of up to
    * 9 decimal places.
    */
   asset_quantity: number;
 
   /**
-   * ID of stock, as returned by the `/stocks` endpoint, e.g. 1
+   * ID of `Stock`.
    */
   stock_id: string;
 }
@@ -213,7 +223,7 @@ export declare namespace OrderRequests {
     type LimitOrderRequestInput as LimitOrderRequestInput,
     type OrderRequest as OrderRequest,
     type OrderRequestListResponse as OrderRequestListResponse,
-    type OrderRequestRetrieveParams as OrderRequestRetrieveParams,
+    type OrderRequestListParams as OrderRequestListParams,
     type OrderRequestCreateLimitBuyParams as OrderRequestCreateLimitBuyParams,
     type OrderRequestCreateLimitSellParams as OrderRequestCreateLimitSellParams,
     type OrderRequestCreateMarketBuyParams as OrderRequestCreateMarketBuyParams,
