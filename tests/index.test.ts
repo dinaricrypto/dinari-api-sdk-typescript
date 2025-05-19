@@ -362,6 +362,29 @@ describe('instantiate client', () => {
       const client = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
       expect(client.baseURL).toEqual('https://api-enterprise.sbt.dinari.com');
     });
+
+    test('env variable with environment', () => {
+      process.env['DINARI_BASE_URL'] = 'https://example.com/from_env';
+
+      expect(
+        () =>
+          new Dinari({
+            apiKeyID: 'My API Key ID',
+            apiSecretKey: 'My API Secret Key',
+            environment: 'production',
+          }),
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Ambiguous URL; The \`baseURL\` option (or DINARI_BASE_URL env var) and the \`environment\` option are given. If you want to use the environment you must pass baseURL: null"`,
+      );
+
+      const client = new Dinari({
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
+        baseURL: null,
+        environment: 'production',
+      });
+      expect(client.baseURL).toEqual('https://api-enterprise.sbt.dinari.com');
+    });
   });
 
   test('maxRetries option is correctly set', () => {
