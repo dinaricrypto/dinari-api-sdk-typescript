@@ -26,6 +26,12 @@ import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 import { V2 } from './resources/v2/v2';
 
+const environments = {
+  production: 'https://api-enterprise.sbt.dinari.com',
+  sandbox: 'https://api-enterprise.sandbox.dinari.com',
+};
+type Environment = keyof typeof environments;
+
 export interface ClientOptions {
   /**
    * The API key ID provided on the [Partners Dashboard](https://partners.dinari.com).
@@ -36,6 +42,15 @@ export interface ClientOptions {
    * API Secret Key that is only shown once at API Key creation.
    */
   apiSecretKey?: string | undefined;
+
+  /**
+   * Specifies the environment to use for the API.
+   *
+   * Each environment maps to a different base URL:
+   * - `production` corresponds to `https://api-enterprise.sbt.dinari.com`
+   * - `sandbox` corresponds to `https://api-enterprise.sandbox.dinari.com`
+   */
+  environment?: Environment | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -128,6 +143,7 @@ export class Dinari {
    *
    * @param {string | undefined} [opts.apiKeyID=process.env['DINARI_API_KEY_ID'] ?? undefined]
    * @param {string | undefined} [opts.apiSecretKey=process.env['DINARI_API_SECRET_KEY'] ?? undefined]
+   * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
    * @param {string} [opts.baseURL=process.env['DINARI_BASE_URL'] ?? https://api-enterprise.sbt.dinari.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -157,10 +173,17 @@ export class Dinari {
       apiKeyID,
       apiSecretKey,
       ...opts,
-      baseURL: baseURL || `https://api-enterprise.sbt.dinari.com`,
+      baseURL,
+      environment: opts.environment ?? 'production',
     };
 
-    this.baseURL = options.baseURL!;
+    if (baseURL && opts.environment) {
+      throw new Errors.DinariError(
+        'Ambiguous URL; The `baseURL` option (or DINARI_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
+      );
+    }
+
+    this.baseURL = options.baseURL || environments[options.environment || 'production'];
     this.timeout = options.timeout ?? Dinari.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
@@ -187,7 +210,8 @@ export class Dinari {
   withOptions(options: Partial<ClientOptions>): this {
     return new (this.constructor as any as new (props: ClientOptions) => typeof this)({
       ...this._options,
-      baseURL: this.baseURL,
+      environment: options.environment ? options.environment : undefined,
+      baseURL: options.environment ? undefined : this.baseURL,
       maxRetries: this.maxRetries,
       timeout: this.timeout,
       logger: this.logger,

@@ -28,6 +28,7 @@ import Dinari from 'dinari';
 const client = new Dinari({
   apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted
   apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted
+  environment: 'sandbox', // defaults to 'production'
 });
 
 async function main() {
@@ -48,6 +49,7 @@ import Dinari from 'dinari';
 const client = new Dinari({
   apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted
   apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted
+  environment: 'sandbox', // defaults to 'production'
 });
 
 async function main() {
