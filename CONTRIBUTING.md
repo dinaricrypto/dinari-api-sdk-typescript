@@ -55,12 +55,12 @@ $ cd dinari-api-sdk-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link dinari
+$ yarn link @dinari/api-sdk
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global dinari
+$ pnpm link -—global @dinari/api-sdk
 ```
 
 ## Running tests

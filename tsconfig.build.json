@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "dinari/*": ["dist/src/*"],
-      "dinari": ["dist/src/index.ts"]
+      "@dinari/api-sdk/*": ["dist/src/*"],
+      "@dinari/api-sdk": ["dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,
