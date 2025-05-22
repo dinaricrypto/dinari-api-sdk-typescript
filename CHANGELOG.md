@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-05-22)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Chores
+
+* **docs:** grammar improvements ([9623854](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/962385421797eca54c7e202a88536b43d977ca5a))
+
 ## 0.1.0-alpha.1 (2025-05-19)
 
 Full Changelog: [v0.0.1-alpha.2...v0.1.0-alpha.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.0.1-alpha.2...v0.1.0-alpha.1)
