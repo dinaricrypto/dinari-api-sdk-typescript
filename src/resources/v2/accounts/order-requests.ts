@@ -152,6 +152,33 @@ export class OrderRequests extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Get fee quote data for an `Order Request`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v2.accounts.orderRequests.getFeeQuote(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       order_side: 'BUY',
+   *       order_type: 'MARKET',
+   *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     },
+   *   );
+   * ```
+   */
+  getFeeQuote(
+    accountID: string,
+    body: OrderRequestGetFeeQuoteParams,
+    options?: RequestOptions,
+  ): APIPromise<OrderRequestGetFeeQuoteResponse> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/fee_quote`, {
+      body,
+      ...options,
+    });
+  }
 }
 
 /**
@@ -230,6 +257,16 @@ export interface OrderRequest {
 
 export type OrderRequestListResponse = Array<OrderRequest>;
 
+/**
+ * A preview of the fee that would be collected when placing an Order Request.
+ */
+export interface OrderRequestGetFeeQuoteResponse {
+  /**
+   * Cash amount in USD paid for fees for the Order Request.
+   */
+  fee: number;
+}
+
 export interface OrderRequestRetrieveParams {
   account_id: string;
 }
@@ -302,16 +339,52 @@ export interface OrderRequestCreateMarketSellParams {
   stock_id: string;
 }
 
+export interface OrderRequestGetFeeQuoteParams {
+  /**
+   * Indicates whether `Order Request` is a buy or sell.
+   */
+  order_side: OrdersAPI.OrderSide;
+
+  /**
+   * Type of `Order Request`.
+   */
+  order_type: OrdersAPI.OrderType;
+
+  /**
+   * The Stock ID associated with the Order Request
+   */
+  stock_id: string;
+
+  /**
+   * Amount of dShare asset tokens involved. Required for limit `Orders` and market
+   * sell `Order Requests`.
+   */
+  asset_token_quantity?: number;
+
+  /**
+   * Price per asset in the asset's native currency. USD for US equities and ETFs.
+   * Required for limit `Order Requests`.
+   */
+  limit_price?: number;
+
+  /**
+   * Amount of payment tokens involved. Required for market buy `Order Requests`.
+   */
+  payment_token_quantity?: number;
+}
+
 export declare namespace OrderRequests {
   export {
     type CreateLimitOrderInput as CreateLimitOrderInput,
     type OrderRequest as OrderRequest,
     type OrderRequestListResponse as OrderRequestListResponse,
+    type OrderRequestGetFeeQuoteResponse as OrderRequestGetFeeQuoteResponse,
     type OrderRequestRetrieveParams as OrderRequestRetrieveParams,
     type OrderRequestListParams as OrderRequestListParams,
     type OrderRequestCreateLimitBuyParams as OrderRequestCreateLimitBuyParams,
     type OrderRequestCreateLimitSellParams as OrderRequestCreateLimitSellParams,
     type OrderRequestCreateMarketBuyParams as OrderRequestCreateMarketBuyParams,
     type OrderRequestCreateMarketSellParams as OrderRequestCreateMarketSellParams,
+    type OrderRequestGetFeeQuoteParams as OrderRequestGetFeeQuoteParams,
   };
 }
