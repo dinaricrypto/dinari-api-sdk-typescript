@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-06-03)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** generated missing apis ([808f1b6](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/808f1b62dfb3cfb628db584e41aa47c0f2d8fe14))
+
+
+### Bug Fixes
+
+* compat with more runtimes ([76103a1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/76103a1c97d32664cc2fb2d8fd83a4fd5bffc9de))
+
+
+### Chores
+
+* adjust eslint.config.mjs ignore pattern ([14f33cb](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/14f33cb27a8aedc93934dcafaab715f405852987))
+* **deps:** bump eslint-plugin-prettier ([e0d7bcc](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/e0d7bccd8815c63ca5d33eda673d31cabaadd0f9))
+* **docs:** grammar improvements ([9623854](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/962385421797eca54c7e202a88536b43d977ca5a))
+* improve publish-npm script --latest tag logic ([0e84bf1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/0e84bf1d36b980f34a5f69ebaa490e801e4b082f))
+* **internal:** update jest config ([34e9d4b](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/34e9d4b035bddcb5a71dddc14fd2013547462c44))
+
 ## 0.1.0-alpha.1 (2025-05-19)
 
 Full Changelog: [v0.0.1-alpha.2...v0.1.0-alpha.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.0.1-alpha.2...v0.1.0-alpha.1)

@@ -175,6 +175,7 @@ Types:
 - <code><a href="./src/resources/v2/accounts/order-requests.ts">CreateLimitOrderInput</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests.ts">OrderRequest</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests.ts">OrderRequestListResponse</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests.ts">OrderRequestGetFeeQuoteResponse</a></code>
 
 Methods:
 
@@ -184,6 +185,7 @@ Methods:
 - <code title="post /api/v2/accounts/{account_id}/order_requests/limit_sell">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">createLimitSell</a>(accountID, { ...params }) -> OrderRequest</code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/market_buy">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">createMarketBuy</a>(accountID, { ...params }) -> OrderRequest</code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/market_sell">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">createMarketSell</a>(accountID, { ...params }) -> OrderRequest</code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/fee_quote">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">getFeeQuote</a>(accountID, { ...params }) -> OrderRequestGetFeeQuoteResponse</code>
 
 ### WithdrawalRequests
 
