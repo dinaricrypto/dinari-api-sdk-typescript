@@ -139,20 +139,34 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v2/accounts/orders.ts">BrokerageOrderStatus</a></code>
-- <code><a href="./src/resources/v2/accounts/orders.ts">Order</a></code>
-- <code><a href="./src/resources/v2/accounts/orders.ts">OrderSide</a></code>
-- <code><a href="./src/resources/v2/accounts/orders.ts">OrderTif</a></code>
-- <code><a href="./src/resources/v2/accounts/orders.ts">OrderType</a></code>
-- <code><a href="./src/resources/v2/accounts/orders.ts">OrderListResponse</a></code>
-- <code><a href="./src/resources/v2/accounts/orders.ts">OrderGetFulfillmentsResponse</a></code>
+- <code><a href="./src/resources/v2/accounts/orders/orders.ts">BrokerageOrderStatus</a></code>
+- <code><a href="./src/resources/v2/accounts/orders/orders.ts">Order</a></code>
+- <code><a href="./src/resources/v2/accounts/orders/orders.ts">OrderSide</a></code>
+- <code><a href="./src/resources/v2/accounts/orders/orders.ts">OrderTif</a></code>
+- <code><a href="./src/resources/v2/accounts/orders/orders.ts">OrderType</a></code>
+- <code><a href="./src/resources/v2/accounts/orders/orders.ts">OrderListResponse</a></code>
+- <code><a href="./src/resources/v2/accounts/orders/orders.ts">OrderGetFulfillmentsResponse</a></code>
 
 Methods:
 
-- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders.ts">retrieve</a>(orderID, { ...params }) -> Order</code>
-- <code title="get /api/v2/accounts/{account_id}/orders">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders.ts">list</a>(accountID, { ...params }) -> OrderListResponse</code>
-- <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders.ts">cancel</a>(orderID, { ...params }) -> Order</code>
-- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders.ts">getFulfillments</a>(orderID, { ...params }) -> OrderGetFulfillmentsResponse</code>
+- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders/orders.ts">retrieve</a>(orderID, { ...params }) -> Order</code>
+- <code title="get /api/v2/accounts/{account_id}/orders">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders/orders.ts">list</a>(accountID, { ...params }) -> OrderListResponse</code>
+- <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders/orders.ts">cancel</a>(orderID, { ...params }) -> Order</code>
+- <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders/orders.ts">getFulfillments</a>(orderID, { ...params }) -> OrderGetFulfillmentsResponse</code>
+
+#### Stocks
+
+##### Eip155
+
+Types:
+
+- <code><a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">Eip155GetFeeQuoteResponse</a></code>
+- <code><a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">Eip155PrepareOrderResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v2/accounts/{account_id}/orders/stocks/eip155/fee_quote">client.v2.accounts.orders.stocks.eip155.<a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">getFeeQuote</a>(accountID, { ...params }) -> Eip155GetFeeQuoteResponse</code>
+- <code title="post /api/v2/accounts/{account_id}/orders/stocks/eip155/prepare">client.v2.accounts.orders.stocks.eip155.<a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">prepareOrder</a>(accountID, { ...params }) -> Eip155PrepareOrderResponse</code>
 
 ### OrderFulfillments
 
@@ -170,20 +184,33 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v2/accounts/order-requests.ts">CreateLimitOrderInput</a></code>
-- <code><a href="./src/resources/v2/accounts/order-requests.ts">OrderRequest</a></code>
-- <code><a href="./src/resources/v2/accounts/order-requests.ts">OrderRequestListResponse</a></code>
-- <code><a href="./src/resources/v2/accounts/order-requests.ts">OrderRequestGetFeeQuoteResponse</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">CreateLimitOrderInput</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequest</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequestListResponse</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequestGetFeeQuoteResponse</a></code>
 
 Methods:
 
-- <code title="get /api/v2/accounts/{account_id}/order_requests/{order_request_id}">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">retrieve</a>(orderRequestID, { ...params }) -> OrderRequest</code>
-- <code title="get /api/v2/accounts/{account_id}/order_requests">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">list</a>(accountID, { ...params }) -> OrderRequestListResponse</code>
-- <code title="post /api/v2/accounts/{account_id}/order_requests/limit_buy">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">createLimitBuy</a>(accountID, { ...params }) -> OrderRequest</code>
-- <code title="post /api/v2/accounts/{account_id}/order_requests/limit_sell">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">createLimitSell</a>(accountID, { ...params }) -> OrderRequest</code>
-- <code title="post /api/v2/accounts/{account_id}/order_requests/market_buy">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">createMarketBuy</a>(accountID, { ...params }) -> OrderRequest</code>
-- <code title="post /api/v2/accounts/{account_id}/order_requests/market_sell">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">createMarketSell</a>(accountID, { ...params }) -> OrderRequest</code>
-- <code title="post /api/v2/accounts/{account_id}/order_requests/fee_quote">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests.ts">getFeeQuote</a>(accountID, { ...params }) -> OrderRequestGetFeeQuoteResponse</code>
+- <code title="get /api/v2/accounts/{account_id}/order_requests/{order_request_id}">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests/order-requests.ts">retrieve</a>(orderRequestID, { ...params }) -> OrderRequest</code>
+- <code title="get /api/v2/accounts/{account_id}/order_requests">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests/order-requests.ts">list</a>(accountID, { ...params }) -> OrderRequestListResponse</code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/limit_buy">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests/order-requests.ts">createLimitBuy</a>(accountID, { ...params }) -> OrderRequest</code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/limit_sell">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests/order-requests.ts">createLimitSell</a>(accountID, { ...params }) -> OrderRequest</code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/market_buy">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests/order-requests.ts">createMarketBuy</a>(accountID, { ...params }) -> OrderRequest</code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/market_sell">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests/order-requests.ts">createMarketSell</a>(accountID, { ...params }) -> OrderRequest</code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/fee_quote">client.v2.accounts.orderRequests.<a href="./src/resources/v2/accounts/order-requests/order-requests.ts">getFeeQuote</a>(accountID, { ...params }) -> OrderRequestGetFeeQuoteResponse</code>
+
+#### Stocks
+
+##### Eip155
+
+Types:
+
+- <code><a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">Eip155PrepareProxiedOrderResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155">client.v2.accounts.orderRequests.stocks.eip155.<a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">createProxiedOrder</a>(accountID, { ...params }) -> OrderRequest</code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155/prepare">client.v2.accounts.orderRequests.stocks.eip155.<a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">prepareProxiedOrder</a>(accountID, { ...params }) -> Eip155PrepareProxiedOrderResponse</code>
 
 ### WithdrawalRequests
 
