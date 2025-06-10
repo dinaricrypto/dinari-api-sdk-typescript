@@ -31,7 +31,7 @@ export {
   type OrderRequestCreateMarketBuyParams,
   type OrderRequestCreateMarketSellParams,
   type OrderRequestGetFeeQuoteParams,
-} from './order-requests';
+} from './order-requests/index';
 export {
   Orders,
   type BrokerageOrderStatus,
@@ -45,7 +45,7 @@ export {
   type OrderListParams,
   type OrderCancelParams,
   type OrderGetFulfillmentsParams,
-} from './orders';
+} from './orders/index';
 export { WalletResource, type Wallet } from './wallet/index';
 export {
   WithdrawalRequests,
