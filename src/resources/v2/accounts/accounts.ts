@@ -30,8 +30,6 @@ import {
   BrokerageOrderStatus,
   Order,
   OrderCancelParams,
-  OrderGetFeeQuoteParams,
-  OrderGetFeeQuoteResponse,
   OrderGetFulfillmentsParams,
   OrderGetFulfillmentsResponse,
   OrderListParams,
@@ -424,12 +422,10 @@ export declare namespace Accounts {
     type OrderTif as OrderTif,
     type OrderType as OrderType,
     type OrderListResponse as OrderListResponse,
-    type OrderGetFeeQuoteResponse as OrderGetFeeQuoteResponse,
     type OrderGetFulfillmentsResponse as OrderGetFulfillmentsResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
     type OrderListParams as OrderListParams,
     type OrderCancelParams as OrderCancelParams,
-    type OrderGetFeeQuoteParams as OrderGetFeeQuoteParams,
     type OrderGetFulfillmentsParams as OrderGetFulfillmentsParams,
   };
 

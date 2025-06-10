@@ -145,7 +145,6 @@ Types:
 - <code><a href="./src/resources/v2/accounts/orders.ts">OrderTif</a></code>
 - <code><a href="./src/resources/v2/accounts/orders.ts">OrderType</a></code>
 - <code><a href="./src/resources/v2/accounts/orders.ts">OrderListResponse</a></code>
-- <code><a href="./src/resources/v2/accounts/orders.ts">OrderGetFeeQuoteResponse</a></code>
 - <code><a href="./src/resources/v2/accounts/orders.ts">OrderGetFulfillmentsResponse</a></code>
 
 Methods:
@@ -153,7 +152,6 @@ Methods:
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders.ts">retrieve</a>(orderID, { ...params }) -> Order</code>
 - <code title="get /api/v2/accounts/{account_id}/orders">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders.ts">list</a>(accountID, { ...params }) -> OrderListResponse</code>
 - <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders.ts">cancel</a>(orderID, { ...params }) -> Order</code>
-- <code title="post /api/v2/accounts/{account_id}/orders/fee_quote">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders.ts">getFeeQuote</a>(accountID, { ...params }) -> OrderGetFeeQuoteResponse</code>
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders.ts">getFulfillments</a>(orderID, { ...params }) -> OrderGetFulfillmentsResponse</code>
 
 ### OrderFulfillments
