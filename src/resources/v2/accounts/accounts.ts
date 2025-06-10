@@ -10,38 +10,6 @@ import {
   OrderFulfillmentRetrieveParams,
   OrderFulfillments,
 } from './order-fulfillments';
-import * as OrderRequestsAPI from './order-requests';
-import {
-  CreateLimitOrderInput,
-  OrderRequest,
-  OrderRequestCreateLimitBuyParams,
-  OrderRequestCreateLimitSellParams,
-  OrderRequestCreateMarketBuyParams,
-  OrderRequestCreateMarketSellParams,
-  OrderRequestGetFeeQuoteParams,
-  OrderRequestGetFeeQuoteResponse,
-  OrderRequestListParams,
-  OrderRequestListResponse,
-  OrderRequestRetrieveParams,
-  OrderRequests,
-} from './order-requests';
-import * as OrdersAPI from './orders';
-import {
-  BrokerageOrderStatus,
-  Order,
-  OrderCancelParams,
-  OrderGetFeeQuoteParams,
-  OrderGetFeeQuoteResponse,
-  OrderGetFulfillmentsParams,
-  OrderGetFulfillmentsResponse,
-  OrderListParams,
-  OrderListResponse,
-  OrderRetrieveParams,
-  OrderSide,
-  OrderTif,
-  OrderType,
-  Orders,
-} from './orders';
 import * as WithdrawalRequestsAPI from './withdrawal-requests';
 import {
   WithdrawalRequest,
@@ -60,6 +28,36 @@ import {
   Withdrawals,
 } from './withdrawals';
 import * as EntitiesAccountsAPI from '../entities/accounts';
+import * as OrderRequestsAPI from './order-requests/order-requests';
+import {
+  CreateLimitOrderInput,
+  OrderRequest,
+  OrderRequestCreateLimitBuyParams,
+  OrderRequestCreateLimitSellParams,
+  OrderRequestCreateMarketBuyParams,
+  OrderRequestCreateMarketSellParams,
+  OrderRequestGetFeeQuoteParams,
+  OrderRequestGetFeeQuoteResponse,
+  OrderRequestListParams,
+  OrderRequestListResponse,
+  OrderRequestRetrieveParams,
+  OrderRequests,
+} from './order-requests/order-requests';
+import * as OrdersAPI from './orders/orders';
+import {
+  BrokerageOrderStatus,
+  Order,
+  OrderCancelParams,
+  OrderGetFulfillmentsParams,
+  OrderGetFulfillmentsResponse,
+  OrderListParams,
+  OrderListResponse,
+  OrderRetrieveParams,
+  OrderSide,
+  OrderTif,
+  OrderType,
+  Orders,
+} from './orders/orders';
 import * as WalletAPI from './wallet/wallet';
 import { Wallet, WalletResource } from './wallet/wallet';
 import { APIPromise } from '../../../core/api-promise';
@@ -424,12 +422,10 @@ export declare namespace Accounts {
     type OrderTif as OrderTif,
     type OrderType as OrderType,
     type OrderListResponse as OrderListResponse,
-    type OrderGetFeeQuoteResponse as OrderGetFeeQuoteResponse,
     type OrderGetFulfillmentsResponse as OrderGetFulfillmentsResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
     type OrderListParams as OrderListParams,
     type OrderCancelParams as OrderCancelParams,
-    type OrderGetFeeQuoteParams as OrderGetFeeQuoteParams,
     type OrderGetFulfillmentsParams as OrderGetFulfillmentsParams,
   };
 

@@ -28,11 +28,7 @@ const client = new Dinari({
   environment: 'sandbox', // defaults to 'production'
 });
 
-async function main() {
-  const stocks = await client.v2.marketData.stocks.list();
-}
-
-main();
+const stocks = await client.v2.marketData.stocks.list();
 ```
 
 ### Request & Response types
@@ -49,11 +45,7 @@ const client = new Dinari({
   environment: 'sandbox', // defaults to 'production'
 });
 
-async function main() {
-  const stocks: Dinari.V2.MarketData.StockListResponse = await client.v2.marketData.stocks.list();
-}
-
-main();
+const stocks: Dinari.V2.MarketData.StockListResponse = await client.v2.marketData.stocks.list();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -115,19 +107,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-async function main() {
-  const stocks = await client.v2.marketData.stocks.list().catch(async (err) => {
-    if (err instanceof Dinari.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
-}
-
-main();
+const stocks = await client.v2.marketData.stocks.list().catch(async (err) => {
+  if (err instanceof Dinari.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:
