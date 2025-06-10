@@ -1,6 +1,6 @@
 {
   "name": "@dinari/api-sdk",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0",
   "description": "The official TypeScript library for the Dinari API",
   "author": "Dinari <hello@dinari.com>",
   "types": "dist/index.d.ts",

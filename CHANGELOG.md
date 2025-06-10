@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0 (2025-06-10)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.1.0-alpha.2...v0.1.0)
+
+### Features
+
+* **api:** api update ([ddcbbc8](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/ddcbbc8c7dd3ac8e76d4ed3ab1af88e49205e500))
+* **api:** update routes ([c6da8ac](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c6da8ac7d455f6beafae900f45e262187f0fe865))
+
+
+### Chores
+
+* avoid type error in certain environments ([4c11a52](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/4c11a522a17b891ee9152a6cfd5b8de5e6b50987))
+* **docs:** use top-level-await in example snippets ([9f34fbd](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/9f34fbdb7d9812a751cefaede98141a4a38adb2f))
+* **internal:** fix readablestream types in node 20 ([5292582](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/52925822c209ee73c8ec4d5efa0f213bc587f333))
+
 ## 0.1.0-alpha.2 (2025-06-03)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
