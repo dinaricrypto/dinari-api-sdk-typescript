@@ -68,36 +68,6 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Get fee quote data for an `Order`.
-   *
-   * The `order_fee_contract_object` property contains the fee quote structure to be
-   * used verbatim when placing an `Order` directly through our Contracts.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v2.accounts.orders.getFeeQuote(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       chain_id: 'eip155:1',
-   *       contract_address: 'contract_address',
-   *       order_side: 'BUY',
-   *       order_tif: 'DAY',
-   *       order_type: 'MARKET',
-   *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     },
-   *   );
-   * ```
-   */
-  getFeeQuote(
-    accountID: string,
-    body: OrderGetFeeQuoteParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderGetFeeQuoteResponse> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/orders/fee_quote`, { body, ...options });
-  }
-
-  /**
    * Get `OrderFulfillments` for a specific `Order`.
    *
    * @example
@@ -232,93 +202,6 @@ export type OrderType = 'MARKET' | 'LIMIT';
 
 export type OrderListResponse = Array<Order>;
 
-export interface OrderGetFeeQuoteResponse {
-  /**
-   * CAIP-2 chain ID of the blockchain where the `Order` will be placed
-   */
-  chain_id: AccountsAPI.Chain;
-
-  /**
-   * The total quantity of the fees paid via payment token.
-   */
-  fee: number;
-
-  /**
-   * Opaque fee quote object to pass into the contract when creating an `Order`
-   * directly through Dinari's smart contracts.
-   */
-  order_fee_contract_object: OrderGetFeeQuoteResponse.OrderFeeContractObject;
-}
-
-export namespace OrderGetFeeQuoteResponse {
-  /**
-   * Opaque fee quote object to pass into the contract when creating an `Order`
-   * directly through Dinari's smart contracts.
-   */
-  export interface OrderFeeContractObject {
-    /**
-     * EVM chain ID where the order is placed
-     */
-    chain_id: number;
-
-    /**
-     * `FeeQuote` structure to pass into contracts.
-     */
-    fee_quote: OrderFeeContractObject.FeeQuote;
-
-    /**
-     * Signed `FeeQuote` structure to pass into contracts.
-     */
-    fee_quote_signature: string;
-
-    /**
-     * Breakdown of fees
-     */
-    fees: Array<OrderFeeContractObject.Fee>;
-
-    /**
-     * Address of payment token used for fees
-     */
-    payment_token: string;
-  }
-
-  export namespace OrderFeeContractObject {
-    /**
-     * `FeeQuote` structure to pass into contracts.
-     */
-    export interface FeeQuote {
-      deadline: number;
-
-      fee: string;
-
-      orderId: string;
-
-      requester: string;
-
-      timestamp: number;
-    }
-
-    export interface Fee {
-      /**
-       * The quantity of the fee paid via payment token in
-       * [ETH](https://ethereum.org/en/developers/docs/intro-to-ether/#what-is-ether).
-       */
-      fee_in_eth: number;
-
-      /**
-       * The quantity of the fee paid via payment token in
-       * [wei](https://ethereum.org/en/developers/docs/intro-to-ether/#denominations).
-       */
-      fee_in_wei: string;
-
-      /**
-       * Type of fee.
-       */
-      type: 'SPONSORED_NETWORK' | 'NETWORK' | 'TRADING' | 'ORDER' | 'PARTNER_ORDER' | 'PARTNER_TRADING';
-    }
-  }
-}
-
 export type OrderGetFulfillmentsResponse = Array<OrderFulfillmentsAPI.Fulfillment>;
 
 export interface OrderRetrieveParams {
@@ -333,60 +216,6 @@ export interface OrderListParams {
 
 export interface OrderCancelParams {
   account_id: string;
-}
-
-export interface OrderGetFeeQuoteParams {
-  /**
-   * CAIP-2 chain ID of the blockchain where the `Order` will be placed.
-   */
-  chain_id: AccountsAPI.Chain;
-
-  /**
-   * Address of the smart contract that will create the `Order`.
-   */
-  contract_address: string;
-
-  /**
-   * Indicates whether `Order` is a buy or sell.
-   */
-  order_side: OrderSide;
-
-  /**
-   * Time in force. Indicates how long `Order` is valid for.
-   */
-  order_tif: OrderTif;
-
-  /**
-   * Type of `Order`.
-   */
-  order_type: OrderType;
-
-  /**
-   * The Stock ID associated with the Order
-   */
-  stock_id: string;
-
-  /**
-   * Amount of dShare asset tokens involved. Required for limit `Orders` and market
-   * sell `Orders`.
-   */
-  asset_token_quantity?: number;
-
-  /**
-   * Price per asset in the asset's native currency. USD for US equities and ETFs.
-   * Required for limit `Orders`.
-   */
-  limit_price?: number;
-
-  /**
-   * Address of payment token.
-   */
-  payment_token?: string;
-
-  /**
-   * Amount of payment tokens involved. Required for market buy `Orders`.
-   */
-  payment_token_quantity?: number;
 }
 
 export interface OrderGetFulfillmentsParams {
@@ -414,12 +243,10 @@ export declare namespace Orders {
     type OrderTif as OrderTif,
     type OrderType as OrderType,
     type OrderListResponse as OrderListResponse,
-    type OrderGetFeeQuoteResponse as OrderGetFeeQuoteResponse,
     type OrderGetFulfillmentsResponse as OrderGetFulfillmentsResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
     type OrderListParams as OrderListParams,
     type OrderCancelParams as OrderCancelParams,
-    type OrderGetFeeQuoteParams as OrderGetFeeQuoteParams,
     type OrderGetFulfillmentsParams as OrderGetFulfillmentsParams,
   };
 }

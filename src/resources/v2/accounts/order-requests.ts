@@ -8,7 +8,7 @@ import { path } from '../../../internal/utils/path';
 
 export class OrderRequests extends APIResource {
   /**
-   * Get a specific managed `OrderRequest` by its ID.
+   * Get a specific `OrderRequest` by its ID.
    *
    * @example
    * ```ts
@@ -29,7 +29,7 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Lists managed `OrderRequests`.
+   * Lists `OrderRequests`.
    *
    * @example
    * ```ts
@@ -48,7 +48,7 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Create a managed limit buy `OrderRequest`.
+   * Create a managed `OrderRequest` to place a limit buy `Order`.
    *
    * @example
    * ```ts
@@ -75,7 +75,7 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Create a managed limit sell `OrderRequest`.
+   * Create a managed `OrderRequest` to place a limit sell `Order`.
    *
    * @example
    * ```ts
@@ -102,7 +102,7 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Create a managed market buy `OrderRequest`.
+   * Create a managed `OrderRequest` to place a market buy `Order`.
    *
    * @example
    * ```ts
@@ -128,7 +128,7 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Create a managed market sell `OrderRequest`.
+   * Create a managed `OrderRequest` to place a market sell `Order`.
    *
    * @example
    * ```ts
@@ -154,7 +154,8 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Get fee quote data for an `Order Request`.
+   * Get fee quote data for an `Order Request`. This is provided primarily for
+   * informational purposes.
    *
    * @example
    * ```ts
@@ -315,7 +316,7 @@ export interface OrderRequestCreateLimitSellParams {
 
 export interface OrderRequestCreateMarketBuyParams {
   /**
-   * Amount of currency (USD for US equities and ETFS) to pay or receive for the
+   * Amount of currency (USD for US equities and ETFs) to pay or receive for the
    * order. Must be a positive number with a precision of up to 2 decimal places.
    */
   payment_amount: number;
