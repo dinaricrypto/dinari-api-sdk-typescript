@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.1 (2025-06-13)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.1.0...v0.1.1)
+
+### Bug Fixes
+
+* publish script — handle NPM errors correctly ([31a9a5c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/31a9a5c89c37a70587615a21dd9d2202c95f71b0))
+
+
+### Chores
+
+* **internal:** add pure annotations, make base APIResource abstract ([34b0f16](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/34b0f160ae826fbb25d72414d479a89fe86e91be))
+
 ## 0.1.0 (2025-06-10)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.1.0-alpha.2...v0.1.0)
