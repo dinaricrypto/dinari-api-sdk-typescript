@@ -1,6 +1,6 @@
 # Dinari TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/@dinari/api-sdk.svg)](https://npmjs.org/package/@dinari/api-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@dinari/api-sdk)
+[![NPM version](<https://img.shields.io/npm/v/@dinari/api-sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/@dinari/api-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@dinari/api-sdk)
 
 This library provides convenient access to the Dinari REST API from server-side TypeScript or JavaScript.
 
