@@ -385,6 +385,32 @@ describe('instantiate client', () => {
       });
       expect(client.baseURL).toEqual('https://api-enterprise.sbt.dinari.com');
     });
+
+    test('in request options', () => {
+      const client = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/option/foo',
+      );
+    });
+
+    test('in request options overridden by client options', () => {
+      const client = new Dinari({
+        apiKeyID: 'My API Key ID',
+        apiSecretKey: 'My API Secret Key',
+        baseURL: 'http://localhost:5000/client',
+      });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/client/foo',
+      );
+    });
+
+    test('in request options overridden by env variable', () => {
+      process.env['DINARI_BASE_URL'] = 'http://localhost:5000/env';
+      const client = new Dinari({ apiKeyID: 'My API Key ID', apiSecretKey: 'My API Secret Key' });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/env/foo',
+      );
+    });
   });
 
   test('maxRetries option is correctly set', () => {
