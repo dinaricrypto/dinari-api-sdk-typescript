@@ -106,10 +106,7 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Create a managed `OrderRequest` to place a market buy `Order`. Fees for the
-   * `Order` are included in the transaction. Refer to our
-   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-   * for fee estimation.
+   * Create a managed `OrderRequest` to place a market buy `Order`.
    *
    * @example
    * ```ts
@@ -323,8 +320,8 @@ export interface OrderRequestCreateLimitSellParams {
 
 export interface OrderRequestCreateMarketBuyParams {
   /**
-   * Amount of currency (USD for US equities and ETFs) to pay for the order. Must be
-   * a positive number with a precision of up to 2 decimal places.
+   * Amount of currency (USD for US equities and ETFs) to pay or receive for the
+   * order. Must be a positive number with a precision of up to 2 decimal places.
    */
   payment_amount: number;
 
