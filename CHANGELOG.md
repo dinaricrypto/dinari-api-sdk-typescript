@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.2.0 (2025-06-22)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** api update ([d2f9e09](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/d2f9e09b5ba11425785098f6d499ccd40839911d))
+* **client:** add support for endpoint-specific base URLs ([58a253c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/58a253c29986e7bc52eee7cc198155ffc4b9ed76))
+
+
+### Bug Fixes
+
+* **client:** explicitly copy fetch in withOptions ([6416932](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/6416932a357f417e96b834d555e603916be489f8))
+* publish script — handle NPM errors correctly ([31a9a5c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/31a9a5c89c37a70587615a21dd9d2202c95f71b0))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([a77c2f8](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a77c2f8f48ac8df849a988207389321715d74043))
+* **client:** refactor imports ([a0f0279](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a0f02792c56be3c8b7fe6c74c7d86056ddf1eaf8))
+* **internal:** add pure annotations, make base APIResource abstract ([34b0f16](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/34b0f160ae826fbb25d72414d479a89fe86e91be))
+* **readme:** update badges ([46bd035](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/46bd035c22d55a48efdd7a6ed19b760051c3d6ab))
+* **readme:** use better example snippet for undocumented params ([c8cb4e1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c8cb4e1e301f29e139c0559e80331f745884cbb6))
+
 ## 0.1.0 (2025-06-10)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.1.0-alpha.2...v0.1.0)
