@@ -46,7 +46,7 @@ describe('resource external', () => {
   test.skip('getNonce: only required params', async () => {
     const responsePromise = client.v2.accounts.wallet.external.getNonce(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { wallet_address: 'wallet_address' },
+      { chain_id: 'eip155:1', wallet_address: 'wallet_address' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -61,7 +61,7 @@ describe('resource external', () => {
   test.skip('getNonce: required and optional params', async () => {
     const response = await client.v2.accounts.wallet.external.getNonce(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { wallet_address: 'wallet_address' },
+      { chain_id: 'eip155:1', wallet_address: 'wallet_address' },
     );
   });
 });

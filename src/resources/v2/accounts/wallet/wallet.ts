@@ -40,6 +40,19 @@ export interface Wallet {
   address: string;
 
   /**
+   * CAIP-2 formatted chain ID of the blockchain the `Wallet` is on. eip155:0 is used
+   * for EOA wallets
+   */
+  chain_id:
+    | 'eip155:1'
+    | 'eip155:42161'
+    | 'eip155:8453'
+    | 'eip155:81457'
+    | 'eip155:7887'
+    | 'eip155:98866'
+    | 'eip155:0';
+
+  /**
    * Indicates whether the `Wallet` is flagged for AML violation.
    */
   is_aml_flagged: boolean;

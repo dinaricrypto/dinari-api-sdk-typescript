@@ -144,6 +144,11 @@ export namespace StockListResponse {
     symbol: string;
 
     /**
+     * List of CAIP-10 formatted token addresses.
+     */
+    tokens: Array<string>;
+
+    /**
      * SEC Central Index Key. Refer to
      * [this link](https://www.sec.gov/submit-filings/filer-support-resources/how-do-i-guides/understand-utilize-edgar-ciks-passphrases-access-codes)
      * for more information.

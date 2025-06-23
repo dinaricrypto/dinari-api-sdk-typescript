@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as AccountsAPI from '../accounts';
 import * as WalletAPI from './wallet';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -41,7 +40,10 @@ export class External extends APIResource {
    * const response =
    *   await client.v2.accounts.wallet.external.getNonce(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { wallet_address: 'wallet_address' },
+   *     {
+   *       chain_id: 'eip155:1',
+   *       wallet_address: 'wallet_address',
+   *     },
    *   );
    * ```
    */
@@ -71,9 +73,17 @@ export interface ExternalGetNonceResponse {
 
 export interface ExternalConnectParams {
   /**
-   * CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on.
+   * CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on. eip155:0
+   * is used for EOA wallets
    */
-  chain_id: AccountsAPI.Chain;
+  chain_id:
+    | 'eip155:1'
+    | 'eip155:42161'
+    | 'eip155:8453'
+    | 'eip155:81457'
+    | 'eip155:7887'
+    | 'eip155:98866'
+    | 'eip155:0';
 
   /**
    * Nonce contained within the connection message.
@@ -92,6 +102,19 @@ export interface ExternalConnectParams {
 }
 
 export interface ExternalGetNonceParams {
+  /**
+   * CAIP-2 formatted chain ID of the blockchain the `Wallet` is on. eip155:0 is used
+   * for EOA wallets
+   */
+  chain_id:
+    | 'eip155:1'
+    | 'eip155:42161'
+    | 'eip155:8453'
+    | 'eip155:81457'
+    | 'eip155:7887'
+    | 'eip155:98866'
+    | 'eip155:0';
+
   /**
    * Address of the `Wallet` to connect.
    */
