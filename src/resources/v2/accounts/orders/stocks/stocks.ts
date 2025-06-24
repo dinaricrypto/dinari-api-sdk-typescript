@@ -8,6 +8,7 @@ import {
   Eip155GetFeeQuoteResponse,
   Eip155PrepareOrderParams,
   Eip155PrepareOrderResponse,
+  OrderFeeAmount,
 } from './eip155';
 
 export class Stocks extends APIResource {
@@ -19,6 +20,7 @@ Stocks.Eip155 = Eip155;
 export declare namespace Stocks {
   export {
     Eip155 as Eip155,
+    type OrderFeeAmount as OrderFeeAmount,
     type Eip155GetFeeQuoteResponse as Eip155GetFeeQuoteResponse,
     type Eip155PrepareOrderResponse as Eip155PrepareOrderResponse,
     type Eip155GetFeeQuoteParams as Eip155GetFeeQuoteParams,

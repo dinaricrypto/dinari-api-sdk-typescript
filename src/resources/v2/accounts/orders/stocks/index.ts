@@ -2,6 +2,7 @@
 
 export {
   Eip155,
+  type OrderFeeAmount,
   type Eip155GetFeeQuoteResponse,
   type Eip155PrepareOrderResponse,
   type Eip155GetFeeQuoteParams,

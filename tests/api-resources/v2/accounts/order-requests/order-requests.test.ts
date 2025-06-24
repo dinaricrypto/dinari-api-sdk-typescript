@@ -74,7 +74,12 @@ describe('resource orderRequests', () => {
   test.skip('createLimitBuy: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.createLimitBuy(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { asset_quantity: 0, limit_price: 0, stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+      {
+        asset_quantity: 0,
+        limit_price: 0,
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      },
     );
   });
 
@@ -97,7 +102,12 @@ describe('resource orderRequests', () => {
   test.skip('createLimitSell: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.createLimitSell(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { asset_quantity: 0, limit_price: 0, stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+      {
+        asset_quantity: 0,
+        limit_price: 0,
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      },
     );
   });
 
@@ -120,7 +130,11 @@ describe('resource orderRequests', () => {
   test.skip('createMarketBuy: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.createMarketBuy(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { payment_amount: 0, stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+      {
+        payment_amount: 0,
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      },
     );
   });
 
@@ -143,7 +157,11 @@ describe('resource orderRequests', () => {
   test.skip('createMarketSell: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.createMarketSell(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { asset_quantity: 0, stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+      {
+        asset_quantity: 0,
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      },
     );
   });
 

@@ -46,7 +46,7 @@ export {
   type OrderCancelParams,
   type OrderGetFulfillmentsParams,
 } from './orders/index';
-export { WalletResource, type Wallet } from './wallet/index';
+export { WalletResource, type Wallet, type WalletConnectInternalParams } from './wallet/index';
 export {
   WithdrawalRequests,
   type WithdrawalRequest,

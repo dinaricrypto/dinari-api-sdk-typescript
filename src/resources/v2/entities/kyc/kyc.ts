@@ -67,7 +67,11 @@ export class KYC extends APIResource {
    * const kycInfo = await client.v2.entities.kyc.submit(
    *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *   {
-   *     data: { country_code: 'SG', last_name: 'Doe' },
+   *     data: {
+   *       address_country_code: 'SG',
+   *       country_code: 'SG',
+   *       last_name: 'Doe',
+   *     },
    *     provider_name: 'x',
    *   },
    * );
@@ -82,6 +86,11 @@ export class KYC extends APIResource {
  * KYC data for an `Entity`.
  */
 export interface KYCData {
+  /**
+   * Country of residence. ISO 3166-1 alpha 2 country code.
+   */
+  address_country_code: string;
+
   /**
    * Country of citizenship or home country of the organization. ISO 3166-1 alpha 2
    * country code.

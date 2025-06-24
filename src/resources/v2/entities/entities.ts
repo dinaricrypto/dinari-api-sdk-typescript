@@ -29,7 +29,21 @@ export class Entities extends APIResource {
   }
 
   /**
-   * Get a list of all direct `Entities` your organization manages. These `Entities`
+   * Update a specific customer `Entity` of your organization.
+   *
+   * @example
+   * ```ts
+   * const entity = await client.v2.entities.update(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   * );
+   * ```
+   */
+  update(entityID: string, body: EntityUpdateParams, options?: RequestOptions): APIPromise<Entity> {
+    return this._client.patch(path`/api/v2/entities/${entityID}`, { body, ...options });
+  }
+
+  /**
+   * Get a list of direct `Entities` your organization manages. These `Entities`
    * represent individual customers of your organization.
    *
    * @example
@@ -37,8 +51,11 @@ export class Entities extends APIResource {
    * const entities = await client.v2.entities.list();
    * ```
    */
-  list(options?: RequestOptions): APIPromise<EntityListResponse> {
-    return this._client.get('/api/v2/entities/', options);
+  list(
+    query: EntityListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EntityListResponse> {
+    return this._client.get('/api/v2/entities/', { query, ...options });
   }
 
   /**
@@ -98,6 +115,12 @@ export interface Entity {
    * Nationality or home country of the `Entity`.
    */
   nationality?: string;
+
+  /**
+   * Case sensitive unique reference ID that you can set for the `Entity`. We
+   * recommend setting this to the unique ID of the `Entity` in your system.
+   */
+  reference_id?: string;
 }
 
 export type EntityListResponse = Array<Entity>;
@@ -107,6 +130,31 @@ export interface EntityCreateParams {
    * Name of the `Entity`.
    */
   name: string;
+
+  /**
+   * Case sensitive unique reference ID for the `Entity`. We recommend setting this
+   * to the unique ID of the `Entity` in your system.
+   */
+  reference_id?: string;
+}
+
+export interface EntityUpdateParams {
+  /**
+   * Case sensitive unique reference ID for the `Entity`. We recommend setting this
+   * to the unique ID of the `Entity` in your system.
+   */
+  reference_id?: string;
+}
+
+export interface EntityListParams {
+  page?: number;
+
+  page_size?: number;
+
+  /**
+   * Case sensitive unique reference ID for the `Entity`.
+   */
+  reference_id?: string;
 }
 
 Entities.Accounts = Accounts;
@@ -117,6 +165,8 @@ export declare namespace Entities {
     type Entity as Entity,
     type EntityListResponse as EntityListResponse,
     type EntityCreateParams as EntityCreateParams,
+    type EntityUpdateParams as EntityUpdateParams,
+    type EntityListParams as EntityListParams,
   };
 
   export {

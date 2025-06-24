@@ -36,7 +36,7 @@ describe('resource kyc', () => {
   // skipped: tests are disabled for the time being
   test.skip('submit: only required params', async () => {
     const responsePromise = client.v2.entities.kyc.submit('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      data: { country_code: 'SG', last_name: 'Doe' },
+      data: { address_country_code: 'SG', country_code: 'SG', last_name: 'Doe' },
       provider_name: 'x',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -52,6 +52,7 @@ describe('resource kyc', () => {
   test.skip('submit: required and optional params', async () => {
     const response = await client.v2.entities.kyc.submit('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       data: {
+        address_country_code: 'SG',
         country_code: 'SG',
         last_name: 'Doe',
         address_city: 'San Francisco',
