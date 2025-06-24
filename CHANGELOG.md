@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.1 (2025-06-24)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.2.0...v0.2.1)
+
+### Features
+
+* **api:** 20250624 new updates ([2a370e3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/2a370e37a5fa11f909c593b6ace676c0b572e74e))
+* **api:** Add link to docs ([8e4427c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/8e4427c54e04a35043cb21883ff7ee9a3fab5ab0))
+* **api:** api update ([c00aafb](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c00aafb27e3de0f7902505690b0e80cafef5d989))
+* **api:** api update ([a415b7e](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a415b7e2de4b28e3e714b41922118d9edb966607))
+* **api:** api update ([cbcdc00](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/cbcdc004124efcb704c95cf518956dcc90f74a1e))
+
 ## 0.2.0 (2025-06-22)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.1.0...v0.2.0)
