@@ -11,6 +11,12 @@ export {
   type AccountGetInterestPaymentsParams,
   type AccountMintSandboxTokensParams,
 } from './accounts/index';
-export { Entities, type Entity, type EntityListResponse, type EntityCreateParams } from './entities/index';
+export {
+  Entities,
+  type Entity,
+  type EntityListResponse,
+  type EntityCreateParams,
+  type EntityListParams,
+} from './entities/index';
 export { MarketData, type MarketDataRetrieveMarketHoursResponse } from './market-data/index';
 export { V2 } from './v2';

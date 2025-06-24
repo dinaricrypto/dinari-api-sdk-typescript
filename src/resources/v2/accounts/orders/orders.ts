@@ -29,7 +29,8 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Get a list of all `Orders` under the `Account`.
+   * Get a list of all `Orders` under the `Account`. Optionally `Orders` can be
+   * filtered by chain ID or transaction hash.
    *
    * @example
    * ```ts
@@ -213,6 +214,16 @@ export interface OrderRetrieveParams {
 }
 
 export interface OrderListParams {
+  /**
+   * CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
+   */
+  chain_id?: AccountsAPI.Chain;
+
+  /**
+   * Transaction hash of the `Order`.
+   */
+  order_transaction_hash?: string;
+
   page?: number;
 
   page_size?: number;
