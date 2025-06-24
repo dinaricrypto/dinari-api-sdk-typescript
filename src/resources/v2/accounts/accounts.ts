@@ -59,7 +59,7 @@ import {
   Orders,
 } from './orders/orders';
 import * as WalletAPI from './wallet/wallet';
-import { Wallet, WalletResource } from './wallet/wallet';
+import { Wallet, WalletConnectInternalParams, WalletResource } from './wallet/wallet';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -412,7 +412,11 @@ export declare namespace Accounts {
     type AccountMintSandboxTokensParams as AccountMintSandboxTokensParams,
   };
 
-  export { WalletResource as WalletResource, type Wallet as Wallet };
+  export {
+    WalletResource as WalletResource,
+    type Wallet as Wallet,
+    type WalletConnectInternalParams as WalletConnectInternalParams,
+  };
 
   export {
     Orders as Orders,

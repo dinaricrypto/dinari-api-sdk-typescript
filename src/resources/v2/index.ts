@@ -16,6 +16,7 @@ export {
   type Entity,
   type EntityListResponse,
   type EntityCreateParams,
+  type EntityUpdateParams,
   type EntityListParams,
 } from './entities/index';
 export { MarketData, type MarketDataRetrieveMarketHoursResponse } from './market-data/index';

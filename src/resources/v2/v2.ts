@@ -20,6 +20,7 @@ import {
   EntityCreateParams,
   EntityListParams,
   EntityListResponse,
+  EntityUpdateParams,
 } from './entities/entities';
 import * as MarketDataAPI from './market-data/market-data';
 import { MarketData, MarketDataRetrieveMarketHoursResponse } from './market-data/market-data';
@@ -45,6 +46,7 @@ export declare namespace V2 {
     type Entity as Entity,
     type EntityListResponse as EntityListResponse,
     type EntityCreateParams as EntityCreateParams,
+    type EntityUpdateParams as EntityUpdateParams,
     type EntityListParams as EntityListParams,
   };
 

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../core/resource';
+import * as Eip155API from './eip155';
 import * as AccountsAPI from '../../accounts';
 import * as OrdersAPI from '../orders';
 import { APIPromise } from '../../../../../core/api-promise';
@@ -79,6 +80,25 @@ export class Eip155 extends APIResource {
   }
 }
 
+export interface OrderFeeAmount {
+  /**
+   * The quantity of the fee paid via payment token in
+   * [ETH](https://ethereum.org/en/developers/docs/intro-to-ether/#what-is-ether).
+   */
+  fee_in_eth: number;
+
+  /**
+   * The quantity of the fee paid via payment token in
+   * [wei](https://ethereum.org/en/developers/docs/intro-to-ether/#denominations).
+   */
+  fee_in_wei: string;
+
+  /**
+   * Type of fee.
+   */
+  type: 'SPONSORED_NETWORK' | 'NETWORK' | 'TRADING' | 'ORDER' | 'PARTNER_ORDER' | 'PARTNER_TRADING';
+}
+
 export interface Eip155GetFeeQuoteResponse {
   /**
    * CAIP-2 chain ID of the blockchain where the `Order` will be placed
@@ -121,7 +141,7 @@ export namespace Eip155GetFeeQuoteResponse {
     /**
      * Breakdown of fees
      */
-    fees: Array<OrderFeeContractObject.Fee>;
+    fees: Array<Eip155API.OrderFeeAmount>;
 
     /**
      * Address of payment token used for fees
@@ -144,25 +164,6 @@ export namespace Eip155GetFeeQuoteResponse {
 
       timestamp: number;
     }
-
-    export interface Fee {
-      /**
-       * The quantity of the fee paid via payment token in
-       * [ETH](https://ethereum.org/en/developers/docs/intro-to-ether/#what-is-ether).
-       */
-      fee_in_eth: number;
-
-      /**
-       * The quantity of the fee paid via payment token in
-       * [wei](https://ethereum.org/en/developers/docs/intro-to-ether/#denominations).
-       */
-      fee_in_wei: string;
-
-      /**
-       * Type of fee.
-       */
-      type: 'SPONSORED_NETWORK' | 'NETWORK' | 'TRADING' | 'ORDER' | 'PARTNER_ORDER' | 'PARTNER_TRADING';
-    }
   }
 }
 
@@ -173,7 +174,7 @@ export interface Eip155PrepareOrderResponse {
   /**
    * Fees included in the order transaction. Provided here as a reference.
    */
-  fees: Array<Eip155PrepareOrderResponse.Fee>;
+  fees: Array<OrderFeeAmount>;
 
   /**
    * List of contract addresses and call data for building transactions to be signed
@@ -184,25 +185,6 @@ export interface Eip155PrepareOrderResponse {
 }
 
 export namespace Eip155PrepareOrderResponse {
-  export interface Fee {
-    /**
-     * The quantity of the fee paid via payment token in
-     * [ETH](https://ethereum.org/en/developers/docs/intro-to-ether/#what-is-ether).
-     */
-    fee_in_eth: number;
-
-    /**
-     * The quantity of the fee paid via payment token in
-     * [wei](https://ethereum.org/en/developers/docs/intro-to-ether/#denominations).
-     */
-    fee_in_wei: string;
-
-    /**
-     * Type of fee.
-     */
-    type: 'SPONSORED_NETWORK' | 'NETWORK' | 'TRADING' | 'ORDER' | 'PARTNER_ORDER' | 'PARTNER_TRADING';
-  }
-
   /**
    * Information about a transaction to be signed with a wallet and submitted on
    * chain.
@@ -338,6 +320,7 @@ export interface Eip155PrepareOrderParams {
 
 export declare namespace Eip155 {
   export {
+    type OrderFeeAmount as OrderFeeAmount,
     type Eip155GetFeeQuoteResponse as Eip155GetFeeQuoteResponse,
     type Eip155PrepareOrderResponse as Eip155PrepareOrderResponse,
     type Eip155GetFeeQuoteParams as Eip155GetFeeQuoteParams,

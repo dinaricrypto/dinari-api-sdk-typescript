@@ -2,8 +2,9 @@
 
 export {
   External,
+  type WalletChainID,
   type ExternalGetNonceResponse,
   type ExternalConnectParams,
   type ExternalGetNonceParams,
 } from './external';
-export { WalletResource, type Wallet } from './wallet';
+export { WalletResource, type Wallet, type WalletConnectInternalParams } from './wallet';

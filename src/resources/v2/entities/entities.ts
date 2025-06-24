@@ -29,6 +29,20 @@ export class Entities extends APIResource {
   }
 
   /**
+   * Update a specific customer `Entity` of your organization.
+   *
+   * @example
+   * ```ts
+   * const entity = await client.v2.entities.update(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   * );
+   * ```
+   */
+  update(entityID: string, body: EntityUpdateParams, options?: RequestOptions): APIPromise<Entity> {
+    return this._client.patch(path`/api/v2/entities/${entityID}`, { body, ...options });
+  }
+
+  /**
    * Get a list of direct `Entities` your organization manages. These `Entities`
    * represent individual customers of your organization.
    *
@@ -124,6 +138,14 @@ export interface EntityCreateParams {
   reference_id?: string;
 }
 
+export interface EntityUpdateParams {
+  /**
+   * Case sensitive unique reference ID for the `Entity`. We recommend setting this
+   * to the unique ID of the `Entity` in your system.
+   */
+  reference_id?: string;
+}
+
 export interface EntityListParams {
   page?: number;
 
@@ -143,6 +165,7 @@ export declare namespace Entities {
     type Entity as Entity,
     type EntityListResponse as EntityListResponse,
     type EntityCreateParams as EntityCreateParams,
+    type EntityUpdateParams as EntityUpdateParams,
     type EntityListParams as EntityListParams,
   };
 

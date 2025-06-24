@@ -7,6 +7,7 @@ import {
   ExternalConnectParams,
   ExternalGetNonceParams,
   ExternalGetNonceResponse,
+  WalletChainID,
 } from './external';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -14,6 +15,29 @@ import { path } from '../../../../internal/utils/path';
 
 export class WalletResource extends APIResource {
   external: ExternalAPI.External = new ExternalAPI.External(this._client);
+
+  /**
+   * Connect an internal `Wallet` to the `Account`.
+   *
+   * @example
+   * ```ts
+   * const wallet =
+   *   await client.v2.accounts.wallet.connectInternal(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       chain_id: 'eip155:0',
+   *       wallet_address: 'wallet_address',
+   *     },
+   *   );
+   * ```
+   */
+  connectInternal(
+    accountID: string,
+    body: WalletConnectInternalParams,
+    options?: RequestOptions,
+  ): APIPromise<Wallet> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/wallet/internal`, { body, ...options });
+  }
 
   /**
    * Get the wallet connected to the `Account`.
@@ -43,14 +67,7 @@ export interface Wallet {
    * CAIP-2 formatted chain ID of the blockchain the `Wallet` is on. eip155:0 is used
    * for EOA wallets
    */
-  chain_id:
-    | 'eip155:1'
-    | 'eip155:42161'
-    | 'eip155:8453'
-    | 'eip155:81457'
-    | 'eip155:7887'
-    | 'eip155:98866'
-    | 'eip155:0';
+  chain_id: ExternalAPI.WalletChainID;
 
   /**
    * Indicates whether the `Wallet` is flagged for AML violation.
@@ -63,13 +80,32 @@ export interface Wallet {
   is_managed_wallet: boolean;
 }
 
+export interface WalletConnectInternalParams {
+  /**
+   * CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on. eip155:0
+   * is used for EOA wallets
+   */
+  chain_id: ExternalAPI.WalletChainID;
+
+  /**
+   * Address of the `Wallet`.
+   */
+  wallet_address: string;
+
+  /**
+   * Is the linked Wallet shared or not
+   */
+  is_shared?: boolean;
+}
+
 WalletResource.External = External;
 
 export declare namespace WalletResource {
-  export { type Wallet as Wallet };
+  export { type Wallet as Wallet, type WalletConnectInternalParams as WalletConnectInternalParams };
 
   export {
     External as External,
+    type WalletChainID as WalletChainID,
     type ExternalGetNonceResponse as ExternalGetNonceResponse,
     type ExternalConnectParams as ExternalConnectParams,
     type ExternalGetNonceParams as ExternalGetNonceParams,
