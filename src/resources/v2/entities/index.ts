@@ -6,6 +6,7 @@ export {
   type Entity,
   type EntityListResponse,
   type EntityCreateParams,
+  type EntityUpdateParams,
   type EntityListParams,
 } from './entities';
 export {

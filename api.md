@@ -51,6 +51,7 @@ Types:
 Methods:
 
 - <code title="post /api/v2/entities/">client.v2.entities.<a href="./src/resources/v2/entities/entities.ts">create</a>({ ...params }) -> Entity</code>
+- <code title="patch /api/v2/entities/{entity_id}">client.v2.entities.<a href="./src/resources/v2/entities/entities.ts">update</a>(entityID, { ...params }) -> Entity</code>
 - <code title="get /api/v2/entities/">client.v2.entities.<a href="./src/resources/v2/entities/entities.ts">list</a>({ ...params }) -> EntityListResponse</code>
 - <code title="get /api/v2/entities/{entity_id}">client.v2.entities.<a href="./src/resources/v2/entities/entities.ts">retrieveByID</a>(entityID) -> Entity</code>
 - <code title="get /api/v2/entities/me">client.v2.entities.<a href="./src/resources/v2/entities/entities.ts">retrieveCurrent</a>() -> Entity</code>
@@ -122,12 +123,14 @@ Types:
 
 Methods:
 
+- <code title="post /api/v2/accounts/{account_id}/wallet/internal">client.v2.accounts.wallet.<a href="./src/resources/v2/accounts/wallet/wallet.ts">connectInternal</a>(accountID, { ...params }) -> Wallet</code>
 - <code title="get /api/v2/accounts/{account_id}/wallet">client.v2.accounts.wallet.<a href="./src/resources/v2/accounts/wallet/wallet.ts">get</a>(accountID) -> Wallet</code>
 
 #### External
 
 Types:
 
+- <code><a href="./src/resources/v2/accounts/wallet/external.ts">WalletChainID</a></code>
 - <code><a href="./src/resources/v2/accounts/wallet/external.ts">ExternalGetNonceResponse</a></code>
 
 Methods:
@@ -160,6 +163,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">OrderFeeAmount</a></code>
 - <code><a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">Eip155GetFeeQuoteResponse</a></code>
 - <code><a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">Eip155PrepareOrderResponse</a></code>
 
@@ -205,6 +209,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">EvmTypedData</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">Eip155PrepareProxiedOrderResponse</a></code>
 
 Methods:

@@ -4,6 +4,7 @@ import { APIResource } from '../../../../../core/resource';
 import * as AccountsAPI from '../../accounts';
 import * as OrderRequestsAPI from '../order-requests';
 import * as OrdersAPI from '../../orders/orders';
+import * as StocksEip155API from '../../orders/stocks/eip155';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
@@ -71,6 +72,33 @@ export class Eip155 extends APIResource {
 }
 
 /**
+ * [EIP-712](https://eips.ethereum.org/EIPS/eip-712) typed data to be signed with a
+ * wallet.
+ */
+export interface EvmTypedData {
+  /**
+   * Domain separator for the typed data.
+   */
+  domain: unknown;
+
+  /**
+   * Message to be signed. Contains the actual data that will be signed with the
+   * wallet.
+   */
+  message: unknown;
+
+  /**
+   * Primary type of the typed data.
+   */
+  primaryType: string;
+
+  /**
+   * Types used in the typed data.
+   */
+  types: unknown;
+}
+
+/**
  * Prepared data for creating an `OrderRequest` through the EVM proxied order API
  * route.
  */
@@ -88,94 +116,19 @@ export interface Eip155PrepareProxiedOrderResponse {
   /**
    * Fees involved in the order. Provided here as a reference.
    */
-  fees: Array<Eip155PrepareProxiedOrderResponse.Fee>;
+  fees: Array<StocksEip155API.OrderFeeAmount>;
 
   /**
    * [EIP-712](https://eips.ethereum.org/EIPS/eip-712) typed data to be signed with a
    * wallet.
    */
-  order_typed_data: Eip155PrepareProxiedOrderResponse.OrderTypedData;
+  order_typed_data: EvmTypedData;
 
   /**
    * [EIP-712](https://eips.ethereum.org/EIPS/eip-712) typed data to be signed with a
    * wallet.
    */
-  permit_typed_data: Eip155PrepareProxiedOrderResponse.PermitTypedData;
-}
-
-export namespace Eip155PrepareProxiedOrderResponse {
-  export interface Fee {
-    /**
-     * The quantity of the fee paid via payment token in
-     * [ETH](https://ethereum.org/en/developers/docs/intro-to-ether/#what-is-ether).
-     */
-    fee_in_eth: number;
-
-    /**
-     * The quantity of the fee paid via payment token in
-     * [wei](https://ethereum.org/en/developers/docs/intro-to-ether/#denominations).
-     */
-    fee_in_wei: string;
-
-    /**
-     * Type of fee.
-     */
-    type: 'SPONSORED_NETWORK' | 'NETWORK' | 'TRADING' | 'ORDER' | 'PARTNER_ORDER' | 'PARTNER_TRADING';
-  }
-
-  /**
-   * [EIP-712](https://eips.ethereum.org/EIPS/eip-712) typed data to be signed with a
-   * wallet.
-   */
-  export interface OrderTypedData {
-    /**
-     * Domain separator for the typed data.
-     */
-    domain: unknown;
-
-    /**
-     * Message to be signed. Contains the actual data that will be signed with the
-     * wallet.
-     */
-    message: unknown;
-
-    /**
-     * Primary type of the typed data.
-     */
-    primaryType: string;
-
-    /**
-     * Types used in the typed data.
-     */
-    types: unknown;
-  }
-
-  /**
-   * [EIP-712](https://eips.ethereum.org/EIPS/eip-712) typed data to be signed with a
-   * wallet.
-   */
-  export interface PermitTypedData {
-    /**
-     * Domain separator for the typed data.
-     */
-    domain: unknown;
-
-    /**
-     * Message to be signed. Contains the actual data that will be signed with the
-     * wallet.
-     */
-    message: unknown;
-
-    /**
-     * Primary type of the typed data.
-     */
-    primaryType: string;
-
-    /**
-     * Types used in the typed data.
-     */
-    types: unknown;
-  }
+  permit_typed_data: EvmTypedData;
 }
 
 export interface Eip155CreateProxiedOrderParams {
@@ -248,6 +201,7 @@ export interface Eip155PrepareProxiedOrderParams {
 
 export declare namespace Eip155 {
   export {
+    type EvmTypedData as EvmTypedData,
     type Eip155PrepareProxiedOrderResponse as Eip155PrepareProxiedOrderResponse,
     type Eip155CreateProxiedOrderParams as Eip155CreateProxiedOrderParams,
     type Eip155PrepareProxiedOrderParams as Eip155PrepareProxiedOrderParams,
