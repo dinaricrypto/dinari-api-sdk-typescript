@@ -342,6 +342,11 @@ export interface StockRetrieveQuoteResponse {
   stock_id: string;
 
   /**
+   * When the Stock Quote was generated.
+   */
+  timestamp: string;
+
+  /**
    * The change in price from the previous close.
    */
   change?: number;

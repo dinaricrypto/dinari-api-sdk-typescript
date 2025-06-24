@@ -23,7 +23,7 @@ describe('resource entities', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await client.v2.entities.create({ name: 'x' });
+    const response = await client.v2.entities.create({ name: 'x', reference_id: 'x' });
   });
 
   // skipped: tests are disabled for the time being
@@ -36,6 +36,17 @@ describe('resource entities', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v2.entities.list(
+        { page: 1, page_size: 1, reference_id: 'x' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Dinari.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being

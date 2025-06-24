@@ -208,6 +208,11 @@ export interface CreateLimitOrderInput {
    * ID of `Stock`.
    */
   stock_id: string;
+
+  /**
+   * ID of `Account` to receive the `Order`.
+   */
+  recipient_account_id?: string;
 }
 
 /**
@@ -261,6 +266,11 @@ export interface OrderRequest {
    * for the `/orders` routes.
    */
   order_id?: string;
+
+  /**
+   * ID of recipient `Account`.
+   */
+  recipient_account_id?: string;
 }
 
 export type OrderRequestListResponse = Array<OrderRequest>;
@@ -301,6 +311,11 @@ export interface OrderRequestCreateLimitBuyParams {
    * ID of `Stock`.
    */
   stock_id: string;
+
+  /**
+   * ID of `Account` to receive the `Order`.
+   */
+  recipient_account_id?: string;
 }
 
 export interface OrderRequestCreateLimitSellParams {
@@ -319,6 +334,11 @@ export interface OrderRequestCreateLimitSellParams {
    * ID of `Stock`.
    */
   stock_id: string;
+
+  /**
+   * ID of `Account` to receive the `Order`.
+   */
+  recipient_account_id?: string;
 }
 
 export interface OrderRequestCreateMarketBuyParams {
@@ -332,6 +352,11 @@ export interface OrderRequestCreateMarketBuyParams {
    * ID of `Stock`.
    */
   stock_id: string;
+
+  /**
+   * ID of `Account` to receive the `Order`.
+   */
+  recipient_account_id?: string;
 }
 
 export interface OrderRequestCreateMarketSellParams {
@@ -345,6 +370,11 @@ export interface OrderRequestCreateMarketSellParams {
    * ID of `Stock`.
    */
   stock_id: string;
+
+  /**
+   * ID of `Account` to receive the `Order`.
+   */
+  recipient_account_id?: string;
 }
 
 export interface OrderRequestGetFeeQuoteParams {

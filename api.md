@@ -51,7 +51,7 @@ Types:
 Methods:
 
 - <code title="post /api/v2/entities/">client.v2.entities.<a href="./src/resources/v2/entities/entities.ts">create</a>({ ...params }) -> Entity</code>
-- <code title="get /api/v2/entities/">client.v2.entities.<a href="./src/resources/v2/entities/entities.ts">list</a>() -> EntityListResponse</code>
+- <code title="get /api/v2/entities/">client.v2.entities.<a href="./src/resources/v2/entities/entities.ts">list</a>({ ...params }) -> EntityListResponse</code>
 - <code title="get /api/v2/entities/{entity_id}">client.v2.entities.<a href="./src/resources/v2/entities/entities.ts">retrieveByID</a>(entityID) -> Entity</code>
 - <code title="get /api/v2/entities/me">client.v2.entities.<a href="./src/resources/v2/entities/entities.ts">retrieveCurrent</a>() -> Entity</code>
 

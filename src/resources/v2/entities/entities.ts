@@ -29,7 +29,7 @@ export class Entities extends APIResource {
   }
 
   /**
-   * Get a list of all direct `Entities` your organization manages. These `Entities`
+   * Get a list of direct `Entities` your organization manages. These `Entities`
    * represent individual customers of your organization.
    *
    * @example
@@ -37,8 +37,11 @@ export class Entities extends APIResource {
    * const entities = await client.v2.entities.list();
    * ```
    */
-  list(options?: RequestOptions): APIPromise<EntityListResponse> {
-    return this._client.get('/api/v2/entities/', options);
+  list(
+    query: EntityListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EntityListResponse> {
+    return this._client.get('/api/v2/entities/', { query, ...options });
   }
 
   /**
@@ -98,6 +101,12 @@ export interface Entity {
    * Nationality or home country of the `Entity`.
    */
   nationality?: string;
+
+  /**
+   * Case sensitive unique reference ID that you can set for the `Entity`. We
+   * recommend setting this to the unique ID of the `Entity` in your system.
+   */
+  reference_id?: string;
 }
 
 export type EntityListResponse = Array<Entity>;
@@ -107,6 +116,23 @@ export interface EntityCreateParams {
    * Name of the `Entity`.
    */
   name: string;
+
+  /**
+   * Case sensitive unique reference ID for the `Entity`. We recommend setting this
+   * to the unique ID of the `Entity` in your system.
+   */
+  reference_id?: string;
+}
+
+export interface EntityListParams {
+  page?: number;
+
+  page_size?: number;
+
+  /**
+   * Case sensitive unique reference ID for the `Entity`.
+   */
+  reference_id?: string;
 }
 
 Entities.Accounts = Accounts;
@@ -117,6 +143,7 @@ export declare namespace Entities {
     type Entity as Entity,
     type EntityListResponse as EntityListResponse,
     type EntityCreateParams as EntityCreateParams,
+    type EntityListParams as EntityListParams,
   };
 
   export {

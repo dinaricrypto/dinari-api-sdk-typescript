@@ -48,7 +48,7 @@ describe('resource orders', () => {
     await expect(
       client.v2.accounts.orders.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { page: 1, page_size: 1 },
+        { chain_id: 'eip155:1', order_transaction_hash: 'order_transaction_hash', page: 1, page_size: 1 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Dinari.NotFoundError);
