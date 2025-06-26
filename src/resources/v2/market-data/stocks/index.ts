@@ -14,7 +14,6 @@ export {
   type StockRetrieveDividendsResponse,
   type StockRetrieveHistoricalPricesResponse,
   type StockRetrieveNewsResponse,
-  type StockRetrieveQuoteResponse,
   type StockListParams,
   type StockRetrieveHistoricalPricesParams,
   type StockRetrieveNewsParams,

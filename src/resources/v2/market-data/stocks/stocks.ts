@@ -93,21 +93,6 @@ export class Stocks extends APIResource {
   ): APIPromise<StockRetrieveNewsResponse> {
     return this._client.get(path`/api/v2/market_data/stocks/${stockID}/news`, { query, ...options });
   }
-
-  /**
-   * Get quote for a specified `Stock`.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v2.marketData.stocks.retrieveQuote(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   );
-   * ```
-   */
-  retrieveQuote(stockID: string, options?: RequestOptions): APIPromise<StockRetrieveQuoteResponse> {
-    return this._client.get(path`/api/v2/market_data/stocks/${stockID}/quote`, options);
-  }
 }
 
 export type StockListResponse = Array<StockListResponse.StockListResponseItem>;
@@ -330,74 +315,6 @@ export namespace StockRetrieveNewsResponse {
   }
 }
 
-export interface StockRetrieveQuoteResponse {
-  /**
-   * The ask price.
-   */
-  price: number;
-
-  /**
-   * ID of the `Stock`
-   */
-  stock_id: string;
-
-  /**
-   * When the Stock Quote was generated.
-   */
-  timestamp: string;
-
-  /**
-   * The change in price from the previous close.
-   */
-  change?: number;
-
-  /**
-   * The percentage change in price from the previous close.
-   */
-  change_percent?: number;
-
-  /**
-   * The close price from the given time period.
-   */
-  close?: number;
-
-  /**
-   * The highest price from the given time period
-   */
-  high?: number;
-
-  /**
-   * The lowest price from the given time period.
-   */
-  low?: number;
-
-  /**
-   * The most recent close price of the ticker multiplied by weighted outstanding
-   * shares.
-   */
-  market_cap?: number;
-
-  /**
-   * The open price from the given time period.
-   */
-  open?: number;
-
-  /**
-   * The close price for the `Stock` from the previous trading session.
-   */
-  previous_close?: number;
-
-  /**
-   * The trading volume from the given time period.
-   */
-  volume?: number;
-
-  /**
-   * The number of shares outstanding in the given time period.
-   */
-  weighted_shares_outstanding?: number;
-}
-
 export interface StockListParams {
   page?: number;
 
@@ -431,7 +348,6 @@ export declare namespace Stocks {
     type StockRetrieveDividendsResponse as StockRetrieveDividendsResponse,
     type StockRetrieveHistoricalPricesResponse as StockRetrieveHistoricalPricesResponse,
     type StockRetrieveNewsResponse as StockRetrieveNewsResponse,
-    type StockRetrieveQuoteResponse as StockRetrieveQuoteResponse,
     type StockListParams as StockListParams,
     type StockRetrieveHistoricalPricesParams as StockRetrieveHistoricalPricesParams,
     type StockRetrieveNewsParams as StockRetrieveNewsParams,
