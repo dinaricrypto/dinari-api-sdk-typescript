@@ -18,7 +18,6 @@ Types:
 - <code><a href="./src/resources/v2/market-data/stocks/stocks.ts">StockRetrieveDividendsResponse</a></code>
 - <code><a href="./src/resources/v2/market-data/stocks/stocks.ts">StockRetrieveHistoricalPricesResponse</a></code>
 - <code><a href="./src/resources/v2/market-data/stocks/stocks.ts">StockRetrieveNewsResponse</a></code>
-- <code><a href="./src/resources/v2/market-data/stocks/stocks.ts">StockRetrieveQuoteResponse</a></code>
 
 Methods:
 
@@ -26,7 +25,6 @@ Methods:
 - <code title="get /api/v2/market_data/stocks/{stock_id}/dividends">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveDividends</a>(stockID) -> StockRetrieveDividendsResponse</code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/historical_prices/">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveHistoricalPrices</a>(stockID, { ...params }) -> StockRetrieveHistoricalPricesResponse</code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/news">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveNews</a>(stockID, { ...params }) -> StockRetrieveNewsResponse</code>
-- <code title="get /api/v2/market_data/stocks/{stock_id}/quote">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveQuote</a>(stockID) -> StockRetrieveQuoteResponse</code>
 
 #### Splits
 
