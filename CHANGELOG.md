@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.1 (2025-06-27)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.3.0...v0.3.1)
+
+### Features
+
+* **api:** api update ([b9f661b](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/b9f661bbe06e425925b894fa6db47a7b722ea2e3))
+* **api:** api update ([55a333c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/55a333ca0a40b0d534e5438dc66fc71616ebcf37))
+* **api:** api update ([2d2d81d](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/2d2d81d159f60097f5da3c5a7b95b2a8977797b1))
+* **api:** api update ([9b297c2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/9b297c2afc1c8a066bfc18754106e9001cee4d15))
+* **api:** remove quote api ([a50455c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a50455ce48302b6debc5878e2aa31ea9d1ef472f))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([751a544](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/751a5446274505dba7e15a23828777f67ad85773))
+* **client:** get fetchOptions type more reliably ([8089889](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/8089889d036c5e627bd3982f29715792c212148b))
+
 ## 0.3.0 (2025-06-24)
 
 Full Changelog: [v0.2.1...v0.3.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.2.1...v0.3.0)

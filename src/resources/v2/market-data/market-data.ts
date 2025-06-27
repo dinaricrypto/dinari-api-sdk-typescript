@@ -5,12 +5,13 @@ import * as StocksAPI from './stocks/stocks';
 import {
   StockListParams,
   StockListResponse,
+  StockRetrieveCurrentPriceResponse,
+  StockRetrieveCurrentQuoteResponse,
   StockRetrieveDividendsResponse,
   StockRetrieveHistoricalPricesParams,
   StockRetrieveHistoricalPricesResponse,
   StockRetrieveNewsParams,
   StockRetrieveNewsResponse,
-  StockRetrieveQuoteResponse,
   Stocks,
 } from './stocks/stocks';
 import { APIPromise } from '../../../core/api-promise';
@@ -71,10 +72,11 @@ export declare namespace MarketData {
   export {
     Stocks as Stocks,
     type StockListResponse as StockListResponse,
+    type StockRetrieveCurrentPriceResponse as StockRetrieveCurrentPriceResponse,
+    type StockRetrieveCurrentQuoteResponse as StockRetrieveCurrentQuoteResponse,
     type StockRetrieveDividendsResponse as StockRetrieveDividendsResponse,
     type StockRetrieveHistoricalPricesResponse as StockRetrieveHistoricalPricesResponse,
     type StockRetrieveNewsResponse as StockRetrieveNewsResponse,
-    type StockRetrieveQuoteResponse as StockRetrieveQuoteResponse,
     type StockListParams as StockListParams,
     type StockRetrieveHistoricalPricesParams as StockRetrieveHistoricalPricesParams,
     type StockRetrieveNewsParams as StockRetrieveNewsParams,

@@ -189,6 +189,11 @@ export interface Order {
   limit_price?: number;
 
   /**
+   * Order Request ID for the `Order`
+   */
+  order_request_id?: string;
+
+  /**
    * The payment token (stablecoin) address.
    */
   payment_token?: string;
