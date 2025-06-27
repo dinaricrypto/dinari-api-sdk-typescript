@@ -39,12 +39,13 @@ export class V2 extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v2.listOrders({
-   *   chain_id: 'eip155:1',
-   * });
+   * const response = await client.v2.listOrders();
    * ```
    */
-  listOrders(query: V2ListOrdersParams, options?: RequestOptions): APIPromise<V2ListOrdersResponse> {
+  listOrders(
+    query: V2ListOrdersParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<V2ListOrdersResponse> {
     return this._client.get('/api/v2/orders/', { query, ...options });
   }
 }
@@ -141,6 +142,11 @@ export namespace V2ListOrdersResponse {
     limit_price?: number;
 
     /**
+     * Order Request ID for the `Order`
+     */
+    order_request_id?: string;
+
+    /**
      * The payment token (stablecoin) address.
      */
     payment_token?: string;
@@ -156,12 +162,17 @@ export interface V2ListOrdersParams {
   /**
    * CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
    */
-  chain_id: AccountsAPI.Chain;
+  chain_id?: AccountsAPI.Chain;
 
   /**
    * Fulfillment transaction hash of the `Order`.
    */
   order_fulfillment_transaction_hash?: string;
+
+  /**
+   * Order Request ID for the `Order`
+   */
+  order_request_id?: string;
 
   /**
    * Transaction hash of the `Order`.
