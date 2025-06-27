@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.2 (2025-06-27)
+
+Full Changelog: [v0.3.1...v0.3.2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.3.1...v0.3.2)
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([906fcc3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/906fcc313cf8ce8cdefe6976eb69306529ec55ad))
+
 ## 0.3.1 (2025-06-27)
 
 Full Changelog: [v0.3.0...v0.3.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.3.0...v0.3.1)
