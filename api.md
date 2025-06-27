@@ -1,5 +1,13 @@
 # V2
 
+Types:
+
+- <code><a href="./src/resources/v2/v2.ts">V2ListOrdersResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v2/orders/">client.v2.<a href="./src/resources/v2/v2.ts">listOrders</a>({ ...params }) -> V2ListOrdersResponse</code>
+
 ## MarketData
 
 Types:
@@ -15,6 +23,8 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v2/market-data/stocks/stocks.ts">StockListResponse</a></code>
+- <code><a href="./src/resources/v2/market-data/stocks/stocks.ts">StockRetrieveCurrentPriceResponse</a></code>
+- <code><a href="./src/resources/v2/market-data/stocks/stocks.ts">StockRetrieveCurrentQuoteResponse</a></code>
 - <code><a href="./src/resources/v2/market-data/stocks/stocks.ts">StockRetrieveDividendsResponse</a></code>
 - <code><a href="./src/resources/v2/market-data/stocks/stocks.ts">StockRetrieveHistoricalPricesResponse</a></code>
 - <code><a href="./src/resources/v2/market-data/stocks/stocks.ts">StockRetrieveNewsResponse</a></code>
@@ -22,6 +32,8 @@ Types:
 Methods:
 
 - <code title="get /api/v2/market_data/stocks/">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">list</a>({ ...params }) -> StockListResponse</code>
+- <code title="get /api/v2/market_data/stocks/{stock_id}/current_price">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveCurrentPrice</a>(stockID) -> StockRetrieveCurrentPriceResponse</code>
+- <code title="get /api/v2/market_data/stocks/{stock_id}/current_quote">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveCurrentQuote</a>(stockID) -> StockRetrieveCurrentQuoteResponse</code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/dividends">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveDividends</a>(stockID) -> StockRetrieveDividendsResponse</code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/historical_prices/">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveHistoricalPrices</a>(stockID, { ...params }) -> StockRetrieveHistoricalPricesResponse</code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/news">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveNews</a>(stockID, { ...params }) -> StockRetrieveNewsResponse</code>
