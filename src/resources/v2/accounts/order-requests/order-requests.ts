@@ -194,7 +194,8 @@ export class OrderRequests extends APIResource {
  */
 export interface CreateLimitOrderInput {
   /**
-   * Quantity of shares to trade. Must be a positive integer.
+   * Amount of dShare asset involved. Required for limit `Orders` and market sell
+   * `Orders`.
    */
   asset_quantity: number;
 
@@ -297,7 +298,8 @@ export interface OrderRequestListParams {
 
 export interface OrderRequestCreateLimitBuyParams {
   /**
-   * Quantity of shares to trade. Must be a positive integer.
+   * Amount of dShare asset involved. Required for limit `Orders` and market sell
+   * `Orders`.
    */
   asset_quantity: number;
 
@@ -320,7 +322,8 @@ export interface OrderRequestCreateLimitBuyParams {
 
 export interface OrderRequestCreateLimitSellParams {
   /**
-   * Quantity of shares to trade. Must be a positive integer.
+   * Amount of dShare asset involved. Required for limit `Orders` and market sell
+   * `Orders`.
    */
   asset_quantity: number;
 
