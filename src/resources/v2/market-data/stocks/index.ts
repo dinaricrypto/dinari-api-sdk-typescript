@@ -11,6 +11,8 @@ export {
 export {
   Stocks,
   type StockListResponse,
+  type StockRetrieveCurrentPriceResponse,
+  type StockRetrieveCurrentQuoteResponse,
   type StockRetrieveDividendsResponse,
   type StockRetrieveHistoricalPricesResponse,
   type StockRetrieveNewsResponse,

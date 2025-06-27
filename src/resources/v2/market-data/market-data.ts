@@ -5,6 +5,8 @@ import * as StocksAPI from './stocks/stocks';
 import {
   StockListParams,
   StockListResponse,
+  StockRetrieveCurrentPriceResponse,
+  StockRetrieveCurrentQuoteResponse,
   StockRetrieveDividendsResponse,
   StockRetrieveHistoricalPricesParams,
   StockRetrieveHistoricalPricesResponse,
@@ -70,6 +72,8 @@ export declare namespace MarketData {
   export {
     Stocks as Stocks,
     type StockListResponse as StockListResponse,
+    type StockRetrieveCurrentPriceResponse as StockRetrieveCurrentPriceResponse,
+    type StockRetrieveCurrentQuoteResponse as StockRetrieveCurrentQuoteResponse,
     type StockRetrieveDividendsResponse as StockRetrieveDividendsResponse,
     type StockRetrieveHistoricalPricesResponse as StockRetrieveHistoricalPricesResponse,
     type StockRetrieveNewsResponse as StockRetrieveNewsResponse,

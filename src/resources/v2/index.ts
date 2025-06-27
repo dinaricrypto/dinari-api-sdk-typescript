@@ -20,4 +20,4 @@ export {
   type EntityListParams,
 } from './entities/index';
 export { MarketData, type MarketDataRetrieveMarketHoursResponse } from './market-data/index';
-export { V2 } from './v2';
+export { V2, type V2ListOrdersResponse, type V2ListOrdersParams } from './v2';
