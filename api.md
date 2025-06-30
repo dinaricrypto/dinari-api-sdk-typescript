@@ -198,7 +198,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">CreateLimitOrderInput</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequest</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequestListResponse</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequestGetFeeQuoteResponse</a></code>
