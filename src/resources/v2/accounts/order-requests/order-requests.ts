@@ -190,33 +190,6 @@ export class OrderRequests extends APIResource {
 }
 
 /**
- * Input parameters for creating a limit `OrderRequest`.
- */
-export interface CreateLimitOrderInput {
-  /**
-   * Amount of dShare asset involved. Required for limit `Orders` and market sell
-   * `Orders`.
-   */
-  asset_quantity: number;
-
-  /**
-   * Price at which to execute the order. Must be a positive number with a precision
-   * of up to 2 decimal places.
-   */
-  limit_price: number;
-
-  /**
-   * ID of `Stock`.
-   */
-  stock_id: string;
-
-  /**
-   * ID of `Account` to receive the `Order`.
-   */
-  recipient_account_id?: string;
-}
-
-/**
  * A request to create an `Order`.
  *
  * An `OrderRequest` is created when a user places an order through the Dinari API.
@@ -339,6 +312,13 @@ export interface OrderRequestCreateLimitSellParams {
   stock_id: string;
 
   /**
+   * Address of the payment token to be used for the sell order. If not provided, the
+   * default payment token (USD+) will be used. Should only be specified if
+   * `recipient_account_id` for a non-managed wallet account is also provided.
+   */
+  payment_token_address?: string;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string;
@@ -375,6 +355,13 @@ export interface OrderRequestCreateMarketSellParams {
   stock_id: string;
 
   /**
+   * Address of the payment token to be used for the sell order. If not provided, the
+   * default payment token (USD+) will be used. Should only be specified if
+   * `recipient_account_id` for a non-managed wallet account is also provided.
+   */
+  payment_token_address?: string;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string;
@@ -409,6 +396,12 @@ export interface OrderRequestGetFeeQuoteParams {
   limit_price?: number;
 
   /**
+   * Address of the payment token to be used for an order. If not provided, the
+   * default payment token (USD+) will be used.
+   */
+  payment_token_address?: string;
+
+  /**
    * Amount of payment tokens involved. Required for market buy `Order Requests`.
    */
   payment_token_quantity?: number;
@@ -418,7 +411,6 @@ OrderRequests.Stocks = Stocks;
 
 export declare namespace OrderRequests {
   export {
-    type CreateLimitOrderInput as CreateLimitOrderInput,
     type OrderRequest as OrderRequest,
     type OrderRequestListResponse as OrderRequestListResponse,
     type OrderRequestGetFeeQuoteResponse as OrderRequestGetFeeQuoteResponse,
