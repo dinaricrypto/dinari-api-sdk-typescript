@@ -20,7 +20,6 @@ export {
 } from './order-fulfillments';
 export {
   OrderRequests,
-  type CreateLimitOrderInput,
   type OrderRequest,
   type OrderRequestListResponse,
   type OrderRequestGetFeeQuoteResponse,

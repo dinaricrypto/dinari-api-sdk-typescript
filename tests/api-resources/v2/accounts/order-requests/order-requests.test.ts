@@ -106,6 +106,7 @@ describe('resource orderRequests', () => {
         asset_quantity: 0,
         limit_price: 0,
         stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        payment_token_address: 'payment_token_address',
         recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
@@ -160,6 +161,7 @@ describe('resource orderRequests', () => {
       {
         asset_quantity: 0,
         stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        payment_token_address: 'payment_token_address',
         recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
@@ -190,6 +192,7 @@ describe('resource orderRequests', () => {
         stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         asset_token_quantity: 0,
         limit_price: 0,
+        payment_token_address: 'payment_token_address',
         payment_token_quantity: 0,
       },
     );

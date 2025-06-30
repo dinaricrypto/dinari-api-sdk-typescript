@@ -30,7 +30,6 @@ import {
 import * as EntitiesAccountsAPI from '../entities/accounts';
 import * as OrderRequestsAPI from './order-requests/order-requests';
 import {
-  CreateLimitOrderInput,
   OrderRequest,
   OrderRequestCreateLimitBuyParams,
   OrderRequestCreateLimitSellParams,
@@ -443,7 +442,6 @@ export declare namespace Accounts {
 
   export {
     OrderRequests as OrderRequests,
-    type CreateLimitOrderInput as CreateLimitOrderInput,
     type OrderRequest as OrderRequest,
     type OrderRequestListResponse as OrderRequestListResponse,
     type OrderRequestGetFeeQuoteResponse as OrderRequestGetFeeQuoteResponse,
