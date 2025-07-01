@@ -52,6 +52,11 @@ export interface MarketDataRetrieveMarketHoursResponse {
   next_session_open_dt: string;
 
   /**
+   * Time at which the current session after-hours end.
+   */
+  current_session_after_hours_close_time_dt?: string;
+
+  /**
    * Datetime at which the current session closes. `null` if the market is currently
    * closed. ISO 8601 timestamp.
    */
@@ -62,6 +67,31 @@ export interface MarketDataRetrieveMarketHoursResponse {
    * closed. ISO 8601 timestamp.
    */
   current_session_open_dt?: string;
+
+  /**
+   * Time at which the current session overnight starts.
+   */
+  current_session_overnight_open_time_dt?: string;
+
+  /**
+   * Time at which the current session pre-market hours start.
+   */
+  current_session_pre_market_open_time_dt?: string;
+
+  /**
+   * Time at which the next session after-hours end.
+   */
+  next_session_after_hours_close_time_dt?: string;
+
+  /**
+   * Time at which the next session overnight starts.
+   */
+  next_session_overnight_open_time_dt?: string;
+
+  /**
+   * Time at which the next session pre-market hours start.
+   */
+  next_session_pre_market_open_time_dt?: string;
 }
 
 MarketData.Stocks = Stocks;
