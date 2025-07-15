@@ -191,6 +191,116 @@ export class OrderRequests extends APIResource {
 }
 
 /**
+ * Input parameters for creating a limit buy `OrderRequest`.
+ */
+export interface CreateLimitBuyOrderInput {
+  /**
+   * Amount of dShare asset involved. Required for limit `Orders` and market sell
+   * `Orders`.
+   */
+  asset_quantity: number;
+
+  /**
+   * Price at which to execute the order. Must be a positive number with a precision
+   * of up to 2 decimal places.
+   */
+  limit_price: number;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id: string;
+
+  /**
+   * ID of `Account` to receive the `Order`.
+   */
+  recipient_account_id?: string;
+}
+
+/**
+ * Input parameters for creating a limit sell `OrderRequest`.
+ */
+export interface CreateLimitSellOrderInput {
+  /**
+   * Amount of dShare asset involved. Required for limit `Orders` and market sell
+   * `Orders`.
+   */
+  asset_quantity: number;
+
+  /**
+   * Price at which to execute the order. Must be a positive number with a precision
+   * of up to 2 decimal places.
+   */
+  limit_price: number;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id: string;
+
+  /**
+   * Address of the payment token to be used for the sell order. If not provided, the
+   * default payment token (USD+) will be used. Should only be specified if
+   * `recipient_account_id` for a non-managed wallet account is also provided.
+   */
+  payment_token_address?: string;
+
+  /**
+   * ID of `Account` to receive the `Order`.
+   */
+  recipient_account_id?: string;
+}
+
+/**
+ * Input parameters for creating a market buy `OrderRequest`.
+ */
+export interface CreateMarketBuyOrderInput {
+  /**
+   * Amount of currency (USD for US equities and ETFs) to pay for the order. Must be
+   * a positive number with a precision of up to 2 decimal places.
+   */
+  payment_amount: number;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id: string;
+
+  /**
+   * ID of `Account` to receive the `Order`.
+   */
+  recipient_account_id?: string;
+}
+
+/**
+ * Input parameters for creating a market sell `OrderRequest`.
+ */
+export interface CreateMarketSellOrderInput {
+  /**
+   * Quantity of shares to trade. Must be a positive number with a precision of up to
+   * 9 decimal places.
+   */
+  asset_quantity: number;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id: string;
+
+  /**
+   * Address of the payment token to be used for the sell order. If not provided, the
+   * default payment token (USD+) will be used. Should only be specified if
+   * `recipient_account_id` for a non-managed wallet account is also provided.
+   */
+  payment_token_address?: string;
+
+  /**
+   * ID of `Account` to receive the `Order`.
+   */
+  recipient_account_id?: string;
+}
+
+/**
  * A request to create an `Order`.
  *
  * An `OrderRequest` is created when a user places an order through the Dinari API.
@@ -418,6 +528,10 @@ OrderRequests.Stocks = Stocks;
 
 export declare namespace OrderRequests {
   export {
+    type CreateLimitBuyOrderInput as CreateLimitBuyOrderInput,
+    type CreateLimitSellOrderInput as CreateLimitSellOrderInput,
+    type CreateMarketBuyOrderInput as CreateMarketBuyOrderInput,
+    type CreateMarketSellOrderInput as CreateMarketSellOrderInput,
     type OrderRequest as OrderRequest,
     type OrderRequestListResponse as OrderRequestListResponse,
     type OrderRequestGetFeeQuoteResponse as OrderRequestGetFeeQuoteResponse,
