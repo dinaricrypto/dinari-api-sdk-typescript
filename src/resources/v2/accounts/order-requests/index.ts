@@ -2,6 +2,10 @@
 
 export {
   OrderRequests,
+  type CreateLimitBuyOrderInput,
+  type CreateLimitSellOrderInput,
+  type CreateMarketBuyOrderInput,
+  type CreateMarketSellOrderInput,
   type OrderRequest,
   type OrderRequestListResponse,
   type OrderRequestGetFeeQuoteResponse,

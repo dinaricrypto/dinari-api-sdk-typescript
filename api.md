@@ -198,6 +198,10 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">CreateLimitBuyOrderInput</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">CreateLimitSellOrderInput</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">CreateMarketBuyOrderInput</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">CreateMarketSellOrderInput</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequest</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequestListResponse</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequestGetFeeQuoteResponse</a></code>
