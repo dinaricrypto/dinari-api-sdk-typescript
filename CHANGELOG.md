@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.4.0 (2025-07-15)
+
+Full Changelog: [v0.3.1...v0.4.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.3.1...v0.4.0)
+
+### Features
+
+* **api:** api update ([a9003af](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a9003af2cba1c93d1da09081be47b2e09058d1ef))
+* **api:** api update ([605dd06](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/605dd06b5e088d385d43007b87b56044b2c1f8ac))
+* **api:** api update ([c4c581c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c4c581c2a9910265d74bcb54cc2b509b03e7c311))
+* **api:** manual updates ([cbb5842](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/cbb58427b4a84913b35cab4ea22ade1903c6f2ea))
+
+
+### Chores
+
+* add docs to RequestOptions type ([0317096](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/0317096bab169563ca3c868fc156bcaf5abc7adf))
+* **ci:** only run for pushes and fork pull requests ([906fcc3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/906fcc313cf8ce8cdefe6976eb69306529ec55ad))
+* **client:** improve path param validation ([103f2bd](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/103f2bd263a679f635411b13183bf3a222472928))
+* make some internal functions async ([7592438](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/7592438999fe4518d0d1f913fe0b05382819f8e6))
+
 ## 0.3.1 (2025-06-27)
 
 Full Changelog: [v0.3.0...v0.3.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.3.0...v0.3.1)
