@@ -49,6 +49,7 @@ describe('resource eip155', () => {
         order_side: 'BUY',
         order_tif: 'DAY',
         order_type: 'MARKET',
+        payment_token: 'payment_token',
         stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
@@ -70,10 +71,10 @@ describe('resource eip155', () => {
         order_side: 'BUY',
         order_tif: 'DAY',
         order_type: 'MARKET',
+        payment_token: 'payment_token',
         stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         asset_token_quantity: 0,
         limit_price: 0,
-        payment_token: 'payment_token',
         payment_token_quantity: 0,
       },
     );

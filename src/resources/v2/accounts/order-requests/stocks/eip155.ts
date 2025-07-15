@@ -54,6 +54,7 @@ export class Eip155 extends APIResource {
    *       order_side: 'BUY',
    *       order_tif: 'DAY',
    *       order_type: 'MARKET',
+   *       payment_token: 'payment_token',
    *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     },
    *   );
@@ -172,6 +173,11 @@ export interface Eip155PrepareProxiedOrderParams {
   order_type: OrdersAPI.OrderType;
 
   /**
+   * Address of payment token.
+   */
+  payment_token: string;
+
+  /**
    * The ID of the `Stock` for which the `Order` is being placed.
    */
   stock_id: string;
@@ -187,11 +193,6 @@ export interface Eip155PrepareProxiedOrderParams {
    * Required for limit `Orders`.
    */
   limit_price?: number;
-
-  /**
-   * Address of payment token.
-   */
-  payment_token?: string;
 
   /**
    * Amount of payment tokens involved. Required for market buy `Orders`.

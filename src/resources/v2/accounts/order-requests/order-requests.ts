@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as AccountsAPI from '../accounts';
 import * as OrdersAPI from '../orders/orders';
 import * as StocksAPI from './stocks/stocks';
 import { Stocks } from './stocks/stocks';
@@ -388,6 +389,12 @@ export interface OrderRequestGetFeeQuoteParams {
    * sell `Order Requests`.
    */
   asset_token_quantity?: number;
+
+  /**
+   * CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
+   * not provided, the default chain ID (eip155:42161) will be used.
+   */
+  chain_id?: AccountsAPI.Chain;
 
   /**
    * Price per asset in the asset's native currency. USD for US equities and ETFs.

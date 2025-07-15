@@ -96,6 +96,11 @@ export namespace V2ListOrdersResponse {
     order_type: OrdersAPI.OrderType;
 
     /**
+     * The payment token (stablecoin) address.
+     */
+    payment_token: string;
+
+    /**
      * Status of the `Order`.
      */
     status: OrdersAPI.BrokerageOrderStatus;
@@ -145,11 +150,6 @@ export namespace V2ListOrdersResponse {
      * Order Request ID for the `Order`
      */
     order_request_id?: string;
-
-    /**
-     * The payment token (stablecoin) address.
-     */
-    payment_token?: string;
 
     /**
      * Total amount of payment involved.
