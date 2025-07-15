@@ -153,6 +153,11 @@ export interface Order {
   order_type: OrderType;
 
   /**
+   * The payment token (stablecoin) address.
+   */
+  payment_token: string;
+
+  /**
    * Status of the `Order`.
    */
   status: BrokerageOrderStatus;
@@ -192,11 +197,6 @@ export interface Order {
    * Order Request ID for the `Order`
    */
   order_request_id?: string;
-
-  /**
-   * The payment token (stablecoin) address.
-   */
-  payment_token?: string;
 
   /**
    * Total amount of payment involved.
