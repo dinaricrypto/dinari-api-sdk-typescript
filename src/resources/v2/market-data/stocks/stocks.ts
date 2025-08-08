@@ -325,16 +325,10 @@ export namespace StockRetrieveDividendsResponse {
     currency?: string;
 
     /**
-     * Date on which the dividend was announced. In ISO 8601 format, YYYY-MM-DD.
-     */
-    declaration_date?: string;
-
-    /**
      * Type of dividend. Dividends that have been paid and/or are expected to be paid
      * on consistent schedules are denoted as `CD`. Special Cash dividends that have
      * been paid that are infrequent or unusual, and/or can not be expected to occur in
-     * the future are denoted as `SC`. Long-term and short-term capital gain
-     * distributions are denoted as `LT` and `ST`, respectively.
+     * the future are denoted as `SC`.
      */
     dividend_type?: string;
 
@@ -344,18 +338,6 @@ export namespace StockRetrieveDividendsResponse {
      * you will not receive the upcoming dividend. In ISO 8601 format, YYYY-MM-DD.
      */
     ex_dividend_date?: string;
-
-    /**
-     * Frequency of the dividend. The following values are possible:
-     *
-     * - `1` - Annual
-     * - `2` - Semi-Annual
-     * - `4` - Quarterly
-     * - `12` - Monthly
-     * - `52` - Weekly
-     * - `365` - Daily
-     */
-    frequency?: number;
 
     /**
      * Date on which the dividend is paid out. In ISO 8601 format, YYYY-MM-DD.
