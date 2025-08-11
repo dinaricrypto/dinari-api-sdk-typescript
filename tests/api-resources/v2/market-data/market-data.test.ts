@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource marketData', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieveMarketHours', async () => {
     const responsePromise = client.v2.marketData.retrieveMarketHours();
     const rawResponse = await responsePromise.asResponse();

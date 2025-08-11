@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource orderFulfillments', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.v2.accounts.orderFulfillments.retrieve(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -24,7 +24,7 @@ describe('resource orderFulfillments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.v2.accounts.orderFulfillments.retrieve(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -32,7 +32,7 @@ describe('resource orderFulfillments', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('query', async () => {
     const responsePromise = client.v2.accounts.orderFulfillments.query(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -46,7 +46,7 @@ describe('resource orderFulfillments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('query: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
