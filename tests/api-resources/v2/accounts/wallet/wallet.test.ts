@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource wallet', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('connectInternal: only required params', async () => {
     const responsePromise = client.v2.accounts.wallet.connectInternal(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -24,7 +24,7 @@ describe('resource wallet', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('connectInternal: required and optional params', async () => {
     const response = await client.v2.accounts.wallet.connectInternal('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       chain_id: 'eip155:0',
@@ -33,7 +33,7 @@ describe('resource wallet', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('get', async () => {
     const responsePromise = client.v2.accounts.wallet.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();

@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource accounts', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.v2.accounts.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -21,7 +21,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deactivate', async () => {
     const responsePromise = client.v2.accounts.deactivate('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -33,7 +33,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getCashBalances', async () => {
     const responsePromise = client.v2.accounts.getCashBalances('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +45,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getDividendPayments: only required params', async () => {
     const responsePromise = client.v2.accounts.getDividendPayments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       end_date: '2019-12-27',
@@ -60,7 +60,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getDividendPayments: required and optional params', async () => {
     const response = await client.v2.accounts.getDividendPayments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       end_date: '2019-12-27',
@@ -71,7 +71,7 @@ describe('resource accounts', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getInterestPayments: only required params', async () => {
     const responsePromise = client.v2.accounts.getInterestPayments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       end_date: '2019-12-27',
@@ -86,7 +86,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getInterestPayments: required and optional params', async () => {
     const response = await client.v2.accounts.getInterestPayments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       end_date: '2019-12-27',
@@ -96,7 +96,7 @@ describe('resource accounts', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getPortfolio', async () => {
     const responsePromise = client.v2.accounts.getPortfolio('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -108,7 +108,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('mintSandboxTokens', async () => {
     const responsePromise = client.v2.accounts.mintSandboxTokens('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {});
     const rawResponse = await responsePromise.asResponse();

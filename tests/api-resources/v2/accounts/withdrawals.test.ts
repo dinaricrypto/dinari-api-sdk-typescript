@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource withdrawals', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.v2.accounts.withdrawals.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -23,14 +23,14 @@ describe('resource withdrawals', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.v2.accounts.withdrawals.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v2.accounts.withdrawals.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -42,7 +42,7 @@ describe('resource withdrawals', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

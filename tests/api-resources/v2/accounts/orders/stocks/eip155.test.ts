@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource eip155', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getFeeQuote: only required params', async () => {
     const responsePromise = client.v2.accounts.orders.stocks.eip155.getFeeQuote(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -31,7 +31,7 @@ describe('resource eip155', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getFeeQuote: required and optional params', async () => {
     const response = await client.v2.accounts.orders.stocks.eip155.getFeeQuote(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -49,7 +49,7 @@ describe('resource eip155', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('prepareOrder: only required params', async () => {
     const responsePromise = client.v2.accounts.orders.stocks.eip155.prepareOrder(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -71,7 +71,7 @@ describe('resource eip155', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('prepareOrder: required and optional params', async () => {
     const response = await client.v2.accounts.orders.stocks.eip155.prepareOrder(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
