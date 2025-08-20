@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource external', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('connect: only required params', async () => {
     const responsePromise = client.v2.accounts.wallet.external.connect(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -29,7 +29,7 @@ describe('resource external', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('connect: required and optional params', async () => {
     const response = await client.v2.accounts.wallet.external.connect(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -42,7 +42,7 @@ describe('resource external', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getNonce: only required params', async () => {
     const responsePromise = client.v2.accounts.wallet.external.getNonce(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -57,7 +57,7 @@ describe('resource external', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getNonce: required and optional params', async () => {
     const response = await client.v2.accounts.wallet.external.getNonce(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

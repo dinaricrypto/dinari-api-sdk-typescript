@@ -10,6 +10,15 @@ import {
   OrderFulfillmentRetrieveParams,
   OrderFulfillments,
 } from './order-fulfillments';
+import * as TokenTransfersAPI from './token-transfers';
+import {
+  TokenTransfer,
+  TokenTransferCreateParams,
+  TokenTransferListParams,
+  TokenTransferListResponse,
+  TokenTransferRetrieveParams,
+  TokenTransfers,
+} from './token-transfers';
 import * as WithdrawalRequestsAPI from './withdrawal-requests';
 import {
   WithdrawalRequest,
@@ -79,6 +88,7 @@ export class Accounts extends APIResource {
     this._client,
   );
   withdrawals: WithdrawalsAPI.Withdrawals = new WithdrawalsAPI.Withdrawals(this._client);
+  tokenTransfers: TokenTransfersAPI.TokenTransfers = new TokenTransfersAPI.TokenTransfers(this._client);
 
   /**
    * Get a specific `Account` by its ID.
@@ -221,7 +231,10 @@ export type Chain =
   | 'eip155:168587773'
   | 'eip155:98867'
   | 'eip155:31337'
-  | 'eip155:1337';
+  | 'eip155:1337'
+  | 'eip155:202110'
+  | 'eip155:179205'
+  | 'eip155:179202';
 
 export type AccountGetCashBalancesResponse =
   Array<AccountGetCashBalancesResponse.AccountGetCashBalancesResponseItem>;
@@ -402,6 +415,7 @@ Accounts.OrderFulfillments = OrderFulfillments;
 Accounts.OrderRequests = OrderRequests;
 Accounts.WithdrawalRequests = WithdrawalRequests;
 Accounts.Withdrawals = Withdrawals;
+Accounts.TokenTransfers = TokenTransfers;
 
 export declare namespace Accounts {
   export {
@@ -477,5 +491,14 @@ export declare namespace Accounts {
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalRetrieveParams as WithdrawalRetrieveParams,
     type WithdrawalListParams as WithdrawalListParams,
+  };
+
+  export {
+    TokenTransfers as TokenTransfers,
+    type TokenTransfer as TokenTransfer,
+    type TokenTransferListResponse as TokenTransferListResponse,
+    type TokenTransferCreateParams as TokenTransferCreateParams,
+    type TokenTransferRetrieveParams as TokenTransferRetrieveParams,
+    type TokenTransferListParams as TokenTransferListParams,
   };
 }

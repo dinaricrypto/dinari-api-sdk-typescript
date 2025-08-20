@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource eip155', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createProxiedOrder: only required params', async () => {
     const responsePromise = client.v2.accounts.orderRequests.stocks.eip155.createProxiedOrder(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -28,7 +28,7 @@ describe('resource eip155', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createProxiedOrder: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.stocks.eip155.createProxiedOrder(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -40,7 +40,7 @@ describe('resource eip155', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('prepareProxiedOrder: only required params', async () => {
     const responsePromise = client.v2.accounts.orderRequests.stocks.eip155.prepareProxiedOrder(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -62,7 +62,7 @@ describe('resource eip155', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('prepareProxiedOrder: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.stocks.eip155.prepareProxiedOrder(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

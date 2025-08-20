@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.5.0 (2025-08-20)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** api update ([1318ec3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/1318ec3eac264ca1bc73b71ac705bf3c87cedc9d))
+* **api:** api update ([6776817](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/6776817186425766f2f9336a2f0054285e93888f))
+* **api:** manual updates ([badd195](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/badd19517562b6523522c97dc7092b781666cc81))
+* **mcp:** add code execution tool ([7265e00](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/7265e00fde8263708925873e477a4181638a2fee))
+
+
+### Chores
+
+* **deps:** update dependency @types/node to v20.17.58 ([c578ce3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c578ce367a2cdad9dcfe8484af2af45f4039340a))
+* **internal:** formatting change ([8e32e8c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/8e32e8c833fe093e21184317100f3e928edab096))
+* **internal:** move publish config ([bbaaefa](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/bbaaefaacb11e4921c6a397e78d50b3c44b52946))
+* **internal:** remove redundant imports config ([ac4a6a4](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/ac4a6a4d8364abcd5815d8e4dc3ebec620ff2b15))
+* **internal:** update comment in script ([e551992](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/e551992b79d06057c7ea895ab3106ff50f0d36e9))
+* **internal:** update test skipping reason ([8028fca](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/8028fcae5295ec48d1ab4bed8921e5b57c8b9ef6))
+* **ts:** reorder package.json imports ([f889e30](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/f889e3037f630e931e0072a42d20efb649954823))
+* update @stainless-api/prism-cli to v5.15.0 ([1e25f60](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/1e25f60c05a382896f9f1835d00a9db4245dbcde))
+
 ## 0.4.0 (2025-07-15)
 
 Full Changelog: [v0.3.1...v0.4.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.3.1...v0.4.0)

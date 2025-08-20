@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource orderRequests', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.v2.accounts.orderRequests.retrieve(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -24,14 +24,14 @@ describe('resource orderRequests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v2.accounts.orderRequests.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -43,7 +43,7 @@ describe('resource orderRequests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -55,7 +55,7 @@ describe('resource orderRequests', () => {
     ).rejects.toThrow(Dinari.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createLimitBuy: only required params', async () => {
     const responsePromise = client.v2.accounts.orderRequests.createLimitBuy(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -70,7 +70,7 @@ describe('resource orderRequests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createLimitBuy: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.createLimitBuy(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -83,7 +83,7 @@ describe('resource orderRequests', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createLimitSell: only required params', async () => {
     const responsePromise = client.v2.accounts.orderRequests.createLimitSell(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -98,7 +98,7 @@ describe('resource orderRequests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createLimitSell: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.createLimitSell(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -112,7 +112,7 @@ describe('resource orderRequests', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createMarketBuy: only required params', async () => {
     const responsePromise = client.v2.accounts.orderRequests.createMarketBuy(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -127,7 +127,7 @@ describe('resource orderRequests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createMarketBuy: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.createMarketBuy(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -139,7 +139,7 @@ describe('resource orderRequests', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createMarketSell: only required params', async () => {
     const responsePromise = client.v2.accounts.orderRequests.createMarketSell(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -154,7 +154,7 @@ describe('resource orderRequests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createMarketSell: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.createMarketSell(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -167,7 +167,7 @@ describe('resource orderRequests', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getFeeQuote: only required params', async () => {
     const responsePromise = client.v2.accounts.orderRequests.getFeeQuote(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -182,7 +182,7 @@ describe('resource orderRequests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getFeeQuote: required and optional params', async () => {
     const response = await client.v2.accounts.orderRequests.getFeeQuote(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

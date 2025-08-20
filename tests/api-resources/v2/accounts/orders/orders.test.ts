@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource orders', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.v2.accounts.orders.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -23,14 +23,14 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.v2.accounts.orders.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v2.accounts.orders.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -42,7 +42,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -54,7 +54,7 @@ describe('resource orders', () => {
     ).rejects.toThrow(Dinari.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('cancel: only required params', async () => {
     const responsePromise = client.v2.accounts.orders.cancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -68,14 +68,14 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('cancel: required and optional params', async () => {
     const response = await client.v2.accounts.orders.cancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getFulfillments: only required params', async () => {
     const responsePromise = client.v2.accounts.orders.getFulfillments(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -90,7 +90,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getFulfillments: required and optional params', async () => {
     const response = await client.v2.accounts.orders.getFulfillments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

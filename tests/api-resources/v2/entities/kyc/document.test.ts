@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource document', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.v2.entities.kyc.document.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -23,14 +23,14 @@ describe('resource document', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.v2.entities.kyc.document.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('upload: only required params', async () => {
     const responsePromise = client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -46,7 +46,7 @@ describe('resource document', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('upload: required and optional params', async () => {
     const response = await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

@@ -749,7 +749,9 @@ export class Dinari {
 
   v2: API.V2 = new API.V2(this);
 }
+
 Dinari.V2 = V2;
+
 export declare namespace Dinari {
   export type RequestOptions = Opts.RequestOptions;
 
