@@ -254,3 +254,16 @@ Methods:
 
 - <code title="get /api/v2/accounts/{account_id}/withdrawals/{withdrawal_id}">client.v2.accounts.withdrawals.<a href="./src/resources/v2/accounts/withdrawals.ts">retrieve</a>(withdrawalID, { ...params }) -> Withdrawal</code>
 - <code title="get /api/v2/accounts/{account_id}/withdrawals">client.v2.accounts.withdrawals.<a href="./src/resources/v2/accounts/withdrawals.ts">list</a>(accountID, { ...params }) -> WithdrawalListResponse</code>
+
+### TokenTransfers
+
+Types:
+
+- <code><a href="./src/resources/v2/accounts/token-transfers.ts">TokenTransfer</a></code>
+- <code><a href="./src/resources/v2/accounts/token-transfers.ts">TokenTransferListResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v2/accounts/{account_id}/token_transfers">client.v2.accounts.tokenTransfers.<a href="./src/resources/v2/accounts/token-transfers.ts">create</a>(accountID, { ...params }) -> TokenTransfer</code>
+- <code title="get /api/v2/accounts/{account_id}/token_transfers/{transfer_id}">client.v2.accounts.tokenTransfers.<a href="./src/resources/v2/accounts/token-transfers.ts">retrieve</a>(transferID, { ...params }) -> TokenTransfer</code>
+- <code title="get /api/v2/accounts/{account_id}/token_transfers">client.v2.accounts.tokenTransfers.<a href="./src/resources/v2/accounts/token-transfers.ts">list</a>(accountID, { ...params }) -> TokenTransferListResponse</code>

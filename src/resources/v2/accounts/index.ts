@@ -49,6 +49,14 @@ export {
   type OrderCancelParams,
   type OrderGetFulfillmentsParams,
 } from './orders/index';
+export {
+  TokenTransfers,
+  type TokenTransfer,
+  type TokenTransferListResponse,
+  type TokenTransferCreateParams,
+  type TokenTransferRetrieveParams,
+  type TokenTransferListParams,
+} from './token-transfers';
 export { WalletResource, type Wallet, type WalletConnectInternalParams } from './wallet/index';
 export {
   WithdrawalRequests,
