@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.6.0 (2025-08-22)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([802bc1a](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/802bc1a10fb73c019b0793b00a69e935a6efdae2))
+
+
+### Chores
+
+* add package to package.json ([501b94c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/501b94c26554d0d7fbbb8c00bb3ae853cc9196ee))
+* **client:** qualify global Blob ([5a8158b](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/5a8158bef87fdd3cbeb09e4b846d51897c627a89))
+* update CI script ([716edc4](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/716edc47f7ccb86cc7a3cda66c89b1198f2ec23d))
+
 ## 0.5.0 (2025-08-20)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.4.0...v0.5.0)
