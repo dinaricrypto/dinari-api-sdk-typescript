@@ -232,7 +232,8 @@ export type Chain =
   | 'eip155:98867'
   | 'eip155:202110'
   | 'eip155:179205'
-  | 'eip155:179202';
+  | 'eip155:179202'
+  | 'eip155:98865';
 
 export type AccountGetCashBalancesResponse =
   Array<AccountGetCashBalancesResponse.AccountGetCashBalancesResponseItem>;
