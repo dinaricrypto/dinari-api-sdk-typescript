@@ -7,10 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "@dinari/api-sdk/*": ["src/*"],
-      "@dinari/api-sdk": ["src/index.ts"]
+      "@dinari/api-sdk/*": ["./src/*"],
+      "@dinari/api-sdk": ["./src/index.ts"]
     },
     "noEmit": true,
 
