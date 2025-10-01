@@ -62,7 +62,6 @@ export type WalletChainID =
   | 'eip155:42161'
   | 'eip155:8453'
   | 'eip155:81457'
-  | 'eip155:7887'
   | 'eip155:98866'
   | 'eip155:11155111'
   | 'eip155:421614'
@@ -72,7 +71,8 @@ export type WalletChainID =
   | 'eip155:202110'
   | 'eip155:179205'
   | 'eip155:179202'
-  | 'eip155:98865';
+  | 'eip155:98865'
+  | 'eip155:7887';
 
 /**
  * Connection message to sign to prove ownership of the `Wallet`.
