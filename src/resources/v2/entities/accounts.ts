@@ -65,6 +65,11 @@ export interface Account {
    * Indicates whether the `Account` is active.
    */
   is_active: boolean;
+
+  /**
+   * ID of the brokerage account associated with the `Account`.
+   */
+  brokerage_account_id?: string | null;
 }
 
 export type AccountListResponse = Array<Account>;
