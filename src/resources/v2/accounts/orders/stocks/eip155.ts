@@ -128,7 +128,7 @@ export namespace Eip155GetFeeQuoteResponse {
     /**
      * EVM chain ID of the blockchain where the `Order` will be placed.
      */
-    chain_id: 42161 | 1 | 8453 | 81457 | 98866;
+    chain_id: 42161 | 1 | 8453 | 81457 | 98866 | 202110;
 
     /**
      * `FeeQuote` structure to pass into contracts.
