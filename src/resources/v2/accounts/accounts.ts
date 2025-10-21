@@ -188,8 +188,12 @@ export class Accounts extends APIResource {
    * );
    * ```
    */
-  getPortfolio(accountID: string, options?: RequestOptions): APIPromise<AccountGetPortfolioResponse> {
-    return this._client.get(path`/api/v2/accounts/${accountID}/portfolio`, options);
+  getPortfolio(
+    accountID: string,
+    query: AccountGetPortfolioParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountGetPortfolioResponse> {
+    return this._client.get(path`/api/v2/accounts/${accountID}/portfolio`, { query, ...options });
   }
 
   /**
@@ -399,6 +403,18 @@ export interface AccountGetInterestPaymentsParams {
   page_size?: number;
 }
 
+export interface AccountGetPortfolioParams {
+  /**
+   * The page number.
+   */
+  page?: number | null;
+
+  /**
+   * The number of stocks to return per page, maximum number is 200.
+   */
+  page_size?: number | null;
+}
+
 export interface AccountMintSandboxTokensParams {
   /**
    * CAIP-2 chain ID of blockchain in which to mint the sandbox payment tokens. If
@@ -425,6 +441,7 @@ export declare namespace Accounts {
     type AccountGetPortfolioResponse as AccountGetPortfolioResponse,
     type AccountGetDividendPaymentsParams as AccountGetDividendPaymentsParams,
     type AccountGetInterestPaymentsParams as AccountGetInterestPaymentsParams,
+    type AccountGetPortfolioParams as AccountGetPortfolioParams,
     type AccountMintSandboxTokensParams as AccountMintSandboxTokensParams,
   };
 

@@ -122,7 +122,7 @@ Methods:
 - <code title="get /api/v2/accounts/{account_id}/cash">client.v2.accounts.<a href="./src/resources/v2/accounts/accounts.ts">getCashBalances</a>(accountID) -> AccountGetCashBalancesResponse</code>
 - <code title="get /api/v2/accounts/{account_id}/dividend_payments">client.v2.accounts.<a href="./src/resources/v2/accounts/accounts.ts">getDividendPayments</a>(accountID, { ...params }) -> AccountGetDividendPaymentsResponse</code>
 - <code title="get /api/v2/accounts/{account_id}/interest_payments">client.v2.accounts.<a href="./src/resources/v2/accounts/accounts.ts">getInterestPayments</a>(accountID, { ...params }) -> AccountGetInterestPaymentsResponse</code>
-- <code title="get /api/v2/accounts/{account_id}/portfolio">client.v2.accounts.<a href="./src/resources/v2/accounts/accounts.ts">getPortfolio</a>(accountID) -> AccountGetPortfolioResponse</code>
+- <code title="get /api/v2/accounts/{account_id}/portfolio">client.v2.accounts.<a href="./src/resources/v2/accounts/accounts.ts">getPortfolio</a>(accountID, { ...params }) -> AccountGetPortfolioResponse</code>
 - <code title="post /api/v2/accounts/{account_id}/faucet">client.v2.accounts.<a href="./src/resources/v2/accounts/accounts.ts">mintSandboxTokens</a>(accountID, { ...params }) -> void</code>
 
 ### Wallet

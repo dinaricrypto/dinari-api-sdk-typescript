@@ -9,6 +9,7 @@ export {
   type AccountGetPortfolioResponse,
   type AccountGetDividendPaymentsParams,
   type AccountGetInterestPaymentsParams,
+  type AccountGetPortfolioParams,
   type AccountMintSandboxTokensParams,
 } from './accounts/index';
 export {

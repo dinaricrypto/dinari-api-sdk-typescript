@@ -8,6 +8,7 @@ import {
   AccountGetDividendPaymentsResponse,
   AccountGetInterestPaymentsParams,
   AccountGetInterestPaymentsResponse,
+  AccountGetPortfolioParams,
   AccountGetPortfolioResponse,
   AccountMintSandboxTokensParams,
   Accounts,
@@ -214,6 +215,7 @@ export declare namespace V2 {
     type AccountGetPortfolioResponse as AccountGetPortfolioResponse,
     type AccountGetDividendPaymentsParams as AccountGetDividendPaymentsParams,
     type AccountGetInterestPaymentsParams as AccountGetInterestPaymentsParams,
+    type AccountGetPortfolioParams as AccountGetPortfolioParams,
     type AccountMintSandboxTokensParams as AccountMintSandboxTokensParams,
   };
 }
