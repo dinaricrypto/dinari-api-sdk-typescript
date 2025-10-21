@@ -109,6 +109,18 @@ describe('resource accounts', () => {
   });
 
   // Prism tests are disabled
+  test.skip('getPortfolio: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v2.accounts.getPortfolio(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { page: 1, page_size: 1 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Dinari.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('mintSandboxTokens', async () => {
     const responsePromise = client.v2.accounts.mintSandboxTokens('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {});
     const rawResponse = await responsePromise.asResponse();
