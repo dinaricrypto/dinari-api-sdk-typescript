@@ -109,18 +109,18 @@ export interface Entity {
   /**
    * Name of `Entity`.
    */
-  name?: string;
+  name?: string | null;
 
   /**
    * Nationality or home country of the `Entity`.
    */
-  nationality?: string;
+  nationality?: string | null;
 
   /**
    * Case sensitive unique reference ID that you can set for the `Entity`. We
    * recommend setting this to the unique ID of the `Entity` in your system.
    */
-  reference_id?: string;
+  reference_id?: string | null;
 }
 
 export type EntityListResponse = Array<Entity>;
@@ -135,7 +135,7 @@ export interface EntityCreateParams {
    * Case sensitive unique reference ID for the `Entity`. We recommend setting this
    * to the unique ID of the `Entity` in your system.
    */
-  reference_id?: string;
+  reference_id?: string | null;
 }
 
 export interface EntityUpdateParams {
@@ -143,7 +143,7 @@ export interface EntityUpdateParams {
    * Case sensitive unique reference ID for the `Entity`. We recommend setting this
    * to the unique ID of the `Entity` in your system.
    */
-  reference_id?: string;
+  reference_id?: string | null;
 }
 
 export interface EntityListParams {
@@ -154,7 +154,7 @@ export interface EntityListParams {
   /**
    * Case sensitive unique reference ID for the `Entity`.
    */
-  reference_id?: string;
+  reference_id?: string | null;
 }
 
 Entities.Accounts = Accounts;

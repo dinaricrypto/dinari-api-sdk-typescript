@@ -257,18 +257,18 @@ export interface Eip155GetFeeQuoteParams {
    * Amount of dShare asset tokens involved. Required for limit `Orders` and market
    * sell `Orders`.
    */
-  asset_token_quantity?: number;
+  asset_token_quantity?: number | null;
 
   /**
    * Price per asset in the asset's native currency. USD for US equities and ETFs.
    * Required for limit `Orders`.
    */
-  limit_price?: number;
+  limit_price?: number | null;
 
   /**
    * Amount of payment tokens involved. Required for market buy `Orders`.
    */
-  payment_token_quantity?: number;
+  payment_token_quantity?: number | null;
 }
 
 export interface Eip155PrepareOrderParams {
@@ -306,18 +306,18 @@ export interface Eip155PrepareOrderParams {
    * Amount of dShare asset tokens involved. Required for limit `Orders` and market
    * sell `Orders`.
    */
-  asset_token_quantity?: number;
+  asset_token_quantity?: number | null;
 
   /**
    * Price per asset in the asset's native currency. USD for US equities and ETFs.
    * Required for limit `Orders`.
    */
-  limit_price?: number;
+  limit_price?: number | null;
 
   /**
    * Amount of payment tokens involved. Required for market buy `Orders`.
    */
-  payment_token_quantity?: number;
+  payment_token_quantity?: number | null;
 }
 
 export declare namespace Eip155 {

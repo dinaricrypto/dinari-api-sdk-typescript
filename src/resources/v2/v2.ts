@@ -114,48 +114,48 @@ export namespace V2ListOrdersResponse {
     /**
      * Account ID the order was made for.
      */
-    account_id?: string;
+    account_id?: string | null;
 
     /**
      * The dShare asset token address.
      */
-    asset_token?: string;
+    asset_token?: string | null;
 
     /**
      * Total amount of assets involved.
      */
-    asset_token_quantity?: number;
+    asset_token_quantity?: number | null;
 
     /**
      * Transaction hash for cancellation of `Order`, if the `Order` was cancelled.
      */
-    cancel_transaction_hash?: string;
+    cancel_transaction_hash?: string | null;
 
     /**
      * Entity ID of the Order
      */
-    entity_id?: string;
+    entity_id?: string | null;
 
     /**
      * Fee amount associated with `Order`.
      */
-    fee?: number;
+    fee?: number | null;
 
     /**
      * For limit `Orders`, the price per asset, specified in the `Stock`'s native
      * currency (USD for US equities and ETFs).
      */
-    limit_price?: number;
+    limit_price?: number | null;
 
     /**
      * Order Request ID for the `Order`
      */
-    order_request_id?: string;
+    order_request_id?: string | null;
 
     /**
      * Total amount of payment involved.
      */
-    payment_token_quantity?: number;
+    payment_token_quantity?: number | null;
   }
 }
 
@@ -163,22 +163,22 @@ export interface V2ListOrdersParams {
   /**
    * CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
    */
-  chain_id?: AccountsAPI.Chain;
+  chain_id?: AccountsAPI.Chain | null;
 
   /**
    * Fulfillment transaction hash of the `Order`.
    */
-  order_fulfillment_transaction_hash?: string;
+  order_fulfillment_transaction_hash?: string | null;
 
   /**
    * Order Request ID for the `Order`
    */
-  order_request_id?: string;
+  order_request_id?: string | null;
 
   /**
    * Transaction hash of the `Order`.
    */
-  order_transaction_hash?: string;
+  order_transaction_hash?: string | null;
 
   page?: number;
 
