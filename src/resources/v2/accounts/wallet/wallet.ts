@@ -95,7 +95,7 @@ export interface WalletConnectInternalParams {
   /**
    * Is the linked Wallet shared or not
    */
-  is_shared?: boolean;
+  is_shared?: boolean | null;
 }
 
 WalletResource.External = External;

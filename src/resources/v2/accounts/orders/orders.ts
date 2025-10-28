@@ -170,38 +170,38 @@ export interface Order {
   /**
    * The dShare asset token address.
    */
-  asset_token?: string;
+  asset_token?: string | null;
 
   /**
    * Total amount of assets involved.
    */
-  asset_token_quantity?: number;
+  asset_token_quantity?: number | null;
 
   /**
    * Transaction hash for cancellation of `Order`, if the `Order` was cancelled.
    */
-  cancel_transaction_hash?: string;
+  cancel_transaction_hash?: string | null;
 
   /**
    * Fee amount associated with `Order`.
    */
-  fee?: number;
+  fee?: number | null;
 
   /**
    * For limit `Orders`, the price per asset, specified in the `Stock`'s native
    * currency (USD for US equities and ETFs).
    */
-  limit_price?: number;
+  limit_price?: number | null;
 
   /**
    * Order Request ID for the `Order`
    */
-  order_request_id?: string;
+  order_request_id?: string | null;
 
   /**
    * Total amount of payment involved.
    */
-  payment_token_quantity?: number;
+  payment_token_quantity?: number | null;
 }
 
 export type OrderSide = 'BUY' | 'SELL';
@@ -222,12 +222,12 @@ export interface OrderListParams {
   /**
    * CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
    */
-  chain_id?: AccountsAPI.Chain;
+  chain_id?: AccountsAPI.Chain | null;
 
   /**
    * Transaction hash of the `Order`.
    */
-  order_transaction_hash?: string;
+  order_transaction_hash?: string | null;
 
   page?: number;
 

@@ -54,29 +54,29 @@ export interface MarketDataRetrieveMarketHoursResponse {
   /**
    * Time at which the current session after-hours end.
    */
-  current_session_after_hours_close_time_dt?: string;
+  current_session_after_hours_close_time_dt?: string | null;
 
   /**
    * Datetime at which the current session closes. `null` if the market is currently
    * closed. ISO 8601 timestamp.
    */
-  current_session_close_dt?: string;
+  current_session_close_dt?: string | null;
 
   /**
    * Datetime at which the current session opened. `null` if the market is currently
    * closed. ISO 8601 timestamp.
    */
-  current_session_open_dt?: string;
+  current_session_open_dt?: string | null;
 
   /**
    * Time at which the current session overnight starts.
    */
-  current_session_overnight_open_time_dt?: string;
+  current_session_overnight_open_time_dt?: string | null;
 
   /**
    * Time at which the current session pre-market hours start.
    */
-  current_session_pre_market_open_time_dt?: string;
+  current_session_pre_market_open_time_dt?: string | null;
 
   /**
    * Time at which the next session after-hours end.

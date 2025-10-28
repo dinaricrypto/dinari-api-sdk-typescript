@@ -218,7 +218,7 @@ export interface CreateLimitBuyOrderInput {
   /**
    * ID of `Account` to receive the `Order`.
    */
-  recipient_account_id?: string;
+  recipient_account_id?: string | null;
 }
 
 /**
@@ -247,12 +247,12 @@ export interface CreateLimitSellOrderInput {
    * default payment token (USD+) will be used. Should only be specified if
    * `recipient_account_id` for a non-managed wallet account is also provided.
    */
-  payment_token_address?: string;
+  payment_token_address?: string | null;
 
   /**
    * ID of `Account` to receive the `Order`.
    */
-  recipient_account_id?: string;
+  recipient_account_id?: string | null;
 }
 
 /**
@@ -273,7 +273,7 @@ export interface CreateMarketBuyOrderInput {
   /**
    * ID of `Account` to receive the `Order`.
    */
-  recipient_account_id?: string;
+  recipient_account_id?: string | null;
 }
 
 /**
@@ -296,12 +296,12 @@ export interface CreateMarketSellOrderInput {
    * default payment token (USD+) will be used. Should only be specified if
    * `recipient_account_id` for a non-managed wallet account is also provided.
    */
-  payment_token_address?: string;
+  payment_token_address?: string | null;
 
   /**
    * ID of `Account` to receive the `Order`.
    */
-  recipient_account_id?: string;
+  recipient_account_id?: string | null;
 }
 
 /**
@@ -348,18 +348,18 @@ export interface OrderRequest {
   /**
    * Status of `OrderRequest`.
    */
-  status: 'QUOTED' | 'PENDING' | 'PENDING_BRIDGE' | 'SUBMITTED' | 'ERROR' | 'CANCELLED';
+  status: 'QUOTED' | 'PENDING' | 'PENDING_BRIDGE' | 'SUBMITTED' | 'ERROR' | 'CANCELLED' | 'EXPIRED';
 
   /**
    * ID of `Order` created from the `OrderRequest`. This is the primary identifier
    * for the `/orders` routes.
    */
-  order_id?: string;
+  order_id?: string | null;
 
   /**
    * ID of recipient `Account`.
    */
-  recipient_account_id?: string;
+  recipient_account_id?: string | null;
 }
 
 export type OrderRequestListResponse = Array<OrderRequest>;
@@ -405,7 +405,7 @@ export interface OrderRequestCreateLimitBuyParams {
   /**
    * ID of `Account` to receive the `Order`.
    */
-  recipient_account_id?: string;
+  recipient_account_id?: string | null;
 }
 
 export interface OrderRequestCreateLimitSellParams {
@@ -431,12 +431,12 @@ export interface OrderRequestCreateLimitSellParams {
    * default payment token (USD+) will be used. Should only be specified if
    * `recipient_account_id` for a non-managed wallet account is also provided.
    */
-  payment_token_address?: string;
+  payment_token_address?: string | null;
 
   /**
    * ID of `Account` to receive the `Order`.
    */
-  recipient_account_id?: string;
+  recipient_account_id?: string | null;
 }
 
 export interface OrderRequestCreateMarketBuyParams {
@@ -454,7 +454,7 @@ export interface OrderRequestCreateMarketBuyParams {
   /**
    * ID of `Account` to receive the `Order`.
    */
-  recipient_account_id?: string;
+  recipient_account_id?: string | null;
 }
 
 export interface OrderRequestCreateMarketSellParams {
@@ -474,12 +474,12 @@ export interface OrderRequestCreateMarketSellParams {
    * default payment token (USD+) will be used. Should only be specified if
    * `recipient_account_id` for a non-managed wallet account is also provided.
    */
-  payment_token_address?: string;
+  payment_token_address?: string | null;
 
   /**
    * ID of `Account` to receive the `Order`.
    */
-  recipient_account_id?: string;
+  recipient_account_id?: string | null;
 }
 
 export interface OrderRequestGetFeeQuoteParams {
@@ -502,30 +502,30 @@ export interface OrderRequestGetFeeQuoteParams {
    * Amount of dShare asset tokens involved. Required for limit `Orders` and market
    * sell `Order Requests`.
    */
-  asset_token_quantity?: number;
+  asset_token_quantity?: number | null;
 
   /**
    * CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
    * not provided, the default chain ID (eip155:42161) will be used.
    */
-  chain_id?: AccountsAPI.Chain;
+  chain_id?: AccountsAPI.Chain | null;
 
   /**
    * Price per asset in the asset's native currency. USD for US equities and ETFs.
    * Required for limit `Order Requests`.
    */
-  limit_price?: number;
+  limit_price?: number | null;
 
   /**
    * Address of the payment token to be used for an order. If not provided, the
    * default payment token (USD+) will be used.
    */
-  payment_token_address?: string;
+  payment_token_address?: string | null;
 
   /**
    * Amount of payment tokens involved. Required for market buy `Order Requests`.
    */
-  payment_token_quantity?: number;
+  payment_token_quantity?: number | null;
 }
 
 OrderRequests.Stocks = Stocks;

@@ -225,53 +225,53 @@ export interface StockRetrieveCurrentPriceResponse {
   /**
    * The change in price from the previous close.
    */
-  change?: number;
+  change?: number | null;
 
   /**
    * The percentage change in price from the previous close.
    */
-  change_percent?: number;
+  change_percent?: number | null;
 
   /**
    * The close price from the given time period.
    */
-  close?: number;
+  close?: number | null;
 
   /**
    * The highest price from the given time period
    */
-  high?: number;
+  high?: number | null;
 
   /**
    * The lowest price from the given time period.
    */
-  low?: number;
+  low?: number | null;
 
   /**
    * The most recent close price of the ticker multiplied by weighted outstanding
    * shares.
    */
-  market_cap?: number;
+  market_cap?: number | null;
 
   /**
    * The open price from the given time period.
    */
-  open?: number;
+  open?: number | null;
 
   /**
    * The close price for the `Stock` from the previous trading session.
    */
-  previous_close?: number;
+  previous_close?: number | null;
 
   /**
    * The trading volume from the given time period.
    */
-  volume?: number;
+  volume?: number | null;
 
   /**
    * The number of shares outstanding in the given time period.
    */
-  weighted_shares_outstanding?: number;
+  weighted_shares_outstanding?: number | null;
 }
 
 export interface StockRetrieveCurrentQuoteResponse {
@@ -317,12 +317,12 @@ export namespace StockRetrieveDividendsResponse {
     /**
      * Cash amount of the dividend per share owned.
      */
-    cash_amount?: number;
+    cash_amount?: number | null;
 
     /**
      * Currency in which the dividend is paid.
      */
-    currency?: string;
+    currency?: string | null;
 
     /**
      * Type of dividend. Dividends that have been paid and/or are expected to be paid
@@ -330,30 +330,30 @@ export namespace StockRetrieveDividendsResponse {
      * been paid that are infrequent or unusual, and/or can not be expected to occur in
      * the future are denoted as `SC`.
      */
-    dividend_type?: string;
+    dividend_type?: string | null;
 
     /**
      * Date on or after which a `Stock` is traded without the right to receive the next
      * dividend payment. If you purchase a `Stock` on or after the ex-dividend date,
      * you will not receive the upcoming dividend. In ISO 8601 format, YYYY-MM-DD.
      */
-    ex_dividend_date?: string;
+    ex_dividend_date?: string | null;
 
     /**
      * Date on which the dividend is paid out. In ISO 8601 format, YYYY-MM-DD.
      */
-    pay_date?: string;
+    pay_date?: string | null;
 
     /**
      * Date that the shares must be held to receive the dividend; set by the company.
      * In ISO 8601 format, YYYY-MM-DD.
      */
-    record_date?: string;
+    record_date?: string | null;
 
     /**
      * Ticker symbol of the `Stock`.
      */
-    ticker?: string;
+    ticker?: string | null;
   }
 }
 
@@ -429,7 +429,7 @@ export namespace StockRetrieveNewsResponse {
      * Mobile-friendly Accelerated Mobile Page (AMP) URL of the news article, if
      * available
      */
-    amp_url?: string;
+    amp_url?: string | null;
   }
 }
 

@@ -121,7 +121,7 @@ export interface WithdrawalListParams {
   /**
    * ID of the `WithdrawalRequest` to find `Withdrawals` for.
    */
-  withdrawal_request_id?: string;
+  withdrawal_request_id?: string | null;
 }
 
 export declare namespace Withdrawals {

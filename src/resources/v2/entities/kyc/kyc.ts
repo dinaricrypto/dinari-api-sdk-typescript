@@ -105,54 +105,54 @@ export interface KYCData {
   /**
    * City of address. Not all international addresses use this attribute.
    */
-  address_city?: string;
+  address_city?: string | null;
 
   /**
    * Postal code of residence address. Not all international addresses use this
    * attribute.
    */
-  address_postal_code?: string;
+  address_postal_code?: string | null;
 
   /**
    * Street address of address.
    */
-  address_street_1?: string;
+  address_street_1?: string | null;
 
   /**
    * Extension of address, usually apartment or suite number.
    */
-  address_street_2?: string;
+  address_street_2?: string | null;
 
   /**
    * State or subdivision of address. In the US, this should be the unabbreviated
    * name of the state. Not all international addresses use this attribute.
    */
-  address_subdivision?: string;
+  address_subdivision?: string | null;
 
   /**
    * Birth date of the individual. In ISO 8601 format, YYYY-MM-DD.
    */
-  birth_date?: string;
+  birth_date?: string | null;
 
   /**
    * Email address.
    */
-  email?: string;
+  email?: string | null;
 
   /**
    * First name of the person.
    */
-  first_name?: string;
+  first_name?: string | null;
 
   /**
    * Middle name of the user
    */
-  middle_name?: string;
+  middle_name?: string | null;
 
   /**
    * ID number of the official tax document of the country the entity belongs to.
    */
-  tax_id_number?: string;
+  tax_id_number?: string | null;
 }
 
 /**
@@ -172,12 +172,12 @@ export interface KYCInfo {
   /**
    * Datetime when the KYC was last checked. ISO 8601 timestamp.
    */
-  checked_dt?: string;
+  checked_dt?: string | null;
 
   /**
    * KYC data for an `Entity`.
    */
-  data?: KYCData;
+  data?: KYCData | null;
 }
 
 /**

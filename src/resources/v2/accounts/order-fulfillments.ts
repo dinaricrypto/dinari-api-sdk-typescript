@@ -104,7 +104,7 @@ export interface Fulfillment {
   /**
    * Fee amount, in payment tokens.
    */
-  payment_token_fee?: number;
+  payment_token_fee?: number | null;
 }
 
 export type OrderFulfillmentQueryResponse = Array<Fulfillment>;
