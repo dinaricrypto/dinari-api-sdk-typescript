@@ -138,7 +138,7 @@ export interface TokenTransfer {
    * Transaction hash of the transfer on the blockchain, if applicable. This is only
    * present if the transfer has been executed on-chain.
    */
-  transaction_hash?: string;
+  transaction_hash?: string | null;
 }
 
 export type TokenTransferListResponse = Array<TokenTransfer>;
