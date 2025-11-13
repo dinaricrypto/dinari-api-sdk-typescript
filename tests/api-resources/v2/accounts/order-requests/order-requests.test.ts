@@ -49,7 +49,13 @@ describe('resource orderRequests', () => {
     await expect(
       client.v2.accounts.orderRequests.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { page: 1, page_size: 1 },
+        {
+          client_order_id: 'client_order_id',
+          order_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          order_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          page: 1,
+          page_size: 1,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Dinari.NotFoundError);
@@ -78,6 +84,7 @@ describe('resource orderRequests', () => {
         asset_quantity: 0,
         limit_price: 0,
         stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        client_order_id: 'client_order_id',
         recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
@@ -106,6 +113,7 @@ describe('resource orderRequests', () => {
         asset_quantity: 0,
         limit_price: 0,
         stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        client_order_id: 'client_order_id',
         payment_token_address: 'payment_token_address',
         recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
@@ -134,6 +142,7 @@ describe('resource orderRequests', () => {
       {
         payment_amount: 0,
         stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        client_order_id: 'client_order_id',
         recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
@@ -161,6 +170,7 @@ describe('resource orderRequests', () => {
       {
         asset_quantity: 0,
         stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        client_order_id: 'client_order_id',
         payment_token_address: 'payment_token_address',
         recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },

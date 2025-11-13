@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as AccountsAPI from '../../accounts';
-import * as OrderRequestsAPI from '../order-requests';
 import * as OrdersAPI from '../../orders/orders';
 import * as StocksEip155API from '../../orders/stocks/eip155';
 import { APIPromise } from '../../../../../core/api-promise';
@@ -11,54 +10,13 @@ import { path } from '../../../../../internal/utils/path';
 
 export class Eip155 extends APIResource {
   /**
-   * Create a proxied order on EVM from a prepared proxied order. An `OrderRequest`
-   * representing the proxied order is returned.
-   *
-   * @example
-   * ```ts
-   * const orderRequest =
-   *   await client.v2.accounts.orderRequests.stocks.eip155.createProxiedOrder(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       order_signature: '0xeaF12bD1DfFd',
-   *       permit_signature: '0xeaF12bD1DfFd',
-   *       prepared_proxied_order_id:
-   *         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     },
-   *   );
-   * ```
-   */
-  createProxiedOrder(
-    accountID: string,
-    body: Eip155CreateProxiedOrderParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderRequestsAPI.OrderRequest> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/stocks/eip155`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
    * Prepare a proxied order to be placed on EVM. The returned structure contains the
    * necessary data to create an `OrderRequest` with a `Wallet` that is not
    * Dinari-managed.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v2.accounts.orderRequests.stocks.eip155.prepareProxiedOrder(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       chain_id: 'eip155:1',
-   *       order_side: 'BUY',
-   *       order_tif: 'DAY',
-   *       order_type: 'MARKET',
-   *       payment_token: 'payment_token',
-   *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     },
-   *   );
-   * ```
+   * **⚠️ This endpoint will be deprecated on 2025-12-15.**
+   *
+   * @deprecated
    */
   prepareProxiedOrder(
     accountID: string,
@@ -132,25 +90,6 @@ export interface Eip155PrepareProxiedOrderResponse {
   permit_typed_data: EvmTypedData;
 }
 
-export interface Eip155CreateProxiedOrderParams {
-  /**
-   * Signature of the order typed data, allowing Dinari to place the proxied order on
-   * behalf of the `Wallet`.
-   */
-  order_signature: string;
-
-  /**
-   * Signature of the permit typed data, allowing Dinari to spend the payment token
-   * or dShare asset token on behalf of the owner.
-   */
-  permit_signature: string;
-
-  /**
-   * ID of the prepared proxied order to be submitted as a proxied order.
-   */
-  prepared_proxied_order_id: string;
-}
-
 export interface Eip155PrepareProxiedOrderParams {
   /**
    * CAIP-2 chain ID of the blockchain where the `Order` will be placed.
@@ -178,15 +117,16 @@ export interface Eip155PrepareProxiedOrderParams {
   payment_token: string;
 
   /**
-   * The ID of the `Stock` for which the `Order` is being placed.
-   */
-  stock_id: string;
-
-  /**
    * Amount of dShare asset tokens involved. Required for limit `Orders` and market
    * sell `Orders`.
    */
   asset_token_quantity?: number | null;
+
+  /**
+   * Customer-supplied unique identifier to map this `Order` to an order in the
+   * customer's systems.
+   */
+  client_order_id?: string | null;
 
   /**
    * Price per asset in the asset's native currency. USD for US equities and ETFs.
@@ -198,13 +138,22 @@ export interface Eip155PrepareProxiedOrderParams {
    * Amount of payment tokens involved. Required for market buy `Orders`.
    */
   payment_token_quantity?: number | null;
+
+  /**
+   * The ID of the `Stock` for which the `Order` is being placed.
+   */
+  stock_id?: string | null;
+
+  /**
+   * The ID of the `Token` for which the `Order` is being placed.
+   */
+  token_id?: string | null;
 }
 
 export declare namespace Eip155 {
   export {
     type EvmTypedData as EvmTypedData,
     type Eip155PrepareProxiedOrderResponse as Eip155PrepareProxiedOrderResponse,
-    type Eip155CreateProxiedOrderParams as Eip155CreateProxiedOrderParams,
     type Eip155PrepareProxiedOrderParams as Eip155PrepareProxiedOrderParams,
   };
 }

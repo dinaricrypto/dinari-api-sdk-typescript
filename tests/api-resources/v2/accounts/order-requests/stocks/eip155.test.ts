@@ -10,37 +10,6 @@ const client = new Dinari({
 
 describe('resource eip155', () => {
   // Prism tests are disabled
-  test.skip('createProxiedOrder: only required params', async () => {
-    const responsePromise = client.v2.accounts.orderRequests.stocks.eip155.createProxiedOrder(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        order_signature: '0xeaF12bD1DfFd',
-        permit_signature: '0xeaF12bD1DfFd',
-        prepared_proxied_order_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('createProxiedOrder: required and optional params', async () => {
-    const response = await client.v2.accounts.orderRequests.stocks.eip155.createProxiedOrder(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        order_signature: '0xeaF12bD1DfFd',
-        permit_signature: '0xeaF12bD1DfFd',
-        prepared_proxied_order_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      },
-    );
-  });
-
-  // Prism tests are disabled
   test.skip('prepareProxiedOrder: only required params', async () => {
     const responsePromise = client.v2.accounts.orderRequests.stocks.eip155.prepareProxiedOrder(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -50,7 +19,6 @@ describe('resource eip155', () => {
         order_tif: 'DAY',
         order_type: 'MARKET',
         payment_token: 'payment_token',
-        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -72,10 +40,12 @@ describe('resource eip155', () => {
         order_tif: 'DAY',
         order_type: 'MARKET',
         payment_token: 'payment_token',
-        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         asset_token_quantity: 0,
+        client_order_id: 'client_order_id',
         limit_price: 0,
         payment_token_quantity: 0,
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
   });
