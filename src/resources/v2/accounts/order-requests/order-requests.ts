@@ -34,7 +34,8 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Lists `OrderRequests`.
+   * Lists `OrderRequests`. Optionally `OrderRequests` can be filtered by certain
+   * parameters.
    *
    * @example
    * ```ts
@@ -54,6 +55,14 @@ export class OrderRequests extends APIResource {
 
   /**
    * Create a managed `OrderRequest` to place a limit buy `Order`.
+   *
+   * Fees for the `Order` are included in the transaction. Refer to our
+   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
+   * for fee estimation.
+   *
+   * If an `OrderRequest` with the same `client_order_id` already exists for the
+   * given account, the existing `OrderRequest` will be returned instead of creating
+   * a new one.
    *
    * @example
    * ```ts
@@ -82,6 +91,14 @@ export class OrderRequests extends APIResource {
   /**
    * Create a managed `OrderRequest` to place a limit sell `Order`.
    *
+   * Fees for the `Order` are included in the transaction. Refer to our
+   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
+   * for fee estimation.
+   *
+   * If an `OrderRequest` with the same `client_order_id` already exists for the
+   * given account, the existing `OrderRequest` will be returned instead of creating
+   * a new one.
+   *
    * @example
    * ```ts
    * const orderRequest =
@@ -107,10 +124,15 @@ export class OrderRequests extends APIResource {
   }
 
   /**
-   * Create a managed `OrderRequest` to place a market buy `Order`. Fees for the
-   * `Order` are included in the transaction. Refer to our
+   * Create a managed `OrderRequest` to place a market buy `Order`.
+   *
+   * Fees for the `Order` are included in the transaction. Refer to our
    * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
    * for fee estimation.
+   *
+   * If an `OrderRequest` with the same `client_order_id` already exists for the
+   * given account, the existing `OrderRequest` will be returned instead of creating
+   * a new one.
    *
    * @example
    * ```ts
@@ -137,6 +159,14 @@ export class OrderRequests extends APIResource {
 
   /**
    * Create a managed `OrderRequest` to place a market sell `Order`.
+   *
+   * Fees for the `Order` are included in the transaction. Refer to our
+   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
+   * for fee estimation.
+   *
+   * If an `OrderRequest` with the same `client_order_id` already exists for the
+   * given account, the existing `OrderRequest` will be returned instead of creating
+   * a new one.
    *
    * @example
    * ```ts
@@ -216,6 +246,12 @@ export interface CreateLimitBuyOrderInput {
   stock_id: string;
 
   /**
+   * Customer-supplied ID to map this order to an order in their own systems. Must be
+   * unique within the entity.
+   */
+  client_order_id?: string | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -241,6 +277,12 @@ export interface CreateLimitSellOrderInput {
    * ID of `Stock`.
    */
   stock_id: string;
+
+  /**
+   * Customer-supplied ID to map this order to an order in their own systems. Must be
+   * unique within the entity.
+   */
+  client_order_id?: string | null;
 
   /**
    * Address of the payment token to be used for the sell order. If not provided, the
@@ -271,6 +313,12 @@ export interface CreateMarketBuyOrderInput {
   stock_id: string;
 
   /**
+   * Customer-supplied ID to map this order to an order in their own systems. Must be
+   * unique within the entity.
+   */
+  client_order_id?: string | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -290,6 +338,12 @@ export interface CreateMarketSellOrderInput {
    * ID of `Stock`.
    */
   stock_id: string;
+
+  /**
+   * Customer-supplied ID to map this order to an order in their own systems. Must be
+   * unique within the entity.
+   */
+  client_order_id?: string | null;
 
   /**
    * Address of the payment token to be used for the sell order. If not provided, the
@@ -351,6 +405,12 @@ export interface OrderRequest {
   status: 'QUOTED' | 'PENDING' | 'PENDING_BRIDGE' | 'SUBMITTED' | 'ERROR' | 'CANCELLED' | 'EXPIRED';
 
   /**
+   * Customer-supplied ID to map this `OrderRequest` to an order in their own
+   * systems.
+   */
+  client_order_id?: string | null;
+
+  /**
    * ID of `Order` created from the `OrderRequest`. This is the primary identifier
    * for the `/orders` routes.
    */
@@ -379,6 +439,22 @@ export interface OrderRequestRetrieveParams {
 }
 
 export interface OrderRequestListParams {
+  /**
+   * Customer-supplied ID to map this `OrderRequest` to an order in their own
+   * systems.
+   */
+  client_order_id?: string | null;
+
+  /**
+   * Order ID for the `OrderRequest`
+   */
+  order_id?: string | null;
+
+  /**
+   * Order Request ID for the `OrderRequest`
+   */
+  order_request_id?: string | null;
+
   page?: number;
 
   page_size?: number;
@@ -403,6 +479,12 @@ export interface OrderRequestCreateLimitBuyParams {
   stock_id: string;
 
   /**
+   * Customer-supplied ID to map this order to an order in their own systems. Must be
+   * unique within the entity.
+   */
+  client_order_id?: string | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -425,6 +507,12 @@ export interface OrderRequestCreateLimitSellParams {
    * ID of `Stock`.
    */
   stock_id: string;
+
+  /**
+   * Customer-supplied ID to map this order to an order in their own systems. Must be
+   * unique within the entity.
+   */
+  client_order_id?: string | null;
 
   /**
    * Address of the payment token to be used for the sell order. If not provided, the
@@ -452,6 +540,12 @@ export interface OrderRequestCreateMarketBuyParams {
   stock_id: string;
 
   /**
+   * Customer-supplied ID to map this order to an order in their own systems. Must be
+   * unique within the entity.
+   */
+  client_order_id?: string | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -468,6 +562,12 @@ export interface OrderRequestCreateMarketSellParams {
    * ID of `Stock`.
    */
   stock_id: string;
+
+  /**
+   * Customer-supplied ID to map this order to an order in their own systems. Must be
+   * unique within the entity.
+   */
+  client_order_id?: string | null;
 
   /**
    * Address of the payment token to be used for the sell order. If not provided, the

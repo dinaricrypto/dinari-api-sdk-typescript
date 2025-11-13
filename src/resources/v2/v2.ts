@@ -132,6 +132,12 @@ export namespace V2ListOrdersResponse {
     cancel_transaction_hash?: string | null;
 
     /**
+     * Customer-supplied unique identifier to map this `Order` to an order in the
+     * customer's systems.
+     */
+    client_order_id?: string | null;
+
+    /**
      * Entity ID of the Order
      */
     entity_id?: string | null;

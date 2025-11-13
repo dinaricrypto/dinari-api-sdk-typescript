@@ -18,21 +18,9 @@ export class Eip155 extends APIResource {
    * The `order_fee_contract_object` property contains the opaque fee quote structure
    * to be used.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v2.accounts.orders.stocks.eip155.getFeeQuote(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       chain_id: 'eip155:1',
-   *       order_side: 'BUY',
-   *       order_tif: 'DAY',
-   *       order_type: 'MARKET',
-   *       payment_token: 'payment_token',
-   *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     },
-   *   );
-   * ```
+   * **⚠️ This endpoint will be deprecated on 2025-12-15.**
+   *
+   * @deprecated
    */
   getFeeQuote(
     accountID: string,
@@ -54,21 +42,9 @@ export class Eip155 extends APIResource {
    * sent to the EVM network to create the order. Note that the fee quote is already
    * included in the transactions, so no additional fee quote lookup is needed.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v2.accounts.orders.stocks.eip155.prepareOrder(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       chain_id: 'eip155:1',
-   *       order_side: 'BUY',
-   *       order_tif: 'DAY',
-   *       order_type: 'MARKET',
-   *       payment_token: 'payment_token',
-   *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     },
-   *   );
-   * ```
+   * **⚠️ This endpoint will be deprecated on 2025-12-15.**
+   *
+   * @deprecated
    */
   prepareOrder(
     accountID: string,
@@ -249,15 +225,16 @@ export interface Eip155GetFeeQuoteParams {
   payment_token: string;
 
   /**
-   * The ID of the `Stock` for which the `Order` is being placed.
-   */
-  stock_id: string;
-
-  /**
    * Amount of dShare asset tokens involved. Required for limit `Orders` and market
    * sell `Orders`.
    */
   asset_token_quantity?: number | null;
+
+  /**
+   * Customer-supplied unique identifier to map this `Order` to an order in the
+   * customer's systems.
+   */
+  client_order_id?: string | null;
 
   /**
    * Price per asset in the asset's native currency. USD for US equities and ETFs.
@@ -269,6 +246,16 @@ export interface Eip155GetFeeQuoteParams {
    * Amount of payment tokens involved. Required for market buy `Orders`.
    */
   payment_token_quantity?: number | null;
+
+  /**
+   * The ID of the `Stock` for which the `Order` is being placed.
+   */
+  stock_id?: string | null;
+
+  /**
+   * The ID of the `Token` for which the `Order` is being placed.
+   */
+  token_id?: string | null;
 }
 
 export interface Eip155PrepareOrderParams {
@@ -298,15 +285,16 @@ export interface Eip155PrepareOrderParams {
   payment_token: string;
 
   /**
-   * The ID of the `Stock` for which the `Order` is being placed.
-   */
-  stock_id: string;
-
-  /**
    * Amount of dShare asset tokens involved. Required for limit `Orders` and market
    * sell `Orders`.
    */
   asset_token_quantity?: number | null;
+
+  /**
+   * Customer-supplied unique identifier to map this `Order` to an order in the
+   * customer's systems.
+   */
+  client_order_id?: string | null;
 
   /**
    * Price per asset in the asset's native currency. USD for US equities and ETFs.
@@ -318,6 +306,16 @@ export interface Eip155PrepareOrderParams {
    * Amount of payment tokens involved. Required for market buy `Orders`.
    */
   payment_token_quantity?: number | null;
+
+  /**
+   * The ID of the `Stock` for which the `Order` is being placed.
+   */
+  stock_id?: string | null;
+
+  /**
+   * The ID of the `Token` for which the `Order` is being placed.
+   */
+  token_id?: string | null;
 }
 
 export declare namespace Eip155 {

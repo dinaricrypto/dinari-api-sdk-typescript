@@ -30,7 +30,7 @@ export class Orders extends APIResource {
 
   /**
    * Get a list of all `Orders` under the `Account`. Optionally `Orders` can be
-   * filtered by chain ID or transaction hash.
+   * filtered by chain ID, transaction hash, or client order ID.
    *
    * @example
    * ```ts
@@ -183,6 +183,12 @@ export interface Order {
   cancel_transaction_hash?: string | null;
 
   /**
+   * Customer-supplied unique identifier to map this `Order` to an order in the
+   * customer's systems.
+   */
+  client_order_id?: string | null;
+
+  /**
    * Fee amount associated with `Order`.
    */
   fee?: number | null;
@@ -223,6 +229,11 @@ export interface OrderListParams {
    * CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
    */
   chain_id?: AccountsAPI.Chain | null;
+
+  /**
+   * Customer-supplied identifier to search for `Order`s.
+   */
+  client_order_id?: string | null;
 
   /**
    * Transaction hash of the `Order`.

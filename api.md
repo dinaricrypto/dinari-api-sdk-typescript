@@ -227,7 +227,6 @@ Types:
 
 Methods:
 
-- <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155">client.v2.accounts.orderRequests.stocks.eip155.<a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">createProxiedOrder</a>(accountID, { ...params }) -> OrderRequest</code>
 - <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155/prepare">client.v2.accounts.orderRequests.stocks.eip155.<a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">prepareProxiedOrder</a>(accountID, { ...params }) -> Eip155PrepareProxiedOrderResponse</code>
 
 ### WithdrawalRequests
