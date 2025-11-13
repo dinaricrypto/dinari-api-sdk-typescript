@@ -19,7 +19,6 @@ describe('resource eip155', () => {
         order_tif: 'DAY',
         order_type: 'MARKET',
         payment_token: 'payment_token',
-        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -41,10 +40,12 @@ describe('resource eip155', () => {
         order_tif: 'DAY',
         order_type: 'MARKET',
         payment_token: 'payment_token',
-        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         asset_token_quantity: 0,
+        client_order_id: 'client_order_id',
         limit_price: 0,
         payment_token_quantity: 0,
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
   });
@@ -59,7 +60,6 @@ describe('resource eip155', () => {
         order_tif: 'DAY',
         order_type: 'MARKET',
         payment_token: 'payment_token',
-        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -81,10 +81,12 @@ describe('resource eip155', () => {
         order_tif: 'DAY',
         order_type: 'MARKET',
         payment_token: 'payment_token',
-        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         asset_token_quantity: 0,
+        client_order_id: 'client_order_id',
         limit_price: 0,
         payment_token_quantity: 0,
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       },
     );
   });

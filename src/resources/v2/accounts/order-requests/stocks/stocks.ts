@@ -4,7 +4,6 @@ import { APIResource } from '../../../../../core/resource';
 import * as Eip155API from './eip155';
 import {
   Eip155,
-  Eip155CreateProxiedOrderParams,
   Eip155PrepareProxiedOrderParams,
   Eip155PrepareProxiedOrderResponse,
   EvmTypedData,
@@ -21,7 +20,6 @@ export declare namespace Stocks {
     Eip155 as Eip155,
     type EvmTypedData as EvmTypedData,
     type Eip155PrepareProxiedOrderResponse as Eip155PrepareProxiedOrderResponse,
-    type Eip155CreateProxiedOrderParams as Eip155CreateProxiedOrderParams,
     type Eip155PrepareProxiedOrderParams as Eip155PrepareProxiedOrderParams,
   };
 }
