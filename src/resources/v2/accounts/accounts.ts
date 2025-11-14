@@ -59,6 +59,8 @@ import * as OrdersAPI from './orders/orders';
 import {
   BrokerageOrderStatus,
   Order,
+  OrderBatchCancelParams,
+  OrderBatchCancelResponse,
   OrderCancelParams,
   OrderGetFulfillmentsParams,
   OrderGetFulfillmentsResponse,
@@ -459,9 +461,11 @@ export declare namespace Accounts {
     type OrderTif as OrderTif,
     type OrderType as OrderType,
     type OrderListResponse as OrderListResponse,
+    type OrderBatchCancelResponse as OrderBatchCancelResponse,
     type OrderGetFulfillmentsResponse as OrderGetFulfillmentsResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
     type OrderListParams as OrderListParams,
+    type OrderBatchCancelParams as OrderBatchCancelParams,
     type OrderCancelParams as OrderCancelParams,
     type OrderGetFulfillmentsParams as OrderGetFulfillmentsParams,
   };

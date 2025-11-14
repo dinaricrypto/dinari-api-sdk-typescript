@@ -48,6 +48,37 @@ export class Orders extends APIResource {
   }
 
   /**
+   * Cancel multiple `Orders` by their IDs in a single request. Note that this
+   * requires the `Order` IDs, not the `OrderRequest` IDs. Once you submit a
+   * cancellation request, it cannot be undone. Be advised that orders with a status
+   * of PENDING_FILL, PENDING_ESCROW, FILLED, REJECTED, or CANCELLED cannot be
+   * cancelled.
+   *
+   * `Order` cancellation is not guaranteed nor is it immediate. The `Orders` may
+   * still be executed if the cancellation request is not received in time.
+   *
+   * The response will indicate which orders were successfully queued to cancel and
+   * which failed to queue. Check the status using the "Get Order by ID" endpoint to
+   * confirm whether individual `Orders` have been cancelled.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v2.accounts.orders.batchCancel(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { order_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'] },
+   *   );
+   * ```
+   */
+  batchCancel(
+    accountID: string,
+    body: OrderBatchCancelParams,
+    options?: RequestOptions,
+  ): APIPromise<OrderBatchCancelResponse> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/orders/cancel`, { body, ...options });
+  }
+
+  /**
    * Cancel an `Order` by its ID. Note that this requires the `Order` ID, not the
    * `OrderRequest` ID. Once you submit a cancellation request, it cannot be undone.
    * Be advised that orders with a status of PENDING_FILL, PENDING_ESCROW, FILLED,
@@ -218,6 +249,18 @@ export type OrderType = 'MARKET' | 'LIMIT';
 
 export type OrderListResponse = Array<Order>;
 
+export interface OrderBatchCancelResponse {
+  /**
+   * Orders that were queued to cancel.
+   */
+  cancel_queued_orders: Array<Order>;
+
+  /**
+   * Orders that could not be queued to cancel.
+   */
+  failed_to_cancel_orders: Array<Order>;
+}
+
 export type OrderGetFulfillmentsResponse = Array<OrderFulfillmentsAPI.Fulfillment>;
 
 export interface OrderRetrieveParams {
@@ -243,6 +286,13 @@ export interface OrderListParams {
   page?: number;
 
   page_size?: number;
+}
+
+export interface OrderBatchCancelParams {
+  /**
+   * List of `Order` IDs to cancel
+   */
+  order_ids: Array<string>;
 }
 
 export interface OrderCancelParams {
@@ -276,9 +326,11 @@ export declare namespace Orders {
     type OrderTif as OrderTif,
     type OrderType as OrderType,
     type OrderListResponse as OrderListResponse,
+    type OrderBatchCancelResponse as OrderBatchCancelResponse,
     type OrderGetFulfillmentsResponse as OrderGetFulfillmentsResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
     type OrderListParams as OrderListParams,
+    type OrderBatchCancelParams as OrderBatchCancelParams,
     type OrderCancelParams as OrderCancelParams,
     type OrderGetFulfillmentsParams as OrderGetFulfillmentsParams,
   };

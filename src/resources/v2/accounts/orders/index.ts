@@ -8,9 +8,11 @@ export {
   type OrderTif,
   type OrderType,
   type OrderListResponse,
+  type OrderBatchCancelResponse,
   type OrderGetFulfillmentsResponse,
   type OrderRetrieveParams,
   type OrderListParams,
+  type OrderBatchCancelParams,
   type OrderCancelParams,
   type OrderGetFulfillmentsParams,
 } from './orders';
