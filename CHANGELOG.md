@@ -1,5 +1,49 @@
 # Changelog
 
+## 0.6.0 (2025-11-14)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([665afaf](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/665afaf0112037a2e00a46da00a393cc46a514ba))
+* **api:** api update ([3b7c1b3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/3b7c1b337dab867a6d598c6174ec8e9fe8bb31ff))
+* **api:** api update ([865514e](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/865514e797f9027de464f255b9fef6862175b746))
+* **api:** api update ([caae747](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/caae747d23cb50e995c808563f4adee56ff5d52d))
+* **api:** api update ([6c5a8b1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/6c5a8b17ecc47aaa49ae1242a5c312b37b5cfa50))
+* **api:** api update ([9ba7fe4](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/9ba7fe418787369943b50b953d059dc8dc141df7))
+* **api:** api update ([77d61bd](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/77d61bd4fad3d788369161e88495b7c9984250b0))
+* **api:** api update ([2f55c98](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/2f55c982b5b34ee3d1e890090463fb66a4255758))
+* **api:** api update ([802bc1a](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/802bc1a10fb73c019b0793b00a69e935a6efdae2))
+* **api:** permit, permit transaction, batch cancel ([3ac5101](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/3ac51014eb417597528205b7470ed6bf93dc806d))
+
+
+### Bug Fixes
+
+* coerce nullable values to undefined ([21d85d0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/21d85d0dfb9fade5fac3ebc47a5ddf22f1469ac8))
+
+
+### Performance Improvements
+
+* faster formatting ([d3369f2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/d3369f23b7bcc6e82e4fafd2e7a36b4b40157922))
+
+
+### Chores
+
+* add package to package.json ([501b94c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/501b94c26554d0d7fbbb8c00bb3ae853cc9196ee))
+* ci build action ([d2eb351](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/d2eb351913dbf35645e6ed1d4f3b993065627e45))
+* **client:** qualify global Blob ([5a8158b](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/5a8158bef87fdd3cbeb09e4b846d51897c627a89))
+* do not install brew dependencies in ./scripts/bootstrap by default ([e52d86f](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/e52d86fe3a07ed67b2c242c3d10390b158355e3c))
+* **internal:** codegen related update ([92f1a12](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/92f1a12225866b90210db276e2bd1380c8031403))
+* **internal:** fix incremental formatting in some cases ([bf45623](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/bf45623b74ea7a785dd181d9d42659e0b9be1ce2))
+* **internal:** ignore .eslintcache ([6e116ee](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/6e116eeadcda7a319d0f13edd3043cc190306428))
+* **internal:** remove .eslintcache ([dd416ce](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/dd416ce2796e2bff4ff48311e8403eeaac5a8fae))
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([5783936](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/5783936ec3e2540b6ab94c6e8158ea66e2ee0e3d))
+* **internal:** update global Error reference ([b906938](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/b906938828612e3789e8c93e22fd8980781e4d7e))
+* **internal:** use npm pack for build uploads ([c65d8ec](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c65d8ec917ad027a04599a6bc832875222a0d6d3))
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([711bbe3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/711bbe37b4dd53f470bd12f1a9ef1f1511ced78a))
+* update CI script ([716edc4](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/716edc47f7ccb86cc7a3cda66c89b1198f2ec23d))
+
 ## 0.5.0 (2025-08-20)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.4.0...v0.5.0)
