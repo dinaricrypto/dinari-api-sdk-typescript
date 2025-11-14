@@ -158,12 +158,14 @@ Types:
 - <code><a href="./src/resources/v2/accounts/orders/orders.ts">OrderTif</a></code>
 - <code><a href="./src/resources/v2/accounts/orders/orders.ts">OrderType</a></code>
 - <code><a href="./src/resources/v2/accounts/orders/orders.ts">OrderListResponse</a></code>
+- <code><a href="./src/resources/v2/accounts/orders/orders.ts">OrderBatchCancelResponse</a></code>
 - <code><a href="./src/resources/v2/accounts/orders/orders.ts">OrderGetFulfillmentsResponse</a></code>
 
 Methods:
 
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders/orders.ts">retrieve</a>(orderID, { ...params }) -> Order</code>
 - <code title="get /api/v2/accounts/{account_id}/orders">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders/orders.ts">list</a>(accountID, { ...params }) -> OrderListResponse</code>
+- <code title="post /api/v2/accounts/{account_id}/orders/cancel">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders/orders.ts">batchCancel</a>(accountID, { ...params }) -> OrderBatchCancelResponse</code>
 - <code title="post /api/v2/accounts/{account_id}/orders/{order_id}/cancel">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders/orders.ts">cancel</a>(orderID, { ...params }) -> Order</code>
 - <code title="get /api/v2/accounts/{account_id}/orders/{order_id}/fulfillments">client.v2.accounts.orders.<a href="./src/resources/v2/accounts/orders/orders.ts">getFulfillments</a>(orderID, { ...params }) -> OrderGetFulfillmentsResponse</code>
 
@@ -228,6 +230,20 @@ Types:
 Methods:
 
 - <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155/prepare">client.v2.accounts.orderRequests.stocks.eip155.<a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">prepareProxiedOrder</a>(accountID, { ...params }) -> Eip155PrepareProxiedOrderResponse</code>
+
+#### Eip155
+
+Types:
+
+- <code><a href="./src/resources/v2/accounts/order-requests/eip155.ts">Eip155CreatePermitResponse</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests/eip155.ts">Eip155CreatePermitTransactionResponse</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests/eip155.ts">Eip155SubmitResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v2/accounts/{account_id}/order_requests/eip155/permit">client.v2.accounts.orderRequests.eip155.<a href="./src/resources/v2/accounts/order-requests/eip155.ts">createPermit</a>(accountID, { ...params }) -> Eip155CreatePermitResponse</code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/eip155/permit_transaction">client.v2.accounts.orderRequests.eip155.<a href="./src/resources/v2/accounts/order-requests/eip155.ts">createPermitTransaction</a>(accountID, { ...params }) -> Eip155CreatePermitTransactionResponse</code>
+- <code title="post /api/v2/accounts/{account_id}/order_requests/eip155">client.v2.accounts.orderRequests.eip155.<a href="./src/resources/v2/accounts/order-requests/eip155.ts">submit</a>(accountID, { ...params }) -> Eip155SubmitResponse</code>
 
 ### WithdrawalRequests
 

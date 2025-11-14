@@ -2,6 +2,16 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as AccountsAPI from '../accounts';
+import * as Eip155API from './eip155';
+import {
+  Eip155,
+  Eip155CreatePermitParams,
+  Eip155CreatePermitResponse,
+  Eip155CreatePermitTransactionParams,
+  Eip155CreatePermitTransactionResponse,
+  Eip155SubmitParams,
+  Eip155SubmitResponse,
+} from './eip155';
 import * as OrdersAPI from '../orders/orders';
 import * as StocksAPI from './stocks/stocks';
 import { Stocks } from './stocks/stocks';
@@ -11,6 +21,7 @@ import { path } from '../../../../internal/utils/path';
 
 export class OrderRequests extends APIResource {
   stocks: StocksAPI.Stocks = new StocksAPI.Stocks(this._client);
+  eip155: Eip155API.Eip155 = new Eip155API.Eip155(this._client);
 
   /**
    * Get a specific `OrderRequest` by its ID.
@@ -629,6 +640,7 @@ export interface OrderRequestGetFeeQuoteParams {
 }
 
 OrderRequests.Stocks = Stocks;
+OrderRequests.Eip155 = Eip155;
 
 export declare namespace OrderRequests {
   export {
@@ -649,4 +661,14 @@ export declare namespace OrderRequests {
   };
 
   export { Stocks as Stocks };
+
+  export {
+    Eip155 as Eip155,
+    type Eip155CreatePermitResponse as Eip155CreatePermitResponse,
+    type Eip155CreatePermitTransactionResponse as Eip155CreatePermitTransactionResponse,
+    type Eip155SubmitResponse as Eip155SubmitResponse,
+    type Eip155CreatePermitParams as Eip155CreatePermitParams,
+    type Eip155CreatePermitTransactionParams as Eip155CreatePermitTransactionParams,
+    type Eip155SubmitParams as Eip155SubmitParams,
+  };
 }
