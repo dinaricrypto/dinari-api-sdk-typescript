@@ -67,6 +67,7 @@ describe('resource kyc', () => {
         tax_id_number: '12-3456789',
       },
       provider_name: 'x',
+      jurisdiction: 'BASELINE',
     });
   });
 });

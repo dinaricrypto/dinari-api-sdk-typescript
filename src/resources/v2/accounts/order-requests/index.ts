@@ -2,6 +2,7 @@
 
 export {
   Eip155,
+  type Eip155OrderRequestPermitTransaction,
   type Eip155CreatePermitResponse,
   type Eip155CreatePermitTransactionResponse,
   type Eip155SubmitResponse,
@@ -16,6 +17,7 @@ export {
   type CreateMarketBuyOrderInput,
   type CreateMarketSellOrderInput,
   type OrderRequest,
+  type OrderRequestStatus,
   type OrderRequestListResponse,
   type OrderRequestGetFeeQuoteResponse,
   type OrderRequestRetrieveParams,

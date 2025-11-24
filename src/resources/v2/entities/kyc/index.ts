@@ -10,8 +10,10 @@ export {
 } from './document';
 export {
   KYC,
-  type KYCData,
+  type BaselineKYCCheckData,
   type KYCInfo,
+  type KYCStatus,
+  type UsKYCCheckData,
   type KYCCreateManagedCheckResponse,
   type KYCSubmitParams,
 } from './kyc';

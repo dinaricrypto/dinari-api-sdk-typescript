@@ -12,6 +12,7 @@ export {
   type AccountGetPortfolioParams,
   type AccountMintSandboxTokensParams,
 } from './accounts';
+export { Activities, type ActivityRetrieveBrokerageParams } from './activities';
 export {
   OrderFulfillments,
   type Fulfillment,
@@ -26,6 +27,7 @@ export {
   type CreateMarketBuyOrderInput,
   type CreateMarketSellOrderInput,
   type OrderRequest,
+  type OrderRequestStatus,
   type OrderRequestListResponse,
   type OrderRequestGetFeeQuoteResponse,
   type OrderRequestRetrieveParams,
