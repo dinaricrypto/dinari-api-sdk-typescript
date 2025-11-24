@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as AccountsAPI from '../accounts';
+import * as OrderRequestsAPI from './order-requests';
 import * as OrdersAPI from '../orders/orders';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -101,6 +102,22 @@ export class Eip155 extends APIResource {
 }
 
 /**
+ * Input parameters for creating a proxied `EIP155OrderRequestPermitTransaction`.
+ */
+export interface Eip155OrderRequestPermitTransaction {
+  /**
+   * ID of the prepared proxied order to be submitted as a proxied order.
+   */
+  order_request_id: string;
+
+  /**
+   * Signature of the permit typed data, allowing Dinari to spend the payment token
+   * or dShare asset token on behalf of the owner.
+   */
+  permit_signature: string;
+}
+
+/**
  * Token permit to be signed by the smart contract submitter.
  */
 export interface Eip155CreatePermitResponse {
@@ -191,7 +208,7 @@ export interface Eip155SubmitResponse {
   /**
    * Status of `EIP155OrderRequest`.
    */
-  status: 'QUOTED' | 'PENDING' | 'PENDING_BRIDGE' | 'SUBMITTED' | 'ERROR' | 'CANCELLED' | 'EXPIRED';
+  status: OrderRequestsAPI.OrderRequestStatus;
 
   /**
    * ID of `Order` created from the `EIP155OrderRequest`. This is the primary
@@ -293,6 +310,7 @@ export interface Eip155SubmitParams {
 
 export declare namespace Eip155 {
   export {
+    type Eip155OrderRequestPermitTransaction as Eip155OrderRequestPermitTransaction,
     type Eip155CreatePermitResponse as Eip155CreatePermitResponse,
     type Eip155CreatePermitTransactionResponse as Eip155CreatePermitTransactionResponse,
     type Eip155SubmitResponse as Eip155SubmitResponse,

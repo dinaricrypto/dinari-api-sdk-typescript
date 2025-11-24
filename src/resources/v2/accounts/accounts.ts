@@ -2,6 +2,8 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AccountsAPI from './accounts';
+import * as ActivitiesAPI from './activities';
+import { Activities, ActivityRetrieveBrokerageParams } from './activities';
 import * as OrderFulfillmentsAPI from './order-fulfillments';
 import {
   Fulfillment,
@@ -53,6 +55,7 @@ import {
   OrderRequestListParams,
   OrderRequestListResponse,
   OrderRequestRetrieveParams,
+  OrderRequestStatus,
   OrderRequests,
 } from './order-requests/order-requests';
 import * as OrdersAPI from './orders/orders';
@@ -91,6 +94,7 @@ export class Accounts extends APIResource {
   );
   withdrawals: WithdrawalsAPI.Withdrawals = new WithdrawalsAPI.Withdrawals(this._client);
   tokenTransfers: TokenTransfersAPI.TokenTransfers = new TokenTransfersAPI.TokenTransfers(this._client);
+  activities: ActivitiesAPI.Activities = new ActivitiesAPI.Activities(this._client);
 
   /**
    * Get a specific `Account` by its ID.
@@ -433,6 +437,7 @@ Accounts.OrderRequests = OrderRequests;
 Accounts.WithdrawalRequests = WithdrawalRequests;
 Accounts.Withdrawals = Withdrawals;
 Accounts.TokenTransfers = TokenTransfers;
+Accounts.Activities = Activities;
 
 export declare namespace Accounts {
   export {
@@ -485,6 +490,7 @@ export declare namespace Accounts {
     type CreateMarketBuyOrderInput as CreateMarketBuyOrderInput,
     type CreateMarketSellOrderInput as CreateMarketSellOrderInput,
     type OrderRequest as OrderRequest,
+    type OrderRequestStatus as OrderRequestStatus,
     type OrderRequestListResponse as OrderRequestListResponse,
     type OrderRequestGetFeeQuoteResponse as OrderRequestGetFeeQuoteResponse,
     type OrderRequestRetrieveParams as OrderRequestRetrieveParams,
@@ -520,5 +526,10 @@ export declare namespace Accounts {
     type TokenTransferCreateParams as TokenTransferCreateParams,
     type TokenTransferRetrieveParams as TokenTransferRetrieveParams,
     type TokenTransferListParams as TokenTransferListParams,
+  };
+
+  export {
+    Activities as Activities,
+    type ActivityRetrieveBrokerageParams as ActivityRetrieveBrokerageParams,
   };
 }

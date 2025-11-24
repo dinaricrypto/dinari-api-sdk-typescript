@@ -71,19 +71,22 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v2/entities/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/v2/entities/accounts.ts">Jurisdiction</a></code>
 - <code><a href="./src/resources/v2/entities/accounts.ts">AccountListResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v2/entities/{entity_id}/accounts">client.v2.entities.accounts.<a href="./src/resources/v2/entities/accounts.ts">create</a>(entityID) -> Account</code>
+- <code title="post /api/v2/entities/{entity_id}/accounts">client.v2.entities.accounts.<a href="./src/resources/v2/entities/accounts.ts">create</a>(entityID, { ...params }) -> Account</code>
 - <code title="get /api/v2/entities/{entity_id}/accounts">client.v2.entities.accounts.<a href="./src/resources/v2/entities/accounts.ts">list</a>(entityID, { ...params }) -> AccountListResponse</code>
 
 ### KYC
 
 Types:
 
-- <code><a href="./src/resources/v2/entities/kyc/kyc.ts">KYCData</a></code>
+- <code><a href="./src/resources/v2/entities/kyc/kyc.ts">BaselineKYCCheckData</a></code>
 - <code><a href="./src/resources/v2/entities/kyc/kyc.ts">KYCInfo</a></code>
+- <code><a href="./src/resources/v2/entities/kyc/kyc.ts">KYCStatus</a></code>
+- <code><a href="./src/resources/v2/entities/kyc/kyc.ts">UsKYCCheckData</a></code>
 - <code><a href="./src/resources/v2/entities/kyc/kyc.ts">KYCCreateManagedCheckResponse</a></code>
 
 Methods:
@@ -205,6 +208,7 @@ Types:
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">CreateMarketBuyOrderInput</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">CreateMarketSellOrderInput</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequest</a></code>
+- <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequestStatus</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequestListResponse</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/order-requests.ts">OrderRequestGetFeeQuoteResponse</a></code>
 
@@ -235,6 +239,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v2/accounts/order-requests/eip155.ts">Eip155OrderRequestPermitTransaction</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/eip155.ts">Eip155CreatePermitResponse</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/eip155.ts">Eip155CreatePermitTransactionResponse</a></code>
 - <code><a href="./src/resources/v2/accounts/order-requests/eip155.ts">Eip155SubmitResponse</a></code>
@@ -282,3 +287,9 @@ Methods:
 - <code title="post /api/v2/accounts/{account_id}/token_transfers">client.v2.accounts.tokenTransfers.<a href="./src/resources/v2/accounts/token-transfers.ts">create</a>(accountID, { ...params }) -> TokenTransfer</code>
 - <code title="get /api/v2/accounts/{account_id}/token_transfers/{transfer_id}">client.v2.accounts.tokenTransfers.<a href="./src/resources/v2/accounts/token-transfers.ts">retrieve</a>(transferID, { ...params }) -> TokenTransfer</code>
 - <code title="get /api/v2/accounts/{account_id}/token_transfers">client.v2.accounts.tokenTransfers.<a href="./src/resources/v2/accounts/token-transfers.ts">list</a>(accountID, { ...params }) -> TokenTransferListResponse</code>
+
+### Activities
+
+Methods:
+
+- <code title="get /api/v2/accounts/{account_id}/activities/brokerage">client.v2.accounts.activities.<a href="./src/resources/v2/accounts/activities.ts">retrieveBrokerage</a>(accountID, { ...params }) -> void</code>

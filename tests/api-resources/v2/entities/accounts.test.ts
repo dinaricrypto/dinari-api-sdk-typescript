@@ -22,6 +22,18 @@ describe('resource accounts', () => {
   });
 
   // Prism tests are disabled
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v2.entities.accounts.create(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { jurisdiction: 'BASELINE' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Dinari.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v2.entities.accounts.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();

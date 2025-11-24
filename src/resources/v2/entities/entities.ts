@@ -2,9 +2,24 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AccountsAPI from './accounts';
-import { Account, AccountListParams, AccountListResponse, Accounts } from './accounts';
+import {
+  Account,
+  AccountCreateParams,
+  AccountListParams,
+  AccountListResponse,
+  Accounts,
+  Jurisdiction,
+} from './accounts';
 import * as KYCAPI from './kyc/kyc';
-import { KYC, KYCCreateManagedCheckResponse, KYCData, KYCInfo, KYCSubmitParams } from './kyc/kyc';
+import {
+  BaselineKYCCheckData,
+  KYC,
+  KYCCreateManagedCheckResponse,
+  KYCInfo,
+  KYCStatus,
+  KYCSubmitParams,
+  UsKYCCheckData,
+} from './kyc/kyc';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -172,14 +187,18 @@ export declare namespace Entities {
   export {
     Accounts as Accounts,
     type Account as Account,
+    type Jurisdiction as Jurisdiction,
     type AccountListResponse as AccountListResponse,
+    type AccountCreateParams as AccountCreateParams,
     type AccountListParams as AccountListParams,
   };
 
   export {
     KYC as KYC,
-    type KYCData as KYCData,
+    type BaselineKYCCheckData as BaselineKYCCheckData,
     type KYCInfo as KYCInfo,
+    type KYCStatus as KYCStatus,
+    type UsKYCCheckData as UsKYCCheckData,
     type KYCCreateManagedCheckResponse as KYCCreateManagedCheckResponse,
     type KYCSubmitParams as KYCSubmitParams,
   };
