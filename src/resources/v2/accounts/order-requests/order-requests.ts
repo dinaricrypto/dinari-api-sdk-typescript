@@ -9,6 +9,7 @@ import {
   Eip155CreatePermitResponse,
   Eip155CreatePermitTransactionParams,
   Eip155CreatePermitTransactionResponse,
+  Eip155OrderRequestPermitTransaction,
   Eip155SubmitParams,
   Eip155SubmitResponse,
 } from './eip155';
@@ -413,7 +414,7 @@ export interface OrderRequest {
   /**
    * Status of `OrderRequest`.
    */
-  status: 'QUOTED' | 'PENDING' | 'PENDING_BRIDGE' | 'SUBMITTED' | 'ERROR' | 'CANCELLED' | 'EXPIRED';
+  status: OrderRequestStatus;
 
   /**
    * Customer-supplied ID to map this `OrderRequest` to an order in their own
@@ -432,6 +433,15 @@ export interface OrderRequest {
    */
   recipient_account_id?: string | null;
 }
+
+export type OrderRequestStatus =
+  | 'QUOTED'
+  | 'PENDING'
+  | 'PENDING_BRIDGE'
+  | 'SUBMITTED'
+  | 'ERROR'
+  | 'CANCELLED'
+  | 'EXPIRED';
 
 export type OrderRequestListResponse = Array<OrderRequest>;
 
@@ -649,6 +659,7 @@ export declare namespace OrderRequests {
     type CreateMarketBuyOrderInput as CreateMarketBuyOrderInput,
     type CreateMarketSellOrderInput as CreateMarketSellOrderInput,
     type OrderRequest as OrderRequest,
+    type OrderRequestStatus as OrderRequestStatus,
     type OrderRequestListResponse as OrderRequestListResponse,
     type OrderRequestGetFeeQuoteResponse as OrderRequestGetFeeQuoteResponse,
     type OrderRequestRetrieveParams as OrderRequestRetrieveParams,
@@ -664,6 +675,7 @@ export declare namespace OrderRequests {
 
   export {
     Eip155 as Eip155,
+    type Eip155OrderRequestPermitTransaction as Eip155OrderRequestPermitTransaction,
     type Eip155CreatePermitResponse as Eip155CreatePermitResponse,
     type Eip155CreatePermitTransactionResponse as Eip155CreatePermitTransactionResponse,
     type Eip155SubmitResponse as Eip155SubmitResponse,

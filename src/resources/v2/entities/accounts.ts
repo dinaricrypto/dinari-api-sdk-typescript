@@ -17,8 +17,12 @@ export class Accounts extends APIResource {
    * );
    * ```
    */
-  create(entityID: string, options?: RequestOptions): APIPromise<Account> {
-    return this._client.post(path`/api/v2/entities/${entityID}/accounts`, options);
+  create(
+    entityID: string,
+    body: AccountCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Account> {
+    return this._client.post(path`/api/v2/entities/${entityID}/accounts`, { body, ...options });
   }
 
   /**
@@ -67,12 +71,26 @@ export interface Account {
   is_active: boolean;
 
   /**
+   * Jurisdiction of the `Account`.
+   */
+  jurisdiction: Jurisdiction;
+
+  /**
    * ID of the brokerage account associated with the `Account`.
    */
   brokerage_account_id?: string | null;
 }
 
+export type Jurisdiction = 'BASELINE' | 'US';
+
 export type AccountListResponse = Array<Account>;
+
+export interface AccountCreateParams {
+  /**
+   * Jurisdiction of the `Account`.
+   */
+  jurisdiction?: Jurisdiction;
+}
 
 export interface AccountListParams {
   page?: number;
@@ -83,7 +101,9 @@ export interface AccountListParams {
 export declare namespace Accounts {
   export {
     type Account as Account,
+    type Jurisdiction as Jurisdiction,
     type AccountListResponse as AccountListResponse,
+    type AccountCreateParams as AccountCreateParams,
     type AccountListParams as AccountListParams,
   };
 }

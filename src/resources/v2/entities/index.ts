@@ -1,6 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Accounts, type Account, type AccountListResponse, type AccountListParams } from './accounts';
+export {
+  Accounts,
+  type Account,
+  type Jurisdiction,
+  type AccountListResponse,
+  type AccountCreateParams,
+  type AccountListParams,
+} from './accounts';
 export {
   Entities,
   type Entity,
@@ -11,8 +18,10 @@ export {
 } from './entities';
 export {
   KYC,
-  type KYCData,
+  type BaselineKYCCheckData,
   type KYCInfo,
+  type KYCStatus,
+  type UsKYCCheckData,
   type KYCCreateManagedCheckResponse,
   type KYCSubmitParams,
 } from './kyc/index';
