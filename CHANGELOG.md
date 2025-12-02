@@ -4,7 +4,7 @@
 
 Full Changelog: [v0.7.0...v0.7.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.7.0...v0.7.1)
 
-### Features
+### Bug Fixes
 
 * **api:** use repeat for array parameters ([d2850e4](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/d2850e4906fc008c57402d7056ad84047d3ea1ce))
 
