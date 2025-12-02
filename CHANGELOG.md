@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.7.1 (2025-12-02)
+
+Full Changelog: [v0.7.0...v0.7.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.7.0...v0.7.1)
+
+### Bug Fixes
+
+* **client:** use repeat for array parameters ([d2850e4](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/d2850e4906fc008c57402d7056ad84047d3ea1ce))
+
+
+### Chores
+
+* **client:** fix logger property type ([c31e66f](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c31e66f0863196dcb7b3119915e085202156b1c6))
+* **internal:** upgrade eslint ([f06d39d](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/f06d39dd3a903a3cd9435462f460406e6c16467f))
+
 ## 0.7.0 (2025-11-25)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.6.0...v0.7.0)
