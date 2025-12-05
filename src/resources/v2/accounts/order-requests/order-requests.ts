@@ -73,8 +73,7 @@ export class OrderRequests extends APIResource {
    * for fee estimation.
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
-   * given account, the existing `OrderRequest` will be returned instead of creating
-   * a new one.
+   * given account, the creation call will fail.
    *
    * @example
    * ```ts
@@ -108,8 +107,7 @@ export class OrderRequests extends APIResource {
    * for fee estimation.
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
-   * given account, the existing `OrderRequest` will be returned instead of creating
-   * a new one.
+   * given account, the creation call will fail.
    *
    * @example
    * ```ts
@@ -143,8 +141,7 @@ export class OrderRequests extends APIResource {
    * for fee estimation.
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
-   * given account, the existing `OrderRequest` will be returned instead of creating
-   * a new one.
+   * given account, the creation call will fail.
    *
    * @example
    * ```ts
@@ -177,8 +174,7 @@ export class OrderRequests extends APIResource {
    * for fee estimation.
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
-   * given account, the existing `OrderRequest` will be returned instead of creating
-   * a new one.
+   * given account, the creation call will fail.
    *
    * @example
    * ```ts
