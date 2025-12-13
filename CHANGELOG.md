@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.8.0 (2025-12-13)
+
+Full Changelog: [v0.7.1...v0.8.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.7.1...v0.8.0)
+
+### Features
+
+* **api:** api update ([90949f3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/90949f316e2243e17f169661ec536ca61107de9e))
+* **api:** api update ([891c21e](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/891c21e61c4d07f6631521198c3984a021e7fef0))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([00fd9c3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/00fd9c34164a8ee72ae802ddd40608bbefc440d7))
+* **mcp:** return correct lines on typescript errors ([4f51449](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/4f51449407cfa53134fdd7989695df045f7e4923))
+
+
+### Chores
+
+* **internal:** codegen related update ([7e791b8](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/7e791b89d9ef62d006d336eb061c63b2e5a069ce))
+* **internal:** codegen related update ([9143550](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/91435508c570ccfbd4de2f3246b8f7c4b43850ce))
+
 ## 0.7.1 (2025-12-02)
 
 Full Changelog: [v0.7.0...v0.7.1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.7.0...v0.7.1)
