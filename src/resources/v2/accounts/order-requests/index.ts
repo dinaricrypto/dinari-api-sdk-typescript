@@ -28,4 +28,3 @@ export {
   type OrderRequestCreateMarketSellParams,
   type OrderRequestGetFeeQuoteParams,
 } from './order-requests';
-export { Stocks } from './stocks/index';
