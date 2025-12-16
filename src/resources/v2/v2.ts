@@ -14,6 +14,7 @@ import {
   Accounts,
   Chain,
 } from './accounts/accounts';
+import * as OrdersAPI from './accounts/orders';
 import * as EntitiesAPI from './entities/entities';
 import {
   Entities,
@@ -25,7 +26,6 @@ import {
 } from './entities/entities';
 import * as MarketDataAPI from './market-data/market-data';
 import { MarketData, MarketDataRetrieveMarketHoursResponse } from './market-data/market-data';
-import * as OrdersAPI from './accounts/orders/orders';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 

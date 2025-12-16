@@ -53,7 +53,7 @@ export {
   type OrderBatchCancelParams,
   type OrderCancelParams,
   type OrderGetFulfillmentsParams,
-} from './orders/index';
+} from './orders';
 export {
   TokenTransfers,
   type TokenTransfer,

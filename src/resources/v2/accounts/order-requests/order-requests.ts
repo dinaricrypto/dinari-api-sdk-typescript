@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as AccountsAPI from '../accounts';
+import * as OrdersAPI from '../orders';
 import * as Eip155API from './eip155';
 import {
   Eip155,
@@ -13,15 +14,11 @@ import {
   Eip155SubmitParams,
   Eip155SubmitResponse,
 } from './eip155';
-import * as OrdersAPI from '../orders/orders';
-import * as StocksAPI from './stocks/stocks';
-import { Stocks } from './stocks/stocks';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 export class OrderRequests extends APIResource {
-  stocks: StocksAPI.Stocks = new StocksAPI.Stocks(this._client);
   eip155: Eip155API.Eip155 = new Eip155API.Eip155(this._client);
 
   /**
@@ -651,7 +648,6 @@ export interface OrderRequestGetFeeQuoteParams {
   payment_token_quantity?: number | null;
 }
 
-OrderRequests.Stocks = Stocks;
 OrderRequests.Eip155 = Eip155;
 
 export declare namespace OrderRequests {
@@ -672,8 +668,6 @@ export declare namespace OrderRequests {
     type OrderRequestCreateMarketSellParams as OrderRequestCreateMarketSellParams,
     type OrderRequestGetFeeQuoteParams as OrderRequestGetFeeQuoteParams,
   };
-
-  export { Stocks as Stocks };
 
   export {
     Eip155 as Eip155,

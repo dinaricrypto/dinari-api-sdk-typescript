@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as AccountsAPI from '../accounts';
+import * as OrdersAPI from '../orders';
 import * as OrderRequestsAPI from './order-requests';
-import * as OrdersAPI from '../orders/orders';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
