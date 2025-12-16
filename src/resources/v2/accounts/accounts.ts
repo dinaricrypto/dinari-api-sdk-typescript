@@ -12,6 +12,23 @@ import {
   OrderFulfillmentRetrieveParams,
   OrderFulfillments,
 } from './order-fulfillments';
+import * as OrdersAPI from './orders';
+import {
+  BrokerageOrderStatus,
+  Order,
+  OrderBatchCancelParams,
+  OrderBatchCancelResponse,
+  OrderCancelParams,
+  OrderGetFulfillmentsParams,
+  OrderGetFulfillmentsResponse,
+  OrderListParams,
+  OrderListResponse,
+  OrderRetrieveParams,
+  OrderSide,
+  OrderTif,
+  OrderType,
+  Orders,
+} from './orders';
 import * as TokenTransfersAPI from './token-transfers';
 import {
   TokenTransfer,
@@ -58,23 +75,6 @@ import {
   OrderRequestStatus,
   OrderRequests,
 } from './order-requests/order-requests';
-import * as OrdersAPI from './orders/orders';
-import {
-  BrokerageOrderStatus,
-  Order,
-  OrderBatchCancelParams,
-  OrderBatchCancelResponse,
-  OrderCancelParams,
-  OrderGetFulfillmentsParams,
-  OrderGetFulfillmentsResponse,
-  OrderListParams,
-  OrderListResponse,
-  OrderRetrieveParams,
-  OrderSide,
-  OrderTif,
-  OrderType,
-  Orders,
-} from './orders/orders';
 import * as WalletAPI from './wallet/wallet';
 import { Wallet, WalletConnectInternalParams, WalletResource } from './wallet/wallet';
 import { APIPromise } from '../../../core/api-promise';
