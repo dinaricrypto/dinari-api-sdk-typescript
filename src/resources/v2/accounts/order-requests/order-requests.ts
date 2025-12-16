@@ -237,8 +237,9 @@ export class OrderRequests extends APIResource {
  */
 export interface CreateLimitBuyOrderInput {
   /**
-   * Amount of dShare asset involved. Required for limit `Orders` and market sell
-   * `Orders`.
+   * Amount of dShare asset involved. Required for limit `Order Requests` and market
+   * sell `Order Requests`. Must be a positive number with a precision of up to 4
+   * decimal places.
    */
   asset_quantity: number;
 
@@ -270,8 +271,9 @@ export interface CreateLimitBuyOrderInput {
  */
 export interface CreateLimitSellOrderInput {
   /**
-   * Amount of dShare asset involved. Required for limit `Orders` and market sell
-   * `Orders`.
+   * Amount of dShare asset involved. Required for limit `Order Requests` and market
+   * sell `Order Requests`. Must be a positive number with a precision of up to 4
+   * decimal places.
    */
   asset_quantity: number;
 
@@ -338,7 +340,7 @@ export interface CreateMarketBuyOrderInput {
 export interface CreateMarketSellOrderInput {
   /**
    * Quantity of shares to trade. Must be a positive number with a precision of up to
-   * 9 decimal places.
+   * 6 decimal places.
    */
   asset_quantity: number;
 
@@ -479,8 +481,9 @@ export interface OrderRequestListParams {
 
 export interface OrderRequestCreateLimitBuyParams {
   /**
-   * Amount of dShare asset involved. Required for limit `Orders` and market sell
-   * `Orders`.
+   * Amount of dShare asset involved. Required for limit `Order Requests` and market
+   * sell `Order Requests`. Must be a positive number with a precision of up to 4
+   * decimal places.
    */
   asset_quantity: number;
 
@@ -509,8 +512,9 @@ export interface OrderRequestCreateLimitBuyParams {
 
 export interface OrderRequestCreateLimitSellParams {
   /**
-   * Amount of dShare asset involved. Required for limit `Orders` and market sell
-   * `Orders`.
+   * Amount of dShare asset involved. Required for limit `Order Requests` and market
+   * sell `Order Requests`. Must be a positive number with a precision of up to 4
+   * decimal places.
    */
   asset_quantity: number;
 
@@ -571,7 +575,7 @@ export interface OrderRequestCreateMarketBuyParams {
 export interface OrderRequestCreateMarketSellParams {
   /**
    * Quantity of shares to trade. Must be a positive number with a precision of up to
-   * 9 decimal places.
+   * 6 decimal places.
    */
   asset_quantity: number;
 
@@ -616,8 +620,10 @@ export interface OrderRequestGetFeeQuoteParams {
   stock_id: string;
 
   /**
-   * Amount of dShare asset tokens involved. Required for limit `Orders` and market
-   * sell `Order Requests`.
+   * Amount of dShare asset tokens involved. Required for limit `Order Requests` and
+   * market sell `Order Requests`. Must be a positive number with a precision of up
+   * to 4 decimal places for limit `Order Requests` or up to 6 decimal places for
+   * market sell `Order Requests`.
    */
   asset_token_quantity?: number | null;
 

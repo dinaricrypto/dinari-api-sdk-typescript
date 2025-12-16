@@ -176,17 +176,6 @@ Methods:
 
 ##### Eip155
 
-Types:
-
-- <code><a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">OrderFeeAmount</a></code>
-- <code><a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">Eip155GetFeeQuoteResponse</a></code>
-- <code><a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">Eip155PrepareOrderResponse</a></code>
-
-Methods:
-
-- <code title="post /api/v2/accounts/{account_id}/orders/stocks/eip155/fee_quote">client.v2.accounts.orders.stocks.eip155.<a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">getFeeQuote</a>(accountID, { ...params }) -> Eip155GetFeeQuoteResponse</code>
-- <code title="post /api/v2/accounts/{account_id}/orders/stocks/eip155/prepare">client.v2.accounts.orders.stocks.eip155.<a href="./src/resources/v2/accounts/orders/stocks/eip155.ts">prepareOrder</a>(accountID, { ...params }) -> Eip155PrepareOrderResponse</code>
-
 ### OrderFulfillments
 
 Types:
@@ -225,15 +214,6 @@ Methods:
 #### Stocks
 
 ##### Eip155
-
-Types:
-
-- <code><a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">EvmTypedData</a></code>
-- <code><a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">Eip155PrepareProxiedOrderResponse</a></code>
-
-Methods:
-
-- <code title="post /api/v2/accounts/{account_id}/order_requests/stocks/eip155/prepare">client.v2.accounts.orderRequests.stocks.eip155.<a href="./src/resources/v2/accounts/order-requests/stocks/eip155.ts">prepareProxiedOrder</a>(accountID, { ...params }) -> Eip155PrepareProxiedOrderResponse</code>
 
 #### Eip155
 

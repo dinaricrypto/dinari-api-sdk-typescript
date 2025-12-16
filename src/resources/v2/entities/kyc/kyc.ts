@@ -271,6 +271,15 @@ export interface UsKYCCheckData {
   kyc_metadata: UsKYCCheckData.KYCMetadata;
 
   /**
+   * The non-professional trader property is a self-attestation for US customers that
+   * can affect the metered realtime data fees. This field must be updated when if
+   * there is a change in the user's attestation. This field may also be modified by
+   * Dinari compliance team. For more information, please see the US Customers
+   * Integration Guide.
+   */
+  non_professional_trader_attestation: UsKYCCheckData.NonProfessionalTraderAttestation;
+
+  /**
    * Risk information about the individual <br/><br/> Fields denote if the account
    * owner falls under each category defined by FINRA rules. If any of the answers is
    * true (yes), additional verifications may be required before US account approval.
@@ -526,6 +535,25 @@ export namespace UsKYCCheckData {
      * Your unique identifier for the KYC check.
      */
     ref_id: string;
+  }
+
+  /**
+   * The non-professional trader property is a self-attestation for US customers that
+   * can affect the metered realtime data fees. This field must be updated when if
+   * there is a change in the user's attestation. This field may also be modified by
+   * Dinari compliance team. For more information, please see the US Customers
+   * Integration Guide.
+   */
+  export interface NonProfessionalTraderAttestation {
+    /**
+     * Datetime when the attestation was made.
+     */
+    attestation_dt: string;
+
+    /**
+     * Whether the individual attests to being a non-professional trader.
+     */
+    is_non_professional_trader: boolean;
   }
 
   /**
