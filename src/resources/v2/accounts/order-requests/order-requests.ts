@@ -407,9 +407,22 @@ export interface OrderRequest {
   order_type: OrdersAPI.OrderType;
 
   /**
-   * Status of `OrderRequest`.
+   * Status of `OrderRequest`. Possible values:
+   *
+   * - `QUOTED`: Order request created with fee quote provided, ready for processing
+   * - `PENDING`: Order request is being prepared for submission
+   * - `PENDING_BRIDGE`: Order is waiting for bridge transaction to complete
+   * - `SUBMITTED`: Order has been successfully submitted to the order book
+   * - `ERROR`: An error occurred during order processing
+   * - `CANCELLED`: Order request was cancelled
+   * - `EXPIRED`: Order request expired due to deadline passing
    */
   status: OrderRequestStatus;
+
+  /**
+   * Reason for the order cancellation if the order status is CANCELLED
+   */
+  cancel_message?: string | null;
 
   /**
    * Customer-supplied ID to map this `OrderRequest` to an order in their own
