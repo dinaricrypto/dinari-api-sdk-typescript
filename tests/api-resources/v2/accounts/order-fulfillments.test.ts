@@ -52,7 +52,11 @@ describe('resource orderFulfillments', () => {
     await expect(
       client.v2.accounts.orderFulfillments.query(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { order_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'], page: 1, page_size: 1 },
+        {
+          order_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+          page: 1,
+          page_size: 1,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Dinari.NotFoundError);
