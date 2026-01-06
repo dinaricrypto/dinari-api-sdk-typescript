@@ -26,7 +26,11 @@ describe('resource stocks', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v2.marketData.stocks.list(
-        { page: 1, page_size: 1, symbols: ['string'] },
+        {
+          page: 1,
+          page_size: 1,
+          symbols: ['string'],
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Dinari.NotFoundError);

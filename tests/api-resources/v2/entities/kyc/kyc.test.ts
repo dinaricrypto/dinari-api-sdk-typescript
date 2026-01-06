@@ -36,7 +36,11 @@ describe('resource kyc', () => {
   // Prism tests are disabled
   test.skip('submit: only required params', async () => {
     const responsePromise = client.v2.entities.kyc.submit('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      data: { address_country_code: 'SG', country_code: 'SG', last_name: 'Doe' },
+      data: {
+        address_country_code: 'SG',
+        country_code: 'SG',
+        last_name: 'Doe',
+      },
       provider_name: 'x',
     });
     const rawResponse = await responsePromise.asResponse();

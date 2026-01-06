@@ -55,7 +55,11 @@ describe('resource entities', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v2.entities.list(
-        { page: 1, page_size: 1, reference_id: 'x' },
+        {
+          page: 1,
+          page_size: 1,
+          reference_id: 'x',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Dinari.NotFoundError);

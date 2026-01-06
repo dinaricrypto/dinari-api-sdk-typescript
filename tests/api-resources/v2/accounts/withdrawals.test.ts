@@ -48,7 +48,11 @@ describe('resource withdrawals', () => {
     await expect(
       client.v2.accounts.withdrawals.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { page: 1, page_size: 1, withdrawal_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+        {
+          page: 1,
+          page_size: 1,
+          withdrawal_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Dinari.NotFoundError);
