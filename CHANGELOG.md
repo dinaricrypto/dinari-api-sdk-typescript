@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.10.0 (2026-01-07)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** api update ([11a01b0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/11a01b0f3b813ea3ba6317aed19b587e9f23ac49))
+* **api:** Use pnpm to publish using OIDC ([51fd63c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/51fd63c90b4db5ca7f7ca6417e1f4d2e9bd1635e))
+* **publish:** oidc support ([5fb4621](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/5fb46219e257e8cabb28dc98e883c4ecfb76a134))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([91f3420](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/91f342019f7d0056b3db4ee0a5ba2dd486cb4377))
+
 ## 0.9.0 (2025-12-23)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.8.0...v0.9.0)
