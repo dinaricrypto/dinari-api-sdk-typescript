@@ -215,6 +215,7 @@ export interface Eip155SubmitResponse {
    * - `ERROR`: An error occurred during order processing
    * - `CANCELLED`: Order request was cancelled
    * - `EXPIRED`: Order request expired due to deadline passing
+   * - `REJECTED`: Order request was rejected
    */
   status: OrderRequestsAPI.OrderRequestStatus;
 
@@ -233,6 +234,11 @@ export interface Eip155SubmitResponse {
    * ID of recipient `Account`.
    */
   recipient_account_id?: string | null;
+
+  /**
+   * Reason for the order rejection if the order status is REJECTED
+   */
+  reject_message?: string | null;
 }
 
 export interface Eip155CreatePermitParams {
