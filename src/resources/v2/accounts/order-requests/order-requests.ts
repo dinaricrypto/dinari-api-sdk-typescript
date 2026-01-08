@@ -416,6 +416,7 @@ export interface OrderRequest {
    * - `ERROR`: An error occurred during order processing
    * - `CANCELLED`: Order request was cancelled
    * - `EXPIRED`: Order request expired due to deadline passing
+   * - `REJECTED`: Order request was rejected
    */
   status: OrderRequestStatus;
 
@@ -440,6 +441,11 @@ export interface OrderRequest {
    * ID of recipient `Account`.
    */
   recipient_account_id?: string | null;
+
+  /**
+   * Reason for the order rejection if the order status is REJECTED
+   */
+  reject_message?: string | null;
 }
 
 export type OrderRequestStatus =
@@ -449,7 +455,8 @@ export type OrderRequestStatus =
   | 'SUBMITTED'
   | 'ERROR'
   | 'CANCELLED'
-  | 'EXPIRED';
+  | 'EXPIRED'
+  | 'REJECTED';
 
 export type OrderRequestListResponse = Array<OrderRequest>;
 
