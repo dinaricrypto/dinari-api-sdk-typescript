@@ -297,17 +297,17 @@ export interface OrderCancelParams {
 
 export interface OrderGetFulfillmentsParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   page?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   page_size?: number;
 }

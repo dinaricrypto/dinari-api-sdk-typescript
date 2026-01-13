@@ -90,7 +90,7 @@ export interface DocumentRetrieveParams {
 
 export interface DocumentUploadParams {
   /**
-   * Path param:
+   * Path param
    */
   entity_id: string;
 
