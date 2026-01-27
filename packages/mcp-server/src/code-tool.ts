@@ -4,6 +4,7 @@ import { McpTool, Metadata, ToolCallResult, asErrorResult, asTextContentResult }
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import { readEnv, readEnvOrError } from './server';
 import { WorkerInput, WorkerOutput } from './code-tool-types';
+import { Dinari } from '@dinari/api-sdk';
 
 const prompt = `Runs JavaScript code to interact with the Dinari API.
 
@@ -52,7 +53,7 @@ export function codeTool(): McpTool {
       required: ['code'],
     },
   };
-  const handler = async (_: unknown, args: any): Promise<ToolCallResult> => {
+  const handler = async (client: Dinari, args: any): Promise<ToolCallResult> => {
     const code = args.code as string;
     const intent = args.intent as string | undefined;
 
@@ -68,9 +69,9 @@ export function codeTool(): McpTool {
         ...(stainlessAPIKey && { Authorization: stainlessAPIKey }),
         'Content-Type': 'application/json',
         client_envs: JSON.stringify({
-          DINARI_API_KEY_ID: readEnvOrError('DINARI_API_KEY_ID'),
-          DINARI_API_SECRET_KEY: readEnvOrError('DINARI_API_SECRET_KEY'),
-          DINARI_BASE_URL: readEnv('DINARI_BASE_URL'),
+          DINARI_API_KEY_ID: readEnvOrError('DINARI_API_KEY_ID') ?? client.apiKeyID ?? undefined,
+          DINARI_API_SECRET_KEY: readEnvOrError('DINARI_API_SECRET_KEY') ?? client.apiSecretKey ?? undefined,
+          DINARI_BASE_URL: readEnv('DINARI_BASE_URL') ?? client.baseURL ?? undefined,
         }),
       },
       body: JSON.stringify({
