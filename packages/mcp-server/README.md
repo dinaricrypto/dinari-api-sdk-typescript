@@ -43,14 +43,14 @@ For clients with a configuration JSON, it might look something like this:
 If you use Cursor, you can install the MCP server by using the button below. You will need to set your environment variables
 in Cursor's `mcp.json`, which can be found in Cursor Settings > Tools & MCP > New MCP Server.
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40dinari%2Fapi-sdk-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBkaW5hcmkvYXBpLXNkay1tY3AiXSwiZW52Ijp7IkRJTkFSSV9BUElfS0VZX0lEIjoiU2V0IHlvdXIgRElOQVJJX0FQSV9LRVlfSUQgaGVyZS4iLCJESU5BUklfQVBJX1NFQ1JFVF9LRVkiOiJTZXQgeW91ciBESU5BUklfQVBJX1NFQ1JFVF9LRVkgaGVyZS4ifX0)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40dinari%2Fapi-sdk-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBkaW5hcmkvYXBpLXNkay1tY3AiXSwiZW52Ijp7IkRJTkFSSV9BUElfS0VZX0lEIjoiTXkgQVBJIEtleSBJRCIsIkRJTkFSSV9BUElfU0VDUkVUX0tFWSI6Ik15IEFQSSBTZWNyZXQgS2V5In19)
 
 ### VS Code
 
 If you use MCP, you can install the MCP server by clicking the link below. You will need to set your environment variables
 in VS Code's `mcp.json`, which can be found via Command Palette > MCP: Open User Configuration.
 
-[Open VS Code](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40dinari%2Fapi-sdk-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40dinari%2Fapi-sdk-mcp%22%5D%2C%22env%22%3A%7B%22DINARI_API_KEY_ID%22%3A%22Set%20your%20DINARI_API_KEY_ID%20here.%22%2C%22DINARI_API_SECRET_KEY%22%3A%22Set%20your%20DINARI_API_SECRET_KEY%20here.%22%7D%7D)
+[Open VS Code](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40dinari%2Fapi-sdk-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40dinari%2Fapi-sdk-mcp%22%5D%2C%22env%22%3A%7B%22DINARI_API_KEY_ID%22%3A%22My%20API%20Key%20ID%22%2C%22DINARI_API_SECRET_KEY%22%3A%22My%20API%20Secret%20Key%22%7D%7D)
 
 ### Claude Code
 
@@ -58,7 +58,7 @@ If you use Claude Code, you can install the MCP server by running the command be
 environment variables in Claude Code's `.claude.json`, which can be found in your home directory.
 
 ```
-claude mcp add dinari_api_sdk_mcp_api --env DINARI_API_KEY_ID="Your DINARI_API_KEY_ID here." DINARI_API_SECRET_KEY="Your DINARI_API_SECRET_KEY here." -- npx -y @dinari/api-sdk-mcp
+claude mcp add dinari_api_sdk_mcp_api --env DINARI_API_KEY_ID="My API Key ID" DINARI_API_SECRET_KEY="My API Secret Key" -- npx -y @dinari/api-sdk-mcp
 ```
 
 ## Code Mode
