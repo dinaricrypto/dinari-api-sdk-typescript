@@ -77,7 +77,10 @@ export function codeTool(): McpTool {
             readEnv('DINARI_API_SECRET_KEY') ?? client.apiSecretKey,
             'set DINARI_API_SECRET_KEY environment variable or provide apiSecretKey client option',
           ),
-          DINARI_BASE_URL: readEnv('DINARI_BASE_URL') ?? client.baseURL ?? undefined,
+          DINARI_BASE_URL:
+            readEnv('DINARI_BASE_URL') ?? readEnv('DINARI_ENVIRONMENT') ?
+              undefined
+            : client.baseURL ?? undefined,
         }),
       },
       body: JSON.stringify({
