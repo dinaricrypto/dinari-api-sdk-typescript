@@ -3,7 +3,7 @@
 import { IncomingMessage } from 'node:http';
 import { ClientOptions } from '@dinari/api-sdk';
 
-export const parseAuthHeaders = (req: IncomingMessage): Partial<ClientOptions> => {
+export const parseAuthHeaders = (req: IncomingMessage, required?: boolean): Partial<ClientOptions> => {
   const apiKeyID =
     Array.isArray(req.headers['x-api-key-id']) ? req.headers['x-api-key-id'][0] : req.headers['x-api-key-id'];
   const apiSecretKey =
