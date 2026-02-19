@@ -9,7 +9,7 @@ const client = new Dinari({
 });
 
 describe('resource activities', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveBrokerage', async () => {
     const responsePromise = client.v2.accounts.activities.retrieveBrokerage(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -23,7 +23,7 @@ describe('resource activities', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveBrokerage: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
