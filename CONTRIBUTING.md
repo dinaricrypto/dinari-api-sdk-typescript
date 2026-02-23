@@ -60,7 +60,7 @@ $ yarn link @dinari/api-sdk
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @dinari/api-sdk
+$ pnpm link --global @dinari/api-sdk
 ```
 
 ## Running tests
