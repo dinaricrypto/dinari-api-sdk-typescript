@@ -762,6 +762,14 @@ export class Dinari {
 
   static toFile = Uploads.toFile;
 
+  /**
+   * **`Orders` represent the buying and selling of assets under an `Account`.**
+   *
+   * For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+   *
+   * For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+   *
+   */
   v2: API.V2 = new API.V2(this);
 }
 
