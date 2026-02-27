@@ -29,6 +29,13 @@ import { MarketData, MarketDataRetrieveMarketHoursResponse } from './market-data
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
+/**
+ * **`Orders` represent the buying and selling of assets under an `Account`.**
+ *
+ * For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+ *
+ * For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+ */
 export class V2 extends APIResource {
   marketData: MarketDataAPI.MarketData = new MarketDataAPI.MarketData(this._client);
   entities: EntitiesAPI.Entities = new EntitiesAPI.Entities(this._client);

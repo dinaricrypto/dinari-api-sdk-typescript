@@ -5,6 +5,11 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * **`Accounts` represent the financial accounts of an `Entity`.**
+ *
+ * `Orders`, dividends, and other transactions are associated with an `Account`.
+ */
 export class Accounts extends APIResource {
   /**
    * Create a new `Account` for a specific `Entity`. This `Entity` represents your

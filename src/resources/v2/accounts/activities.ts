@@ -6,6 +6,11 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * **`Accounts` represent the financial accounts of an `Entity`.**
+ *
+ * `Orders`, dividends, and other transactions are associated with an `Account`.
+ */
 export class Activities extends APIResource {
   /**
    * Get a list of brokerage activities tied to the specified `Account`.

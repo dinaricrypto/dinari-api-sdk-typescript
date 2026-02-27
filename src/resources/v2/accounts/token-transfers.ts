@@ -6,6 +6,11 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * **`Accounts` represent the financial accounts of an `Entity`.**
+ *
+ * `Orders`, dividends, and other transactions are associated with an `Account`.
+ */
 export class TokenTransfers extends APIResource {
   /**
    * Creates a `TokenTransfer` from this `Account`.
