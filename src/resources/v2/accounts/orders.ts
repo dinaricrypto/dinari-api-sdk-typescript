@@ -139,6 +139,7 @@ export type BrokerageOrderStatus =
   | 'ESCROWED'
   | 'SUBMITTED'
   | 'CANCELLED'
+  | 'PARTIALLY_FILLED'
   | 'FILLED'
   | 'REJECTED'
   | 'REQUIRING_CONTACT'
