@@ -153,7 +153,7 @@ const remoteStainlessHandler = async ({
     headers: {
       ...(reqContext.stainlessApiKey && { Authorization: reqContext.stainlessApiKey }),
       'Content-Type': 'application/json',
-      client_envs: JSON.stringify({
+      'x-stainless-mcp-client-envs': JSON.stringify({
         DINARI_API_KEY_ID: requireValue(
           readEnv('DINARI_API_KEY_ID') ?? client.apiKeyID,
           'set DINARI_API_KEY_ID environment variable or provide apiKeyID client option',
