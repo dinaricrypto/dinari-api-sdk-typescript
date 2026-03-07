@@ -35,7 +35,7 @@ describe('resource document', () => {
     const responsePromise = client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       document_type: 'GOVERNMENT_ID',
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -51,7 +51,7 @@ describe('resource document', () => {
     const response = await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       document_type: 'GOVERNMENT_ID',
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
   });
 });
