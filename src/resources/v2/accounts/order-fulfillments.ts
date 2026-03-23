@@ -6,6 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * **`Orders` represent the buying and selling of assets under an `Account`.**
+ *
+ * For `Accounts` using self-custodied `Wallets`, `Orders` are created and fulfilled by making calls to Dinari's smart contracts, or using the *Proxied Orders* methods.
+ *
+ * For `Accounts` using managed `Wallets`, `Orders` are created and fulfilled by using the `Managed Orders` methods, which then create the corresponding transactions on the blockchain.
+ */
 export class OrderFulfillments extends APIResource {
   /**
    * Get a specific `OrderFulfillment` by its ID.
@@ -102,9 +109,19 @@ export interface Fulfillment {
   transaction_hash: string;
 
   /**
+   * The `Alloy` ID associated with the `Order`
+   */
+  alloy_id?: string | null;
+
+  /**
    * Fee amount, in payment tokens.
    */
   payment_token_fee?: number | null;
+
+  /**
+   * The `Stock` ID associated with the `Order`
+   */
+  stock_id?: string | null;
 }
 
 export type OrderFulfillmentQueryResponse = Array<Fulfillment>;

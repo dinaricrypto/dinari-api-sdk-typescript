@@ -17,6 +17,11 @@ import {
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
+/**
+ * **Dinari provides basic market data for `Stocks` that are available to transact on.**
+ *
+ * This data is provided on a best-effort basis and we recommend using a dedicated provider for more intensive market data needs.
+ */
 export class MarketData extends APIResource {
   stocks: StocksAPI.Stocks = new StocksAPI.Stocks(this._client);
 

@@ -8,6 +8,11 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * **`Order Requests` represent requests for Dinari to create `Orders` on behalf of an `Account`.**
+ *
+ * `Order Requests` are created when placing **proxied orders** or **managed orders**. See their respective descriptions for more details.
+ */
 export class Eip155 extends APIResource {
   /**
    * Generates a permit that can be signed and used to create an `OrderRequest` using
@@ -266,6 +271,11 @@ export interface Eip155CreatePermitParams {
    * Address of payment token.
    */
   payment_token: string;
+
+  /**
+   * The ID of the `Alloy` for which the `Order` is being placed.
+   */
+  alloy_id?: string | null;
 
   /**
    * Amount of dShare asset tokens involved. Required for limit `Order Requests` and

@@ -24,6 +24,12 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * **`Entities` represent a business or organization that uses the API, and their customers.**
+ *
+ * Dinari Partners are represented as an organization `Entity` in the API, with their own accounts.
+ * Individual customers of Partner `Entities` are also represented as `Entities` in the API, which are managed by the Partner `Entity`.
+ */
 export class Entities extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
   kyc: KYCAPI.KYC = new KYCAPI.KYC(this._client);

@@ -5,6 +5,11 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * **Corporate actions are events that affect the ownership of a `Stock`.**
+ *
+ * Corporate actions include dividends and stock splits.
+ */
 export class Splits extends APIResource {
   /**
    * Get a list of stock splits for `Stocks` available for trade via Dinari. The

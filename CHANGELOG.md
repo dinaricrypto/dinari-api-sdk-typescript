@@ -1,5 +1,104 @@
 # Changelog
 
+## 0.12.0 (2026-03-23)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* **api:** api update ([8918dda](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/8918dda147d8a285ba95bb3e25166ef8c88a445f))
+* **api:** api update ([cbc1bf5](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/cbc1bf5b8af38c4f65c8b83dbc0725d6dc16e17f))
+* **api:** api update ([43806c9](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/43806c948ddaceda821f2a3ddb14e37a217e51c6))
+* **mcp:** add an option to disable code tool ([4eaaf14](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/4eaaf147ea155ba34330361da523423680488510))
+* **mcp:** add initial server instructions ([b0bbab7](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/b0bbab77dfd09899a2cceeaf216446b78d4bb6d2))
+
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([ad09110](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/ad091102d1ea51d857057fac8b08cf4e9c1bcd6f))
+* **client:** avoid removing abort listener too early ([fd8066f](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/fd8066f291f9a8273857cf8d7028e88acaf012fb))
+* **client:** preserve URL params already embedded in path ([6ef3bb0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/6ef3bb04daeb338fb5492bfb68530a3dc5dc2589))
+* **docs/contributing:** correct pnpm link command ([e154490](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/e154490e5b5db28a0822869ed1eaa9c96dc905aa))
+* **docs:** fix mcp installation instructions for remote servers ([dc95311](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/dc95311a254d6d1505d9a8054f714c688cfda0ec))
+* fix request delays for retrying to be more respectful of high requested delays ([85c6b3b](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/85c6b3b3ce3977dd73082a1223f54fd99e331c49))
+* **mcp:** allow falling back for required env variables ([36ab893](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/36ab89337bbc8c4ebdd7f06cc62c282e3a05cb49))
+* **mcp:** do not fallback on baseUrl if environment env variable is set ([c79cae2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c79cae2a6142cd139511992b06fbc6e3843de01b))
+* **mcp:** initialize SDK lazily to avoid failing the connection on init errors ([921d5ee](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/921d5ee61068d1b032a5f91065c79a84ba459d20))
+* **mcp:** update prompt ([5aaa59d](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/5aaa59d4052fc4c93d16248f8a8c07b89dc76a2a))
+* **publish:** remove extraneous npm copy from package ([509fdd2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/509fdd2b8019752b53509845493affcacfdc6615))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([66594b8](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/66594b8bd1725bebcfdf457f9420f666ca2aad5f))
+* **ci:** upgrade `actions/github-script` ([e84d82a](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/e84d82ae48ea63bf4e550aea681a5d79ef63d79b))
+* **client:** do not parse responses with empty content-length ([aceaa46](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/aceaa46c0f00f2e1eea29c0f67e34158cc03aeaa))
+* **client:** restructure abort controller binding ([3498a34](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/3498a347a72766414ae6803079bff4b1287b510c))
+* configure new SDK language ([3560400](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/35604006a37618a39dc12922da346155c647e18d))
+* **docs:** add missing descriptions ([a56cc1e](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a56cc1e1eacd327030ddf8cb941636258a083f2b))
+* fix typo in descriptions ([1454395](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/1454395f7f196ae27c039a8f0dd1daef5e719685))
+* **internal/client:** fix form-urlencoded requests ([84ba41f](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/84ba41fe9bad1b794e4618bcde193807d49cd7dd))
+* **internal:** add health check to MCP server when running in HTTP mode ([bde8b4e](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/bde8b4e0f20800f28f4e089a76718d91699c753a))
+* **internal:** allow basic filtering of methods allowed for MCP code mode ([9bb766f](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/9bb766f19c0b88db71bf8e8fe302593700d9ccfc))
+* **internal:** allow setting x-stainless-api-key header on mcp server requests ([a6c55d5](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a6c55d53fae5c327a13cc5df0661d4be94345c6a))
+* **internal:** always generate MCP server dockerfiles and upgrade associated dependencies ([5b7153f](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/5b7153fc6e7fe686efd2f557b4ed9ad3b8b1e7d7))
+* **internal:** avoid type checking errors with ts-reset ([90a2b92](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/90a2b92cd1b3849105a213cab364a13ddacea64f))
+* **internal:** cache fetch instruction calls in MCP server ([0c1018c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/0c1018c13d77dc411e51a59cbf3434ee1a2c385c))
+* **internal:** codegen related update ([ca1dbb9](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/ca1dbb9d2a37f2f47e4cd3edb7f2343b6d3f93aa))
+* **internal:** codegen related update ([dc801ce](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/dc801ce4d068fa712155cea482515e669098e73d))
+* **internal:** codegen related update ([e16ecfb](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/e16ecfbad98eea44c7217def037aa935939dabf6))
+* **internal:** codegen related update ([23d0c64](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/23d0c64167749796dd353c8a66465169de696549))
+* **internal:** codegen related update ([add78d0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/add78d0ded014db4adb5bab1c536d09b2a92e970))
+* **internal:** codegen related update ([6cef6f4](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/6cef6f41f0bf4937c003dc43585a60cf43034f73))
+* **internal:** codegen related update ([cd80d47](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/cd80d4745342692e8b3ec1d4b2022528df4f6d0f))
+* **internal:** codegen related update ([475222f](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/475222fb0999a3345f32d6d526f5aafe892ff583))
+* **internal:** codegen related update ([243cade](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/243cade97ff7ec2d52f6770d1c156fc374d96754))
+* **internal:** codegen related update ([74cd91a](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/74cd91a2a59b67ae6b93fd36a004a0efd1b21d9b))
+* **internal:** codegen related update ([d9e8cb6](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/d9e8cb63aaf8d5a376fe218310e7132f76cbcb1d))
+* **internal:** codegen related update ([92b3f0c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/92b3f0c2bbf0a5c5983cb1ab4a111cd753febb7f))
+* **internal:** codegen related update ([085ec03](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/085ec035f8950c59faf15120bcaedf1815cb2c48))
+* **internal:** codegen related update ([c4849df](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c4849df56033117246a87dd8f8de50e077be946e))
+* **internal:** codegen related update ([4734124](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/4734124878dfea04a2a919b3e7a018f0030400ad))
+* **internal:** fix MCP Dockerfiles so they can be built without buildkit ([d402a7f](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/d402a7fb159303587e8996aa75af09ab49c7d615))
+* **internal:** fix MCP Dockerfiles so they can be built without buildkit ([f1774ba](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/f1774ba6b6a0846d8d0813c6da85c93c20de7dda))
+* **internal:** fix MCP server TS errors that occur with required client options ([a0b11f2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a0b11f2645242ad8c343216ef910e39540c5083f))
+* **internal:** improve layout of generated MCP server files ([55371c0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/55371c0f4cfc03a66f599e7d350faed5eb047bee))
+* **internal:** improve reliability of MCP servers when using local code mode execution ([fc72f29](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/fc72f292176402bf883066388b921819359f9e15))
+* **internal:** make generated MCP servers compatible with Cloudflare worker environments ([a77e6cb](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a77e6cbd4fc30ae3d8741121818b1adc5e23a9f6))
+* **internal:** make MCP code execution location configurable via a flag ([386c8a5](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/386c8a581b9fed8d2189072e4be9c5247a94e685))
+* **internal:** move stringifyQuery implementation to internal function ([3f33517](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/3f33517b11dedc38c312a6d2875081edd026c455))
+* **internal:** refactor flag parsing for MCP servers and add debug flag ([1196374](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/119637405da4153f4976b2950f94bdf6b3eccd97))
+* **internal:** remove mock server code ([78a4f85](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/78a4f85fb8380af8d33b87e1a5bc4f048aa6af6e))
+* **internal:** support oauth authorization code flow for MCP servers ([a9d87f3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a9d87f3564f6e6751c7c4e291fe3694aff2c9f41))
+* **internal:** support x-stainless-mcp-client-envs header in MCP servers ([489da46](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/489da46f12fa75947b5be94d9ca419d7f6827129))
+* **internal:** support x-stainless-mcp-client-permissions headers in MCP servers ([10f03c0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/10f03c051403069b69021f933a3944e66f1d0803))
+* **internal:** switch MCP servers to use pino for logging ([4f234e8](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/4f234e867f54800fb9c98474c1256df43c75d167))
+* **internal:** tweak CI branches ([907fb48](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/907fb488783a3c321fd056eaf6ba916fccbc0bc8))
+* **internal:** update `actions/checkout` version ([2fa9dc0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/2fa9dc0855246f75c8185c401dee460e16142480))
+* **internal:** update dependencies to address dependabot vulnerabilities ([6a0cc64](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/6a0cc648b12a85c68728663018c62b91c9b692a6))
+* **internal:** update gitignore ([9a79fcf](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/9a79fcfd8961331adcac45b0f023b97dd632d64c))
+* **internal:** update lock file ([d628026](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/d628026cb9bd744e38b96557690781af2c4b3d7d))
+* **internal:** update lock file ([ede6d7c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/ede6d7ca9eb113b379053156aa1393e4555e232f))
+* **internal:** update lockfile ([7ed6c52](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/7ed6c529412a566a184f2624bf9b3ff93413988b))
+* **internal:** upgrade @modelcontextprotocol/sdk and hono ([02260b9](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/02260b9090333a9a17628b434607ed6101e9a636))
+* **internal:** upgrade babel, qs, js-yaml ([e99d726](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/e99d726c0c17a817cdd10fb6517c46934b58e335))
+* **internal:** upgrade brace-expansion and @babel/helpers ([92266b2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/92266b28ec2b617efcfb3aab14cd508a83c4da56))
+* **internal:** upgrade pnpm ([7789088](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/77890882cd3419ac29305a1bffd40e6b244a057e))
+* **internal:** upgrade pnpm version ([45b9169](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/45b9169f23868386acac54ee19f722b7db383f4e))
+* **internal:** use x-stainless-mcp-client-envs header for MCP remote code tool calls ([db18bdd](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/db18bdd57825a89ee37074ca8faf453da23d8c97))
+* **mcp-server:** improve instructions ([fb88a13](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/fb88a137571410ee51cd70d51f462c8c457e5698))
+* **mcp-server:** return access instructions for 404 without API key ([bca6896](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/bca689675bf0248400a90740ed4b7be2f6fc9384))
+* **mcp:** correctly update version in sync with sdk ([0f2ec6a](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/0f2ec6a47e681d58e4e9c9dc95f8fd5fadd7ea4c))
+* **mcp:** forward STAINLESS_API_KEY to docs search endpoint ([21a1a87](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/21a1a87295c93a85e8eac392cdf6c04c92001c10))
+* **mcp:** up tsconfig lib version to es2022 ([be290f3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/be290f3747a539a913844d47457c3eacd40d5d33))
+* update mock server docs ([cf69819](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/cf69819f1636b0e2d4c54e6f39234ef19bc83b47))
+* update placeholder string ([b9149b5](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/b9149b5943753264fe2a299cdfc13a65bbcdcc06))
+
+
+### Refactors
+
+* update sdk ([d282f11](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/d282f110966ee70b5e686bcd3b4228a0f0717613))
+
 ## 0.11.0 (2026-01-08)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.10.0...v0.11.0)
