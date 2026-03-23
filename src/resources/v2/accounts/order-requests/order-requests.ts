@@ -77,11 +77,7 @@ export class OrderRequests extends APIResource {
    * const orderRequest =
    *   await client.v2.accounts.orderRequests.createLimitBuy(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       asset_quantity: 0,
-   *       limit_price: 0,
-   *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     },
+   *     { asset_quantity: 0, limit_price: 0 },
    *   );
    * ```
    */
@@ -111,11 +107,7 @@ export class OrderRequests extends APIResource {
    * const orderRequest =
    *   await client.v2.accounts.orderRequests.createLimitSell(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       asset_quantity: 0,
-   *       limit_price: 0,
-   *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     },
+   *     { asset_quantity: 0, limit_price: 0 },
    *   );
    * ```
    */
@@ -145,10 +137,7 @@ export class OrderRequests extends APIResource {
    * const orderRequest =
    *   await client.v2.accounts.orderRequests.createMarketBuy(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       payment_amount: 0,
-   *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     },
+   *     { payment_amount: 0 },
    *   );
    * ```
    */
@@ -178,10 +167,7 @@ export class OrderRequests extends APIResource {
    * const orderRequest =
    *   await client.v2.accounts.orderRequests.createMarketSell(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       asset_quantity: 0,
-   *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     },
+   *     { asset_quantity: 0 },
    *   );
    * ```
    */
@@ -209,11 +195,7 @@ export class OrderRequests extends APIResource {
    * const response =
    *   await client.v2.accounts.orderRequests.getFeeQuote(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       order_side: 'BUY',
-   *       order_type: 'MARKET',
-   *       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     },
+   *     { order_side: 'BUY', order_type: 'MARKET' },
    *   );
    * ```
    */
@@ -247,9 +229,9 @@ export interface CreateLimitBuyOrderInput {
   limit_price: number;
 
   /**
-   * ID of `Stock`.
+   * ID of `Alloy`.
    */
-  stock_id: string;
+  alloy_id?: string | null;
 
   /**
    * Customer-supplied ID to map this order to an order in their own systems. Must be
@@ -261,6 +243,11 @@ export interface CreateLimitBuyOrderInput {
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id?: string | null;
 }
 
 /**
@@ -281,9 +268,9 @@ export interface CreateLimitSellOrderInput {
   limit_price: number;
 
   /**
-   * ID of `Stock`.
+   * ID of `Alloy`.
    */
-  stock_id: string;
+  alloy_id?: string | null;
 
   /**
    * Customer-supplied ID to map this order to an order in their own systems. Must be
@@ -302,6 +289,11 @@ export interface CreateLimitSellOrderInput {
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id?: string | null;
 }
 
 /**
@@ -315,9 +307,9 @@ export interface CreateMarketBuyOrderInput {
   payment_amount: number;
 
   /**
-   * ID of `Stock`.
+   * ID of `Alloy`.
    */
-  stock_id: string;
+  alloy_id?: string | null;
 
   /**
    * Customer-supplied ID to map this order to an order in their own systems. Must be
@@ -329,6 +321,11 @@ export interface CreateMarketBuyOrderInput {
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id?: string | null;
 }
 
 /**
@@ -342,9 +339,9 @@ export interface CreateMarketSellOrderInput {
   asset_quantity: number;
 
   /**
-   * ID of `Stock`.
+   * ID of `Alloy`.
    */
-  stock_id: string;
+  alloy_id?: string | null;
 
   /**
    * Customer-supplied ID to map this order to an order in their own systems. Must be
@@ -363,6 +360,11 @@ export interface CreateMarketSellOrderInput {
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id?: string | null;
 }
 
 /**
@@ -511,9 +513,9 @@ export interface OrderRequestCreateLimitBuyParams {
   limit_price: number;
 
   /**
-   * ID of `Stock`.
+   * ID of `Alloy`.
    */
-  stock_id: string;
+  alloy_id?: string | null;
 
   /**
    * Customer-supplied ID to map this order to an order in their own systems. Must be
@@ -525,6 +527,11 @@ export interface OrderRequestCreateLimitBuyParams {
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id?: string | null;
 }
 
 export interface OrderRequestCreateLimitSellParams {
@@ -542,9 +549,9 @@ export interface OrderRequestCreateLimitSellParams {
   limit_price: number;
 
   /**
-   * ID of `Stock`.
+   * ID of `Alloy`.
    */
-  stock_id: string;
+  alloy_id?: string | null;
 
   /**
    * Customer-supplied ID to map this order to an order in their own systems. Must be
@@ -563,6 +570,11 @@ export interface OrderRequestCreateLimitSellParams {
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id?: string | null;
 }
 
 export interface OrderRequestCreateMarketBuyParams {
@@ -573,9 +585,9 @@ export interface OrderRequestCreateMarketBuyParams {
   payment_amount: number;
 
   /**
-   * ID of `Stock`.
+   * ID of `Alloy`.
    */
-  stock_id: string;
+  alloy_id?: string | null;
 
   /**
    * Customer-supplied ID to map this order to an order in their own systems. Must be
@@ -587,6 +599,11 @@ export interface OrderRequestCreateMarketBuyParams {
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id?: string | null;
 }
 
 export interface OrderRequestCreateMarketSellParams {
@@ -597,9 +614,9 @@ export interface OrderRequestCreateMarketSellParams {
   asset_quantity: number;
 
   /**
-   * ID of `Stock`.
+   * ID of `Alloy`.
    */
-  stock_id: string;
+  alloy_id?: string | null;
 
   /**
    * Customer-supplied ID to map this order to an order in their own systems. Must be
@@ -618,6 +635,11 @@ export interface OrderRequestCreateMarketSellParams {
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
+
+  /**
+   * ID of `Stock`.
+   */
+  stock_id?: string | null;
 }
 
 export interface OrderRequestGetFeeQuoteParams {
@@ -632,9 +654,9 @@ export interface OrderRequestGetFeeQuoteParams {
   order_type: OrdersAPI.OrderType;
 
   /**
-   * The Stock ID associated with the Order Request
+   * The `Alloy` ID associated with the Order Request
    */
-  stock_id: string;
+  alloy_id?: string | null;
 
   /**
    * Amount of dShare asset tokens involved. Required for limit `Order Requests` and
@@ -666,6 +688,11 @@ export interface OrderRequestGetFeeQuoteParams {
    * Amount of payment tokens involved. Required for market buy `Order Requests`.
    */
   payment_token_quantity?: number | null;
+
+  /**
+   * The `Stock` ID associated with the Order Request
+   */
+  stock_id?: string | null;
 }
 
 OrderRequests.Eip155 = Eip155;
