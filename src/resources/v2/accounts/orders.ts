@@ -198,9 +198,9 @@ export interface Order {
   status: BrokerageOrderStatus;
 
   /**
-   * The `Stock` ID associated with the `Order`
+   * The `Alloy` ID associated with the `Order`
    */
-  stock_id: string;
+  alloy_id?: string | null;
 
   /**
    * The dShare asset token address.
@@ -243,6 +243,11 @@ export interface Order {
    * Total amount of payment involved.
    */
   payment_token_quantity?: number | null;
+
+  /**
+   * The `Stock` ID associated with the `Order`
+   */
+  stock_id?: string | null;
 }
 
 export type OrderSide = 'BUY' | 'SELL';

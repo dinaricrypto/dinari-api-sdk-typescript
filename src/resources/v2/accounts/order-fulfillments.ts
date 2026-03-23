@@ -109,9 +109,19 @@ export interface Fulfillment {
   transaction_hash: string;
 
   /**
+   * The `Alloy` ID associated with the `Order`
+   */
+  alloy_id?: string | null;
+
+  /**
    * Fee amount, in payment tokens.
    */
   payment_token_fee?: number | null;
+
+  /**
+   * The `Stock` ID associated with the `Order`
+   */
+  stock_id?: string | null;
 }
 
 export type OrderFulfillmentQueryResponse = Array<Fulfillment>;

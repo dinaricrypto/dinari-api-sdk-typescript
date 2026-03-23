@@ -114,14 +114,14 @@ export namespace V2ListOrdersResponse {
     status: OrdersAPI.BrokerageOrderStatus;
 
     /**
-     * The `Stock` ID associated with the `Order`
-     */
-    stock_id: string;
-
-    /**
      * Account ID the order was made for.
      */
     account_id?: string | null;
+
+    /**
+     * The `Alloy` ID associated with the `Order`
+     */
+    alloy_id?: string | null;
 
     /**
      * The dShare asset token address.
@@ -169,6 +169,11 @@ export namespace V2ListOrdersResponse {
      * Total amount of payment involved.
      */
     payment_token_quantity?: number | null;
+
+    /**
+     * The `Stock` ID associated with the `Order`
+     */
+    stock_id?: string | null;
   }
 }
 

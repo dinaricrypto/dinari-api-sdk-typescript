@@ -40,6 +40,7 @@ describe('resource eip155', () => {
         order_tif: 'DAY',
         order_type: 'MARKET',
         payment_token: 'payment_token',
+        alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         asset_token_quantity: 0,
         client_order_id: 'client_order_id',
         limit_price: 0,
