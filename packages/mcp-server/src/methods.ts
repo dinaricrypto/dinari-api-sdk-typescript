@@ -71,6 +71,24 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v2/market_data/stocks/{stock_id}/splits',
   },
   {
+    clientCallName: 'client.v2.marketData.alloys.list',
+    fullyQualifiedName: 'v2.marketData.alloys.list',
+    httpMethod: 'get',
+    httpPath: '/api/v2/market_data/alloys/',
+  },
+  {
+    clientCallName: 'client.v2.marketData.alloys.retrieveCurrentPrice',
+    fullyQualifiedName: 'v2.marketData.alloys.retrieveCurrentPrice',
+    httpMethod: 'get',
+    httpPath: '/api/v2/market_data/alloys/{alloy_id}/current_price',
+  },
+  {
+    clientCallName: 'client.v2.marketData.alloys.retrieveHistoricalPrices',
+    fullyQualifiedName: 'v2.marketData.alloys.retrieveHistoricalPrices',
+    httpMethod: 'get',
+    httpPath: '/api/v2/market_data/alloys/{alloy_id}/historical_prices/',
+  },
+  {
     clientCallName: 'client.v2.entities.create',
     fullyQualifiedName: 'v2.entities.create',
     httpMethod: 'post',

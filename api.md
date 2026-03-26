@@ -51,6 +51,20 @@ Methods:
 - <code title="get /api/v2/market_data/stocks/splits">client.v2.marketData.stocks.splits.<a href="./src/resources/v2/market-data/stocks/splits.ts">list</a>({ ...params }) -> SplitListResponse</code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/splits">client.v2.marketData.stocks.splits.<a href="./src/resources/v2/market-data/stocks/splits.ts">listForStock</a>(stockID, { ...params }) -> SplitListForStockResponse</code>
 
+### Alloys
+
+Types:
+
+- <code><a href="./src/resources/v2/market-data/alloys.ts">AlloyListResponse</a></code>
+- <code><a href="./src/resources/v2/market-data/alloys.ts">AlloyRetrieveCurrentPriceResponse</a></code>
+- <code><a href="./src/resources/v2/market-data/alloys.ts">AlloyRetrieveHistoricalPricesResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v2/market_data/alloys/">client.v2.marketData.alloys.<a href="./src/resources/v2/market-data/alloys.ts">list</a>({ ...params }) -> AlloyListResponse</code>
+- <code title="get /api/v2/market_data/alloys/{alloy_id}/current_price">client.v2.marketData.alloys.<a href="./src/resources/v2/market-data/alloys.ts">retrieveCurrentPrice</a>(alloyID) -> AlloyRetrieveCurrentPriceResponse</code>
+- <code title="get /api/v2/market_data/alloys/{alloy_id}/historical_prices/">client.v2.marketData.alloys.<a href="./src/resources/v2/market-data/alloys.ts">retrieveHistoricalPrices</a>(alloyID, { ...params }) -> AlloyRetrieveHistoricalPricesResponse</code>
+
 ## Entities
 
 Types:

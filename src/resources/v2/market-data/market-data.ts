@@ -1,6 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as AlloysAPI from './alloys';
+import {
+  AlloyListParams,
+  AlloyListResponse,
+  AlloyRetrieveCurrentPriceResponse,
+  AlloyRetrieveHistoricalPricesParams,
+  AlloyRetrieveHistoricalPricesResponse,
+  Alloys,
+} from './alloys';
 import * as StocksAPI from './stocks/stocks';
 import {
   StockListParams,
@@ -24,6 +33,7 @@ import { RequestOptions } from '../../../internal/request-options';
  */
 export class MarketData extends APIResource {
   stocks: StocksAPI.Stocks = new StocksAPI.Stocks(this._client);
+  alloys: AlloysAPI.Alloys = new AlloysAPI.Alloys(this._client);
 
   /**
    * Get the market hours for the current trading session and next open trading
@@ -100,6 +110,7 @@ export interface MarketDataRetrieveMarketHoursResponse {
 }
 
 MarketData.Stocks = Stocks;
+MarketData.Alloys = Alloys;
 
 export declare namespace MarketData {
   export { type MarketDataRetrieveMarketHoursResponse as MarketDataRetrieveMarketHoursResponse };
@@ -115,5 +126,14 @@ export declare namespace MarketData {
     type StockListParams as StockListParams,
     type StockRetrieveHistoricalPricesParams as StockRetrieveHistoricalPricesParams,
     type StockRetrieveNewsParams as StockRetrieveNewsParams,
+  };
+
+  export {
+    Alloys as Alloys,
+    type AlloyListResponse as AlloyListResponse,
+    type AlloyRetrieveCurrentPriceResponse as AlloyRetrieveCurrentPriceResponse,
+    type AlloyRetrieveHistoricalPricesResponse as AlloyRetrieveHistoricalPricesResponse,
+    type AlloyListParams as AlloyListParams,
+    type AlloyRetrieveHistoricalPricesParams as AlloyRetrieveHistoricalPricesParams,
   };
 }
