@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.13.0 (2026-03-26)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** Add Historical and Current Price Enterprise API v2 endpoints for Alloy ([05c8b51](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/05c8b51299679d6a6c87d137d8a69d36a8c0a8f6))
+* **api:** api update ([0cb8f5c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/0cb8f5c0547f965d574e31792a9e31060ab5c72b))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([831b039](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/831b039e2e1e706843c6ac1646ffaf5ed47efb2f))
+
 ## 0.12.0 (2026-03-23)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.11.0...v0.12.0)
