@@ -86,6 +86,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.V2ListOrdersParams;\nimport com.dinari.api.models.v2.V2ListOrdersResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<V2ListOrdersResponse> response = client.v2().listOrders();\n    }\n}',
       },
+      php: {
+        method: 'v2->listOrders',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->listOrders(\n  chainID: Chain::EIP155_1,\n  orderFulfillmentTransactionHash: 'order_fulfillment_transaction_hash',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderTransactionHash: 'order_transaction_hash',\n  page: 1,\n  pageSize: 1,\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.list_orders',
         example:
@@ -124,6 +129,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().marketData().retrieveMarketHours',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.MarketDataRetrieveMarketHoursParams;\nimport com.dinari.api.models.v2.marketdata.MarketDataRetrieveMarketHoursResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        MarketDataRetrieveMarketHoursResponse response = client.v2().marketData().retrieveMarketHours();\n    }\n}',
+      },
+      php: {
+        method: 'v2->marketData->retrieveMarketHours',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->retrieveMarketHours();\n\nvar_dump($response);",
       },
       python: {
         method: 'v2.market_data.retrieve_market_hours',
@@ -165,6 +175,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<StockListResponse> stocks = client.v2().marketData().stocks().list();\n    }\n}',
       },
+      php: {
+        method: 'v2->marketData->stocks->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$stocks = $client->v2->marketData->stocks->list(\n  page: 1, pageSize: 1, symbols: ['string']\n);\n\nvar_dump($stocks);",
+      },
       python: {
         method: 'v2.market_data.stocks.list',
         example:
@@ -204,6 +219,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().marketData().stocks().retrieveHistoricalPrices',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveHistoricalPricesParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveHistoricalPricesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockRetrieveHistoricalPricesParams params = StockRetrieveHistoricalPricesParams.builder()\n            .stockId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .timespan(StockRetrieveHistoricalPricesParams.Timespan.DAY)\n            .build();\n        List<StockRetrieveHistoricalPricesResponse> response = client.v2().marketData().stocks().retrieveHistoricalPrices(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->marketData->stocks->retrieveHistoricalPrices',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveHistoricalPrices(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', timespan: 'DAY'\n);\n\nvar_dump($response);",
       },
       python: {
         method: 'v2.market_data.stocks.retrieve_historical_prices',
@@ -246,6 +266,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveNewsParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveNewsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<StockRetrieveNewsResponse> response = client.v2().marketData().stocks().retrieveNews("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->marketData->stocks->retrieveNews',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveNews(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', limit: 1\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.market_data.stocks.retrieve_news',
         example:
@@ -287,6 +312,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveDividendsParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveDividendsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<StockRetrieveDividendsResponse> response = client.v2().marketData().stocks().retrieveDividends("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->marketData->stocks->retrieveDividends',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveDividends(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.market_data.stocks.retrieve_dividends',
         example:
@@ -327,6 +357,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentPriceParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentPriceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockRetrieveCurrentPriceResponse response = client.v2().marketData().stocks().retrieveCurrentPrice("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->marketData->stocks->retrieveCurrentPrice',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveCurrentPrice(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.market_data.stocks.retrieve_current_price',
         example:
@@ -366,6 +401,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().marketData().stocks().retrieveCurrentQuote',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentQuoteParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentQuoteResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockRetrieveCurrentQuoteResponse response = client.v2().marketData().stocks().retrieveCurrentQuote("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      php: {
+        method: 'v2->marketData->stocks->retrieveCurrentQuote',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveCurrentQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
       },
       python: {
         method: 'v2.market_data.stocks.retrieve_current_quote',
@@ -408,6 +448,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.SplitListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.StockSplit;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<StockSplit> stockSplits = client.v2().marketData().stocks().splits().list();\n    }\n}',
       },
+      php: {
+        method: 'v2->marketData->stocks->splits->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$stockSplits = $client->v2->marketData->stocks->splits->list(\n  page: 1, pageSize: 1\n);\n\nvar_dump($stockSplits);",
+      },
       python: {
         method: 'v2.market_data.stocks.splits.list',
         example:
@@ -448,6 +493,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().marketData().stocks().splits().listForStock',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.SplitListForStockParams;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.StockSplit;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<StockSplit> stockSplits = client.v2().marketData().stocks().splits().listForStock("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      php: {
+        method: 'v2->marketData->stocks->splits->listForStock',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$stockSplits = $client->v2->marketData->stocks->splits->listForStock(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', page: 1, pageSize: 1\n);\n\nvar_dump($stockSplits);",
       },
       python: {
         method: 'v2.market_data.stocks.splits.list_for_stock',
@@ -495,6 +545,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyListParams;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AlloyListResponse alloys = client.v2().marketData().alloys().list();\n    }\n}',
       },
+      php: {
+        method: 'v2->marketData->alloys->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$alloys = $client->v2->marketData->alloys->list(\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  previous: 'previous',\n  symbols: ['string'],\n);\n\nvar_dump($alloys);",
+      },
       python: {
         method: 'v2.market_data.alloys.list',
         example:
@@ -533,6 +588,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().marketData().alloys().retrieveCurrentPrice',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveCurrentPriceParams;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveCurrentPriceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AlloyRetrieveCurrentPriceResponse response = client.v2().marketData().alloys().retrieveCurrentPrice("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      php: {
+        method: 'v2->marketData->alloys->retrieveCurrentPrice',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->alloys->retrieveCurrentPrice(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
       },
       python: {
         method: 'v2.market_data.alloys.retrieve_current_price',
@@ -575,6 +635,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveHistoricalPricesParams;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveHistoricalPricesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AlloyRetrieveHistoricalPricesParams params = AlloyRetrieveHistoricalPricesParams.builder()\n            .alloyId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .timespan(AlloyRetrieveHistoricalPricesParams.Timespan.DAY)\n            .build();\n        List<AlloyRetrieveHistoricalPricesResponse> response = client.v2().marketData().alloys().retrieveHistoricalPrices(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->marketData->alloys->retrieveHistoricalPrices',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->alloys->retrieveHistoricalPrices(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', timespan: 'DAY'\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.market_data.alloys.retrieve_historical_prices',
         example:
@@ -615,6 +680,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().entities().list',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.Entity;\nimport com.dinari.api.models.v2.entities.EntityListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<Entity> entities = client.v2().entities().list();\n    }\n}',
+      },
+      php: {
+        method: 'v2->entities->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entities = $client->v2->entities->list(page: 1, pageSize: 1, referenceID: 'x');\n\nvar_dump($entities);",
       },
       python: {
         method: 'v2.entities.list',
@@ -657,6 +727,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.Entity;\nimport com.dinari.api.models.v2.entities.EntityCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityCreateParams params = EntityCreateParams.builder()\n            .name("x")\n            .build();\n        Entity entity = client.v2().entities().create(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->entities->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entity = $client->v2->entities->create(name: 'x', referenceID: 'x');\n\nvar_dump($entity);",
+      },
       python: {
         method: 'v2.entities.create',
         example:
@@ -695,6 +770,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().entities().retrieveCurrent',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.Entity;\nimport com.dinari.api.models.v2.entities.EntityRetrieveCurrentParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Entity entity = client.v2().entities().retrieveCurrent();\n    }\n}',
+      },
+      php: {
+        method: 'v2->entities->retrieveCurrent',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entity = $client->v2->entities->retrieveCurrent();\n\nvar_dump($entity);",
       },
       python: {
         method: 'v2.entities.retrieve_current',
@@ -736,6 +816,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.Entity;\nimport com.dinari.api.models.v2.entities.EntityRetrieveByIdParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Entity entity = client.v2().entities().retrieveById("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->entities->retrieveByID',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entity = $client->v2->entities->retrieveByID(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($entity);",
+      },
       python: {
         method: 'v2.entities.retrieve_by_id',
         example:
@@ -775,6 +860,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().entities().update',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.Entity;\nimport com.dinari.api.models.v2.entities.EntityUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Entity entity = client.v2().entities().update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      php: {
+        method: 'v2->entities->update',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entity = $client->v2->entities->update(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', referenceID: 'x'\n);\n\nvar_dump($entity);",
       },
       python: {
         method: 'v2.entities.update',
@@ -817,6 +907,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.accounts.Account;\nimport com.dinari.api.models.v2.entities.accounts.AccountListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<Account> accounts = client.v2().entities().accounts().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->entities->accounts->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$accounts = $client->v2->entities->accounts->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', page: 1, pageSize: 1\n);\n\nvar_dump($accounts);",
+      },
       python: {
         method: 'v2.entities.accounts.list',
         example:
@@ -858,6 +953,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.accounts.Account;\nimport com.dinari.api.models.v2.entities.accounts.AccountCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Account account = client.v2().entities().accounts().create("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->entities->accounts->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$account = $client->v2->entities->accounts->create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', jurisdiction: Jurisdiction::BASELINE\n);\n\nvar_dump($account);",
+      },
       python: {
         method: 'v2.entities.accounts.create',
         example:
@@ -898,6 +998,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().entities().kyc().retrieve',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.KycInfo;\nimport com.dinari.api.models.v2.entities.kyc.KycRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        KycInfo kycInfo = client.v2().entities().kyc().retrieve("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      php: {
+        method: 'v2->entities->kyc->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycInfo = $client->v2->entities->kyc->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($kycInfo);",
       },
       python: {
         method: 'v2.entities.kyc.retrieve',
@@ -941,6 +1046,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.BaselineKycCheckData;\nimport com.dinari.api.models.v2.entities.kyc.KycInfo;\nimport com.dinari.api.models.v2.entities.kyc.KycSubmitParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        KycSubmitParams params = KycSubmitParams.builder()\n            .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .body(KycSubmitParams.Body.Baseline.builder()\n                .data(BaselineKycCheckData.builder()\n                    .addressCountryCode("SG")\n                    .countryCode("SG")\n                    .lastName("Doe")\n                    .build())\n                .providerName("x")\n                .jurisdiction(KycSubmitParams.Body.Baseline.Jurisdiction.BASELINE)\n                .build())\n            .build();\n        KycInfo kycInfo = client.v2().entities().kyc().submit(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->entities->kyc->submit',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycInfo = $client->v2->entities->kyc->submit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  data: [\n    'alpacaCustomerAgreement' => [\n      'ipAddress' => '192.0.2.1',\n      'signedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n    ],\n    'amlCheck' => [\n      'checkCreatedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'isAdverseMediaMatch' => true,\n      'isMonitoredListsMatch' => true,\n      'isPoliticallyExposedPersonMatch' => true,\n      'isSanctionsMatch' => true,\n      'records' => [\n        'Name: John Doe, Alias: Jonathan Doe, Address: 123 Main St, Springfield, DOB: 01/01/1980, Type of Hit: PEP, Position: Mayor of Springfield, List: World-Check, URL: http://example.com/article',\n        'Name: John Doe, Address: 456 Elm St, Springfield, Type of Hit: Adverse Media, Summary: Involved in financial scandal, URL: http://example.com/article',\n      ],\n      'refID' => 'x',\n    ],\n    'dataCitation' => [\n      'addressSources' => ['utility bill'],\n      'dateOfBirthSources' => [\n        'birth certificate', 'government database lookup'\n      ],\n      'taxIDSources' => ['tax return', 'government database lookup'],\n    ],\n    'employment' => [\n      'employmentStatus' => 'UNEMPLOYED',\n      'employerAddress' => 'x',\n      'employerName' => 'x',\n      'employmentPosition' => 'x',\n    ],\n    'financialProfile' => [\n      'fundingSources' => ['EMPLOYMENT_INCOME'],\n      'liquidNetWorthMax' => 0,\n      'liquidNetWorthMin' => 0,\n    ],\n    'identity' => [\n      'city' => 'xx',\n      'countryOfCitizenship' => 'xx',\n      'countryOfTaxResidence' => 'US',\n      'dateOfBirth' => '2019-12-27',\n      'emailAddress' => 'email_address',\n      'familyName' => 'xx',\n      'givenName' => 'x',\n      'phoneNumber' => '+321669910225610',\n      'postalCode' => 'x',\n      'streetAddress' => 'xx',\n      'taxID' => '732-66-9102',\n      'middleName' => 'x',\n      'state' => 'x',\n      'unit' => 'x',\n    ],\n    'kycMetadata' => [\n      'checkCompletedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'checkInitiatedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'ipAddress' => '192.0.2.1',\n      'refID' => 'x',\n    ],\n    'nonProfessionalTraderAttestation' => [\n      'attestationDt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'isNonProfessionalTrader' => true,\n    ],\n    'riskDisclosure' => [\n      'immediateFamilyExposed' => true,\n      'isAffiliatedExchangeOrFinra' => true,\n      'isControlPerson' => true,\n      'isPoliticallyExposed' => true,\n    ],\n    'trustedContact' => [\n      'familyName' => 'family_name',\n      'givenName' => 'given_name',\n      'emailAddress' => 'email_address',\n      'phoneNumber' => '+321669910225610',\n    ],\n    'usImmigrationInfo' => [\n      'countryOfBirth' => 'xx',\n      'isPermanentResident' => true,\n      'departureFromUsDate' => '2019-12-27',\n      'visaExpirationDate' => '2019-12-27',\n      'visaType' => 'B1',\n    ],\n  ],\n  providerName: 'x',\n  jurisdiction: 'US',\n);\n\nvar_dump($kycInfo);",
+      },
       python: {
         method: 'v2.entities.kyc.submit',
         example:
@@ -981,6 +1091,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.KycCreateManagedCheckParams;\nimport com.dinari.api.models.v2.entities.kyc.KycCreateManagedCheckResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        KycCreateManagedCheckResponse response = client.v2().entities().kyc().createManagedCheck("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->entities->kyc->createManagedCheck',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->entities->kyc->createManagedCheck(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.entities.kyc.create_managed_check',
         example:
@@ -1020,6 +1135,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().entities().kyc().document().retrieve',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.document.DocumentRetrieveParams;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocument;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        DocumentRetrieveParams params = DocumentRetrieveParams.builder()\n            .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .kycId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        List<KycDocument> kycDocuments = client.v2().entities().kyc().document().retrieve(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->entities->kyc->document->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycDocuments = $client->v2->entities->kyc->document->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  entityID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($kycDocuments);",
       },
       python: {
         method: 'v2.entities.kyc.document.retrieve',
@@ -1067,6 +1187,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.document.DocumentUploadParams;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocument;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocumentType;\nimport java.io.ByteArrayInputStream;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        DocumentUploadParams params = DocumentUploadParams.builder()\n            .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .kycId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .documentType(KycDocumentType.GOVERNMENT_ID)\n            .file(new ByteArrayInputStream("Example data".getBytes()))\n            .build();\n        KycDocument kycDocument = client.v2().entities().kyc().document().upload(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->entities->kyc->document->upload',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycDocument = $client->v2->entities->kyc->document->upload(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  entityID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  documentType: KYCDocumentType::GOVERNMENT_ID,\n  file: 'file',\n);\n\nvar_dump($kycDocument);",
+      },
       python: {
         method: 'v2.entities.kyc.document.upload',
         example:
@@ -1106,6 +1231,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().retrieve',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountRetrieveParams;\nimport com.dinari.api.models.v2.entities.accounts.Account;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Account account = client.v2().accounts().retrieve("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$account = $client->v2->accounts->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($account);",
       },
       python: {
         method: 'v2.accounts.retrieve',
@@ -1147,6 +1277,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountDeactivateParams;\nimport com.dinari.api.models.v2.entities.accounts.Account;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Account account = client.v2().accounts().deactivate("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->deactivate',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$account = $client->v2->accounts->deactivate(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($account);",
+      },
       python: {
         method: 'v2.accounts.deactivate',
         example:
@@ -1187,6 +1322,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetPortfolioParams;\nimport com.dinari.api.models.v2.accounts.AccountGetPortfolioResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountGetPortfolioResponse response = client.v2().accounts().getPortfolio("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->getPortfolio',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getPortfolio(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', page: 1, pageSize: 1\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.accounts.get_portfolio',
         example:
@@ -1225,6 +1365,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().getCashBalances',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetCashBalancesParams;\nimport com.dinari.api.models.v2.accounts.AccountGetCashBalancesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<AccountGetCashBalancesResponse> response = client.v2().accounts().getCashBalances("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->getCashBalances',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getCashBalances(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
       },
       python: {
         method: 'v2.accounts.get_cash_balances',
@@ -1272,6 +1417,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetInterestPaymentsParams;\nimport com.dinari.api.models.v2.accounts.AccountGetInterestPaymentsResponse;\nimport java.time.LocalDate;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountGetInterestPaymentsParams params = AccountGetInterestPaymentsParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .endDate(LocalDate.parse("2019-12-27"))\n            .startDate(LocalDate.parse("2019-12-27"))\n            .build();\n        List<AccountGetInterestPaymentsResponse> response = client.v2().accounts().getInterestPayments(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->getInterestPayments',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getInterestPayments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  endDate: '2019-12-27',\n  startDate: '2019-12-27',\n  page: 1,\n  pageSize: 1,\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.accounts.get_interest_payments',
         example:
@@ -1318,6 +1468,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetDividendPaymentsParams;\nimport com.dinari.api.models.v2.accounts.AccountGetDividendPaymentsResponse;\nimport java.time.LocalDate;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountGetDividendPaymentsParams params = AccountGetDividendPaymentsParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .endDate(LocalDate.parse("2019-12-27"))\n            .startDate(LocalDate.parse("2019-12-27"))\n            .build();\n        List<AccountGetDividendPaymentsResponse> response = client.v2().accounts().getDividendPayments(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->getDividendPayments',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getDividendPayments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  endDate: '2019-12-27',\n  startDate: '2019-12-27',\n  page: 1,\n  pageSize: 1,\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.accounts.get_dividend_payments',
         example:
@@ -1356,6 +1511,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().mintSandboxTokens',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountMintSandboxTokensParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        client.v2().accounts().mintSandboxTokens("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->mintSandboxTokens',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$result = $client->v2->accounts->mintSandboxTokens(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', chainID: Chain::EIP155_1\n);\n\nvar_dump($result);",
       },
       python: {
         method: 'v2.accounts.mint_sandbox_tokens',
@@ -1396,6 +1556,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.Wallet;\nimport com.dinari.api.models.v2.accounts.wallet.WalletGetParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Wallet wallet = client.v2().accounts().wallet().get("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->wallet->get',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$wallet = $client->v2->accounts->wallet->get(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($wallet);",
+      },
       python: {
         method: 'v2.accounts.wallet.get',
         example:
@@ -1435,6 +1600,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.Wallet;\nimport com.dinari.api.models.v2.accounts.wallet.WalletConnectInternalParams;\nimport com.dinari.api.models.v2.accounts.wallet.external.WalletChainId;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WalletConnectInternalParams params = WalletConnectInternalParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(WalletChainId.EIP155_0)\n            .walletAddress("wallet_address")\n            .build();\n        Wallet wallet = client.v2().accounts().wallet().connectInternal(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->wallet->connectInternal',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$wallet = $client->v2->accounts->wallet->connectInternal(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: WalletChainID::EIP155_0,\n  walletAddress: 'wallet_address',\n  isShared: true,\n);\n\nvar_dump($wallet);",
+      },
       python: {
         method: 'v2.accounts.wallet.connect_internal',
         example:
@@ -1473,6 +1643,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().wallet().external().getNonce',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.external.ExternalGetNonceParams;\nimport com.dinari.api.models.v2.accounts.wallet.external.ExternalGetNonceResponse;\nimport com.dinari.api.models.v2.accounts.wallet.external.WalletChainId;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        ExternalGetNonceParams params = ExternalGetNonceParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(WalletChainId.EIP155_0)\n            .walletAddress("wallet_address")\n            .build();\n        ExternalGetNonceResponse response = client.v2().accounts().wallet().external().getNonce(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->wallet->external->getNonce',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->wallet->external->getNonce(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: WalletChainID::EIP155_0,\n  walletAddress: 'wallet_address',\n);\n\nvar_dump($response);",
       },
       python: {
         method: 'v2.accounts.wallet.external.get_nonce',
@@ -1518,6 +1693,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().wallet().external().connect',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.Wallet;\nimport com.dinari.api.models.v2.accounts.wallet.external.ExternalConnectParams;\nimport com.dinari.api.models.v2.accounts.wallet.external.WalletChainId;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        ExternalConnectParams params = ExternalConnectParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(WalletChainId.EIP155_0)\n            .nonce("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .signature("0xeaF12bD1DfFd")\n            .walletAddress("wallet_address")\n            .build();\n        Wallet wallet = client.v2().accounts().wallet().external().connect(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->wallet->external->connect',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$wallet = $client->v2->accounts->wallet->external->connect(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: WalletChainID::EIP155_0,\n  nonce: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  signature: '0xeaF12bD1DfFd',\n  walletAddress: 'wallet_address',\n);\n\nvar_dump($wallet);",
       },
       python: {
         method: 'v2.accounts.wallet.external.connect',
@@ -1567,6 +1747,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.Order;\nimport com.dinari.api.models.v2.accounts.orders.OrderListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<Order> orders = client.v2().accounts().orders().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->orders->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orders = $client->v2->accounts->orders->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: Chain::EIP155_1,\n  clientOrderID: 'client_order_id',\n  orderTransactionHash: 'order_transaction_hash',\n  page: 1,\n  pageSize: 1,\n);\n\nvar_dump($orders);",
+      },
       python: {
         method: 'v2.accounts.orders.list',
         example:
@@ -1607,6 +1792,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.Order;\nimport com.dinari.api.models.v2.accounts.orders.OrderRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRetrieveParams params = OrderRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        Order order = client.v2().accounts().orders().retrieve(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->orders->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$order = $client->v2->accounts->orders->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($order);",
+      },
       python: {
         method: 'v2.accounts.orders.retrieve',
         example:
@@ -1646,6 +1836,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().orders().getFulfillments',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.Fulfillment;\nimport com.dinari.api.models.v2.accounts.orders.OrderGetFulfillmentsParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderGetFulfillmentsParams params = OrderGetFulfillmentsParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        List<Fulfillment> fulfillments = client.v2().accounts().orders().getFulfillments(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->orders->getFulfillments',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$fulfillments = $client->v2->accounts->orders->getFulfillments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  page: 1,\n  pageSize: 1,\n);\n\nvar_dump($fulfillments);",
       },
       python: {
         method: 'v2.accounts.orders.get_fulfillments',
@@ -1688,6 +1883,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.OrderBatchCancelParams;\nimport com.dinari.api.models.v2.accounts.orders.OrderBatchCancelResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderBatchCancelParams params = OrderBatchCancelParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .addOrderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        OrderBatchCancelResponse response = client.v2().accounts().orders().batchCancel(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->orders->batchCancel',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orders->batchCancel(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderIDs: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.accounts.orders.batch_cancel',
         example:
@@ -1729,6 +1929,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.Order;\nimport com.dinari.api.models.v2.accounts.orders.OrderCancelParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderCancelParams params = OrderCancelParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        Order order = client.v2().accounts().orders().cancel(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->orders->cancel',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$order = $client->v2->accounts->orders->cancel(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($order);",
+      },
       python: {
         method: 'v2.accounts.orders.cancel',
         example:
@@ -1769,6 +1974,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.Fulfillment;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.OrderFulfillmentQueryParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<Fulfillment> fulfillments = client.v2().accounts().orderFulfillments().query("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->orderFulfillments->query',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$fulfillments = $client->v2->accounts->orderFulfillments->query(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderIDs: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  page: 1,\n  pageSize: 1,\n);\n\nvar_dump($fulfillments);",
+      },
       python: {
         method: 'v2.accounts.order_fulfillments.query',
         example:
@@ -1808,6 +2018,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().orderFulfillments().retrieve',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.Fulfillment;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.OrderFulfillmentRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderFulfillmentRetrieveParams params = OrderFulfillmentRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderFulfillmentId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        Fulfillment fulfillment = client.v2().accounts().orderFulfillments().retrieve(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->orderFulfillments->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$fulfillment = $client->v2->accounts->orderFulfillments->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($fulfillment);",
       },
       python: {
         method: 'v2.accounts.order_fulfillments.retrieve',
@@ -1856,6 +2071,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().orderRequests().createMarketBuy',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateMarketBuyOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateMarketBuyParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateMarketBuyParams params = OrderRequestCreateMarketBuyParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createMarketBuyOrderInput(CreateMarketBuyOrderInput.builder()\n                .paymentAmount(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createMarketBuy(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->createMarketBuy',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createMarketBuy(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  paymentAmount: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
       },
       python: {
         method: 'v2.accounts.order_requests.create_market_buy',
@@ -1906,6 +2126,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateMarketSellOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateMarketSellParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateMarketSellParams params = OrderRequestCreateMarketSellParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createMarketSellOrderInput(CreateMarketSellOrderInput.builder()\n                .assetQuantity(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createMarketSell(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->orderRequests->createMarketSell',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createMarketSell(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetQuantity: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  paymentTokenAddress: 'payment_token_address',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+      },
       python: {
         method: 'v2.accounts.order_requests.create_market_sell',
         example:
@@ -1954,6 +2179,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().orderRequests().createLimitBuy',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateLimitBuyOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateLimitBuyParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateLimitBuyParams params = OrderRequestCreateLimitBuyParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createLimitBuyOrderInput(CreateLimitBuyOrderInput.builder()\n                .assetQuantity(0.0)\n                .limitPrice(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createLimitBuy(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->createLimitBuy',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createLimitBuy(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetQuantity: 0,\n  limitPrice: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
       },
       python: {
         method: 'v2.accounts.order_requests.create_limit_buy',
@@ -2005,6 +2235,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateLimitSellOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateLimitSellParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateLimitSellParams params = OrderRequestCreateLimitSellParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createLimitSellOrderInput(CreateLimitSellOrderInput.builder()\n                .assetQuantity(0.0)\n                .limitPrice(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createLimitSell(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->orderRequests->createLimitSell',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createLimitSell(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetQuantity: 0,\n  limitPrice: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  paymentTokenAddress: 'payment_token_address',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+      },
       python: {
         method: 'v2.accounts.order_requests.create_limit_sell',
         example:
@@ -2053,6 +2288,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<OrderRequest> orderRequests = client.v2().accounts().orderRequests().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->orderRequests->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequests = $client->v2->accounts->orderRequests->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  orderID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  page: 1,\n  pageSize: 1,\n);\n\nvar_dump($orderRequests);",
+      },
       python: {
         method: 'v2.accounts.order_requests.list',
         example:
@@ -2092,6 +2332,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().orderRequests().retrieve',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestRetrieveParams params = OrderRequestRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().retrieve(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
       },
       python: {
         method: 'v2.accounts.order_requests.retrieve',
@@ -2143,6 +2388,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().orderRequests().getFeeQuote',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestGetFeeQuoteParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestGetFeeQuoteResponse;\nimport com.dinari.api.models.v2.accounts.orders.OrderSide;\nimport com.dinari.api.models.v2.accounts.orders.OrderType;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestGetFeeQuoteParams params = OrderRequestGetFeeQuoteParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderSide(OrderSide.BUY)\n            .orderType(OrderType.MARKET)\n            .build();\n        OrderRequestGetFeeQuoteResponse response = client.v2().accounts().orderRequests().getFeeQuote(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->getFeeQuote',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderRequests->getFeeQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderSide: OrderSide::BUY,\n  orderType: OrderType::MARKET,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetTokenQuantity: 0,\n  chainID: Chain::EIP155_1,\n  limitPrice: 0,\n  paymentTokenAddress: 'payment_token_address',\n  paymentTokenQuantity: 0,\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($response);",
       },
       python: {
         method: 'v2.accounts.order_requests.get_fee_quote',
@@ -2198,6 +2448,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.Chain;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitResponse;\nimport com.dinari.api.models.v2.accounts.orders.OrderSide;\nimport com.dinari.api.models.v2.accounts.orders.OrderTif;\nimport com.dinari.api.models.v2.accounts.orders.OrderType;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Eip155CreatePermitParams params = Eip155CreatePermitParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(Chain.EIP155_1)\n            .orderSide(OrderSide.BUY)\n            .orderTif(OrderTif.DAY)\n            .orderType(OrderType.MARKET)\n            .paymentToken("payment_token")\n            .build();\n        Eip155CreatePermitResponse response = client.v2().accounts().orderRequests().eip155().createPermit(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->orderRequests->eip155->createPermit',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderRequests->eip155->createPermit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: Chain::EIP155_1,\n  orderSide: OrderSide::BUY,\n  orderTif: OrderTif::DAY,\n  orderType: OrderType::MARKET,\n  paymentToken: 'payment_token',\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetTokenQuantity: 0,\n  clientOrderID: 'client_order_id',\n  limitPrice: 0,\n  paymentTokenQuantity: 0,\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  tokenID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.accounts.order_requests.eip155.create_permit',
         example:
@@ -2237,6 +2492,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().orderRequests().eip155().createPermitTransaction',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitTransactionParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitTransactionResponse;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155OrderRequestPermitTransaction;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Eip155CreatePermitTransactionParams params = Eip155CreatePermitTransactionParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .eip155OrderRequestPermitTransaction(Eip155OrderRequestPermitTransaction.builder()\n                .orderRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n                .permitSignature("0xeaF12bD1DfFd")\n                .build())\n            .build();\n        Eip155CreatePermitTransactionResponse response = client.v2().accounts().orderRequests().eip155().createPermitTransaction(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->eip155->createPermitTransaction',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client\n  ->v2\n  ->accounts\n  ->orderRequests\n  ->eip155\n  ->createPermitTransaction(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  permitSignature: '0xeaF12bD1DfFd',\n);\n\nvar_dump($response);",
       },
       python: {
         method: 'v2.accounts.order_requests.eip155.create_permit_transaction',
@@ -2279,6 +2539,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155OrderRequestPermitTransaction;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155SubmitParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155SubmitResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Eip155SubmitParams params = Eip155SubmitParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .eip155OrderRequestPermitTransaction(Eip155OrderRequestPermitTransaction.builder()\n                .orderRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n                .permitSignature("0xeaF12bD1DfFd")\n                .build())\n            .build();\n        Eip155SubmitResponse response = client.v2().accounts().orderRequests().eip155().submit(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->orderRequests->eip155->submit',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderRequests->eip155->submit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  permitSignature: '0xeaF12bD1DfFd',\n);\n\nvar_dump($response);",
+      },
       python: {
         method: 'v2.accounts.order_requests.eip155.submit',
         example:
@@ -2318,6 +2583,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().withdrawalRequests().list',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequest;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<WithdrawalRequest> withdrawalRequests = client.v2().accounts().withdrawalRequests().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->withdrawalRequests->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawalRequests = $client->v2->accounts->withdrawalRequests->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', page: 1, pageSize: 1\n);\n\nvar_dump($withdrawalRequests);",
       },
       python: {
         method: 'v2.accounts.withdrawal_requests.list',
@@ -2360,6 +2630,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequest;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRequestCreateParams params = WithdrawalRequestCreateParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .paymentTokenQuantity(0.0)\n            .recipientAccountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        WithdrawalRequest withdrawalRequest = client.v2().accounts().withdrawalRequests().create(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->withdrawalRequests->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawalRequest = $client->v2->accounts->withdrawalRequests->create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  paymentTokenQuantity: 0,\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawalRequest);",
+      },
       python: {
         method: 'v2.accounts.withdrawal_requests.create',
         example:
@@ -2399,6 +2674,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().withdrawalRequests().retrieve',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequest;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRequestRetrieveParams params = WithdrawalRequestRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .withdrawalRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        WithdrawalRequest withdrawalRequest = client.v2().accounts().withdrawalRequests().retrieve(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->withdrawalRequests->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawalRequest = $client->v2->accounts->withdrawalRequests->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawalRequest);",
       },
       python: {
         method: 'v2.accounts.withdrawal_requests.retrieve',
@@ -2445,6 +2725,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawals.Withdrawal;\nimport com.dinari.api.models.v2.accounts.withdrawals.WithdrawalListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<Withdrawal> withdrawals = client.v2().accounts().withdrawals().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->withdrawals->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawals = $client->v2->accounts->withdrawals->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  page: 1,\n  pageSize: 1,\n  withdrawalRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawals);",
+      },
       python: {
         method: 'v2.accounts.withdrawals.list',
         example:
@@ -2484,6 +2769,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().withdrawals().retrieve',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawals.Withdrawal;\nimport com.dinari.api.models.v2.accounts.withdrawals.WithdrawalRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRetrieveParams params = WithdrawalRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .withdrawalId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        Withdrawal withdrawal = client.v2().accounts().withdrawals().retrieve(params);\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->withdrawals->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawal = $client->v2->accounts->withdrawals->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawal);",
       },
       python: {
         method: 'v2.accounts.withdrawals.retrieve',
@@ -2525,6 +2815,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'v2().accounts().tokenTransfers().list',
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransfer;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<TokenTransfer> tokenTransfers = client.v2().accounts().tokenTransfers().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      php: {
+        method: 'v2->accounts->tokenTransfers->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$tokenTransfers = $client->v2->accounts->tokenTransfers->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', page: 1, pageSize: 1\n);\n\nvar_dump($tokenTransfers);",
       },
       python: {
         method: 'v2.accounts.token_transfers.list',
@@ -2572,6 +2867,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransfer;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        TokenTransferCreateParams params = TokenTransferCreateParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .quantity(0.0)\n            .recipientAccountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .tokenAddress("token_address")\n            .build();\n        TokenTransfer tokenTransfer = client.v2().accounts().tokenTransfers().create(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->tokenTransfers->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$tokenTransfer = $client->v2->accounts->tokenTransfers->create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  quantity: 0,\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  tokenAddress: 'token_address',\n);\n\nvar_dump($tokenTransfer);",
+      },
       python: {
         method: 'v2.accounts.token_transfers.create',
         example:
@@ -2613,6 +2913,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransfer;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        TokenTransferRetrieveParams params = TokenTransferRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .transferId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        TokenTransfer tokenTransfer = client.v2().accounts().tokenTransfers().retrieve(params);\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->tokenTransfers->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$tokenTransfer = $client->v2->accounts->tokenTransfers->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($tokenTransfer);",
+      },
       python: {
         method: 'v2.accounts.token_transfers.retrieve',
         example:
@@ -2652,6 +2957,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.activities.ActivityRetrieveBrokerageParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        client.v2().accounts().activities().retrieveBrokerage("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
       },
+      php: {
+        method: 'v2->accounts->activities->retrieveBrokerage',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$result = $client->v2->accounts->activities->retrieveBrokerage(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', pageSize: 1, pageToken: 'page_token'\n);\n\nvar_dump($result);",
+      },
       python: {
         method: 'v2.accounts.activities.retrieve_brokerage',
         example:
@@ -2686,6 +2996,11 @@ const EMBEDDED_READMES: { language: string; content: string }[] = [
     language: 'java',
     content:
       '# Dinari Java API Library\n\n<!-- x-release-please-start-version -->\n[![Maven Central](https://img.shields.io/maven-central/v/com.dinari.api/dinari-java)](https://central.sonatype.com/artifact/com.dinari.api/dinari-java/0.0.1)\n[![javadoc](https://javadoc.io/badge2/com.dinari.api/dinari-java/0.0.1/javadoc.svg)](https://javadoc.io/doc/com.dinari.api/dinari-java/0.0.1)\n<!-- x-release-please-end -->\n\nThe Dinari Java SDK provides convenient access to the [Dinari REST API](https://docs.dinari.com/)   from applications written in Java.\n\n\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Dinari MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40dinari%2Fapi-sdk-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBkaW5hcmkvYXBpLXNkay1tY3AiXSwiZW52Ijp7IkRJTkFSSV9BUElfS0VZX0lEIjoiTXkgQVBJIEtleSBJRCIsIkRJTkFSSV9BUElfU0VDUkVUX0tFWSI6Ik15IEFQSSBTZWNyZXQgS2V5In19)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40dinari%2Fapi-sdk-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40dinari%2Fapi-sdk-mcp%22%5D%2C%22env%22%3A%7B%22DINARI_API_KEY_ID%22%3A%22My%20API%20Key%20ID%22%2C%22DINARI_API_SECRET_KEY%22%3A%22My%20API%20Secret%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n<!-- x-release-please-start-version -->\n\nThe REST API documentation can be found on [docs.dinari.com](https://docs.dinari.com/). Javadocs are available on [javadoc.io](https://javadoc.io/doc/com.dinari.api/dinari-java/0.0.1).\n\n<!-- x-release-please-end -->\n\n## Installation\n\n<!-- x-release-please-start-version -->\n\n### Gradle\n\n~~~kotlin\nimplementation("com.dinari.api:dinari-java:0.0.1")\n~~~\n\n### Maven\n\n~~~xml\n<dependency>\n  <groupId>com.dinari.api</groupId>\n  <artifactId>dinari-java</artifactId>\n  <version>0.0.1</version>\n</dependency>\n~~~\n\n<!-- x-release-please-end -->\n\n## Requirements\n\nThis library requires Java 8 or later.\n\n## Usage\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListResponse;\n\n// Configures using the `dinari.apiKeyId`, `dinari.apiSecretKey` and `dinari.baseUrl` system properties\n// Or configures using the `DINARI_API_KEY_ID`, `DINARI_API_SECRET_KEY` and `DINARI_BASE_URL` environment variables\nDinariClient client = DinariOkHttpClient.fromEnv();\n\nList<StockListResponse> stocks = client.v2().marketData().stocks().list();\n```\n\n## Client configuration\n\nConfigure the client using system properties or environment variables:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\n\n// Configures using the `dinari.apiKeyId`, `dinari.apiSecretKey` and `dinari.baseUrl` system properties\n// Or configures using the `DINARI_API_KEY_ID`, `DINARI_API_SECRET_KEY` and `DINARI_BASE_URL` environment variables\nDinariClient client = DinariOkHttpClient.fromEnv();\n```\n\nOr manually:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\n\nDinariClient client = DinariOkHttpClient.builder()\n    .apiKeyId("My API Key ID")\n    .apiSecretKey("My API Secret Key")\n    .build();\n```\n\nOr using a combination of the two approaches:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\n\nDinariClient client = DinariOkHttpClient.builder()\n    // Configures using the `dinari.apiKeyId`, `dinari.apiSecretKey` and `dinari.baseUrl` system properties\n    // Or configures using the `DINARI_API_KEY_ID`, `DINARI_API_SECRET_KEY` and `DINARI_BASE_URL` environment variables\n    .fromEnv()\n    .apiKeyId("My API Key ID")\n    .build();\n```\n\nSee this table for the available options:\n\n| Setter         | System property       | Environment variable    | Required | Default value                             |\n| -------------- | --------------------- | ----------------------- | -------- | ----------------------------------------- |\n| `apiKeyId`     | `dinari.apiKeyId`     | `DINARI_API_KEY_ID`     | true     | -                                         |\n| `apiSecretKey` | `dinari.apiSecretKey` | `DINARI_API_SECRET_KEY` | true     | -                                         |\n| `baseUrl`      | `dinari.baseUrl`      | `DINARI_BASE_URL`       | true     | `"https://api-enterprise.sbt.dinari.com"` |\n\nSystem properties take precedence over environment variables.\n\n> [!TIP]\n> Don\'t create more than one client in the same application. Each client has a connection pool and\n> thread pools, which are more efficient to share between requests.\n\n### Modifying configuration\n\nTo temporarily use a modified client configuration, while reusing the same connection and thread       pools, call `withOptions()` on any client or service:\n\n```java\nimport com.dinari.api.client.DinariClient;\n\nDinariClient clientWithOptions = client.withOptions(optionsBuilder -> {\n    optionsBuilder.baseUrl("https://example.com");\n    optionsBuilder.maxRetries(42);\n});\n```\n\nThe `withOptions()` method does not affect the original client or service.\n\n## Requests and responses\n\nTo send a request to the Dinari API, build an instance of some `Params` class and pass it to the     corresponding client method. When the response is received, it will be deserialized into an instance of     a Java class.\n\nFor example, `client.v2().marketData().stocks().list(...)` should be called with an instance of `StockListParams`, and it     will return an instance of `List<StockListResponse>`.\n\n## Immutability\n\nEach class in the SDK has an associated   [builder](https://blogs.oracle.com/javamagazine/post/exploring-joshua-blochs-builder-design-pattern-in-java)   or factory method for constructing it.\n\nEach class is [immutable](https://docs.oracle.com/javase/tutorial/essential/concurrency/immutable.html)   once constructed. If the class has an associated builder, then it has a `toBuilder()` method, which can   be used to convert it back to a builder for making a modified copy.\n\nBecause each class is immutable, builder modification will _never_ affect already built class instances.\n\n## Asynchronous execution\n\nThe default client is synchronous. To switch to asynchronous execution, call the `async()` method:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListResponse;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `dinari.apiKeyId`, `dinari.apiSecretKey` and `dinari.baseUrl` system properties\n// Or configures using the `DINARI_API_KEY_ID`, `DINARI_API_SECRET_KEY` and `DINARI_BASE_URL` environment variables\nDinariClient client = DinariOkHttpClient.fromEnv();\n\nCompletableFuture<List<StockListResponse>> stocks = client.async().v2().marketData().stocks().list();\n```\n\nOr create an asynchronous client from the beginning:\n\n```java\nimport com.dinari.api.client.DinariClientAsync;\nimport com.dinari.api.client.okhttp.DinariOkHttpClientAsync;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListResponse;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `dinari.apiKeyId`, `dinari.apiSecretKey` and `dinari.baseUrl` system properties\n// Or configures using the `DINARI_API_KEY_ID`, `DINARI_API_SECRET_KEY` and `DINARI_BASE_URL` environment variables\nDinariClientAsync client = DinariOkHttpClientAsync.fromEnv();\n\nCompletableFuture<List<StockListResponse>> stocks = client.v2().marketData().stocks().list();\n```\n\nThe asynchronous client supports the same options as the synchronous one, except most methods return `CompletableFuture`s.\n\n\n\n## File uploads\n\nThe SDK defines methods that accept files.\n\nTo upload a file, pass a [`Path`](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Path.html):\n\n```java\nimport com.dinari.api.models.v2.entities.kyc.document.DocumentUploadParams;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocument;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocumentType;\nimport java.nio.file.Paths;\n\nDocumentUploadParams params = DocumentUploadParams.builder()\n    .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n    .kycId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n    .documentType(KycDocumentType.GOVERNMENT_ID)\n    .file(Paths.get("/path/to/file"))\n    .build();\nKycDocument kycDocument = client.v2().entities().kyc().document().upload(params);\n```\n\nOr an arbitrary [`InputStream`](https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html):\n\n```java\nimport com.dinari.api.models.v2.entities.kyc.document.DocumentUploadParams;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocument;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocumentType;\nimport java.net.URL;\n\nDocumentUploadParams params = DocumentUploadParams.builder()\n    .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n    .kycId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n    .documentType(KycDocumentType.GOVERNMENT_ID)\n    .file(new URL("https://example.com//path/to/file").openStream())\n    .build();\nKycDocument kycDocument = client.v2().entities().kyc().document().upload(params);\n```\n\nOr a `byte[]` array:\n\n```java\nimport com.dinari.api.models.v2.entities.kyc.document.DocumentUploadParams;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocument;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocumentType;\n\nDocumentUploadParams params = DocumentUploadParams.builder()\n    .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n    .kycId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n    .documentType(KycDocumentType.GOVERNMENT_ID)\n    .file("content".getBytes())\n    .build();\nKycDocument kycDocument = client.v2().entities().kyc().document().upload(params);\n```\n\nNote that when passing a non-`Path` its filename is unknown so it will not be included in the request.     To manually set a filename, pass a [`MultipartField`](dinari-java-core/src/main/kotlin/com/dinari/api/core/Values.kt):\n\n```java\nimport com.dinari.api.core.MultipartField;\nimport com.dinari.api.models.v2.entities.kyc.document.DocumentUploadParams;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocument;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocumentType;\nimport java.io.InputStream;\nimport java.net.URL;\n\nDocumentUploadParams params = DocumentUploadParams.builder()\n    .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n    .kycId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n    .documentType(KycDocumentType.GOVERNMENT_ID)\n    .file(MultipartField.<InputStream>builder()\n        .value(new URL("https://example.com//path/to/file").openStream())\n        .filename("/path/to/file")\n        .build())\n    .build();\nKycDocument kycDocument = client.v2().entities().kyc().document().upload(params);\n```\n\n\n\n## Raw responses\n\nThe SDK defines methods that deserialize responses into instances of Java classes.       However, these methods don\'t provide access to the response headers, status code, or the raw response       body.\n\nTo access this data, prefix any HTTP method call on a client or service with `withRawResponse()`:\n\n```java\nimport com.dinari.api.core.http.Headers;\nimport com.dinari.api.core.http.HttpResponseFor;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListResponse;\n\nHttpResponseFor<List<StockListResponse>> stocks = client.v2().marketData().stocks().withRawResponse().list();\n\nint statusCode = stocks.statusCode();\nHeaders headers = stocks.headers();\n```\n\nYou can still deserialize the response into an instance of a Java class if needed:\n\n```java\nimport com.dinari.api.models.v2.marketdata.stocks.StockListResponse;\n\nList<StockListResponse> parsedStocks = stocks.parse();\n```\n\n## Error handling\n\nThe SDK throws custom unchecked exception types:\n\n- [`DinariServiceException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/DinariServiceException.kt): Base class for HTTP errors. See this table for which exception       subclass is thrown for each HTTP status code:\n\n  | Status | Exception                                          |\n  | ------ | -------------------------------------------------- |\n  | 400    | [`BadRequestException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/BadRequestException.kt)           |\n  | 401    | [`UnauthorizedException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/UnauthorizedException.kt)         |\n  | 403    | [`PermissionDeniedException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/PermissionDeniedException.kt)     |\n  | 404    | [`NotFoundException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/NotFoundException.kt)             |\n  | 422    | [`UnprocessableEntityException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/UnprocessableEntityException.kt)  |\n  | 429    | [`RateLimitException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/RateLimitException.kt)            |\n  | 5xx    | [`InternalServerException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/InternalServerException.kt)       |\n  | others | [`UnexpectedStatusCodeException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/UnexpectedStatusCodeException.kt) |\n\n- [`DinariIoException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/DinariIoException.kt): I/O networking errors.\n\n- [`DinariRetryableException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/DinariRetryableException.kt): Generic error indicating a failure that could be retried by the client.\n\n- [`DinariInvalidDataException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/DinariInvalidDataException.kt): Failure to interpret successfully parsed data. For example,       when accessing a property that\'s supposed to be required, but the API unexpectedly omitted it from the       response.\n\n- [`DinariException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/DinariException.kt): Base class for all exceptions. Most errors will result in one of the       previously mentioned ones, but completely generic errors may be thrown using the base class.\n\n\n\n## Logging\n\nThe SDK uses the standard   [OkHttp logging interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor).\n\nEnable logging by setting the `DINARI_LOG` environment variable to   `info`:\n\n```sh\nexport DINARI_LOG=info\n```\n\nOr to `debug` for more verbose logging:\n\n```sh\nexport DINARI_LOG=debug\n```\n\n## ProGuard and R8\n\nAlthough the SDK uses reflection, it is still usable with     [ProGuard](https://github.com/Guardsquare/proguard) and     [R8](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization) because     `dinari-java-core` is published with a     [configuration file](dinari-java-core/src/main/resources/META-INF/proguard/dinari-java-core.pro) containing     [keep rules](https://www.guardsquare.com/manual/configuration/usage).\n\nProGuard and R8 should automatically detect and use the published rules, but you can also manually copy     the keep rules if necessary.\n\n\n\n\n\n## Jackson\n\nThe SDK depends on [Jackson](https://github.com/FasterXML/jackson) for JSON     serialization/deserialization. It is compatible with version 2.13.4 or higher,     but depends on version 2.18.2 by default.\n\nThe SDK throws an exception if it detects an incompatible Jackson version at runtime (e.g. if the     default version was overridden in your Maven or Gradle config).\n\nIf the SDK threw an exception, but you\'re _certain_ the version is compatible, then disable the version     check using the `checkJacksonVersionCompatibility` on [`DinariOkHttpClient`](dinari-java-client-okhttp/src/main/kotlin/com/dinari/api/client/okhttp/DinariOkHttpClient.kt) or     [`DinariOkHttpClientAsync`](dinari-java-client-okhttp/src/main/kotlin/com/dinari/api/client/okhttp/DinariOkHttpClientAsync.kt).\n\n> [!CAUTION]\n> We make no guarantee that the SDK works correctly when the Jackson version check is disabled.\n\nAlso note that there are bugs in older Jackson versions that can affect the SDK. We don\'t work around all     Jackson bugs ([example](https://github.com/FasterXML/jackson-databind/issues/3240)) and expect users to     upgrade Jackson for those instead.\n\n## Network options\n\n### Retries\n\nThe SDK automatically retries 2 times by default, with a short exponential backoff between requests.\n\nOnly the following error types are retried:\n- Connection errors (for example, due to a network connectivity problem)\n- 408 Request Timeout\n- 409 Conflict\n- 429 Rate Limit\n- 5xx Internal\n\nThe API may also explicitly instruct the SDK to retry or not retry a request.\n\nTo set a custom number of retries, configure the client using the `maxRetries` method:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\n\nDinariClient client = DinariOkHttpClient.builder()\n    .fromEnv()\n    .maxRetries(4)\n    .build();\n```\n\n### Timeouts\n\nRequests time out after 1 minute by default.\n\nTo set a custom timeout, configure the method call using the `timeout` method:\n\n```java\nimport com.dinari.api.models.v2.marketdata.stocks.StockListResponse;\n\nList<StockListResponse> stocks = client.v2().marketData().stocks().list(RequestOptions.builder().timeout(Duration.ofSeconds(30)).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport java.time.Duration;\n\nDinariClient client = DinariOkHttpClient.builder()\n    .fromEnv()\n    .timeout(Duration.ofSeconds(30))\n    .build();\n```\n\n### Proxies\n\nTo route requests through a proxy, configure the client using the `proxy` method:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport java.net.InetSocketAddress;\nimport java.net.Proxy;\n\nDinariClient client = DinariOkHttpClient.builder()\n    .fromEnv()\n    .proxy(new Proxy(\n      Proxy.Type.HTTP, new InetSocketAddress(\n        "https://example.com", 8080\n      )\n    ))\n    .build();\n```\n\n### Connection pooling\n\nTo customize the underlying OkHttp connection pool, configure the client using the   `maxIdleConnections` and `keepAliveDuration` methods:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport java.time.Duration;\n\nDinariClient client = DinariOkHttpClient.builder()\n    .fromEnv()\n    // If `maxIdleConnections` is set, then `keepAliveDuration` must be set, and vice versa.\n    .maxIdleConnections(10)\n    .keepAliveDuration(Duration.ofMinutes(2))\n    .build();\n```\n\nIf both options are unset, OkHttp\'s default connection pool settings are used.\n\n### HTTPS\n\n> [!NOTE]\n> Most applications should not call these methods, and instead use the system defaults. The defaults include\n> special optimizations that can be lost if the implementations are modified.\n\nTo configure how HTTPS connections are secured, configure the client using the `sslSocketFactory`,   `trustManager`, and `hostnameVerifier` methods:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\n\nDinariClient client = DinariOkHttpClient.builder()\n    .fromEnv()\n    // If `sslSocketFactory` is set, then `trustManager` must be set, and vice versa.\n    .sslSocketFactory(yourSSLSocketFactory)\n    .trustManager(yourTrustManager)\n    .hostnameVerifier(yourHostnameVerifier)\n    .build();\n```\n\n### Environments\n\nThe SDK sends requests to the production by default. To send requests to a different     environment, configure the client like so:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\n\nDinariClient client = DinariOkHttpClient.builder()\n    .fromEnv()\n    .sandbox()\n    .build();\n```\n\n### Custom HTTP client\n\nThe SDK consists of three artifacts:\n- `dinari-java-core`\n  - Contains core SDK logic\n  - Does not depend on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`DinariClient`](dinari-java-core/src/main/kotlin/com/dinari/api/client/DinariClient.kt), [`DinariClientAsync`](dinari-java-core/src/main/kotlin/com/dinari/api/client/DinariClientAsync.kt),             [`DinariClientImpl`](dinari-java-core/src/main/kotlin/com/dinari/api/client/DinariClientImpl.kt), and [`DinariClientAsyncImpl`](dinari-java-core/src/main/kotlin/com/dinari/api/client/DinariClientAsyncImpl.kt), all of which can             work with any HTTP client\n- `dinari-java-client-okhttp`\n  - Depends on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`DinariOkHttpClient`](dinari-java-client-okhttp/src/main/kotlin/com/dinari/api/client/okhttp/DinariOkHttpClient.kt) and [`DinariOkHttpClientAsync`](dinari-java-client-okhttp/src/main/kotlin/com/dinari/api/client/okhttp/DinariOkHttpClientAsync.kt), which             provide a way to construct [`DinariClientImpl`](dinari-java-core/src/main/kotlin/com/dinari/api/client/DinariClientImpl.kt) and             [`DinariClientAsyncImpl`](dinari-java-core/src/main/kotlin/com/dinari/api/client/DinariClientAsyncImpl.kt), respectively, using OkHttp\n- `dinari-java`\n  - Depends on and exposes the APIs of both `dinari-java-core` and `dinari-java-client-okhttp`\n  - Does not have its own logic\n\nThis structure allows replacing the SDK\'s default HTTP client without pulling in unnecessary dependencies.\n\n#### Customized [`OkHttpClient`](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html)\n\n> [!TIP]\n> Try the available [network options](#network-options) before replacing the default client.\n\nTo use a customized `OkHttpClient`:\n\n1. Replace your [`dinari-java` dependency](#installation) with `dinari-java-core`\n2. Copy `dinari-java-client-okhttp`\'s [`OkHttpClient`](dinari-java-client-okhttp/src/main/kotlin/com/dinari/api/client/okhttp/OkHttpClient.kt) class into your code and        customize it\n3. Construct [`DinariClientImpl`](dinari-java-core/src/main/kotlin/com/dinari/api/client/DinariClientImpl.kt) or [`DinariClientAsyncImpl`](dinari-java-core/src/main/kotlin/com/dinari/api/client/DinariClientAsyncImpl.kt), similarly to        [`DinariOkHttpClient`](dinari-java-client-okhttp/src/main/kotlin/com/dinari/api/client/okhttp/DinariOkHttpClient.kt) or [`DinariOkHttpClientAsync`](dinari-java-client-okhttp/src/main/kotlin/com/dinari/api/client/okhttp/DinariOkHttpClientAsync.kt), using your        customized client\n\n### Completely custom HTTP client\n\nTo use a completely custom HTTP client:\n\n1. Replace your [`dinari-java` dependency](#installation) with `dinari-java-core`\n2. Write a class that implements the [`HttpClient`](dinari-java-core/src/main/kotlin/com/dinari/api/core/http/HttpClient.kt) interface\n3. Construct [`DinariClientImpl`](dinari-java-core/src/main/kotlin/com/dinari/api/client/DinariClientImpl.kt) or [`DinariClientAsyncImpl`](dinari-java-core/src/main/kotlin/com/dinari/api/client/DinariClientAsyncImpl.kt), similarly to        [`DinariOkHttpClient`](dinari-java-client-okhttp/src/main/kotlin/com/dinari/api/client/okhttp/DinariOkHttpClient.kt) or [`DinariOkHttpClientAsync`](dinari-java-client-okhttp/src/main/kotlin/com/dinari/api/client/okhttp/DinariOkHttpClientAsync.kt), using your new        client class\n\n## Undocumented API functionality\n\nThe SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.\n\n### Parameters\n\nTo set undocumented parameters, call the `putAdditionalHeader`, `putAdditionalQueryParam`, or       `putAdditionalBodyProperty` methods on any `Params` class:\n\n```java\nimport com.dinari.api.core.JsonValue;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListParams;\n\nStockListParams params = StockListParams.builder()\n    .putAdditionalHeader("Secret-Header", "42")\n    .putAdditionalQueryParam("secret_query_param", "42")\n    .putAdditionalBodyProperty("secretProperty", JsonValue.from("42"))\n    .build();\n```\n\nThese can be accessed on the built object later using the `_additionalHeaders()`,       `_additionalQueryParams()`, and `_additionalBodyProperties()` methods.\n\nTo set a documented parameter or property to an undocumented or not yet supported _value_, pass a       [`JsonValue`](dinari-java-core/src/main/kotlin/com/dinari/api/core/Values.kt) object to its setter:\n\n```java\nimport com.dinari.api.models.v2.marketdata.stocks.StockListParams;\n\nStockListParams params = StockListParams.builder().build();\n```\n\nThe most straightforward way to create a [`JsonValue`](dinari-java-core/src/main/kotlin/com/dinari/api/core/Values.kt) is using its       `from(...)` method:\n\n```java\nimport com.dinari.api.core.JsonValue;\nimport java.util.List;\nimport java.util.Map;\n\n// Create primitive JSON values\nJsonValue nullValue = JsonValue.from(null);\nJsonValue booleanValue = JsonValue.from(true);\nJsonValue numberValue = JsonValue.from(42);\nJsonValue stringValue = JsonValue.from("Hello World!");\n\n// Create a JSON array value equivalent to `["Hello", "World"]`\nJsonValue arrayValue = JsonValue.from(List.of(\n  "Hello", "World"\n));\n\n// Create a JSON object value equivalent to `{ "a": 1, "b": 2 }`\nJsonValue objectValue = JsonValue.from(Map.of(\n  "a", 1,\n  "b", 2\n));\n\n// Create an arbitrarily nested JSON equivalent to:\n// {\n//   "a": [1, 2],\n//   "b": [3, 4]\n// }\nJsonValue complexValue = JsonValue.from(Map.of(\n  "a", List.of(\n    1, 2\n  ),\n  "b", List.of(\n    3, 4\n  )\n));\n```\n\nNormally a `Builder` class\'s `build` method will throw         [`IllegalStateException`](https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalStateException.html)         if any required parameter or property is unset.\n\nTo forcibly omit a required parameter or property, pass [`JsonMissing`](dinari-java-core/src/main/kotlin/com/dinari/api/core/Values.kt):\n\n```java\nimport com.dinari.api.core.JsonMissing;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentPriceParams;\n\nStockListParams params = StockRetrieveCurrentPriceParams.builder()\n    .stockId(JsonMissing.of())\n    .build();\n```\n\n### Response properties\n\nTo access undocumented response properties, call the `_additionalProperties()` method:\n\n```java\nimport com.dinari.api.core.JsonValue;\nimport java.util.Map;\n\nMap<String, JsonValue> additionalProperties = client.v2().marketData().retrieveMarketHours(params)._additionalProperties();\nJsonValue secretPropertyValue = additionalProperties.get("secretProperty");\n\nString result = secretPropertyValue.accept(new JsonValue.Visitor<>() {\n    @Override\n    public String visitNull() {\n        return "It\'s null!";\n    }\n\n    @Override\n    public String visitBoolean(boolean value) {\n        return "It\'s a boolean!";\n    }\n\n    @Override\n    public String visitNumber(Number value) {\n        return "It\'s a number!";\n    }\n\n    // Other methods include `visitMissing`, `visitString`, `visitArray`, and `visitObject`\n    // The default implementation of each unimplemented method delegates to `visitDefault`, which throws by default, but can also be overridden\n});\n```\n\nTo access a property\'s raw JSON value, which may be undocumented, call its `_` prefixed method:\n\n```java\nimport com.dinari.api.core.JsonField;\nimport java.util.Optional;\n\nJsonField<Object> field = client.v2().marketData().retrieveMarketHours(params)._field();\n\nif (field.isMissing()) {\n  // The property is absent from the JSON response\n} else if (field.isNull()) {\n  // The property was set to literal null\n} else {\n  // Check if value was provided as a string\n  // Other methods include `asNumber()`, `asBoolean()`, etc.\n  Optional<String> jsonString = field.asString();\n\n  // Try to deserialize into a custom type\n  MyClass myObject = field.asUnknown().orElseThrow().convert(MyClass.class);\n}\n```\n\n### Response validation\n\nIn rare cases, the API may return a response that doesn\'t match the expected type. For example, the SDK     may expect a property to contain a `String`, but the API could return something else.\n\nBy default, the SDK will not throw an exception in this case. It will throw     [`DinariInvalidDataException`](dinari-java-core/src/main/kotlin/com/dinari/api/errors/DinariInvalidDataException.kt) only if you directly access the property.\n\nIf you would prefer to check that the response is completely well-typed upfront, then either call     `validate()`:\n\n```java\nimport com.dinari.api.models.v2.marketdata.MarketDataRetrieveMarketHoursResponse;\n\nMarketDataRetrieveMarketHoursResponse response = client.v2().marketData().retrieveMarketHours(params).validate();\n```\n\nOr configure the method call to validate the response using the `responseValidation` method:\n\n```java\nimport com.dinari.api.models.v2.marketdata.stocks.StockListResponse;\n\nList<StockListResponse> stocks = client.v2().marketData().stocks().list(RequestOptions.builder().responseValidation(true).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\n\nDinariClient client = DinariOkHttpClient.builder()\n    .fromEnv()\n    .responseValidation(true)\n    .build();\n```\n\n## FAQ\n\n### Why don\'t you use plain `enum` classes?\n\nJava `enum` classes are not trivially   [forwards compatible](https://www.stainless.com/blog/making-java-enums-forwards-compatible). Using them in   the SDK could cause runtime exceptions if the API is updated to respond with a new enum value.\n\n### Why do you represent fields using `JsonField<T>` instead of just plain `T`?\n\nUsing `JsonField<T>` enables a few features:\n\n- Allowing usage of [undocumented API functionality](#undocumented-api-functionality)\n- Lazily [validating the API response against the expected shape](#response-validation)\n- Representing absent vs explicitly null values\n\n### Why don\'t you use [`data` classes](https://kotlinlang.org/docs/data-classes.html)?\n\nIt is not [backwards compatible to add new fields to a data class](https://kotlinlang.org/docs/api-guidelines-backward-compatibility.html#avoid-using-data-classes-in-your-api)   and we don\'t want to introduce a breaking change every time we add a field to a class.\n\n### Why don\'t you use checked exceptions?\n\nChecked exceptions are widely considered a mistake in the Java programming language. In fact, they were   omitted from Kotlin for this reason.\n\nChecked exceptions:\n\n- Are verbose to handle\n- Encourage error handling at the wrong level of abstraction, where nothing can be done about the error\n- Are tedious to propagate due to the [function coloring problem](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function)\n- Don\'t play well with lambdas (also due to the function coloring problem)\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n2. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/dinaricrypto/dinari-api-sdk-java/issues) with questions, bugs, or suggestions.\n',
+  },
+  {
+    language: 'php',
+    content:
+      '# Dinari PHP API Library\n\nThe Dinari PHP library provides convenient access to the Dinari REST API from any PHP 8.1.0+ application.\n\n## Installation\n\nTo use this package, install via Composer by adding the following to your application\'s `composer.json`:\n\n```json\n{\n  "repositories": [\n    {\n      "type": "vcs",\n      "url": "git@github.com:stainless-sdks/dinari-php.git"\n    }\n  ],\n  "require": {\n    "org-placeholder/dinari": "dev-main"\n  }\n}\n```\n\n## Usage\n\n```php\n<?php\n\n$client = new Client(\n  apiKeyID: getenv(\'DINARI_API_KEY_ID\') ?: \'My API Key ID\',\n  apiSecretKey: getenv(\'DINARI_API_SECRET_KEY\') ?: \'My API Secret Key\',\n  environment: \'sandbox\',\n);\n\n$stocks = $client->v2->marketData->stocks->list();\n\nvar_dump($stocks);\n```',
   },
 ];
 
