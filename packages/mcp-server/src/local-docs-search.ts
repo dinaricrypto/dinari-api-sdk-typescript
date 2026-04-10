@@ -1190,7 +1190,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       php: {
         method: 'v2->entities->kyc->document->upload',
         example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycDocument = $client->v2->entities->kyc->document->upload(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  entityID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  documentType: KYCDocumentType::GOVERNMENT_ID,\n  file: 'file',\n);\n\nvar_dump($kycDocument);",
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycDocument = $client->v2->entities->kyc->document->upload(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  entityID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  documentType: KYCDocumentType::GOVERNMENT_ID,\n  file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),\n);\n\nvar_dump($kycDocument);",
       },
       python: {
         method: 'v2.entities.kyc.document.upload',
