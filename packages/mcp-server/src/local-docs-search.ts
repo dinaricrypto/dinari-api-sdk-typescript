@@ -1200,7 +1200,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       typescript: {
         method: 'client.v2.entities.kyc.document.upload',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst kycDocument = await client.v2.entities.kyc.document.upload(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  {\n    entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n    document_type: 'GOVERNMENT_ID',\n    file: fs.createReadStream('path/to/file'),\n  },\n);\n\nconsole.log(kycDocument.id);",
+          "import fs from 'fs';\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst kycDocument = await client.v2.entities.kyc.document.upload(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  {\n    entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n    document_type: 'GOVERNMENT_ID',\n    file: fs.createReadStream('path/to/file'),\n  },\n);\n\nconsole.log(kycDocument.id);",
       },
     },
   },
