@@ -3,6 +3,8 @@
 export {
   Accounts,
   type Chain,
+  type AccountRetrieveResponse,
+  type AccountDeactivateResponse,
   type AccountGetCashBalancesResponse,
   type AccountGetDividendPaymentsResponse,
   type AccountGetInterestPaymentsResponse,
@@ -66,6 +68,8 @@ export { WalletResource, type Wallet, type WalletConnectInternalParams } from '.
 export {
   WithdrawalRequests,
   type WithdrawalRequest,
+  type WithdrawalRequestCreateResponse,
+  type WithdrawalRequestRetrieveResponse,
   type WithdrawalRequestListResponse,
   type WithdrawalRequestCreateParams,
   type WithdrawalRequestRetrieveParams,
@@ -74,6 +78,7 @@ export {
 export {
   Withdrawals,
   type Withdrawal,
+  type WithdrawalRetrieveResponse,
   type WithdrawalListResponse,
   type WithdrawalRetrieveParams,
   type WithdrawalListParams,

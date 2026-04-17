@@ -27,12 +27,16 @@ describe('resource v2', () => {
     await expect(
       client.v2.listOrders(
         {
-          chain_id: 'eip155:1',
+          chain_id: 'chain_id',
+          limit: 20,
+          next: 'next',
+          order: 'asc',
           order_fulfillment_transaction_hash: 'order_fulfillment_transaction_hash',
           order_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           order_transaction_hash: 'order_transaction_hash',
           page: 1,
           page_size: 1,
+          previous: 'previous',
         },
         { path: '/_stainless_unknown_path' },
       ),

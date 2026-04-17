@@ -27,8 +27,12 @@ describe('resource stocks', () => {
     await expect(
       client.v2.marketData.stocks.list(
         {
+          limit: 20,
+          next: 'next',
+          order: 'asc',
           page: 1,
           page_size: 1,
+          previous: 'previous',
           symbols: ['string'],
         },
         { path: '/_stainless_unknown_path' },

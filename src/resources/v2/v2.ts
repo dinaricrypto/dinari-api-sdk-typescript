@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as AccountsAPI from './accounts/accounts';
 import {
+  AccountDeactivateResponse,
   AccountGetCashBalancesResponse,
   AccountGetDividendPaymentsParams,
   AccountGetDividendPaymentsResponse,
@@ -11,18 +12,22 @@ import {
   AccountGetPortfolioParams,
   AccountGetPortfolioResponse,
   AccountMintSandboxTokensParams,
+  AccountRetrieveResponse,
   Accounts,
   Chain,
 } from './accounts/accounts';
-import * as OrdersAPI from './accounts/orders';
 import * as EntitiesAPI from './entities/entities';
 import {
   Entities,
   Entity,
   EntityCreateParams,
+  EntityCreateResponse,
   EntityListParams,
   EntityListResponse,
+  EntityRetrieveByIDResponse,
+  EntityRetrieveCurrentResponse,
   EntityUpdateParams,
+  EntityUpdateResponse,
 } from './entities/entities';
 import * as MarketDataAPI from './market-data/market-data';
 import { MarketData, MarketDataRetrieveMarketHoursResponse } from './market-data/market-data';
@@ -58,10 +63,12 @@ export class V2 extends APIResource {
   }
 }
 
-export type V2ListOrdersResponse = Array<V2ListOrdersResponse.V2ListOrdersResponseItem>;
+export type V2ListOrdersResponse =
+  | Array<V2ListOrdersResponse.UnionMember0>
+  | V2ListOrdersResponse.PaginatedEntityOrderResponse;
 
 export namespace V2ListOrdersResponse {
-  export interface V2ListOrdersResponseItem {
+  export interface UnionMember0 {
     /**
      * ID of the `Order`.
      */
@@ -71,7 +78,7 @@ export namespace V2ListOrdersResponse {
      * CAIP-2 formatted chain ID of the blockchain that the `Order` transaction was run
      * on.
      */
-    chain_id: AccountsAPI.Chain;
+    chain_id: string;
 
     /**
      * Datetime at which the `Order` was created. ISO 8601 timestamp.
@@ -86,12 +93,12 @@ export namespace V2ListOrdersResponse {
     /**
      * Indicates whether `Order` is a buy or sell.
      */
-    order_side: OrdersAPI.OrderSide;
+    order_side: 'BUY' | 'SELL';
 
     /**
      * Time in force. Indicates how long `Order` is valid for.
      */
-    order_tif: OrdersAPI.OrderTif;
+    order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
 
     /**
      * Transaction hash for the `Order` creation.
@@ -101,7 +108,7 @@ export namespace V2ListOrdersResponse {
     /**
      * Type of `Order`.
      */
-    order_type: OrdersAPI.OrderType;
+    order_type: 'MARKET' | 'LIMIT';
 
     /**
      * The payment token (stablecoin) address.
@@ -111,17 +118,29 @@ export namespace V2ListOrdersResponse {
     /**
      * Status of the `Order`.
      */
-    status: OrdersAPI.BrokerageOrderStatus;
+    status:
+      | 'PENDING_SUBMIT'
+      | 'PENDING_CANCEL'
+      | 'PENDING_ESCROW'
+      | 'PENDING_FILL'
+      | 'ESCROWED'
+      | 'SUBMITTED'
+      | 'CANCELLED'
+      | 'PARTIALLY_FILLED'
+      | 'FILLED'
+      | 'REJECTED'
+      | 'REQUIRING_CONTACT'
+      | 'ERROR';
+
+    /**
+     * The `Stock` ID associated with the `Order`
+     */
+    stock_id: string;
 
     /**
      * Account ID the order was made for.
      */
     account_id?: string | null;
-
-    /**
-     * The `Alloy` ID associated with the `Order`
-     */
-    alloy_id?: string | null;
 
     /**
      * The dShare asset token address.
@@ -169,11 +188,162 @@ export namespace V2ListOrdersResponse {
      * Total amount of payment involved.
      */
     payment_token_quantity?: number | null;
+  }
+
+  export interface PaginatedEntityOrderResponse {
+    /**
+     * List of EntityOrder
+     */
+    data: Array<PaginatedEntityOrderResponse.Data>;
 
     /**
-     * The `Stock` ID associated with the `Order`
+     * Pagination metadata
      */
-    stock_id?: string | null;
+    pagination_metadata: PaginatedEntityOrderResponse.PaginationMetadata;
+
+    /**
+     * Version
+     */
+    _sv?: 'PaginatedEntityOrderResponse:v1';
+  }
+
+  export namespace PaginatedEntityOrderResponse {
+    export interface Data {
+      /**
+       * ID of the `Order`.
+       */
+      id: string;
+
+      /**
+       * CAIP-2 formatted chain ID of the blockchain that the `Order` transaction was run
+       * on.
+       */
+      chain_id: string;
+
+      /**
+       * Datetime at which the `Order` was created. ISO 8601 timestamp.
+       */
+      created_dt: string;
+
+      /**
+       * Smart contract address that `Order` was created from.
+       */
+      order_contract_address: string;
+
+      /**
+       * Indicates whether `Order` is a buy or sell.
+       */
+      order_side: 'BUY' | 'SELL';
+
+      /**
+       * Time in force. Indicates how long `Order` is valid for.
+       */
+      order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
+
+      /**
+       * Transaction hash for the `Order` creation.
+       */
+      order_transaction_hash: string;
+
+      /**
+       * Type of `Order`.
+       */
+      order_type: 'MARKET' | 'LIMIT';
+
+      /**
+       * The payment token (stablecoin) address.
+       */
+      payment_token: string;
+
+      /**
+       * Status of the `Order`.
+       */
+      status:
+        | 'PENDING_SUBMIT'
+        | 'PENDING_CANCEL'
+        | 'PENDING_ESCROW'
+        | 'PENDING_FILL'
+        | 'ESCROWED'
+        | 'SUBMITTED'
+        | 'CANCELLED'
+        | 'PARTIALLY_FILLED'
+        | 'FILLED'
+        | 'REJECTED'
+        | 'REQUIRING_CONTACT'
+        | 'ERROR';
+
+      /**
+       * The `Stock` ID associated with the `Order`
+       */
+      stock_id: string;
+
+      /**
+       * Account ID the order was made for.
+       */
+      account_id?: string | null;
+
+      /**
+       * The dShare asset token address.
+       */
+      asset_token?: string | null;
+
+      /**
+       * Total amount of assets involved.
+       */
+      asset_token_quantity?: number | null;
+
+      /**
+       * Transaction hash for cancellation of `Order`, if the `Order` was cancelled.
+       */
+      cancel_transaction_hash?: string | null;
+
+      /**
+       * Customer-supplied unique identifier to map this `Order` to an order in the
+       * customer's systems.
+       */
+      client_order_id?: string | null;
+
+      /**
+       * Entity ID of the Order
+       */
+      entity_id?: string | null;
+
+      /**
+       * Fee amount associated with `Order`.
+       */
+      fee?: number | null;
+
+      /**
+       * For limit `Orders`, the price per asset, specified in the `Stock`'s native
+       * currency (USD for US equities and ETFs).
+       */
+      limit_price?: number | null;
+
+      /**
+       * Order Request ID for the `Order`
+       */
+      order_request_id?: string | null;
+
+      /**
+       * Total amount of payment involved.
+       */
+      payment_token_quantity?: number | null;
+    }
+
+    /**
+     * Pagination metadata
+     */
+    export interface PaginationMetadata {
+      /**
+       * Cursor for next page
+       */
+      next?: string;
+
+      /**
+       * Cursor for previous page
+       */
+      previous?: string;
+    }
   }
 }
 
@@ -181,7 +351,22 @@ export interface V2ListOrdersParams {
   /**
    * CAIP-2 formatted chain ID of the blockchain the `Order` was made on.
    */
-  chain_id?: AccountsAPI.Chain | null;
+  chain_id?: string | null;
+
+  /**
+   * Number of results to return
+   */
+  limit?: number;
+
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
 
   /**
    * Fulfillment transaction hash of the `Order`.
@@ -201,6 +386,11 @@ export interface V2ListOrdersParams {
   page?: number;
 
   page_size?: number;
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 V2.MarketData = MarketData;
@@ -218,7 +408,11 @@ export declare namespace V2 {
   export {
     Entities as Entities,
     type Entity as Entity,
+    type EntityCreateResponse as EntityCreateResponse,
+    type EntityUpdateResponse as EntityUpdateResponse,
     type EntityListResponse as EntityListResponse,
+    type EntityRetrieveByIDResponse as EntityRetrieveByIDResponse,
+    type EntityRetrieveCurrentResponse as EntityRetrieveCurrentResponse,
     type EntityCreateParams as EntityCreateParams,
     type EntityUpdateParams as EntityUpdateParams,
     type EntityListParams as EntityListParams,
@@ -227,6 +421,8 @@ export declare namespace V2 {
   export {
     Accounts as Accounts,
     type Chain as Chain,
+    type AccountRetrieveResponse as AccountRetrieveResponse,
+    type AccountDeactivateResponse as AccountDeactivateResponse,
     type AccountGetCashBalancesResponse as AccountGetCashBalancesResponse,
     type AccountGetDividendPaymentsResponse as AccountGetDividendPaymentsResponse,
     type AccountGetInterestPaymentsResponse as AccountGetInterestPaymentsResponse,

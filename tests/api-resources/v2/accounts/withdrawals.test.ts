@@ -49,8 +49,12 @@ describe('resource withdrawals', () => {
       client.v2.accounts.withdrawals.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         {
+          limit: 20,
+          next: 'next',
+          order: 'asc',
           page: 1,
           page_size: 1,
+          previous: 'previous',
           withdrawal_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         },
         { path: '/_stainless_unknown_path' },

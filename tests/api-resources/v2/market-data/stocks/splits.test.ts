@@ -26,7 +26,14 @@ describe('resource splits', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v2.marketData.stocks.splits.list(
-        { page: 1, page_size: 1 },
+        {
+          limit: 20,
+          next: 'next',
+          order: 'asc',
+          page: 1,
+          page_size: 1,
+          previous: 'previous',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Dinari.NotFoundError);
@@ -52,7 +59,14 @@ describe('resource splits', () => {
     await expect(
       client.v2.marketData.stocks.splits.listForStock(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { page: 1, page_size: 1 },
+        {
+          limit: 20,
+          next: 'next',
+          order: 'asc',
+          page: 1,
+          page_size: 1,
+          previous: 'previous',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Dinari.NotFoundError);

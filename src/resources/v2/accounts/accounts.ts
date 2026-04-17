@@ -42,9 +42,11 @@ import * as WithdrawalRequestsAPI from './withdrawal-requests';
 import {
   WithdrawalRequest,
   WithdrawalRequestCreateParams,
+  WithdrawalRequestCreateResponse,
   WithdrawalRequestListParams,
   WithdrawalRequestListResponse,
   WithdrawalRequestRetrieveParams,
+  WithdrawalRequestRetrieveResponse,
   WithdrawalRequests,
 } from './withdrawal-requests';
 import * as WithdrawalsAPI from './withdrawals';
@@ -53,6 +55,7 @@ import {
   WithdrawalListParams,
   WithdrawalListResponse,
   WithdrawalRetrieveParams,
+  WithdrawalRetrieveResponse,
   Withdrawals,
 } from './withdrawals';
 import * as EntitiesAccountsAPI from '../entities/accounts';
@@ -111,7 +114,7 @@ export class Accounts extends APIResource {
    * );
    * ```
    */
-  retrieve(accountID: string, options?: RequestOptions): APIPromise<EntitiesAccountsAPI.Account> {
+  retrieve(accountID: string, options?: RequestOptions): APIPromise<AccountRetrieveResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}`, options);
   }
 
@@ -120,12 +123,12 @@ export class Accounts extends APIResource {
    *
    * @example
    * ```ts
-   * const account = await client.v2.accounts.deactivate(
+   * const response = await client.v2.accounts.deactivate(
    *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    * );
    * ```
    */
-  deactivate(accountID: string, options?: RequestOptions): APIPromise<EntitiesAccountsAPI.Account> {
+  deactivate(accountID: string, options?: RequestOptions): APIPromise<AccountDeactivateResponse> {
     return this._client.post(path`/api/v2/accounts/${accountID}/deactivate`, options);
   }
 
@@ -252,6 +255,76 @@ export type Chain =
   | 'eip155:98865'
   | 'eip155:7887';
 
+/**
+ * Information about an `Account` owned by an `Entity`.
+ */
+export interface AccountRetrieveResponse {
+  /**
+   * Unique ID for the `Account`.
+   */
+  id: string;
+
+  /**
+   * Datetime when the `Account` was created. ISO 8601 timestamp.
+   */
+  created_dt: string;
+
+  /**
+   * ID for the `Entity` that owns the `Account`.
+   */
+  entity_id: string;
+
+  /**
+   * Indicates whether the `Account` is active.
+   */
+  is_active: boolean;
+
+  /**
+   * Jurisdiction of the `Account`.
+   */
+  jurisdiction: EntitiesAccountsAPI.Jurisdiction;
+
+  /**
+   * ID of the brokerage account associated with the `Account`.
+   */
+  brokerage_account_id?: string | null;
+}
+
+/**
+ * Information about an `Account` owned by an `Entity`.
+ */
+export interface AccountDeactivateResponse {
+  /**
+   * Unique ID for the `Account`.
+   */
+  id: string;
+
+  /**
+   * Datetime when the `Account` was created. ISO 8601 timestamp.
+   */
+  created_dt: string;
+
+  /**
+   * ID for the `Entity` that owns the `Account`.
+   */
+  entity_id: string;
+
+  /**
+   * Indicates whether the `Account` is active.
+   */
+  is_active: boolean;
+
+  /**
+   * Jurisdiction of the `Account`.
+   */
+  jurisdiction: EntitiesAccountsAPI.Jurisdiction;
+
+  /**
+   * ID of the brokerage account associated with the `Account`.
+   */
+  brokerage_account_id?: string | null;
+}
+
 export type AccountGetCashBalancesResponse =
   Array<AccountGetCashBalancesResponse.AccountGetCashBalancesResponseItem>;
 
@@ -283,13 +356,14 @@ export namespace AccountGetCashBalancesResponse {
 }
 
 export type AccountGetDividendPaymentsResponse =
-  Array<AccountGetDividendPaymentsResponse.AccountGetDividendPaymentsResponseItem>;
+  | Array<AccountGetDividendPaymentsResponse.UnionMember0>
+  | AccountGetDividendPaymentsResponse.PaginatedDividendPaymentResponse;
 
 export namespace AccountGetDividendPaymentsResponse {
   /**
    * Represents a dividend payment event for an `Account`.
    */
-  export interface AccountGetDividendPaymentsResponseItem {
+  export interface UnionMember0 {
     /**
      * Amount of the dividend paid.
      */
@@ -310,16 +384,76 @@ export namespace AccountGetDividendPaymentsResponse {
      */
     stock_id: string;
   }
+
+  export interface PaginatedDividendPaymentResponse {
+    /**
+     * List of DividendPayment
+     */
+    data: Array<PaginatedDividendPaymentResponse.Data>;
+
+    /**
+     * Pagination metadata
+     */
+    pagination_metadata: PaginatedDividendPaymentResponse.PaginationMetadata;
+
+    /**
+     * Version
+     */
+    _sv?: 'PaginatedDividendPaymentResponse:v1';
+  }
+
+  export namespace PaginatedDividendPaymentResponse {
+    /**
+     * Represents a dividend payment event for an `Account`.
+     */
+    export interface Data {
+      /**
+       * Amount of the dividend paid.
+       */
+      amount: number;
+
+      /**
+       * Currency in which the dividend was paid. (e.g. USD)
+       */
+      currency: string;
+
+      /**
+       * Date the dividend was distributed to the account. ISO 8601 format, YYYY-MM-DD.
+       */
+      payment_date: string;
+
+      /**
+       * ID of the `Stock` for which the dividend was paid.
+       */
+      stock_id: string;
+    }
+
+    /**
+     * Pagination metadata
+     */
+    export interface PaginationMetadata {
+      /**
+       * Cursor for next page
+       */
+      next?: string;
+
+      /**
+       * Cursor for previous page
+       */
+      previous?: string;
+    }
+  }
 }
 
 export type AccountGetInterestPaymentsResponse =
-  Array<AccountGetInterestPaymentsResponse.AccountGetInterestPaymentsResponseItem>;
+  | Array<AccountGetInterestPaymentsResponse.UnionMember0>
+  | AccountGetInterestPaymentsResponse.PaginatedInterestPaymentResponse;
 
 export namespace AccountGetInterestPaymentsResponse {
   /**
    * An object representing an interest payment from stablecoin holdings.
    */
-  export interface AccountGetInterestPaymentsResponseItem {
+  export interface UnionMember0 {
     /**
      * Amount of interest paid.
      */
@@ -334,6 +468,60 @@ export namespace AccountGetInterestPaymentsResponse {
      * Date of interest payment in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
      */
     payment_date: string;
+  }
+
+  export interface PaginatedInterestPaymentResponse {
+    /**
+     * List of InterestPayment
+     */
+    data: Array<PaginatedInterestPaymentResponse.Data>;
+
+    /**
+     * Pagination metadata
+     */
+    pagination_metadata: PaginatedInterestPaymentResponse.PaginationMetadata;
+
+    /**
+     * Version
+     */
+    _sv?: 'PaginatedInterestPaymentResponse:v1';
+  }
+
+  export namespace PaginatedInterestPaymentResponse {
+    /**
+     * An object representing an interest payment from stablecoin holdings.
+     */
+    export interface Data {
+      /**
+       * Amount of interest paid.
+       */
+      amount: number;
+
+      /**
+       * Currency in which the interest was paid (e.g. USD).
+       */
+      currency: string;
+
+      /**
+       * Date of interest payment in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
+       */
+      payment_date: string;
+    }
+
+    /**
+     * Pagination metadata
+     */
+    export interface PaginationMetadata {
+      /**
+       * Cursor for next page
+       */
+      next?: string;
+
+      /**
+       * Cursor for previous page
+       */
+      previous?: string;
+    }
   }
 }
 
@@ -390,9 +578,29 @@ export interface AccountGetDividendPaymentsParams {
    */
   start_date: string;
 
+  /**
+   * Number of results to return
+   */
+  limit?: number;
+
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
   page?: number;
 
   page_size?: number;
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 
   /**
    * Optional ID of the `Stock` to filter by
@@ -411,9 +619,29 @@ export interface AccountGetInterestPaymentsParams {
    */
   start_date: string;
 
+  /**
+   * Number of results to return
+   */
+  limit?: number;
+
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
   page?: number;
 
   page_size?: number;
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 export interface AccountGetPortfolioParams {
@@ -449,6 +677,8 @@ Accounts.Activities = Activities;
 export declare namespace Accounts {
   export {
     type Chain as Chain,
+    type AccountRetrieveResponse as AccountRetrieveResponse,
+    type AccountDeactivateResponse as AccountDeactivateResponse,
     type AccountGetCashBalancesResponse as AccountGetCashBalancesResponse,
     type AccountGetDividendPaymentsResponse as AccountGetDividendPaymentsResponse,
     type AccountGetInterestPaymentsResponse as AccountGetInterestPaymentsResponse,
@@ -512,6 +742,8 @@ export declare namespace Accounts {
   export {
     WithdrawalRequests as WithdrawalRequests,
     type WithdrawalRequest as WithdrawalRequest,
+    type WithdrawalRequestCreateResponse as WithdrawalRequestCreateResponse,
+    type WithdrawalRequestRetrieveResponse as WithdrawalRequestRetrieveResponse,
     type WithdrawalRequestListResponse as WithdrawalRequestListResponse,
     type WithdrawalRequestCreateParams as WithdrawalRequestCreateParams,
     type WithdrawalRequestRetrieveParams as WithdrawalRequestRetrieveParams,
@@ -521,6 +753,7 @@ export declare namespace Accounts {
   export {
     Withdrawals as Withdrawals,
     type Withdrawal as Withdrawal,
+    type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalRetrieveParams as WithdrawalRetrieveParams,
     type WithdrawalListParams as WithdrawalListParams,

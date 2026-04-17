@@ -460,7 +460,227 @@ export type OrderRequestStatus =
   | 'EXPIRED'
   | 'REJECTED';
 
-export type OrderRequestListResponse = Array<OrderRequest>;
+export type OrderRequestListResponse =
+  | Array<OrderRequestListResponse.UnionMember0>
+  | OrderRequestListResponse.PaginatedAccountOrderRequestResponse;
+
+export namespace OrderRequestListResponse {
+  /**
+   * A request to create an `Order`.
+   *
+   * An `OrderRequest` is created when a user places an order through the Dinari API.
+   * The `OrderRequest` is then fulfilled by creating an `Order` on-chain.
+   *
+   * The `OrderRequest` is a record of the user's intent to place an order, while the
+   * `Order` is the actual transaction that occurs on the blockchain.
+   */
+  export interface UnionMember0 {
+    /**
+     * ID of `OrderRequest`. This is the primary identifier for the `/order_requests`
+     * routes.
+     */
+    id: string;
+
+    /**
+     * ID of `Account` placing the `OrderRequest`.
+     */
+    account_id: string;
+
+    /**
+     * Datetime at which the `OrderRequest` was created. ISO 8601 timestamp.
+     */
+    created_dt: string;
+
+    /**
+     * Indicates whether `Order` is a buy or sell.
+     */
+    order_side: 'BUY' | 'SELL';
+
+    /**
+     * Indicates how long `Order` is valid for.
+     */
+    order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
+
+    /**
+     * Type of `Order`.
+     */
+    order_type: 'MARKET' | 'LIMIT';
+
+    /**
+     * Status of `OrderRequest`. Possible values:
+     *
+     * - `QUOTED`: Order request created with fee quote provided, ready for processing
+     * - `PENDING`: Order request is being prepared for submission
+     * - `PENDING_BRIDGE`: Order is waiting for bridge transaction to complete
+     * - `SUBMITTED`: Order has been successfully submitted to the order book
+     * - `ERROR`: An error occurred during order processing
+     * - `CANCELLED`: Order request was cancelled
+     * - `EXPIRED`: Order request expired due to deadline passing
+     * - `REJECTED`: Order request was rejected
+     */
+    status:
+      | 'QUOTED'
+      | 'PENDING'
+      | 'PENDING_BRIDGE'
+      | 'SUBMITTED'
+      | 'ERROR'
+      | 'CANCELLED'
+      | 'EXPIRED'
+      | 'REJECTED';
+
+    /**
+     * Reason for the order cancellation if the order status is CANCELLED
+     */
+    cancel_message?: string | null;
+
+    /**
+     * Customer-supplied ID to map this `OrderRequest` to an order in their own
+     * systems.
+     */
+    client_order_id?: string | null;
+
+    /**
+     * ID of `Order` created from the `OrderRequest`. This is the primary identifier
+     * for the `/orders` routes.
+     */
+    order_id?: string | null;
+
+    /**
+     * ID of recipient `Account`.
+     */
+    recipient_account_id?: string | null;
+
+    /**
+     * Reason for the order rejection if the order status is REJECTED
+     */
+    reject_message?: string | null;
+  }
+
+  export interface PaginatedAccountOrderRequestResponse {
+    /**
+     * List of AccountOrder
+     */
+    data: Array<PaginatedAccountOrderRequestResponse.Data>;
+
+    /**
+     * Pagination metadata
+     */
+    pagination_metadata: PaginatedAccountOrderRequestResponse.PaginationMetadata;
+
+    /**
+     * Version
+     */
+    _sv?: 'PaginatedAccountOrderRequestResponse:v1';
+  }
+
+  export namespace PaginatedAccountOrderRequestResponse {
+    /**
+     * A request to create an `Order`.
+     *
+     * An `OrderRequest` is created when a user places an order through the Dinari API.
+     * The `OrderRequest` is then fulfilled by creating an `Order` on-chain.
+     *
+     * The `OrderRequest` is a record of the user's intent to place an order, while the
+     * `Order` is the actual transaction that occurs on the blockchain.
+     */
+    export interface Data {
+      /**
+       * ID of `OrderRequest`. This is the primary identifier for the `/order_requests`
+       * routes.
+       */
+      id: string;
+
+      /**
+       * ID of `Account` placing the `OrderRequest`.
+       */
+      account_id: string;
+
+      /**
+       * Datetime at which the `OrderRequest` was created. ISO 8601 timestamp.
+       */
+      created_dt: string;
+
+      /**
+       * Indicates whether `Order` is a buy or sell.
+       */
+      order_side: 'BUY' | 'SELL';
+
+      /**
+       * Indicates how long `Order` is valid for.
+       */
+      order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
+
+      /**
+       * Type of `Order`.
+       */
+      order_type: 'MARKET' | 'LIMIT';
+
+      /**
+       * Status of `OrderRequest`. Possible values:
+       *
+       * - `QUOTED`: Order request created with fee quote provided, ready for processing
+       * - `PENDING`: Order request is being prepared for submission
+       * - `PENDING_BRIDGE`: Order is waiting for bridge transaction to complete
+       * - `SUBMITTED`: Order has been successfully submitted to the order book
+       * - `ERROR`: An error occurred during order processing
+       * - `CANCELLED`: Order request was cancelled
+       * - `EXPIRED`: Order request expired due to deadline passing
+       * - `REJECTED`: Order request was rejected
+       */
+      status:
+        | 'QUOTED'
+        | 'PENDING'
+        | 'PENDING_BRIDGE'
+        | 'SUBMITTED'
+        | 'ERROR'
+        | 'CANCELLED'
+        | 'EXPIRED'
+        | 'REJECTED';
+
+      /**
+       * Reason for the order cancellation if the order status is CANCELLED
+       */
+      cancel_message?: string | null;
+
+      /**
+       * Customer-supplied ID to map this `OrderRequest` to an order in their own
+       * systems.
+       */
+      client_order_id?: string | null;
+
+      /**
+       * ID of `Order` created from the `OrderRequest`. This is the primary identifier
+       * for the `/orders` routes.
+       */
+      order_id?: string | null;
+
+      /**
+       * ID of recipient `Account`.
+       */
+      recipient_account_id?: string | null;
+
+      /**
+       * Reason for the order rejection if the order status is REJECTED
+       */
+      reject_message?: string | null;
+    }
+
+    /**
+     * Pagination metadata
+     */
+    export interface PaginationMetadata {
+      /**
+       * Cursor for next page
+       */
+      next?: string;
+
+      /**
+       * Cursor for previous page
+       */
+      previous?: string;
+    }
+  }
+}
 
 /**
  * A preview of the fee that would be collected when placing an Order Request.
@@ -484,6 +704,21 @@ export interface OrderRequestListParams {
   client_order_id?: string | null;
 
   /**
+   * Number of results to return
+   */
+  limit?: number;
+
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
+  /**
    * Order ID for the `OrderRequest`
    */
   order_id?: string | null;
@@ -496,6 +731,11 @@ export interface OrderRequestListParams {
   page?: number;
 
   page_size?: number;
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 export interface OrderRequestCreateLimitBuyParams {

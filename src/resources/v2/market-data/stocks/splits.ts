@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as SplitsAPI from './splits';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -25,7 +26,7 @@ export class Splits extends APIResource {
    *
    * @example
    * ```ts
-   * const stockSplits =
+   * const splits =
    *   await client.v2.marketData.stocks.splits.list();
    * ```
    */
@@ -49,7 +50,7 @@ export class Splits extends APIResource {
    *
    * @example
    * ```ts
-   * const stockSplits =
+   * const response =
    *   await client.v2.marketData.stocks.splits.listForStock(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *   );
@@ -120,20 +121,134 @@ export interface StockSplit {
   stock_id: string;
 }
 
-export type SplitListResponse = Array<StockSplit>;
+export type SplitListResponse = Array<StockSplit> | SplitListResponse.PaginatedStockSplitResponse;
 
-export type SplitListForStockResponse = Array<StockSplit>;
+export namespace SplitListResponse {
+  export interface PaginatedStockSplitResponse {
+    /**
+     * List of StockSplit
+     */
+    data: Array<SplitsAPI.StockSplit>;
+
+    /**
+     * Pagination metadata
+     */
+    pagination_metadata: PaginatedStockSplitResponse.PaginationMetadata;
+
+    /**
+     * Version
+     */
+    _sv?: 'PaginatedStockSplitResponse:v1';
+  }
+
+  export namespace PaginatedStockSplitResponse {
+    /**
+     * Pagination metadata
+     */
+    export interface PaginationMetadata {
+      /**
+       * Cursor for next page
+       */
+      next?: string;
+
+      /**
+       * Cursor for previous page
+       */
+      previous?: string;
+    }
+  }
+}
+
+export type SplitListForStockResponse =
+  | Array<StockSplit>
+  | SplitListForStockResponse.PaginatedStockSplitResponse;
+
+export namespace SplitListForStockResponse {
+  export interface PaginatedStockSplitResponse {
+    /**
+     * List of StockSplit
+     */
+    data: Array<SplitsAPI.StockSplit>;
+
+    /**
+     * Pagination metadata
+     */
+    pagination_metadata: PaginatedStockSplitResponse.PaginationMetadata;
+
+    /**
+     * Version
+     */
+    _sv?: 'PaginatedStockSplitResponse:v1';
+  }
+
+  export namespace PaginatedStockSplitResponse {
+    /**
+     * Pagination metadata
+     */
+    export interface PaginationMetadata {
+      /**
+       * Cursor for next page
+       */
+      next?: string;
+
+      /**
+       * Cursor for previous page
+       */
+      previous?: string;
+    }
+  }
+}
 
 export interface SplitListParams {
+  /**
+   * Number of results to return
+   */
+  limit?: number;
+
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
   page?: number;
 
   page_size?: number;
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 export interface SplitListForStockParams {
+  /**
+   * Number of results to return
+   */
+  limit?: number;
+
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
   page?: number;
 
   page_size?: number;
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 export declare namespace Splits {
