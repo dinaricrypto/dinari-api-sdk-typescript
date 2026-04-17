@@ -3,6 +3,8 @@
 export {
   Accounts,
   type Chain,
+  type AccountRetrieveResponse,
+  type AccountDeactivateResponse,
   type AccountGetCashBalancesResponse,
   type AccountGetDividendPaymentsResponse,
   type AccountGetInterestPaymentsResponse,
@@ -15,7 +17,11 @@ export {
 export {
   Entities,
   type Entity,
+  type EntityCreateResponse,
+  type EntityUpdateResponse,
   type EntityListResponse,
+  type EntityRetrieveByIDResponse,
+  type EntityRetrieveCurrentResponse,
   type EntityCreateParams,
   type EntityUpdateParams,
   type EntityListParams,

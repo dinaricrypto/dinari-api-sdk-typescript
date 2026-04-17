@@ -65,8 +65,12 @@ describe('resource accounts', () => {
     const response = await client.v2.accounts.getDividendPayments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       end_date: '2019-12-27',
       start_date: '2019-12-27',
+      limit: 20,
+      next: 'next',
+      order: 'asc',
       page: 1,
       page_size: 1,
+      previous: 'previous',
       stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
@@ -91,8 +95,12 @@ describe('resource accounts', () => {
     const response = await client.v2.accounts.getInterestPayments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       end_date: '2019-12-27',
       start_date: '2019-12-27',
+      limit: 20,
+      next: 'next',
+      order: 'asc',
       page: 1,
       page_size: 1,
+      previous: 'previous',
     });
   });
 
