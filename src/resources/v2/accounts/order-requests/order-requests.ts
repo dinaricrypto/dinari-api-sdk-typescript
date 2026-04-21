@@ -910,7 +910,7 @@ export interface OrderRequestGetFeeQuoteParams {
    * CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
    * not provided, the default chain ID (eip155:42161) will be used.
    */
-  chain_id?: AccountsAPI.Chain | null;
+  chain_id?: AccountsAPI.Chain;
 
   /**
    * Price per asset in the asset's native currency. USD for US equities and ETFs.

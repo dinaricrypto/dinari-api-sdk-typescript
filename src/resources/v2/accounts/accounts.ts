@@ -662,7 +662,7 @@ export interface AccountMintSandboxTokensParams {
    * none specified, defaults to eip155:421614. If the `Account` is linked to a
    * Dinari-managed `Wallet`, only eip155:42161 is allowed.
    */
-  chain_id?: Chain | null;
+  chain_id?: Chain;
 }
 
 Accounts.WalletResource = WalletResource;

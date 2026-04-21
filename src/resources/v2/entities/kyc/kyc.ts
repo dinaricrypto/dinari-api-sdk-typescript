@@ -693,7 +693,7 @@ export type KYCSubmitParams = KYCSubmitParams.CreateBaselineKYCInput | KYCSubmit
 export declare namespace KYCSubmitParams {
   export interface CreateBaselineKYCInput {
     /**
-     * KYC data for an `Entity` in the BASELINE jurisdiction.
+     * KYC data of the `Entity`.
      */
     data: BaselineKYCCheckData;
 
@@ -710,7 +710,7 @@ export declare namespace KYCSubmitParams {
 
   export interface CreateUsKYCInput {
     /**
-     * KYC data for an `Entity` in the US jurisdiction.
+     * KYC data of the `Entity`.
      */
     data: UsKYCCheckData;
 
