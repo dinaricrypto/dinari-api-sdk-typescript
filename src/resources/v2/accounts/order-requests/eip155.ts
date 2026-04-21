@@ -135,7 +135,7 @@ export interface Eip155CreatePermitResponse {
    * Token permit that is to be signed by smart contract submitter for authorizing
    * token transfer for the `OrderRequest`
    */
-  permit: { [key: string]: null };
+  permit: { [key: string]: unknown };
 }
 
 export interface Eip155CreatePermitTransactionResponse {
