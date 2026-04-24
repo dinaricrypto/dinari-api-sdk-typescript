@@ -76,34 +76,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_orders\n\n`client.v2.listOrders(chain_id?: string, limit?: number, next?: string, order?: 'asc' | 'desc', order_fulfillment_transaction_hash?: string, order_request_id?: string, order_transaction_hash?: string, page?: number, page_size?: number, previous?: string): { id: string; chain_id: string; created_dt: string; order_contract_address: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_transaction_hash: string; order_type: 'MARKET' | 'LIMIT'; payment_token: string; status: string; stock_id: string; account_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; entity_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; }[] | { data: object[]; pagination_metadata: object; _sv?: 'PaginatedEntityOrderResponse:v1'; }`\n\n**get** `/api/v2/orders/`\n\nGet a list of all `Orders` under the `Entity`.<br>Optionally `Orders` can be transaction hash or fulfillment transaction hash.\n\n### Parameters\n\n- `chain_id?: string`\n  CAIP-2 formatted chain ID of the blockchain the `Order` was made on.\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `order_fulfillment_transaction_hash?: string`\n  Fulfillment transaction hash of the `Order`.\n\n- `order_request_id?: string`\n  Order Request ID for the `Order`\n\n- `order_transaction_hash?: string`\n  Transaction hash of the `Order`.\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ id: string; chain_id: string; created_dt: string; order_contract_address: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_transaction_hash: string; order_type: 'MARKET' | 'LIMIT'; payment_token: string; status: string; stock_id: string; account_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; entity_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; }[] | { data: { id: string; chain_id: string; created_dt: string; order_contract_address: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_transaction_hash: string; order_type: 'MARKET' | 'LIMIT'; payment_token: string; status: string; stock_id: string; account_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; entity_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedEntityOrderResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.listOrders();\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.ListOrders',
+      typescript: {
+        method: 'client.v2.listOrders',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.ListOrders(context.TODO(), dinariapisdkgo.V2ListOrdersParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/orders/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().listOrders',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.V2ListOrdersParams;\nimport com.dinari.api.models.v2.V2ListOrdersResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        V2ListOrdersResponse response = client.v2().listOrders();\n    }\n}',
-      },
-      php: {
-        method: 'v2->listOrders',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->listOrders(\n  chainID: 'chain_id',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  orderFulfillmentTransactionHash: 'order_fulfillment_transaction_hash',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderTransactionHash: 'order_transaction_hash',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.listOrders();\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.list_orders',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.list_orders()\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.listOrders',
+      java: {
+        method: 'v2().listOrders',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.listOrders();\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.V2ListOrdersParams;\nimport com.dinari.api.models.v2.V2ListOrdersResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        V2ListOrdersResponse response = client.v2().listOrders();\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.ListOrders',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.ListOrders(context.TODO(), dinariapisdkgo.V2ListOrdersParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->listOrders',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->listOrders(\n  chainID: 'chain_id',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  orderFulfillmentTransactionHash: 'order_fulfillment_transaction_hash',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderTransactionHash: 'order_transaction_hash',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/orders/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -120,34 +120,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_market_hours\n\n`client.v2.marketData.retrieveMarketHours(): { is_market_open: boolean; next_session_close_dt: string; next_session_open_dt: string; current_session_after_hours_close_time_dt?: string; current_session_close_dt?: string; current_session_open_dt?: string; current_session_overnight_open_time_dt?: string; current_session_pre_market_open_time_dt?: string; next_session_after_hours_close_time_dt?: string; next_session_overnight_open_time_dt?: string; next_session_pre_market_open_time_dt?: string; }`\n\n**get** `/api/v2/market_data/market_hours/`\n\nGet the market hours for the current trading session and next open trading session.\n\n### Returns\n\n- `{ is_market_open: boolean; next_session_close_dt: string; next_session_open_dt: string; current_session_after_hours_close_time_dt?: string; current_session_close_dt?: string; current_session_open_dt?: string; current_session_overnight_open_time_dt?: string; current_session_pre_market_open_time_dt?: string; next_session_after_hours_close_time_dt?: string; next_session_overnight_open_time_dt?: string; next_session_pre_market_open_time_dt?: string; }`\n\n  - `is_market_open: boolean`\n  - `next_session_close_dt: string`\n  - `next_session_open_dt: string`\n  - `current_session_after_hours_close_time_dt?: string`\n  - `current_session_close_dt?: string`\n  - `current_session_open_dt?: string`\n  - `current_session_overnight_open_time_dt?: string`\n  - `current_session_pre_market_open_time_dt?: string`\n  - `next_session_after_hours_close_time_dt?: string`\n  - `next_session_overnight_open_time_dt?: string`\n  - `next_session_pre_market_open_time_dt?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.retrieveMarketHours();\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.GetMarketHours',
+      typescript: {
+        method: 'client.v2.marketData.retrieveMarketHours',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.GetMarketHours(context.TODO())\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.IsMarketOpen)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/market_hours/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().retrieveMarketHours',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.MarketDataRetrieveMarketHoursParams;\nimport com.dinari.api.models.v2.marketdata.MarketDataRetrieveMarketHoursResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        MarketDataRetrieveMarketHoursResponse response = client.v2().marketData().retrieveMarketHours();\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->retrieveMarketHours',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->retrieveMarketHours();\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.retrieveMarketHours();\n\nconsole.log(response.is_market_open);",
       },
       python: {
         method: 'v2.market_data.retrieve_market_hours',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.retrieve_market_hours()\nprint(response.is_market_open)',
       },
-      typescript: {
-        method: 'client.v2.marketData.retrieveMarketHours',
+      java: {
+        method: 'v2().marketData().retrieveMarketHours',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.retrieveMarketHours();\n\nconsole.log(response.is_market_open);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.MarketDataRetrieveMarketHoursParams;\nimport com.dinari.api.models.v2.marketdata.MarketDataRetrieveMarketHoursResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        MarketDataRetrieveMarketHoursResponse response = client.v2().marketData().retrieveMarketHours();\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.GetMarketHours',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.GetMarketHours(context.TODO())\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.IsMarketOpen)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->retrieveMarketHours',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->retrieveMarketHours();\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/market_hours/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -173,34 +173,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v2.marketData.stocks.list(limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string, symbols?: string[]): { id: string; is_fractionable: boolean; is_tradable: boolean; name: string; symbol: string; tokens: string[]; cik?: string; composite_figi?: string; cusip?: string; description?: string; display_name?: string; logo_url?: string; }[] | { data: object[]; pagination_metadata: object; _sv?: 'PaginatedStockResponse:v1'; }`\n\n**get** `/api/v2/market_data/stocks/`\n\nGet a list of `Stocks`.\n\n### Parameters\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n- `symbols?: string[]`\n  List of `Stock` symbols to query. If not provided, all `Stocks` are returned.\n\n### Returns\n\n- `{ id: string; is_fractionable: boolean; is_tradable: boolean; name: string; symbol: string; tokens: string[]; cik?: string; composite_figi?: string; cusip?: string; description?: string; display_name?: string; logo_url?: string; }[] | { data: { id: string; is_fractionable: boolean; is_tradable: boolean; name: string; symbol: string; tokens: string[]; cik?: string; composite_figi?: string; cusip?: string; description?: string; display_name?: string; logo_url?: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedStockResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst stocks = await client.v2.marketData.stocks.list();\n\nconsole.log(stocks);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Stocks.List',
+      typescript: {
+        method: 'client.v2.marketData.stocks.list',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tstocks, err := client.V2.MarketData.Stocks.List(context.TODO(), dinariapisdkgo.V2MarketDataStockListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", stocks)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().stocks().list',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockListResponse stocks = client.v2().marketData().stocks().list();\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->stocks->list',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$stocks = $client->v2->marketData->stocks->list(\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n  symbols: ['string'],\n);\n\nvar_dump($stocks);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst stocks = await client.v2.marketData.stocks.list();\n\nconsole.log(stocks);",
       },
       python: {
         method: 'v2.market_data.stocks.list',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nstocks = client.v2.market_data.stocks.list()\nprint(stocks)',
       },
-      typescript: {
-        method: 'client.v2.marketData.stocks.list',
+      java: {
+        method: 'v2().marketData().stocks().list',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst stocks = await client.v2.marketData.stocks.list();\n\nconsole.log(stocks);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockListResponse stocks = client.v2().marketData().stocks().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Stocks.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tstocks, err := client.V2.MarketData.Stocks.List(context.TODO(), dinariapisdkgo.V2MarketDataStockListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", stocks)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->stocks->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$stocks = $client->v2->marketData->stocks->list(\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n  symbols: ['string'],\n);\n\nvar_dump($stocks);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -218,34 +218,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_historical_prices\n\n`client.v2.marketData.stocks.retrieveHistoricalPrices(stock_id: string, timespan: 'DAY' | 'WEEK' | 'MONTH' | 'YEAR'): { close: number; high: number; low: number; open: number; timestamp: number; }[]`\n\n**get** `/api/v2/market_data/stocks/{stock_id}/historical_prices/`\n\nGet historical price data for a specified `Stock`. Each index in the array represents a single tick in a price chart.\n\n### Parameters\n\n- `stock_id: string`\n\n- `timespan: 'DAY' | 'WEEK' | 'MONTH' | 'YEAR'`\n  The timespan of the historical prices to query.\n\n### Returns\n\n- `{ close: number; high: number; low: number; open: number; timestamp: number; }[]`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.stocks.retrieveHistoricalPrices('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { timespan: 'DAY' });\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Stocks.GetHistoricalPrices',
+      typescript: {
+        method: 'client.v2.marketData.stocks.retrieveHistoricalPrices',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetHistoricalPrices(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2MarketDataStockGetHistoricalPricesParams{\n\t\t\tTimespan: dinariapisdkgo.V2MarketDataStockGetHistoricalPricesParamsTimespanDay,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/historical_prices/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().stocks().retrieveHistoricalPrices',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveHistoricalPricesParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveHistoricalPricesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockRetrieveHistoricalPricesParams params = StockRetrieveHistoricalPricesParams.builder()\n            .stockId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .timespan(StockRetrieveHistoricalPricesParams.Timespan.DAY)\n            .build();\n        List<StockRetrieveHistoricalPricesResponse> response = client.v2().marketData().stocks().retrieveHistoricalPrices(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->stocks->retrieveHistoricalPrices',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveHistoricalPrices(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', timespan: 'DAY'\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveHistoricalPrices(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { timespan: 'DAY' },\n);\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.market_data.stocks.retrieve_historical_prices',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.stocks.retrieve_historical_prices(\n    stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    timespan="DAY",\n)\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.marketData.stocks.retrieveHistoricalPrices',
+      java: {
+        method: 'v2().marketData().stocks().retrieveHistoricalPrices',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveHistoricalPrices(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { timespan: 'DAY' },\n);\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveHistoricalPricesParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveHistoricalPricesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockRetrieveHistoricalPricesParams params = StockRetrieveHistoricalPricesParams.builder()\n            .stockId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .timespan(StockRetrieveHistoricalPricesParams.Timespan.DAY)\n            .build();\n        List<StockRetrieveHistoricalPricesResponse> response = client.v2().marketData().stocks().retrieveHistoricalPrices(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Stocks.GetHistoricalPrices',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetHistoricalPrices(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2MarketDataStockGetHistoricalPricesParams{\n\t\t\tTimespan: dinariapisdkgo.V2MarketDataStockGetHistoricalPricesParamsTimespanDay,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->stocks->retrieveHistoricalPrices',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveHistoricalPrices(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', timespan: 'DAY'\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/historical_prices/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -264,34 +264,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_news\n\n`client.v2.marketData.stocks.retrieveNews(stock_id: string, limit?: number): { article_url: string; description: string; image_url: string; published_dt: string; publisher: string; amp_url?: string; }[]`\n\n**get** `/api/v2/market_data/stocks/{stock_id}/news`\n\nGet the most recent news articles relating to a `Stock`, including a summary of the article \n        and a link to the original source.\n\n### Parameters\n\n- `stock_id: string`\n\n- `limit?: number`\n  The number of articles to return.\n\n### Returns\n\n- `{ article_url: string; description: string; image_url: string; published_dt: string; publisher: string; amp_url?: string; }[]`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.stocks.retrieveNews('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Stocks.GetNews',
+      typescript: {
+        method: 'client.v2.marketData.stocks.retrieveNews',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetNews(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2MarketDataStockGetNewsParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/news \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().stocks().retrieveNews',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveNewsParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveNewsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<StockRetrieveNewsResponse> response = client.v2().marketData().stocks().retrieveNews("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->stocks->retrieveNews',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveNews(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', limit: 1\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveNews(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.market_data.stocks.retrieve_news',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.stocks.retrieve_news(\n    stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.marketData.stocks.retrieveNews',
+      java: {
+        method: 'v2().marketData().stocks().retrieveNews',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveNews(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveNewsParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveNewsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<StockRetrieveNewsResponse> response = client.v2().marketData().stocks().retrieveNews("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Stocks.GetNews',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetNews(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2MarketDataStockGetNewsParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->stocks->retrieveNews',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveNews(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', limit: 1\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/news \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -310,34 +310,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_dividends\n\n`client.v2.marketData.stocks.retrieveDividends(stock_id: string): { cash_amount?: number; currency?: string; dividend_type?: string; ex_dividend_date?: string; pay_date?: string; record_date?: string; ticker?: string; }[]`\n\n**get** `/api/v2/market_data/stocks/{stock_id}/dividends`\n\n\nGet a list of announced stock dividend details for a specified `Stock`.\n\nNote that this data applies only to actual stocks. Yield received for holding tokenized shares may differ from this.\n\n\n### Parameters\n\n- `stock_id: string`\n\n### Returns\n\n- `{ cash_amount?: number; currency?: string; dividend_type?: string; ex_dividend_date?: string; pay_date?: string; record_date?: string; ticker?: string; }[]`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.stocks.retrieveDividends('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Stocks.GetDividends',
+      typescript: {
+        method: 'client.v2.marketData.stocks.retrieveDividends',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetDividends(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/dividends \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().stocks().retrieveDividends',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveDividendsParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveDividendsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<StockRetrieveDividendsResponse> response = client.v2().marketData().stocks().retrieveDividends("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->stocks->retrieveDividends',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveDividends(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveDividends(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.market_data.stocks.retrieve_dividends',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.stocks.retrieve_dividends(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.marketData.stocks.retrieveDividends',
+      java: {
+        method: 'v2().marketData().stocks().retrieveDividends',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveDividends(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveDividendsParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveDividendsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<StockRetrieveDividendsResponse> response = client.v2().marketData().stocks().retrieveDividends("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Stocks.GetDividends',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetDividends(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->stocks->retrieveDividends',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveDividends(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/dividends \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -355,34 +355,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_current_price\n\n`client.v2.marketData.stocks.retrieveCurrentPrice(stock_id: string): { price: number; stock_id: string; timestamp: string; change?: number; change_percent?: number; close?: number; high?: number; low?: number; market_cap?: number; open?: number; previous_close?: number; volume?: number; weighted_shares_outstanding?: number; }`\n\n**get** `/api/v2/market_data/stocks/{stock_id}/current_price`\n\nGet current price for a specified `Stock`.\n\n### Parameters\n\n- `stock_id: string`\n\n### Returns\n\n- `{ price: number; stock_id: string; timestamp: string; change?: number; change_percent?: number; close?: number; high?: number; low?: number; market_cap?: number; open?: number; previous_close?: number; volume?: number; weighted_shares_outstanding?: number; }`\n\n  - `price: number`\n  - `stock_id: string`\n  - `timestamp: string`\n  - `change?: number`\n  - `change_percent?: number`\n  - `close?: number`\n  - `high?: number`\n  - `low?: number`\n  - `market_cap?: number`\n  - `open?: number`\n  - `previous_close?: number`\n  - `volume?: number`\n  - `weighted_shares_outstanding?: number`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.stocks.retrieveCurrentPrice('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Stocks.GetCurrentPrice',
+      typescript: {
+        method: 'client.v2.marketData.stocks.retrieveCurrentPrice',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetCurrentPrice(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.StockID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/current_price \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().stocks().retrieveCurrentPrice',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentPriceParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentPriceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockRetrieveCurrentPriceResponse response = client.v2().marketData().stocks().retrieveCurrentPrice("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->stocks->retrieveCurrentPrice',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveCurrentPrice(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveCurrentPrice(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response.stock_id);",
       },
       python: {
         method: 'v2.market_data.stocks.retrieve_current_price',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.stocks.retrieve_current_price(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response.stock_id)',
       },
-      typescript: {
-        method: 'client.v2.marketData.stocks.retrieveCurrentPrice',
+      java: {
+        method: 'v2().marketData().stocks().retrieveCurrentPrice',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveCurrentPrice(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response.stock_id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentPriceParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentPriceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockRetrieveCurrentPriceResponse response = client.v2().marketData().stocks().retrieveCurrentPrice("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Stocks.GetCurrentPrice',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetCurrentPrice(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.StockID)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->stocks->retrieveCurrentPrice',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveCurrentPrice(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/current_price \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -400,34 +400,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_current_quote\n\n`client.v2.marketData.stocks.retrieveCurrentQuote(stock_id: string): { ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; }`\n\n**get** `/api/v2/market_data/stocks/{stock_id}/current_quote`\n\nGet quote for a specified `Stock`.\n\n### Parameters\n\n- `stock_id: string`\n\n### Returns\n\n- `{ ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; }`\n\n  - `ask_price: number`\n  - `ask_size: number`\n  - `bid_price: number`\n  - `bid_size: number`\n  - `stock_id: string`\n  - `timestamp: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.stocks.retrieveCurrentQuote('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Stocks.GetCurrentQuote',
+      typescript: {
+        method: 'client.v2.marketData.stocks.retrieveCurrentQuote',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetCurrentQuote(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.BidPrice)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/current_quote \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().stocks().retrieveCurrentQuote',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentQuoteParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentQuoteResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockRetrieveCurrentQuoteResponse response = client.v2().marketData().stocks().retrieveCurrentQuote("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->stocks->retrieveCurrentQuote',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveCurrentQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveCurrentQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response.bid_price);",
       },
       python: {
         method: 'v2.market_data.stocks.retrieve_current_quote',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.stocks.retrieve_current_quote(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response.bid_price)',
       },
-      typescript: {
-        method: 'client.v2.marketData.stocks.retrieveCurrentQuote',
+      java: {
+        method: 'v2().marketData().stocks().retrieveCurrentQuote',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveCurrentQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response.bid_price);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentQuoteParams;\nimport com.dinari.api.models.v2.marketdata.stocks.StockRetrieveCurrentQuoteResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        StockRetrieveCurrentQuoteResponse response = client.v2().marketData().stocks().retrieveCurrentQuote("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Stocks.GetCurrentQuote',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetCurrentQuote(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.BidPrice)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->stocks->retrieveCurrentQuote',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveCurrentQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/current_quote \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -453,34 +453,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v2.marketData.stocks.splits.list(limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string): object[] | { data: stock_split[]; pagination_metadata: object; _sv?: 'PaginatedStockSplitResponse:v1'; }`\n\n**get** `/api/v2/market_data/stocks/splits`\n\n\nGet a list of stock splits for `Stocks` available for trade via Dinari.\nThe splits are ordered by the date they were created, with the most recent split first.\n\nIn an example 10-for-1 stock split, trading will be halted for the stock at the end of the `payable_date`, as\nthe split transitions from `PENDING` to `IN_PROGRESS`. This usually occurs over a weekend to minimize trading\ndisruptions. Each share of stock owned by a shareholder will then be converted into 10 shares, and the split\nbecomes `COMPLETE` as trading resumes on the `ex_date` with new split-adjusted prices.\n\n\n### Parameters\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ id: string; ex_date: string; payable_date: string; record_date: string; split_from: number; split_to: number; status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE'; stock_id: string; }[] | { data: { id: string; ex_date: string; payable_date: string; record_date: string; split_from: number; split_to: number; status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE'; stock_id: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedStockSplitResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst splits = await client.v2.marketData.stocks.splits.list();\n\nconsole.log(splits);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Stocks.Splits.List',
+      typescript: {
+        method: 'client.v2.marketData.stocks.splits.list',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tsplits, err := client.V2.MarketData.Stocks.Splits.List(context.TODO(), dinariapisdkgo.V2MarketDataStockSplitListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", splits)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/splits \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().stocks().splits().list',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.SplitListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.SplitListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        SplitListResponse splits = client.v2().marketData().stocks().splits().list();\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->stocks->splits->list',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$splits = $client->v2->marketData->stocks->splits->list(\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($splits);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst splits = await client.v2.marketData.stocks.splits.list();\n\nconsole.log(splits);",
       },
       python: {
         method: 'v2.market_data.stocks.splits.list',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nsplits = client.v2.market_data.stocks.splits.list()\nprint(splits)',
       },
-      typescript: {
-        method: 'client.v2.marketData.stocks.splits.list',
+      java: {
+        method: 'v2().marketData().stocks().splits().list',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst splits = await client.v2.marketData.stocks.splits.list();\n\nconsole.log(splits);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.SplitListParams;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.SplitListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        SplitListResponse splits = client.v2().marketData().stocks().splits().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Stocks.Splits.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tsplits, err := client.V2.MarketData.Stocks.Splits.List(context.TODO(), dinariapisdkgo.V2MarketDataStockSplitListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", splits)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->stocks->splits->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$splits = $client->v2->marketData->stocks->splits->list(\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($splits);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/splits \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -507,34 +507,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_for_stock\n\n`client.v2.marketData.stocks.splits.listForStock(stock_id: string, limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string): object[] | { data: stock_split[]; pagination_metadata: object; _sv?: 'PaginatedStockSplitResponse:v1'; }`\n\n**get** `/api/v2/market_data/stocks/{stock_id}/splits`\n\n\nGet a list of stock splits for a specific `Stock`.\nThe splits are ordered by the date they were created, with the most recent split first.\n\nIn an example 10-for-1 stock split, trading will be halted for the stock at the end of the `payable_date`, as\nthe split transitions from `PENDING` to `IN_PROGRESS`. This usually occurs over a weekend to minimize trading\ndisruptions. Each share of stock owned by a shareholder will then be converted into 10 shares, and the split\nbecomes `COMPLETE` as trading resumes on the `ex_date` with new split-adjusted prices.\n\n\n### Parameters\n\n- `stock_id: string`\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ id: string; ex_date: string; payable_date: string; record_date: string; split_from: number; split_to: number; status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE'; stock_id: string; }[] | { data: { id: string; ex_date: string; payable_date: string; record_date: string; split_from: number; split_to: number; status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE'; stock_id: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedStockSplitResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.stocks.splits.listForStock('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Stocks.Splits.ListForStock',
+      typescript: {
+        method: 'client.v2.marketData.stocks.splits.listForStock',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.Splits.ListForStock(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2MarketDataStockSplitListForStockParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/splits \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().stocks().splits().listForStock',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.SplitListForStockParams;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.SplitListForStockResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        SplitListForStockResponse response = client.v2().marketData().stocks().splits().listForStock("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->stocks->splits->listForStock',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->splits->listForStock(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.splits.listForStock(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.market_data.stocks.splits.list_for_stock',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.stocks.splits.list_for_stock(\n    stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.marketData.stocks.splits.listForStock',
+      java: {
+        method: 'v2().marketData().stocks().splits().listForStock',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.splits.listForStock(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.SplitListForStockParams;\nimport com.dinari.api.models.v2.marketdata.stocks.splits.SplitListForStockResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        SplitListForStockResponse response = client.v2().marketData().stocks().splits().listForStock("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Stocks.Splits.ListForStock',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.Splits.ListForStock(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2MarketDataStockSplitListForStockParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->stocks->splits->listForStock',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->splits->listForStock(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/stocks/$STOCK_ID/splits \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -558,34 +558,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v2.marketData.alloys.list(limit?: number, next?: string, order?: 'asc' | 'desc', previous?: string, symbols?: string[]): { data: object[]; pagination_metadata: object; _sv?: 'PaginatedAlloyResponse:v1'; }`\n\n**get** `/api/v2/market_data/alloys/`\n\nReturns available `Alloys` with cursor-based pagination.\n\n### Parameters\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `previous?: string`\n  Cursor for previous page\n\n- `symbols?: string[]`\n  If set, this endpoint will return Alloys that match the symbols specified\n\n### Returns\n\n- `{ data: { id: string; is_tradable: boolean; name: string; symbol: string; _sv?: 'Alloy:v1'; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedAlloyResponse:v1'; }`\n  Paginated response containing a list of Alloys.\n\n  - `data: { id: string; is_tradable: boolean; name: string; symbol: string; _sv?: 'Alloy:v1'; }[]`\n  - `pagination_metadata: { next?: string; previous?: string; }`\n  - `_sv?: 'PaginatedAlloyResponse:v1'`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst alloys = await client.v2.marketData.alloys.list();\n\nconsole.log(alloys);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Alloys.List',
+      typescript: {
+        method: 'client.v2.marketData.alloys.list',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\talloys, err := client.V2.MarketData.Alloys.List(context.TODO(), dinariapisdkgo.V2MarketDataAlloyListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", alloys.Data)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/alloys/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().alloys().list',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyListParams;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AlloyListResponse alloys = client.v2().marketData().alloys().list();\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->alloys->list',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$alloys = $client->v2->marketData->alloys->list(\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  previous: 'previous',\n  symbols: ['string'],\n);\n\nvar_dump($alloys);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst alloys = await client.v2.marketData.alloys.list();\n\nconsole.log(alloys.data);",
       },
       python: {
         method: 'v2.market_data.alloys.list',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nalloys = client.v2.market_data.alloys.list()\nprint(alloys.data)',
       },
-      typescript: {
-        method: 'client.v2.marketData.alloys.list',
+      java: {
+        method: 'v2().marketData().alloys().list',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst alloys = await client.v2.marketData.alloys.list();\n\nconsole.log(alloys.data);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyListParams;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AlloyListResponse alloys = client.v2().marketData().alloys().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Alloys.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\talloys, err := client.V2.MarketData.Alloys.List(context.TODO(), dinariapisdkgo.V2MarketDataAlloyListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", alloys.Data)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->alloys->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$alloys = $client->v2->marketData->alloys->list(\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  previous: 'previous',\n  symbols: ['string'],\n);\n\nvar_dump($alloys);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/alloys/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -602,34 +602,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_current_price\n\n`client.v2.marketData.alloys.retrieveCurrentPrice(alloy_id: string): { id: string; price: number; timestamp: string; _sv?: 'AlloyPrice:v1'; }`\n\n**get** `/api/v2/market_data/alloys/{alloy_id}/current_price`\n\nGet the current price for a specified `Alloy`.\n\n### Parameters\n\n- `alloy_id: string`\n\n### Returns\n\n- `{ id: string; price: number; timestamp: string; _sv?: 'AlloyPrice:v1'; }`\n\n  - `id: string`\n  - `price: number`\n  - `timestamp: string`\n  - `_sv?: 'AlloyPrice:v1'`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.alloys.retrieveCurrentPrice('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Alloys.GetCurrentPrice',
+      typescript: {
+        method: 'client.v2.marketData.alloys.retrieveCurrentPrice',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Alloys.GetCurrentPrice(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/alloys/$ALLOY_ID/current_price \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().alloys().retrieveCurrentPrice',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveCurrentPriceParams;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveCurrentPriceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AlloyRetrieveCurrentPriceResponse response = client.v2().marketData().alloys().retrieveCurrentPrice("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->alloys->retrieveCurrentPrice',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->alloys->retrieveCurrentPrice(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.alloys.retrieveCurrentPrice(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response.id);",
       },
       python: {
         method: 'v2.market_data.alloys.retrieve_current_price',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.alloys.retrieve_current_price(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response.id)',
       },
-      typescript: {
-        method: 'client.v2.marketData.alloys.retrieveCurrentPrice',
+      java: {
+        method: 'v2().marketData().alloys().retrieveCurrentPrice',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.alloys.retrieveCurrentPrice(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveCurrentPriceParams;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveCurrentPriceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AlloyRetrieveCurrentPriceResponse response = client.v2().marketData().alloys().retrieveCurrentPrice("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Alloys.GetCurrentPrice',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Alloys.GetCurrentPrice(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->alloys->retrieveCurrentPrice',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->alloys->retrieveCurrentPrice(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/alloys/$ALLOY_ID/current_price \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -648,34 +648,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_historical_prices\n\n`client.v2.marketData.alloys.retrieveHistoricalPrices(alloy_id: string, timespan: 'DAY' | 'WEEK'): { close: number; high: number; low: number; open: number; timestamp: number; _sv?: 'AlloyHistoricalPriceDataPointV1:v1'; }[]`\n\n**get** `/api/v2/market_data/alloys/{alloy_id}/historical_prices/`\n\nGet historical price data for a specified `Alloy`. Each index in the array represents a single tick in a price chart.\n\n### Parameters\n\n- `alloy_id: string`\n\n- `timespan: 'DAY' | 'WEEK'`\n  The timespan of the historical prices to query.\n\n### Returns\n\n- `{ close: number; high: number; low: number; open: number; timestamp: number; _sv?: 'AlloyHistoricalPriceDataPointV1:v1'; }[]`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.alloys.retrieveHistoricalPrices('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { timespan: 'DAY' });\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.MarketData.Alloys.GetHistoricalPrices',
+      typescript: {
+        method: 'client.v2.marketData.alloys.retrieveHistoricalPrices',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Alloys.GetHistoricalPrices(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2MarketDataAlloyGetHistoricalPricesParams{\n\t\t\tTimespan: dinariapisdkgo.V2MarketDataAlloyGetHistoricalPricesParamsTimespanDay,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/alloys/$ALLOY_ID/historical_prices/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().marketData().alloys().retrieveHistoricalPrices',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveHistoricalPricesParams;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveHistoricalPricesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AlloyRetrieveHistoricalPricesParams params = AlloyRetrieveHistoricalPricesParams.builder()\n            .alloyId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .timespan(AlloyRetrieveHistoricalPricesParams.Timespan.DAY)\n            .build();\n        List<AlloyRetrieveHistoricalPricesResponse> response = client.v2().marketData().alloys().retrieveHistoricalPrices(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->marketData->alloys->retrieveHistoricalPrices',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->alloys->retrieveHistoricalPrices(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', timespan: 'DAY'\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.alloys.retrieveHistoricalPrices(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { timespan: 'DAY' },\n);\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.market_data.alloys.retrieve_historical_prices',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.alloys.retrieve_historical_prices(\n    alloy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    timespan="DAY",\n)\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.marketData.alloys.retrieveHistoricalPrices',
+      java: {
+        method: 'v2().marketData().alloys().retrieveHistoricalPrices',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.alloys.retrieveHistoricalPrices(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { timespan: 'DAY' },\n);\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveHistoricalPricesParams;\nimport com.dinari.api.models.v2.marketdata.alloys.AlloyRetrieveHistoricalPricesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AlloyRetrieveHistoricalPricesParams params = AlloyRetrieveHistoricalPricesParams.builder()\n            .alloyId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .timespan(AlloyRetrieveHistoricalPricesParams.Timespan.DAY)\n            .build();\n        List<AlloyRetrieveHistoricalPricesResponse> response = client.v2().marketData().alloys().retrieveHistoricalPrices(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.MarketData.Alloys.GetHistoricalPrices',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Alloys.GetHistoricalPrices(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2MarketDataAlloyGetHistoricalPricesParams{\n\t\t\tTimespan: dinariapisdkgo.V2MarketDataAlloyGetHistoricalPricesParamsTimespanDay,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->marketData->alloys->retrieveHistoricalPrices',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->alloys->retrieveHistoricalPrices(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', timespan: 'DAY'\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/market_data/alloys/$ALLOY_ID/historical_prices/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -702,34 +702,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v2.entities.list(limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string, reference_id?: string): object[] | { data: entity[]; pagination_metadata: object; _sv?: 'PaginatedEntityResponse:v1'; }`\n\n**get** `/api/v2/entities/`\n\nGet a list of direct `Entities` your organization manages. These `Entities` represent individual customers of your organization.\n\n### Parameters\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n- `reference_id?: string`\n  Case sensitive unique reference ID for the `Entity`.\n\n### Returns\n\n- `{ id: string; entity_type: 'INDIVIDUAL' | 'ORGANIZATION'; is_kyc_complete: boolean; name?: string; nationality?: string; reference_id?: string; }[] | { data: { id: string; entity_type: 'INDIVIDUAL' | 'ORGANIZATION'; is_kyc_complete: boolean; name?: string; nationality?: string; reference_id?: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedEntityResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst entities = await client.v2.entities.list();\n\nconsole.log(entities);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.List',
+      typescript: {
+        method: 'client.v2.entities.list',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tentities, err := client.V2.Entities.List(context.TODO(), dinariapisdkgo.V2EntityListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entities)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().entities().list',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.EntityListParams;\nimport com.dinari.api.models.v2.entities.EntityListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityListResponse entities = client.v2().entities().list();\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->list',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entities = $client->v2->entities->list(\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n  referenceID: 'x',\n);\n\nvar_dump($entities);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst entities = await client.v2.entities.list();\n\nconsole.log(entities);",
       },
       python: {
         method: 'v2.entities.list',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nentities = client.v2.entities.list()\nprint(entities)',
       },
-      typescript: {
-        method: 'client.v2.entities.list',
+      java: {
+        method: 'v2().entities().list',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst entities = await client.v2.entities.list();\n\nconsole.log(entities);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.EntityListParams;\nimport com.dinari.api.models.v2.entities.EntityListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityListResponse entities = client.v2().entities().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tentities, err := client.V2.Entities.List(context.TODO(), dinariapisdkgo.V2EntityListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entities)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entities = $client->v2->entities->list(\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n  referenceID: 'x',\n);\n\nvar_dump($entities);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/ \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -748,34 +748,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v2.entities.create(name: string, reference_id?: string): { id: string; entity_type: 'INDIVIDUAL' | 'ORGANIZATION'; is_kyc_complete: boolean; name?: string; nationality?: string; reference_id?: string; }`\n\n**post** `/api/v2/entities/`\n\nCreate a new `Entity` to be managed by your organization. This `Entity` represents an individual customer of your organization.\n\n### Parameters\n\n- `name: string`\n  Name of the `Entity`.\n\n- `reference_id?: string`\n  Case sensitive unique reference ID for the `Entity`. We recommend setting this to the unique ID of the `Entity` in your system.\n\n### Returns\n\n- `{ id: string; entity_type: 'INDIVIDUAL' | 'ORGANIZATION'; is_kyc_complete: boolean; name?: string; nationality?: string; reference_id?: string; }`\n  Information about an `Entity`, which can be either an individual or an organization.\n\n  - `id: string`\n  - `entity_type: 'INDIVIDUAL' | 'ORGANIZATION'`\n  - `is_kyc_complete: boolean`\n  - `name?: string`\n  - `nationality?: string`\n  - `reference_id?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst entity = await client.v2.entities.create({ name: 'x' });\n\nconsole.log(entity);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.New',
+      typescript: {
+        method: 'client.v2.entities.create',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tentity, err := client.V2.Entities.New(context.TODO(), dinariapisdkgo.V2EntityNewParams{\n\t\tName: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entity.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/ \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "name": "x"\n        }\'',
-      },
-      java: {
-        method: 'v2().entities().create',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.EntityCreateParams;\nimport com.dinari.api.models.v2.entities.EntityCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityCreateParams params = EntityCreateParams.builder()\n            .name("x")\n            .build();\n        EntityCreateResponse entity = client.v2().entities().create(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->create',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entity = $client->v2->entities->create(name: 'x', referenceID: 'x');\n\nvar_dump($entity);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst entity = await client.v2.entities.create({ name: 'x' });\n\nconsole.log(entity.id);",
       },
       python: {
         method: 'v2.entities.create',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nentity = client.v2.entities.create(\n    name="x",\n)\nprint(entity.id)',
       },
-      typescript: {
-        method: 'client.v2.entities.create',
+      java: {
+        method: 'v2().entities().create',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst entity = await client.v2.entities.create({ name: 'x' });\n\nconsole.log(entity.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.EntityCreateParams;\nimport com.dinari.api.models.v2.entities.EntityCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityCreateParams params = EntityCreateParams.builder()\n            .name("x")\n            .build();\n        EntityCreateResponse entity = client.v2().entities().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tentity, err := client.V2.Entities.New(context.TODO(), dinariapisdkgo.V2EntityNewParams{\n\t\tName: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entity.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entity = $client->v2->entities->create(name: 'x', referenceID: 'x');\n\nvar_dump($entity);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/ \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "name": "x"\n        }\'',
       },
     },
   },
@@ -792,34 +792,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_current\n\n`client.v2.entities.retrieveCurrent(): { id: string; entity_type: 'INDIVIDUAL' | 'ORGANIZATION'; is_kyc_complete: boolean; name?: string; nationality?: string; reference_id?: string; }`\n\n**get** `/api/v2/entities/me`\n\nGet the current authenticated `Entity`, which represents your organization.\n\n### Returns\n\n- `{ id: string; entity_type: 'INDIVIDUAL' | 'ORGANIZATION'; is_kyc_complete: boolean; name?: string; nationality?: string; reference_id?: string; }`\n  Information about an `Entity`, which can be either an individual or an organization.\n\n  - `id: string`\n  - `entity_type: 'INDIVIDUAL' | 'ORGANIZATION'`\n  - `is_kyc_complete: boolean`\n  - `name?: string`\n  - `nationality?: string`\n  - `reference_id?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.entities.retrieveCurrent();\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.GetCurrent',
+      typescript: {
+        method: 'client.v2.entities.retrieveCurrent',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Entities.GetCurrent(context.TODO())\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/me \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().entities().retrieveCurrent',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.EntityRetrieveCurrentParams;\nimport com.dinari.api.models.v2.entities.EntityRetrieveCurrentResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityRetrieveCurrentResponse response = client.v2().entities().retrieveCurrent();\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->retrieveCurrent',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->entities->retrieveCurrent();\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.entities.retrieveCurrent();\n\nconsole.log(response.id);",
       },
       python: {
         method: 'v2.entities.retrieve_current',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.entities.retrieve_current()\nprint(response.id)',
       },
-      typescript: {
-        method: 'client.v2.entities.retrieveCurrent',
+      java: {
+        method: 'v2().entities().retrieveCurrent',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.entities.retrieveCurrent();\n\nconsole.log(response.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.EntityRetrieveCurrentParams;\nimport com.dinari.api.models.v2.entities.EntityRetrieveCurrentResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityRetrieveCurrentResponse response = client.v2().entities().retrieveCurrent();\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.GetCurrent',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Entities.GetCurrent(context.TODO())\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->retrieveCurrent',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->entities->retrieveCurrent();\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/me \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -837,34 +837,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_by_id\n\n`client.v2.entities.retrieveByID(entity_id: string): { id: string; entity_type: 'INDIVIDUAL' | 'ORGANIZATION'; is_kyc_complete: boolean; name?: string; nationality?: string; reference_id?: string; }`\n\n**get** `/api/v2/entities/{entity_id}`\n\nGet a specific customer `Entity` of your organization by their ID.\n\n### Parameters\n\n- `entity_id: string`\n\n### Returns\n\n- `{ id: string; entity_type: 'INDIVIDUAL' | 'ORGANIZATION'; is_kyc_complete: boolean; name?: string; nationality?: string; reference_id?: string; }`\n  Information about an `Entity`, which can be either an individual or an organization.\n\n  - `id: string`\n  - `entity_type: 'INDIVIDUAL' | 'ORGANIZATION'`\n  - `is_kyc_complete: boolean`\n  - `name?: string`\n  - `nationality?: string`\n  - `reference_id?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.entities.retrieveByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.GetByID',
+      typescript: {
+        method: 'client.v2.entities.retrieveByID',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Entities.GetByID(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().entities().retrieveById',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.EntityRetrieveByIdParams;\nimport com.dinari.api.models.v2.entities.EntityRetrieveByIdResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityRetrieveByIdResponse response = client.v2().entities().retrieveById("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->retrieveByID',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->entities->retrieveByID(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.entities.retrieveByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response.id);",
       },
       python: {
         method: 'v2.entities.retrieve_by_id',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.entities.retrieve_by_id(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response.id)',
       },
-      typescript: {
-        method: 'client.v2.entities.retrieveByID',
+      java: {
+        method: 'v2().entities().retrieveById',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.entities.retrieveByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.EntityRetrieveByIdParams;\nimport com.dinari.api.models.v2.entities.EntityRetrieveByIdResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityRetrieveByIdResponse response = client.v2().entities().retrieveById("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.GetByID',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Entities.GetByID(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->retrieveByID',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->entities->retrieveByID(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -882,34 +882,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v2.entities.update(entity_id: string, reference_id?: string): { id: string; entity_type: 'INDIVIDUAL' | 'ORGANIZATION'; is_kyc_complete: boolean; name?: string; nationality?: string; reference_id?: string; }`\n\n**patch** `/api/v2/entities/{entity_id}`\n\nUpdate a specific customer `Entity` of your organization.\n\n### Parameters\n\n- `entity_id: string`\n\n- `reference_id?: string`\n  Case sensitive unique reference ID for the `Entity`. We recommend setting this to the unique ID of the `Entity` in your system.\n\n### Returns\n\n- `{ id: string; entity_type: 'INDIVIDUAL' | 'ORGANIZATION'; is_kyc_complete: boolean; name?: string; nationality?: string; reference_id?: string; }`\n  Information about an `Entity`, which can be either an individual or an organization.\n\n  - `id: string`\n  - `entity_type: 'INDIVIDUAL' | 'ORGANIZATION'`\n  - `is_kyc_complete: boolean`\n  - `name?: string`\n  - `nationality?: string`\n  - `reference_id?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst entity = await client.v2.entities.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(entity);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.Update',
+      typescript: {
+        method: 'client.v2.entities.update',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tentity, err := client.V2.Entities.Update(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entity.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{}\'',
-      },
-      java: {
-        method: 'v2().entities().update',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.EntityUpdateParams;\nimport com.dinari.api.models.v2.entities.EntityUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityUpdateResponse entity = client.v2().entities().update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->update',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entity = $client->v2->entities->update(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', referenceID: 'x'\n);\n\nvar_dump($entity);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst entity = await client.v2.entities.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(entity.id);",
       },
       python: {
         method: 'v2.entities.update',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nentity = client.v2.entities.update(\n    entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(entity.id)',
       },
-      typescript: {
-        method: 'client.v2.entities.update',
+      java: {
+        method: 'v2().entities().update',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst entity = await client.v2.entities.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(entity.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.EntityUpdateParams;\nimport com.dinari.api.models.v2.entities.EntityUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        EntityUpdateResponse entity = client.v2().entities().update("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tentity, err := client.V2.Entities.Update(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entity.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->update',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$entity = $client->v2->entities->update(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', referenceID: 'x'\n);\n\nvar_dump($entity);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{}\'',
       },
     },
   },
@@ -936,34 +936,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v2.entities.accounts.list(entity_id: string, limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string): object[] | { data: account[]; pagination_metadata: object; _sv?: 'PaginatedAccountResponse:v1'; }`\n\n**get** `/api/v2/entities/{entity_id}/accounts`\n\nGet a list of all `Accounts` that belong to a specific `Entity`. This `Entity` represents your organization itself, or an individual customer of your organization.\n\n### Parameters\n\n- `entity_id: string`\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ id: string; created_dt: string; entity_id: string; is_active: boolean; jurisdiction: 'BASELINE' | 'US'; brokerage_account_id?: string; }[] | { data: { id: string; created_dt: string; entity_id: string; is_active: boolean; jurisdiction: 'BASELINE' | 'US'; brokerage_account_id?: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedAccountResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst accounts = await client.v2.entities.accounts.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(accounts);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.Accounts.List',
+      typescript: {
+        method: 'client.v2.entities.accounts.list',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\taccounts, err := client.V2.Entities.Accounts.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityAccountListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", accounts)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/accounts \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().entities().accounts().list',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.accounts.AccountListParams;\nimport com.dinari.api.models.v2.entities.accounts.AccountListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountListResponse accounts = client.v2().entities().accounts().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->accounts->list',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$accounts = $client->v2->entities->accounts->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($accounts);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst accounts = await client.v2.entities.accounts.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(accounts);",
       },
       python: {
         method: 'v2.entities.accounts.list',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\naccounts = client.v2.entities.accounts.list(\n    entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(accounts)',
       },
-      typescript: {
-        method: 'client.v2.entities.accounts.list',
+      java: {
+        method: 'v2().entities().accounts().list',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst accounts = await client.v2.entities.accounts.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(accounts);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.accounts.AccountListParams;\nimport com.dinari.api.models.v2.entities.accounts.AccountListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountListResponse accounts = client.v2().entities().accounts().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.Accounts.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\taccounts, err := client.V2.Entities.Accounts.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityAccountListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", accounts)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->accounts->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$accounts = $client->v2->entities->accounts->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($accounts);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/accounts \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -982,34 +982,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v2.entities.accounts.create(entity_id: string, jurisdiction?: 'BASELINE' | 'US'): { id: string; created_dt: string; entity_id: string; is_active: boolean; jurisdiction: jurisdiction; brokerage_account_id?: string; }`\n\n**post** `/api/v2/entities/{entity_id}/accounts`\n\nCreate a new `Account` for a specific `Entity`. This `Entity` represents your organization itself, or an individual customer of your organization.\n\n### Parameters\n\n- `entity_id: string`\n\n- `jurisdiction?: 'BASELINE' | 'US'`\n  Jurisdiction of the `Account`.\n\n### Returns\n\n- `{ id: string; created_dt: string; entity_id: string; is_active: boolean; jurisdiction: 'BASELINE' | 'US'; brokerage_account_id?: string; }`\n  Information about an `Account` owned by an `Entity`.\n\n  - `id: string`\n  - `created_dt: string`\n  - `entity_id: string`\n  - `is_active: boolean`\n  - `jurisdiction: 'BASELINE' | 'US'`\n  - `brokerage_account_id?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst account = await client.v2.entities.accounts.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(account);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.Accounts.New',
+      typescript: {
+        method: 'client.v2.entities.accounts.create',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\taccount, err := client.V2.Entities.Accounts.New(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityAccountNewParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", account.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/accounts \\\n    -X POST \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().entities().accounts().create',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.accounts.AccountCreateParams;\nimport com.dinari.api.models.v2.entities.accounts.AccountCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountCreateResponse account = client.v2().entities().accounts().create("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->accounts->create',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$account = $client->v2->entities->accounts->create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', jurisdiction: Jurisdiction::BASELINE\n);\n\nvar_dump($account);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst account = await client.v2.entities.accounts.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(account.id);",
       },
       python: {
         method: 'v2.entities.accounts.create',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\naccount = client.v2.entities.accounts.create(\n    entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(account.id)',
       },
-      typescript: {
-        method: 'client.v2.entities.accounts.create',
+      java: {
+        method: 'v2().entities().accounts().create',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst account = await client.v2.entities.accounts.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(account.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.accounts.AccountCreateParams;\nimport com.dinari.api.models.v2.entities.accounts.AccountCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountCreateResponse account = client.v2().entities().accounts().create("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.Accounts.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\taccount, err := client.V2.Entities.Accounts.New(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityAccountNewParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", account.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->accounts->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$account = $client->v2->entities->accounts->create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', jurisdiction: Jurisdiction::BASELINE\n);\n\nvar_dump($account);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/accounts \\\n    -X POST \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1028,34 +1028,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v2.entities.kyc.retrieve(entity_id: string): { id: string; status: kyc_status; checked_dt?: string; data?: baseline_kyc_check_data; jurisdiction?: 'BASELINE'; } | { id: string; status: kyc_status; checked_dt?: string; data?: us_kyc_check_data; jurisdiction?: 'US'; }`\n\n**get** `/api/v2/entities/{entity_id}/kyc`\n\n\nGet most recent KYC data of the `Entity`.\n\nIf there are any completed KYC checks, data from the most recent one will be returned.\nIf there are no completed KYC checks, the most recent KYC check information, regardless of status, will be returned.\n\n\n### Parameters\n\n- `entity_id: string`\n\n### Returns\n\n- `{ id: string; status: 'PASS' | 'FAIL' | 'PENDING' | 'INCOMPLETE' | 'NEEDS_REVIEW'; checked_dt?: string; data?: { address_country_code: string; country_code: string; last_name: string; address_city?: string; address_postal_code?: string; address_street_1?: string; address_street_2?: string; address_subdivision?: string; birth_date?: string; email?: string; first_name?: string; middle_name?: string; tax_id_number?: string; }; jurisdiction?: 'BASELINE'; } | { id: string; status: 'PASS' | 'FAIL' | 'PENDING' | 'INCOMPLETE' | 'NEEDS_REVIEW'; checked_dt?: string; data?: { alpaca_customer_agreement: object; aml_check: object; data_citation: object; employment: object; financial_profile: object; identity: object; kyc_metadata: object; non_professional_trader_attestation: object; risk_disclosure: object; trusted_contact: object; us_immigration_info?: object; }; jurisdiction?: 'US'; }`\n  KYC information for an `Entity` in the baseline jurisdiction.\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst kycInfo = await client.v2.entities.kyc.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(kycInfo);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.KYC.Get',
+      typescript: {
+        method: 'client.v2.entities.kyc.retrieve',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tkycInfo, err := client.V2.Entities.KYC.Get(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", kycInfo)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/kyc \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().entities().kyc().retrieve',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.KycInfo;\nimport com.dinari.api.models.v2.entities.kyc.KycRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        KycInfo kycInfo = client.v2().entities().kyc().retrieve("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->kyc->retrieve',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycInfo = $client->v2->entities->kyc->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($kycInfo);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst kycInfo = await client.v2.entities.kyc.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(kycInfo);",
       },
       python: {
         method: 'v2.entities.kyc.retrieve',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nkyc_info = client.v2.entities.kyc.retrieve(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(kyc_info)',
       },
-      typescript: {
-        method: 'client.v2.entities.kyc.retrieve',
+      java: {
+        method: 'v2().entities().kyc().retrieve',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst kycInfo = await client.v2.entities.kyc.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(kycInfo);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.KycInfo;\nimport com.dinari.api.models.v2.entities.kyc.KycRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        KycInfo kycInfo = client.v2().entities().kyc().retrieve("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.KYC.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tkycInfo, err := client.V2.Entities.KYC.Get(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", kycInfo)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->kyc->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycInfo = $client->v2->entities->kyc->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($kycInfo);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/kyc \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1075,34 +1075,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ id: string; status: 'PASS' | 'FAIL' | 'PENDING' | 'INCOMPLETE' | 'NEEDS_REVIEW'; checked_dt?: string; data?: { address_country_code: string; country_code: string; last_name: string; address_city?: string; address_postal_code?: string; address_street_1?: string; address_street_2?: string; address_subdivision?: string; birth_date?: string; email?: string; first_name?: string; middle_name?: string; tax_id_number?: string; }; jurisdiction?: 'BASELINE'; } | { id: string; status: 'PASS' | 'FAIL' | 'PENDING' | 'INCOMPLETE' | 'NEEDS_REVIEW'; checked_dt?: string; data?: { alpaca_customer_agreement: object; aml_check: object; data_citation: object; employment: object; financial_profile: object; identity: object; kyc_metadata: object; non_professional_trader_attestation: object; risk_disclosure: object; trusted_contact: object; us_immigration_info?: object; }; jurisdiction?: 'US'; }",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.KYC.Submit',
+      typescript: {
+        method: 'client.v2.entities.kyc.submit',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tkycInfo, err := client.V2.Entities.KYC.Submit(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityKYCSubmitParams{\n\t\t\tOfBaseline: &dinariapisdkgo.V2EntityKYCSubmitParamsBodyBaseline{\n\t\t\t\tData: dinariapisdkgo.BaselineKYCCheckDataParam{\n\t\t\t\t\tAddressCountryCode: "SG",\n\t\t\t\t\tCountryCode:        "SG",\n\t\t\t\t\tLastName:           "Doe",\n\t\t\t\t},\n\t\t\t\tProviderName: "x",\n\t\t\t\tJurisdiction: "BASELINE",\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", kycInfo)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/kyc \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "data": {\n            "address_country_code": "SG",\n            "country_code": "SG",\n            "last_name": "Doe"\n          },\n          "provider_name": "x"\n        }\'',
-      },
-      java: {
-        method: 'v2().entities().kyc().submit',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.BaselineKycCheckData;\nimport com.dinari.api.models.v2.entities.kyc.KycInfo;\nimport com.dinari.api.models.v2.entities.kyc.KycSubmitParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        KycSubmitParams params = KycSubmitParams.builder()\n            .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .body(KycSubmitParams.Body.Baseline.builder()\n                .data(BaselineKycCheckData.builder()\n                    .addressCountryCode("SG")\n                    .countryCode("SG")\n                    .lastName("Doe")\n                    .build())\n                .providerName("x")\n                .jurisdiction(KycSubmitParams.Body.Baseline.Jurisdiction.BASELINE)\n                .build())\n            .build();\n        KycInfo kycInfo = client.v2().entities().kyc().submit(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->kyc->submit',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycInfo = $client->v2->entities->kyc->submit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  data: [\n    'alpacaCustomerAgreement' => [\n      'ipAddress' => '192.0.2.1',\n      'signedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n    ],\n    'amlCheck' => [\n      'checkCreatedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'isAdverseMediaMatch' => true,\n      'isMonitoredListsMatch' => true,\n      'isPoliticallyExposedPersonMatch' => true,\n      'isSanctionsMatch' => true,\n      'records' => [\n        'Name: John Doe, Alias: Jonathan Doe, Address: 123 Main St, Springfield, DOB: 01/01/1980, Type of Hit: PEP, Position: Mayor of Springfield, List: World-Check, URL: http://example.com/article',\n        'Name: John Doe, Address: 456 Elm St, Springfield, Type of Hit: Adverse Media, Summary: Involved in financial scandal, URL: http://example.com/article',\n      ],\n      'refID' => 'x',\n    ],\n    'dataCitation' => [\n      'addressSources' => ['utility bill'],\n      'dateOfBirthSources' => [\n        'birth certificate', 'government database lookup'\n      ],\n      'taxIDSources' => ['tax return', 'government database lookup'],\n    ],\n    'employment' => [\n      'employmentStatus' => 'UNEMPLOYED',\n      'employerAddress' => 'x',\n      'employerName' => 'x',\n      'employmentPosition' => 'x',\n    ],\n    'financialProfile' => [\n      'fundingSources' => ['EMPLOYMENT_INCOME'],\n      'liquidNetWorthMax' => 0,\n      'liquidNetWorthMin' => 0,\n    ],\n    'identity' => [\n      'city' => 'xx',\n      'countryOfCitizenship' => 'xx',\n      'countryOfTaxResidence' => 'US',\n      'dateOfBirth' => '2019-12-27',\n      'emailAddress' => 'email_address',\n      'familyName' => 'xx',\n      'givenName' => 'x',\n      'phoneNumber' => '+321669910225610',\n      'postalCode' => 'x',\n      'streetAddress' => 'xx',\n      'taxID' => '732-66-9102',\n      'middleName' => 'x',\n      'state' => 'x',\n      'unit' => 'x',\n    ],\n    'kycMetadata' => [\n      'checkCompletedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'checkInitiatedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'ipAddress' => '192.0.2.1',\n      'refID' => 'x',\n    ],\n    'nonProfessionalTraderAttestation' => [\n      'attestationDt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'isNonProfessionalTrader' => true,\n    ],\n    'riskDisclosure' => [\n      'immediateFamilyExposed' => true,\n      'isAffiliatedExchangeOrFinra' => true,\n      'isControlPerson' => true,\n      'isPoliticallyExposed' => true,\n    ],\n    'trustedContact' => [\n      'familyName' => 'family_name',\n      'givenName' => 'given_name',\n      'emailAddress' => 'email_address',\n      'phoneNumber' => '+321669910225610',\n    ],\n    'usImmigrationInfo' => [\n      'countryOfBirth' => 'xx',\n      'isPermanentResident' => true,\n      'departureFromUsDate' => '2019-12-27',\n      'visaExpirationDate' => '2019-12-27',\n      'visaType' => 'B1',\n    ],\n  ],\n  providerName: 'x',\n  jurisdiction: 'US',\n);\n\nvar_dump($kycInfo);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst kycInfo = await client.v2.entities.kyc.submit('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {\n  data: {\n    address_country_code: 'SG',\n    country_code: 'SG',\n    last_name: 'Doe',\n  },\n  provider_name: 'x',\n});\n\nconsole.log(kycInfo);",
       },
       python: {
         method: 'v2.entities.kyc.submit',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nkyc_info = client.v2.entities.kyc.submit(\n    entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    data={\n        "address_country_code": "SG",\n        "country_code": "SG",\n        "last_name": "Doe",\n    },\n    provider_name="x",\n)\nprint(kyc_info)',
       },
-      typescript: {
-        method: 'client.v2.entities.kyc.submit',
+      java: {
+        method: 'v2().entities().kyc().submit',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst kycInfo = await client.v2.entities.kyc.submit('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {\n  data: {\n    address_country_code: 'SG',\n    country_code: 'SG',\n    last_name: 'Doe',\n  },\n  provider_name: 'x',\n});\n\nconsole.log(kycInfo);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.BaselineKycCheckData;\nimport com.dinari.api.models.v2.entities.kyc.KycInfo;\nimport com.dinari.api.models.v2.entities.kyc.KycSubmitParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        KycSubmitParams params = KycSubmitParams.builder()\n            .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .body(KycSubmitParams.Body.Baseline.builder()\n                .data(BaselineKycCheckData.builder()\n                    .addressCountryCode("SG")\n                    .countryCode("SG")\n                    .lastName("Doe")\n                    .build())\n                .providerName("x")\n                .jurisdiction(KycSubmitParams.Body.Baseline.Jurisdiction.BASELINE)\n                .build())\n            .build();\n        KycInfo kycInfo = client.v2().entities().kyc().submit(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.KYC.Submit',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tkycInfo, err := client.V2.Entities.KYC.Submit(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityKYCSubmitParams{\n\t\t\tOfBaseline: &dinariapisdkgo.V2EntityKYCSubmitParamsBodyBaseline{\n\t\t\t\tData: dinariapisdkgo.BaselineKYCCheckDataParam{\n\t\t\t\t\tAddressCountryCode: "SG",\n\t\t\t\t\tCountryCode:        "SG",\n\t\t\t\t\tLastName:           "Doe",\n\t\t\t\t},\n\t\t\t\tProviderName: "x",\n\t\t\t\tJurisdiction: "BASELINE",\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", kycInfo)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->kyc->submit',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycInfo = $client->v2->entities->kyc->submit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  data: [\n    'alpacaCustomerAgreement' => [\n      'ipAddress' => '192.0.2.1',\n      'signedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n    ],\n    'amlCheck' => [\n      'checkCreatedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'isAdverseMediaMatch' => true,\n      'isMonitoredListsMatch' => true,\n      'isPoliticallyExposedPersonMatch' => true,\n      'isSanctionsMatch' => true,\n      'records' => [\n        'Name: John Doe, Alias: Jonathan Doe, Address: 123 Main St, Springfield, DOB: 01/01/1980, Type of Hit: PEP, Position: Mayor of Springfield, List: World-Check, URL: http://example.com/article',\n        'Name: John Doe, Address: 456 Elm St, Springfield, Type of Hit: Adverse Media, Summary: Involved in financial scandal, URL: http://example.com/article',\n      ],\n      'refID' => 'x',\n    ],\n    'dataCitation' => [\n      'addressSources' => ['utility bill'],\n      'dateOfBirthSources' => [\n        'birth certificate', 'government database lookup'\n      ],\n      'taxIDSources' => ['tax return', 'government database lookup'],\n    ],\n    'employment' => [\n      'employmentStatus' => 'UNEMPLOYED',\n      'employerAddress' => 'x',\n      'employerName' => 'x',\n      'employmentPosition' => 'x',\n    ],\n    'financialProfile' => [\n      'fundingSources' => ['EMPLOYMENT_INCOME'],\n      'liquidNetWorthMax' => 0,\n      'liquidNetWorthMin' => 0,\n    ],\n    'identity' => [\n      'city' => 'xx',\n      'countryOfCitizenship' => 'xx',\n      'countryOfTaxResidence' => 'US',\n      'dateOfBirth' => '2019-12-27',\n      'emailAddress' => 'email_address',\n      'familyName' => 'xx',\n      'givenName' => 'x',\n      'phoneNumber' => '+321669910225610',\n      'postalCode' => 'x',\n      'streetAddress' => 'xx',\n      'taxID' => '732-66-9102',\n      'middleName' => 'x',\n      'state' => 'x',\n      'unit' => 'x',\n    ],\n    'kycMetadata' => [\n      'checkCompletedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'checkInitiatedAt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'ipAddress' => '192.0.2.1',\n      'refID' => 'x',\n    ],\n    'nonProfessionalTraderAttestation' => [\n      'attestationDt' => new \\DateTimeImmutable('2019-12-27T18:11:19.117Z'),\n      'isNonProfessionalTrader' => true,\n    ],\n    'riskDisclosure' => [\n      'immediateFamilyExposed' => true,\n      'isAffiliatedExchangeOrFinra' => true,\n      'isControlPerson' => true,\n      'isPoliticallyExposed' => true,\n    ],\n    'trustedContact' => [\n      'familyName' => 'family_name',\n      'givenName' => 'given_name',\n      'emailAddress' => 'email_address',\n      'phoneNumber' => '+321669910225610',\n    ],\n    'usImmigrationInfo' => [\n      'countryOfBirth' => 'xx',\n      'isPermanentResident' => true,\n      'departureFromUsDate' => '2019-12-27',\n      'visaExpirationDate' => '2019-12-27',\n      'visaType' => 'B1',\n    ],\n  ],\n  providerName: 'x',\n  jurisdiction: 'US',\n);\n\nvar_dump($kycInfo);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/kyc \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "data": {\n            "address_country_code": "SG",\n            "country_code": "SG",\n            "last_name": "Doe"\n          },\n          "provider_name": "x"\n        }\'',
       },
     },
   },
@@ -1120,34 +1120,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_managed_check\n\n`client.v2.entities.kyc.createManagedCheck(entity_id: string): { embed_url: string; expiration_dt: string; }`\n\n**post** `/api/v2/entities/{entity_id}/kyc/url`\n\n\nCreate a Dinari-managed KYC Check and get a URL for your end customer to interact with.\n\nThe URL points to a web-based KYC interface that can be presented to the end customer for KYC verification.\nOnce the customer completes this KYC flow, the KYC check will be created and available in the KYC API.\n\n\n### Parameters\n\n- `entity_id: string`\n\n### Returns\n\n- `{ embed_url: string; expiration_dt: string; }`\n  URL for a managed KYC flow for an `Entity`.\n\n  - `embed_url: string`\n  - `expiration_dt: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.entities.kyc.createManagedCheck('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.KYC.NewManagedCheck',
+      typescript: {
+        method: 'client.v2.entities.kyc.createManagedCheck',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Entities.KYC.NewManagedCheck(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.EmbedURL)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/kyc/url \\\n    -X POST \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().entities().kyc().createManagedCheck',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.KycCreateManagedCheckParams;\nimport com.dinari.api.models.v2.entities.kyc.KycCreateManagedCheckResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        KycCreateManagedCheckResponse response = client.v2().entities().kyc().createManagedCheck("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->kyc->createManagedCheck',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->entities->kyc->createManagedCheck(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.entities.kyc.createManagedCheck(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response.embed_url);",
       },
       python: {
         method: 'v2.entities.kyc.create_managed_check',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.entities.kyc.create_managed_check(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response.embed_url)',
       },
-      typescript: {
-        method: 'client.v2.entities.kyc.createManagedCheck',
+      java: {
+        method: 'v2().entities().kyc().createManagedCheck',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.entities.kyc.createManagedCheck(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response.embed_url);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.KycCreateManagedCheckParams;\nimport com.dinari.api.models.v2.entities.kyc.KycCreateManagedCheckResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        KycCreateManagedCheckResponse response = client.v2().entities().kyc().createManagedCheck("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.KYC.NewManagedCheck',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Entities.KYC.NewManagedCheck(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.EmbedURL)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->kyc->createManagedCheck',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->entities->kyc->createManagedCheck(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/kyc/url \\\n    -X POST \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1165,34 +1165,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v2.entities.kyc.document.retrieve(entity_id: string, kyc_id: string): object[]`\n\n**get** `/api/v2/entities/{entity_id}/kyc/{kyc_id}/document`\n\nGet uploaded documents for a KYC check\n\n### Parameters\n\n- `entity_id: string`\n\n- `kyc_id: string`\n\n### Returns\n\n- `{ id: string; document_type: 'GOVERNMENT_ID' | 'SELFIE' | 'RESIDENCY' | 'UNKNOWN'; filename: string; url: string; }[]`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst kycDocuments = await client.v2.entities.kyc.document.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });\n\nconsole.log(kycDocuments);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.KYC.Document.Get',
+      typescript: {
+        method: 'client.v2.entities.kyc.document.retrieve',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tkycDocuments, err := client.V2.Entities.KYC.Document.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityKYCDocumentGetParams{\n\t\t\tEntityID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", kycDocuments)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/kyc/$KYC_ID/document \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().entities().kyc().document().retrieve',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.document.DocumentRetrieveParams;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocument;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        DocumentRetrieveParams params = DocumentRetrieveParams.builder()\n            .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .kycId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        List<KycDocument> kycDocuments = client.v2().entities().kyc().document().retrieve(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->kyc->document->retrieve',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycDocuments = $client->v2->entities->kyc->document->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  entityID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($kycDocuments);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst kycDocuments = await client.v2.entities.kyc.document.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(kycDocuments);",
       },
       python: {
         method: 'v2.entities.kyc.document.retrieve',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nkyc_documents = client.v2.entities.kyc.document.retrieve(\n    kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(kyc_documents)',
       },
-      typescript: {
-        method: 'client.v2.entities.kyc.document.retrieve',
+      java: {
+        method: 'v2().entities().kyc().document().retrieve',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst kycDocuments = await client.v2.entities.kyc.document.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(kycDocuments);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.document.DocumentRetrieveParams;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocument;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        DocumentRetrieveParams params = DocumentRetrieveParams.builder()\n            .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .kycId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        List<KycDocument> kycDocuments = client.v2().entities().kyc().document().retrieve(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.KYC.Document.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tkycDocuments, err := client.V2.Entities.KYC.Document.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityKYCDocumentGetParams{\n\t\t\tEntityID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", kycDocuments)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->kyc->document->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycDocuments = $client->v2->entities->kyc->document->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  entityID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($kycDocuments);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/kyc/$KYC_ID/document \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1216,34 +1216,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## upload\n\n`client.v2.entities.kyc.document.upload(entity_id: string, kyc_id: string, document_type: 'GOVERNMENT_ID' | 'SELFIE' | 'RESIDENCY' | 'UNKNOWN', file: string): { id: string; document_type: kyc_document_type; filename: string; url: string; }`\n\n**post** `/api/v2/entities/{entity_id}/kyc/{kyc_id}/document`\n\n\nUpload KYC-related documentation for partners that are provisioned to provide their own KYC data.\n\n\n### Parameters\n\n- `entity_id: string`\n\n- `kyc_id: string`\n\n- `document_type: 'GOVERNMENT_ID' | 'SELFIE' | 'RESIDENCY' | 'UNKNOWN'`\n  Type of `KYCDocument` to be uploaded.\n\n- `file: string`\n  File to be uploaded. Must be a valid image or PDF file (jpg, jpeg, png, pdf) less than 10MB in size.\n\n### Returns\n\n- `{ id: string; document_type: 'GOVERNMENT_ID' | 'SELFIE' | 'RESIDENCY' | 'UNKNOWN'; filename: string; url: string; }`\n  A document associated with KYC for an `Entity`.\n\n  - `id: string`\n  - `document_type: 'GOVERNMENT_ID' | 'SELFIE' | 'RESIDENCY' | 'UNKNOWN'`\n  - `filename: string`\n  - `url: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst kycDocument = await client.v2.entities.kyc.document.upload('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {\n  entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  document_type: 'GOVERNMENT_ID',\n  file: fs.createReadStream('path/to/file'),\n});\n\nconsole.log(kycDocument);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Entities.KYC.Document.Upload',
+      typescript: {
+        method: 'client.v2.entities.kyc.document.upload',
         example:
-          'package main\n\nimport (\n\t"bytes"\n\t"context"\n\t"fmt"\n\t"io"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tkycDocument, err := client.V2.Entities.KYC.Document.Upload(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityKYCDocumentUploadParams{\n\t\t\tEntityID:     "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t\tDocumentType: dinariapisdkgo.KYCDocumentTypeGovernmentID,\n\t\t\tFile:         io.Reader(bytes.NewBuffer([]byte("Example data"))),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", kycDocument.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/kyc/$KYC_ID/document \\\n    -H \'Content-Type: multipart/form-data\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -F \'file=@/path/to/file\'',
-      },
-      java: {
-        method: 'v2().entities().kyc().document().upload',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.document.DocumentUploadParams;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocument;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocumentType;\nimport java.io.ByteArrayInputStream;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        DocumentUploadParams params = DocumentUploadParams.builder()\n            .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .kycId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .documentType(KycDocumentType.GOVERNMENT_ID)\n            .file(new ByteArrayInputStream("Example data".getBytes()))\n            .build();\n        KycDocument kycDocument = client.v2().entities().kyc().document().upload(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->entities->kyc->document->upload',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycDocument = $client->v2->entities->kyc->document->upload(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  entityID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  documentType: KYCDocumentType::GOVERNMENT_ID,\n  file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),\n);\n\nvar_dump($kycDocument);",
+          "import fs from 'fs';\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst kycDocument = await client.v2.entities.kyc.document.upload(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  {\n    entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n    document_type: 'GOVERNMENT_ID',\n    file: fs.createReadStream('path/to/file'),\n  },\n);\n\nconsole.log(kycDocument.id);",
       },
       python: {
         method: 'v2.entities.kyc.document.upload',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nkyc_document = client.v2.entities.kyc.document.upload(\n    kyc_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    entity_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    document_type="GOVERNMENT_ID",\n    file=b"Example data",\n)\nprint(kyc_document.id)',
       },
-      typescript: {
-        method: 'client.v2.entities.kyc.document.upload',
+      java: {
+        method: 'v2().entities().kyc().document().upload',
         example:
-          "import fs from 'fs';\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst kycDocument = await client.v2.entities.kyc.document.upload(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  {\n    entity_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n    document_type: 'GOVERNMENT_ID',\n    file: fs.createReadStream('path/to/file'),\n  },\n);\n\nconsole.log(kycDocument.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.entities.kyc.document.DocumentUploadParams;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocument;\nimport com.dinari.api.models.v2.entities.kyc.document.KycDocumentType;\nimport java.io.ByteArrayInputStream;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        DocumentUploadParams params = DocumentUploadParams.builder()\n            .entityId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .kycId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .documentType(KycDocumentType.GOVERNMENT_ID)\n            .file(new ByteArrayInputStream("Example data".getBytes()))\n            .build();\n        KycDocument kycDocument = client.v2().entities().kyc().document().upload(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Entities.KYC.Document.Upload',
+        example:
+          'package main\n\nimport (\n\t"bytes"\n\t"context"\n\t"fmt"\n\t"io"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tkycDocument, err := client.V2.Entities.KYC.Document.Upload(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2EntityKYCDocumentUploadParams{\n\t\t\tEntityID:     "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t\tDocumentType: dinariapisdkgo.KYCDocumentTypeGovernmentID,\n\t\t\tFile:         io.Reader(bytes.NewBuffer([]byte("Example data"))),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", kycDocument.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->entities->kyc->document->upload',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$kycDocument = $client->v2->entities->kyc->document->upload(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  entityID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  documentType: KYCDocumentType::GOVERNMENT_ID,\n  file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),\n);\n\nvar_dump($kycDocument);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/entities/$ENTITY_ID/kyc/$KYC_ID/document \\\n    -H \'Content-Type: multipart/form-data\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -F \'file=@/path/to/file\'',
       },
     },
   },
@@ -1261,34 +1261,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v2.accounts.retrieve(account_id: string): { id: string; created_dt: string; entity_id: string; is_active: boolean; jurisdiction: jurisdiction; brokerage_account_id?: string; }`\n\n**get** `/api/v2/accounts/{account_id}`\n\nGet a specific `Account` by its ID.\n\n### Parameters\n\n- `account_id: string`\n\n### Returns\n\n- `{ id: string; created_dt: string; entity_id: string; is_active: boolean; jurisdiction: 'BASELINE' | 'US'; brokerage_account_id?: string; }`\n  Information about an `Account` owned by an `Entity`.\n\n  - `id: string`\n  - `created_dt: string`\n  - `entity_id: string`\n  - `is_active: boolean`\n  - `jurisdiction: 'BASELINE' | 'US'`\n  - `brokerage_account_id?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst account = await client.v2.accounts.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(account);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Get',
+      typescript: {
+        method: 'client.v2.accounts.retrieve',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\taccount, err := client.V2.Accounts.Get(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", account.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().retrieve',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountRetrieveParams;\nimport com.dinari.api.models.v2.accounts.AccountRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountRetrieveResponse account = client.v2().accounts().retrieve("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->retrieve',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$account = $client->v2->accounts->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($account);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst account = await client.v2.accounts.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(account.id);",
       },
       python: {
         method: 'v2.accounts.retrieve',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\naccount = client.v2.accounts.retrieve(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(account.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.retrieve',
+      java: {
+        method: 'v2().accounts().retrieve',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst account = await client.v2.accounts.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(account.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountRetrieveParams;\nimport com.dinari.api.models.v2.accounts.AccountRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountRetrieveResponse account = client.v2().accounts().retrieve("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\taccount, err := client.V2.Accounts.Get(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", account.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$account = $client->v2->accounts->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($account);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1306,34 +1306,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## deactivate\n\n`client.v2.accounts.deactivate(account_id: string): { id: string; created_dt: string; entity_id: string; is_active: boolean; jurisdiction: jurisdiction; brokerage_account_id?: string; }`\n\n**post** `/api/v2/accounts/{account_id}/deactivate`\n\nSet the `Account` to be inactive. Inactive accounts cannot be used for trading.\n\n### Parameters\n\n- `account_id: string`\n\n### Returns\n\n- `{ id: string; created_dt: string; entity_id: string; is_active: boolean; jurisdiction: 'BASELINE' | 'US'; brokerage_account_id?: string; }`\n  Information about an `Account` owned by an `Entity`.\n\n  - `id: string`\n  - `created_dt: string`\n  - `entity_id: string`\n  - `is_active: boolean`\n  - `jurisdiction: 'BASELINE' | 'US'`\n  - `brokerage_account_id?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.deactivate('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Deactivate',
+      typescript: {
+        method: 'client.v2.accounts.deactivate',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.Deactivate(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/deactivate \\\n    -X POST \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().deactivate',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountDeactivateParams;\nimport com.dinari.api.models.v2.accounts.AccountDeactivateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountDeactivateResponse response = client.v2().accounts().deactivate("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->deactivate',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->deactivate(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.deactivate('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response.id);",
       },
       python: {
         method: 'v2.accounts.deactivate',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.deactivate(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.deactivate',
+      java: {
+        method: 'v2().accounts().deactivate',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.deactivate('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountDeactivateParams;\nimport com.dinari.api.models.v2.accounts.AccountDeactivateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountDeactivateResponse response = client.v2().accounts().deactivate("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Deactivate',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.Deactivate(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->deactivate',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->deactivate(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/deactivate \\\n    -X POST \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1351,34 +1351,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_portfolio\n\n`client.v2.accounts.getPortfolio(account_id: string, page?: number, page_size?: number): { assets: object[]; }`\n\n**get** `/api/v2/accounts/{account_id}/portfolio`\n\nGet the portfolio of the `Account`, excluding cash equivalents such as stablecoins.\n\n### Parameters\n\n- `account_id: string`\n\n- `page?: number`\n  The page number.\n\n- `page_size?: number`\n  The number of stocks to return per page, maximum number is 200.\n\n### Returns\n\n- `{ assets: { amount: number; chain_id: string; stock_id: string; symbol: string; token_address: string; }[]; }`\n  Balance information of `Stock` assets in your `Account`.\n\n  - `assets: { amount: number; chain_id: string; stock_id: string; symbol: string; token_address: string; }[]`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.getPortfolio('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.GetPortfolio',
+      typescript: {
+        method: 'client.v2.accounts.getPortfolio',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.GetPortfolio(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountGetPortfolioParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Assets)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/portfolio \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().getPortfolio',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetPortfolioParams;\nimport com.dinari.api.models.v2.accounts.AccountGetPortfolioResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountGetPortfolioResponse response = client.v2().accounts().getPortfolio("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->getPortfolio',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getPortfolio(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', page: 1, pageSize: 1\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.getPortfolio('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response.assets);",
       },
       python: {
         method: 'v2.accounts.get_portfolio',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.get_portfolio(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response.assets)',
       },
-      typescript: {
-        method: 'client.v2.accounts.getPortfolio',
+      java: {
+        method: 'v2().accounts().getPortfolio',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.getPortfolio('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response.assets);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetPortfolioParams;\nimport com.dinari.api.models.v2.accounts.AccountGetPortfolioResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountGetPortfolioResponse response = client.v2().accounts().getPortfolio("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.GetPortfolio',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.GetPortfolio(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountGetPortfolioParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Assets)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->getPortfolio',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getPortfolio(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', page: 1, pageSize: 1\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/portfolio \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1395,34 +1395,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_cash_balances\n\n`client.v2.accounts.getCashBalances(account_id: string): { amount: number; chain_id: chain; symbol: string; token_address: string; }[]`\n\n**get** `/api/v2/accounts/{account_id}/cash`\n\nGet the cash balances of the `Account`, including stablecoins and other cash equivalents.\n\n### Parameters\n\n- `account_id: string`\n\n### Returns\n\n- `{ amount: number; chain_id: string; symbol: string; token_address: string; }[]`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.getCashBalances('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.GetCashBalances',
+      typescript: {
+        method: 'client.v2.accounts.getCashBalances',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.GetCashBalances(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/cash \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().getCashBalances',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetCashBalancesParams;\nimport com.dinari.api.models.v2.accounts.AccountGetCashBalancesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<AccountGetCashBalancesResponse> response = client.v2().accounts().getCashBalances("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->getCashBalances',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getCashBalances(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.getCashBalances('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.accounts.get_cash_balances',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.get_cash_balances(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.accounts.getCashBalances',
+      java: {
+        method: 'v2().accounts().getCashBalances',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.getCashBalances('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetCashBalancesParams;\nimport com.dinari.api.models.v2.accounts.AccountGetCashBalancesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        List<AccountGetCashBalancesResponse> response = client.v2().accounts().getCashBalances("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.GetCashBalances',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.GetCashBalances(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->getCashBalances',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getCashBalances(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/cash \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1451,34 +1451,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_interest_payments\n\n`client.v2.accounts.getInterestPayments(account_id: string, end_date: string, start_date: string, limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string): { amount: number; currency: string; payment_date: string; }[] | { data: object[]; pagination_metadata: object; _sv?: 'PaginatedInterestPaymentResponse:v1'; }`\n\n**get** `/api/v2/accounts/{account_id}/interest_payments`\n\n\nGet interest payments made to the `Account` from yield-bearing cash holdings.\n\nCurrently, the only yield-bearing stablecoin accepted by Dinari is [USD+](https://usd.dinari.com/).\n\n\n### Parameters\n\n- `account_id: string`\n\n- `end_date: string`\n  End date, exclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.\n\n- `start_date: string`\n  Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ amount: number; currency: string; payment_date: string; }[] | { data: { amount: number; currency: string; payment_date: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedInterestPaymentResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.getInterestPayments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { end_date: '2019-12-27', start_date: '2019-12-27' });\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.GetInterestPayments',
+      typescript: {
+        method: 'client.v2.accounts.getInterestPayments',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.GetInterestPayments(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountGetInterestPaymentsParams{\n\t\t\tEndDate:   time.Now(),\n\t\t\tStartDate: time.Now(),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/interest_payments \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().getInterestPayments',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetInterestPaymentsParams;\nimport com.dinari.api.models.v2.accounts.AccountGetInterestPaymentsResponse;\nimport java.time.LocalDate;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountGetInterestPaymentsParams params = AccountGetInterestPaymentsParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .endDate(LocalDate.parse("2019-12-27"))\n            .startDate(LocalDate.parse("2019-12-27"))\n            .build();\n        AccountGetInterestPaymentsResponse response = client.v2().accounts().getInterestPayments(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->getInterestPayments',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getInterestPayments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  endDate: '2019-12-27',\n  startDate: '2019-12-27',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.getInterestPayments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { end_date: '2019-12-27', start_date: '2019-12-27' },\n);\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.accounts.get_interest_payments',
         example:
           'import os\nfrom datetime import date\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.get_interest_payments(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    end_date=date.fromisoformat("2019-12-27"),\n    start_date=date.fromisoformat("2019-12-27"),\n)\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.accounts.getInterestPayments',
+      java: {
+        method: 'v2().accounts().getInterestPayments',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.getInterestPayments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { end_date: '2019-12-27', start_date: '2019-12-27' },\n);\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetInterestPaymentsParams;\nimport com.dinari.api.models.v2.accounts.AccountGetInterestPaymentsResponse;\nimport java.time.LocalDate;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountGetInterestPaymentsParams params = AccountGetInterestPaymentsParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .endDate(LocalDate.parse("2019-12-27"))\n            .startDate(LocalDate.parse("2019-12-27"))\n            .build();\n        AccountGetInterestPaymentsResponse response = client.v2().accounts().getInterestPayments(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.GetInterestPayments',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.GetInterestPayments(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountGetInterestPaymentsParams{\n\t\t\tEndDate:   time.Now(),\n\t\t\tStartDate: time.Now(),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->getInterestPayments',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getInterestPayments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  endDate: '2019-12-27',\n  startDate: '2019-12-27',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/interest_payments \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1507,34 +1507,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_dividend_payments\n\n`client.v2.accounts.getDividendPayments(account_id: string, end_date: string, start_date: string, limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string, stock_id?: string): { amount: number; currency: string; payment_date: string; stock_id: string; }[] | { data: object[]; pagination_metadata: object; _sv?: 'PaginatedDividendPaymentResponse:v1'; }`\n\n**get** `/api/v2/accounts/{account_id}/dividend_payments`\n\nGet dividend payments made to the `Account` from dividend-bearing stock holdings.\n\n### Parameters\n\n- `account_id: string`\n\n- `end_date: string`\n  End date, exclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.\n\n- `start_date: string`\n  Start date, inclusive, in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n- `stock_id?: string`\n  Optional ID of the `Stock` to filter by\n\n### Returns\n\n- `{ amount: number; currency: string; payment_date: string; stock_id: string; }[] | { data: { amount: number; currency: string; payment_date: string; stock_id: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedDividendPaymentResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.getDividendPayments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { end_date: '2019-12-27', start_date: '2019-12-27' });\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.GetDividendPayments',
+      typescript: {
+        method: 'client.v2.accounts.getDividendPayments',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.GetDividendPayments(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountGetDividendPaymentsParams{\n\t\t\tEndDate:   time.Now(),\n\t\t\tStartDate: time.Now(),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/dividend_payments \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().getDividendPayments',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetDividendPaymentsParams;\nimport com.dinari.api.models.v2.accounts.AccountGetDividendPaymentsResponse;\nimport java.time.LocalDate;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountGetDividendPaymentsParams params = AccountGetDividendPaymentsParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .endDate(LocalDate.parse("2019-12-27"))\n            .startDate(LocalDate.parse("2019-12-27"))\n            .build();\n        AccountGetDividendPaymentsResponse response = client.v2().accounts().getDividendPayments(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->getDividendPayments',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getDividendPayments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  endDate: '2019-12-27',\n  startDate: '2019-12-27',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.getDividendPayments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { end_date: '2019-12-27', start_date: '2019-12-27' },\n);\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.accounts.get_dividend_payments',
         example:
           'import os\nfrom datetime import date\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.get_dividend_payments(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    end_date=date.fromisoformat("2019-12-27"),\n    start_date=date.fromisoformat("2019-12-27"),\n)\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.accounts.getDividendPayments',
+      java: {
+        method: 'v2().accounts().getDividendPayments',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.getDividendPayments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { end_date: '2019-12-27', start_date: '2019-12-27' },\n);\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountGetDividendPaymentsParams;\nimport com.dinari.api.models.v2.accounts.AccountGetDividendPaymentsResponse;\nimport java.time.LocalDate;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        AccountGetDividendPaymentsParams params = AccountGetDividendPaymentsParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .endDate(LocalDate.parse("2019-12-27"))\n            .startDate(LocalDate.parse("2019-12-27"))\n            .build();\n        AccountGetDividendPaymentsResponse response = client.v2().accounts().getDividendPayments(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.GetDividendPayments',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.GetDividendPayments(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountGetDividendPaymentsParams{\n\t\t\tEndDate:   time.Now(),\n\t\t\tStartDate: time.Now(),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->getDividendPayments',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->getDividendPayments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  endDate: '2019-12-27',\n  startDate: '2019-12-27',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/dividend_payments \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1551,34 +1551,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## mint_sandbox_tokens\n\n`client.v2.accounts.mintSandboxTokens(account_id: string, chain_id?: string): void`\n\n**post** `/api/v2/accounts/{account_id}/faucet`\n\n\nMints 1,000 mockUSD sandbox payment tokens to the `Wallet` connected to the `Account`.\n\nThis feature is only supported in sandbox mode.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `chain_id?: string`\n  CAIP-2 chain ID of blockchain in which to mint the sandbox payment tokens. If none specified, defaults to eip155:421614. If the `Account` is linked to a Dinari-managed `Wallet`, only eip155:42161 is allowed.\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nawait client.v2.accounts.mintSandboxTokens('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e')\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.MintSandboxTokens',
+      typescript: {
+        method: 'client.v2.accounts.mintSandboxTokens',
         example:
-          'package main\n\nimport (\n\t"context"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\terr := client.V2.Accounts.MintSandboxTokens(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountMintSandboxTokensParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/faucet \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{}\'',
-      },
-      java: {
-        method: 'v2().accounts().mintSandboxTokens',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountMintSandboxTokensParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        client.v2().accounts().mintSandboxTokens("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->mintSandboxTokens',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$result = $client->v2->accounts->mintSandboxTokens(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', chainID: Chain::EIP155_1\n);\n\nvar_dump($result);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nawait client.v2.accounts.mintSandboxTokens('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');",
       },
       python: {
         method: 'v2.accounts.mint_sandbox_tokens',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nclient.v2.accounts.mint_sandbox_tokens(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)',
       },
-      typescript: {
-        method: 'client.v2.accounts.mintSandboxTokens',
+      java: {
+        method: 'v2().accounts().mintSandboxTokens',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nawait client.v2.accounts.mintSandboxTokens('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.AccountMintSandboxTokensParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        client.v2().accounts().mintSandboxTokens("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.MintSandboxTokens',
+        example:
+          'package main\n\nimport (\n\t"context"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\terr := client.V2.Accounts.MintSandboxTokens(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountMintSandboxTokensParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->mintSandboxTokens',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$result = $client->v2->accounts->mintSandboxTokens(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', chainID: Chain::EIP155_1\n);\n\nvar_dump($result);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/faucet \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{}\'',
       },
     },
   },
@@ -1595,34 +1595,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get\n\n`client.v2.accounts.wallet.get(account_id: string): { address: string; chain_id: wallet_chain_id; is_aml_flagged: boolean; is_managed_wallet: boolean; }`\n\n**get** `/api/v2/accounts/{account_id}/wallet`\n\nGet the wallet connected to the `Account`.\n\n### Parameters\n\n- `account_id: string`\n\n### Returns\n\n- `{ address: string; chain_id: string; is_aml_flagged: boolean; is_managed_wallet: boolean; }`\n  Information about a blockchain `Wallet`.\n\n  - `address: string`\n  - `chain_id: string`\n  - `is_aml_flagged: boolean`\n  - `is_managed_wallet: boolean`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst wallet = await client.v2.accounts.wallet.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(wallet);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Wallet.Get',
+      typescript: {
+        method: 'client.v2.accounts.wallet.get',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twallet, err := client.V2.Accounts.Wallet.Get(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", wallet.ChainID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/wallet \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().wallet().get',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.Wallet;\nimport com.dinari.api.models.v2.accounts.wallet.WalletGetParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Wallet wallet = client.v2().accounts().wallet().get("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->wallet->get',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$wallet = $client->v2->accounts->wallet->get(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($wallet);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst wallet = await client.v2.accounts.wallet.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(wallet.chain_id);",
       },
       python: {
         method: 'v2.accounts.wallet.get',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nwallet = client.v2.accounts.wallet.get(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(wallet.chain_id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.wallet.get',
+      java: {
+        method: 'v2().accounts().wallet().get',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst wallet = await client.v2.accounts.wallet.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(wallet.chain_id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.Wallet;\nimport com.dinari.api.models.v2.accounts.wallet.WalletGetParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Wallet wallet = client.v2().accounts().wallet().get("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Wallet.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twallet, err := client.V2.Accounts.Wallet.Get(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", wallet.ChainID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->wallet->get',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$wallet = $client->v2->accounts->wallet->get(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($wallet);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/wallet \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1639,34 +1639,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## connect_internal\n\n`client.v2.accounts.wallet.connectInternal(account_id: string, chain_id: string, wallet_address: string, is_shared?: boolean): { address: string; chain_id: wallet_chain_id; is_aml_flagged: boolean; is_managed_wallet: boolean; }`\n\n**post** `/api/v2/accounts/{account_id}/wallet/internal`\n\nConnect an internal `Wallet` to the `Account`.\n\n### Parameters\n\n- `account_id: string`\n\n- `chain_id: string`\n  CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on. eip155:0 is used for EOA wallets\n\n- `wallet_address: string`\n  Address of the `Wallet`.\n\n- `is_shared?: boolean`\n  Is the linked Wallet shared or not\n\n### Returns\n\n- `{ address: string; chain_id: string; is_aml_flagged: boolean; is_managed_wallet: boolean; }`\n  Information about a blockchain `Wallet`.\n\n  - `address: string`\n  - `chain_id: string`\n  - `is_aml_flagged: boolean`\n  - `is_managed_wallet: boolean`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst wallet = await client.v2.accounts.wallet.connectInternal('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { chain_id: 'eip155:0', wallet_address: 'wallet_address' });\n\nconsole.log(wallet);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Wallet.ConnectInternal',
+      typescript: {
+        method: 'client.v2.accounts.wallet.connectInternal',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twallet, err := client.V2.Accounts.Wallet.ConnectInternal(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWalletConnectInternalParams{\n\t\t\tChainID:       dinariapisdkgo.WalletChainIDEip155_0,\n\t\t\tWalletAddress: "wallet_address",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", wallet.ChainID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/wallet/internal \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "chain_id": "eip155:0",\n          "wallet_address": "wallet_address"\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().wallet().connectInternal',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.Wallet;\nimport com.dinari.api.models.v2.accounts.wallet.WalletConnectInternalParams;\nimport com.dinari.api.models.v2.accounts.wallet.external.WalletChainId;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WalletConnectInternalParams params = WalletConnectInternalParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(WalletChainId.EIP155_0)\n            .walletAddress("wallet_address")\n            .build();\n        Wallet wallet = client.v2().accounts().wallet().connectInternal(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->wallet->connectInternal',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$wallet = $client->v2->accounts->wallet->connectInternal(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: WalletChainID::EIP155_0,\n  walletAddress: 'wallet_address',\n  isShared: true,\n);\n\nvar_dump($wallet);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst wallet = await client.v2.accounts.wallet.connectInternal(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { chain_id: 'eip155:0', wallet_address: 'wallet_address' },\n);\n\nconsole.log(wallet.chain_id);",
       },
       python: {
         method: 'v2.accounts.wallet.connect_internal',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nwallet = client.v2.accounts.wallet.connect_internal(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    chain_id="eip155:0",\n    wallet_address="wallet_address",\n)\nprint(wallet.chain_id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.wallet.connectInternal',
+      java: {
+        method: 'v2().accounts().wallet().connectInternal',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst wallet = await client.v2.accounts.wallet.connectInternal(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { chain_id: 'eip155:0', wallet_address: 'wallet_address' },\n);\n\nconsole.log(wallet.chain_id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.Wallet;\nimport com.dinari.api.models.v2.accounts.wallet.WalletConnectInternalParams;\nimport com.dinari.api.models.v2.accounts.wallet.external.WalletChainId;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WalletConnectInternalParams params = WalletConnectInternalParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(WalletChainId.EIP155_0)\n            .walletAddress("wallet_address")\n            .build();\n        Wallet wallet = client.v2().accounts().wallet().connectInternal(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Wallet.ConnectInternal',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twallet, err := client.V2.Accounts.Wallet.ConnectInternal(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWalletConnectInternalParams{\n\t\t\tChainID:       dinariapisdkgo.WalletChainIDEip155_0,\n\t\t\tWalletAddress: "wallet_address",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", wallet.ChainID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->wallet->connectInternal',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$wallet = $client->v2->accounts->wallet->connectInternal(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: WalletChainID::EIP155_0,\n  walletAddress: 'wallet_address',\n  isShared: true,\n);\n\nvar_dump($wallet);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/wallet/internal \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "chain_id": "eip155:0",\n          "wallet_address": "wallet_address"\n        }\'',
       },
     },
   },
@@ -1683,34 +1683,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_nonce\n\n`client.v2.accounts.wallet.external.getNonce(account_id: string, chain_id: string, wallet_address: string): { message: string; nonce: string; }`\n\n**get** `/api/v2/accounts/{account_id}/wallet/external/nonce`\n\nGet a nonce and message to be signed in order to verify `Wallet` ownership.\n\n### Parameters\n\n- `account_id: string`\n\n- `chain_id: string`\n  CAIP-2 formatted chain ID of the blockchain the `Wallet` is on. eip155:0 is used for EOA wallets\n\n- `wallet_address: string`\n  Address of the `Wallet` to connect.\n\n### Returns\n\n- `{ message: string; nonce: string; }`\n  Connection message to sign to prove ownership of the `Wallet`.\n\n  - `message: string`\n  - `nonce: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.wallet.external.getNonce('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { chain_id: 'eip155:0', wallet_address: 'wallet_address' });\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Wallet.External.GetNonce',
+      typescript: {
+        method: 'client.v2.accounts.wallet.external.getNonce',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.Wallet.External.GetNonce(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWalletExternalGetNonceParams{\n\t\t\tChainID:       dinariapisdkgo.WalletChainIDEip155_0,\n\t\t\tWalletAddress: "wallet_address",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Message)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/wallet/external/nonce \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().wallet().external().getNonce',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.external.ExternalGetNonceParams;\nimport com.dinari.api.models.v2.accounts.wallet.external.ExternalGetNonceResponse;\nimport com.dinari.api.models.v2.accounts.wallet.external.WalletChainId;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        ExternalGetNonceParams params = ExternalGetNonceParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(WalletChainId.EIP155_0)\n            .walletAddress("wallet_address")\n            .build();\n        ExternalGetNonceResponse response = client.v2().accounts().wallet().external().getNonce(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->wallet->external->getNonce',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->wallet->external->getNonce(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: WalletChainID::EIP155_0,\n  walletAddress: 'wallet_address',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.wallet.external.getNonce(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { chain_id: 'eip155:0', wallet_address: 'wallet_address' },\n);\n\nconsole.log(response.message);",
       },
       python: {
         method: 'v2.accounts.wallet.external.get_nonce',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.wallet.external.get_nonce(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    chain_id="eip155:0",\n    wallet_address="wallet_address",\n)\nprint(response.message)',
       },
-      typescript: {
-        method: 'client.v2.accounts.wallet.external.getNonce',
+      java: {
+        method: 'v2().accounts().wallet().external().getNonce',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.wallet.external.getNonce(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { chain_id: 'eip155:0', wallet_address: 'wallet_address' },\n);\n\nconsole.log(response.message);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.external.ExternalGetNonceParams;\nimport com.dinari.api.models.v2.accounts.wallet.external.ExternalGetNonceResponse;\nimport com.dinari.api.models.v2.accounts.wallet.external.WalletChainId;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        ExternalGetNonceParams params = ExternalGetNonceParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(WalletChainId.EIP155_0)\n            .walletAddress("wallet_address")\n            .build();\n        ExternalGetNonceResponse response = client.v2().accounts().wallet().external().getNonce(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Wallet.External.GetNonce',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.Wallet.External.GetNonce(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWalletExternalGetNonceParams{\n\t\t\tChainID:       dinariapisdkgo.WalletChainIDEip155_0,\n\t\t\tWalletAddress: "wallet_address",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Message)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->wallet->external->getNonce',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->wallet->external->getNonce(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: WalletChainID::EIP155_0,\n  walletAddress: 'wallet_address',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/wallet/external/nonce \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1733,34 +1733,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## connect\n\n`client.v2.accounts.wallet.external.connect(account_id: string, chain_id: string, nonce: string, signature: string, wallet_address: string): { address: string; chain_id: wallet_chain_id; is_aml_flagged: boolean; is_managed_wallet: boolean; }`\n\n**post** `/api/v2/accounts/{account_id}/wallet/external`\n\nConnect a `Wallet` to the `Account` after verifying the signature.\n\n### Parameters\n\n- `account_id: string`\n\n- `chain_id: string`\n  CAIP-2 formatted chain ID of the blockchain the `Wallet` to link is on. eip155:0 is used for EOA wallets\n\n- `nonce: string`\n  Nonce contained within the connection message.\n\n- `signature: string`\n  Signature payload from signing the connection message with the `Wallet`.\n\n- `wallet_address: string`\n  Address of the `Wallet`.\n\n### Returns\n\n- `{ address: string; chain_id: string; is_aml_flagged: boolean; is_managed_wallet: boolean; }`\n  Information about a blockchain `Wallet`.\n\n  - `address: string`\n  - `chain_id: string`\n  - `is_aml_flagged: boolean`\n  - `is_managed_wallet: boolean`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst wallet = await client.v2.accounts.wallet.external.connect('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {\n  chain_id: 'eip155:0',\n  nonce: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  signature: '0xeaF12bD1DfFd',\n  wallet_address: 'wallet_address',\n});\n\nconsole.log(wallet);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Wallet.External.Connect',
+      typescript: {
+        method: 'client.v2.accounts.wallet.external.connect',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twallet, err := client.V2.Accounts.Wallet.External.Connect(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWalletExternalConnectParams{\n\t\t\tChainID:       dinariapisdkgo.WalletChainIDEip155_0,\n\t\t\tNonce:         "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t\tSignature:     "0xeaF12bD1DfFd",\n\t\t\tWalletAddress: "wallet_address",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", wallet.ChainID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/wallet/external \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "chain_id": "eip155:0",\n          "nonce": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "signature": "0xeaF12bD1DfFd",\n          "wallet_address": "wallet_address"\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().wallet().external().connect',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.Wallet;\nimport com.dinari.api.models.v2.accounts.wallet.external.ExternalConnectParams;\nimport com.dinari.api.models.v2.accounts.wallet.external.WalletChainId;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        ExternalConnectParams params = ExternalConnectParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(WalletChainId.EIP155_0)\n            .nonce("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .signature("0xeaF12bD1DfFd")\n            .walletAddress("wallet_address")\n            .build();\n        Wallet wallet = client.v2().accounts().wallet().external().connect(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->wallet->external->connect',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$wallet = $client->v2->accounts->wallet->external->connect(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: WalletChainID::EIP155_0,\n  nonce: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  signature: '0xeaF12bD1DfFd',\n  walletAddress: 'wallet_address',\n);\n\nvar_dump($wallet);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst wallet = await client.v2.accounts.wallet.external.connect(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  {\n    chain_id: 'eip155:0',\n    nonce: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n    signature: '0xeaF12bD1DfFd',\n    wallet_address: 'wallet_address',\n  },\n);\n\nconsole.log(wallet.chain_id);",
       },
       python: {
         method: 'v2.accounts.wallet.external.connect',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nwallet = client.v2.accounts.wallet.external.connect(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    chain_id="eip155:0",\n    nonce="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    signature="0xeaF12bD1DfFd",\n    wallet_address="wallet_address",\n)\nprint(wallet.chain_id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.wallet.external.connect',
+      java: {
+        method: 'v2().accounts().wallet().external().connect',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst wallet = await client.v2.accounts.wallet.external.connect(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  {\n    chain_id: 'eip155:0',\n    nonce: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n    signature: '0xeaF12bD1DfFd',\n    wallet_address: 'wallet_address',\n  },\n);\n\nconsole.log(wallet.chain_id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.wallet.Wallet;\nimport com.dinari.api.models.v2.accounts.wallet.external.ExternalConnectParams;\nimport com.dinari.api.models.v2.accounts.wallet.external.WalletChainId;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        ExternalConnectParams params = ExternalConnectParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(WalletChainId.EIP155_0)\n            .nonce("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .signature("0xeaF12bD1DfFd")\n            .walletAddress("wallet_address")\n            .build();\n        Wallet wallet = client.v2().accounts().wallet().external().connect(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Wallet.External.Connect',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twallet, err := client.V2.Accounts.Wallet.External.Connect(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWalletExternalConnectParams{\n\t\t\tChainID:       dinariapisdkgo.WalletChainIDEip155_0,\n\t\t\tNonce:         "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t\tSignature:     "0xeaF12bD1DfFd",\n\t\t\tWalletAddress: "wallet_address",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", wallet.ChainID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->wallet->external->connect',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$wallet = $client->v2->accounts->wallet->external->connect(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: WalletChainID::EIP155_0,\n  nonce: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  signature: '0xeaF12bD1DfFd',\n  walletAddress: 'wallet_address',\n);\n\nvar_dump($wallet);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/wallet/external \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "chain_id": "eip155:0",\n          "nonce": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "signature": "0xeaF12bD1DfFd",\n          "wallet_address": "wallet_address"\n        }\'',
       },
     },
   },
@@ -1790,34 +1790,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v2.accounts.orders.list(account_id: string, chain_id?: string, client_order_id?: string, limit?: number, next?: string, order?: 'asc' | 'desc', order_transaction_hash?: string, page?: number, page_size?: number, previous?: string): { id: string; chain_id: string; created_dt: string; order_contract_address: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_transaction_hash: string; order_type: 'MARKET' | 'LIMIT'; payment_token: string; status: string; stock_id: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; }[] | { data: object[]; pagination_metadata: object; _sv?: 'PaginatedAccountOrderResponse:v1'; }`\n\n**get** `/api/v2/accounts/{account_id}/orders`\n\nGet a list of all `Orders` under the `Account`.<br>Optionally `Orders` can be filtered by chain ID, transaction hash, or client order ID.\n\n### Parameters\n\n- `account_id: string`\n\n- `chain_id?: string`\n  CAIP-2 formatted chain ID of the blockchain the `Order` was made on.\n\n- `client_order_id?: string`\n  Customer-supplied identifier to search for `Order`s.\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `order_transaction_hash?: string`\n  Transaction hash of the `Order`.\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ id: string; chain_id: string; created_dt: string; order_contract_address: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_transaction_hash: string; order_type: 'MARKET' | 'LIMIT'; payment_token: string; status: string; stock_id: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; }[] | { data: { id: string; chain_id: string; created_dt: string; order_contract_address: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_transaction_hash: string; order_type: 'MARKET' | 'LIMIT'; payment_token: string; status: string; stock_id: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedAccountOrderResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst orders = await client.v2.accounts.orders.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(orders);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Orders.List',
+      typescript: {
+        method: 'client.v2.accounts.orders.list',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torders, err := client.V2.Accounts.Orders.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orders)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/orders \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().orders().list',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.OrderListParams;\nimport com.dinari.api.models.v2.accounts.orders.OrderListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderListResponse orders = client.v2().accounts().orders().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orders->list',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orders = $client->v2->accounts->orders->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: 'chain_id',\n  clientOrderID: 'client_order_id',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  orderTransactionHash: 'order_transaction_hash',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($orders);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orders = await client.v2.accounts.orders.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(orders);",
       },
       python: {
         method: 'v2.accounts.orders.list',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\norders = client.v2.accounts.orders.list(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(orders)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orders.list',
+      java: {
+        method: 'v2().accounts().orders().list',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orders = await client.v2.accounts.orders.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(orders);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.OrderListParams;\nimport com.dinari.api.models.v2.accounts.orders.OrderListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderListResponse orders = client.v2().accounts().orders().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Orders.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torders, err := client.V2.Accounts.Orders.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orders)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orders->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orders = $client->v2->accounts->orders->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: 'chain_id',\n  clientOrderID: 'client_order_id',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  orderTransactionHash: 'order_transaction_hash',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($orders);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/orders \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1835,34 +1835,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v2.accounts.orders.retrieve(account_id: string, order_id: string): { id: string; chain_id: chain; created_dt: string; order_contract_address: string; order_side: order_side; order_tif: order_tif; order_transaction_hash: string; order_type: order_type; payment_token: string; status: brokerage_order_status; alloy_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; stock_id?: string; }`\n\n**get** `/api/v2/accounts/{account_id}/orders/{order_id}`\n\nGet a specific `Order` by its ID.\n\n### Parameters\n\n- `account_id: string`\n\n- `order_id: string`\n\n### Returns\n\n- `{ id: string; chain_id: string; created_dt: string; order_contract_address: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_transaction_hash: string; order_type: 'MARKET' | 'LIMIT'; payment_token: string; status: string; alloy_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; stock_id?: string; }`\n\n  - `id: string`\n  - `chain_id: string`\n  - `created_dt: string`\n  - `order_contract_address: string`\n  - `order_side: 'BUY' | 'SELL'`\n  - `order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'`\n  - `order_transaction_hash: string`\n  - `order_type: 'MARKET' | 'LIMIT'`\n  - `payment_token: string`\n  - `status: string`\n  - `alloy_id?: string`\n  - `asset_token?: string`\n  - `asset_token_quantity?: number`\n  - `cancel_transaction_hash?: string`\n  - `client_order_id?: string`\n  - `fee?: number`\n  - `limit_price?: number`\n  - `order_request_id?: string`\n  - `payment_token_quantity?: number`\n  - `stock_id?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst order = await client.v2.accounts.orders.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });\n\nconsole.log(order);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Orders.Get',
+      typescript: {
+        method: 'client.v2.accounts.orders.retrieve',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torder, err := client.V2.Accounts.Orders.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", order.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/orders/$ORDER_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().orders().retrieve',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.Order;\nimport com.dinari.api.models.v2.accounts.orders.OrderRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRetrieveParams params = OrderRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        Order order = client.v2().accounts().orders().retrieve(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orders->retrieve',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$order = $client->v2->accounts->orders->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($order);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst order = await client.v2.accounts.orders.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {\n  account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n});\n\nconsole.log(order.id);",
       },
       python: {
         method: 'v2.accounts.orders.retrieve',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\norder = client.v2.accounts.orders.retrieve(\n    order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(order.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orders.retrieve',
+      java: {
+        method: 'v2().accounts().orders().retrieve',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst order = await client.v2.accounts.orders.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {\n  account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n});\n\nconsole.log(order.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.Order;\nimport com.dinari.api.models.v2.accounts.orders.OrderRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRetrieveParams params = OrderRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        Order order = client.v2().accounts().orders().retrieve(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Orders.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torder, err := client.V2.Accounts.Orders.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", order.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orders->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$order = $client->v2->accounts->orders->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($order);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/orders/$ORDER_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1889,34 +1889,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_fulfillments\n\n`client.v2.accounts.orders.getFulfillments(account_id: string, order_id: string, limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string): { id: string; asset_token_filled: number; asset_token_spent: number; chain_id: string; order_id: string; payment_token_filled: number; payment_token_spent: number; transaction_dt: string; transaction_hash: string; alloy_id?: string; payment_token_fee?: number; stock_id?: string; }[] | { data: object[]; pagination_metadata: object; _sv?: 'PaginatedAccountOrderFulfillmentResponse:v1'; }`\n\n**get** `/api/v2/accounts/{account_id}/orders/{order_id}/fulfillments`\n\nGet `OrderFulfillments` for a specific `Order`.\n\n### Parameters\n\n- `account_id: string`\n\n- `order_id: string`\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ id: string; asset_token_filled: number; asset_token_spent: number; chain_id: string; order_id: string; payment_token_filled: number; payment_token_spent: number; transaction_dt: string; transaction_hash: string; alloy_id?: string; payment_token_fee?: number; stock_id?: string; }[] | { data: { id: string; asset_token_filled: number; asset_token_spent: number; chain_id: string; order_id: string; payment_token_filled: number; payment_token_spent: number; transaction_dt: string; transaction_hash: string; alloy_id?: string; payment_token_fee?: number; stock_id?: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedAccountOrderFulfillmentResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.orders.getFulfillments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Orders.GetFulfillments',
+      typescript: {
+        method: 'client.v2.accounts.orders.getFulfillments',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.Orders.GetFulfillments(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderGetFulfillmentsParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/orders/$ORDER_ID/fulfillments \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().orders().getFulfillments',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.OrderGetFulfillmentsParams;\nimport com.dinari.api.models.v2.accounts.orders.OrderGetFulfillmentsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderGetFulfillmentsParams params = OrderGetFulfillmentsParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        OrderGetFulfillmentsResponse response = client.v2().accounts().orders().getFulfillments(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orders->getFulfillments',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orders->getFulfillments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orders.getFulfillments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.accounts.orders.get_fulfillments',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.orders.get_fulfillments(\n    order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orders.getFulfillments',
+      java: {
+        method: 'v2().accounts().orders().getFulfillments',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orders.getFulfillments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.OrderGetFulfillmentsParams;\nimport com.dinari.api.models.v2.accounts.orders.OrderGetFulfillmentsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderGetFulfillmentsParams params = OrderGetFulfillmentsParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        OrderGetFulfillmentsResponse response = client.v2().accounts().orders().getFulfillments(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Orders.GetFulfillments',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.Orders.GetFulfillments(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderGetFulfillmentsParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orders->getFulfillments',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orders->getFulfillments(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/orders/$ORDER_ID/fulfillments \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -1935,34 +1935,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## batch_cancel\n\n`client.v2.accounts.orders.batchCancel(account_id: string, order_ids: string[]): { cancel_queued_orders: order[]; failed_to_cancel_orders: order[]; }`\n\n**post** `/api/v2/accounts/{account_id}/orders/cancel`\n\n\nCancel multiple `Orders` by their IDs in a single request. Note that this requires the `Order` IDs, not the `OrderRequest` IDs.\nOnce you submit a cancellation request, it cannot be undone. Be advised that orders with a\nstatus of PENDING_FILL, PENDING_ESCROW, FILLED, REJECTED, or CANCELLED cannot be cancelled.\n\n`Order` cancellation is not guaranteed nor is it immediate. The `Orders` may still be executed\nif the cancellation request is not received in time.\n\nThe response will indicate which orders were successfully queued to cancel and which failed to queue.\nCheck the status using the \"Get Order by ID\" endpoint to confirm whether individual `Orders` have been cancelled.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `order_ids: string[]`\n  List of `Order` IDs to cancel\n\n### Returns\n\n- `{ cancel_queued_orders: { id: string; chain_id: chain; created_dt: string; order_contract_address: string; order_side: order_side; order_tif: order_tif; order_transaction_hash: string; order_type: order_type; payment_token: string; status: brokerage_order_status; alloy_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; stock_id?: string; }[]; failed_to_cancel_orders: { id: string; chain_id: chain; created_dt: string; order_contract_address: string; order_side: order_side; order_tif: order_tif; order_transaction_hash: string; order_type: order_type; payment_token: string; status: brokerage_order_status; alloy_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; stock_id?: string; }[]; }`\n\n  - `cancel_queued_orders: { id: string; chain_id: string; created_dt: string; order_contract_address: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_transaction_hash: string; order_type: 'MARKET' | 'LIMIT'; payment_token: string; status: string; alloy_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; stock_id?: string; }[]`\n  - `failed_to_cancel_orders: { id: string; chain_id: string; created_dt: string; order_contract_address: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_transaction_hash: string; order_type: 'MARKET' | 'LIMIT'; payment_token: string; status: string; alloy_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; stock_id?: string; }[]`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.orders.batchCancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { order_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'] });\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Orders.BatchCancel',
+      typescript: {
+        method: 'client.v2.accounts.orders.batchCancel',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.Orders.BatchCancel(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderBatchCancelParams{\n\t\t\tOrderIDs: []string{"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.CancelQueuedOrders)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/orders/cancel \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "order_ids": [\n            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"\n          ]\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().orders().batchCancel',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.OrderBatchCancelParams;\nimport com.dinari.api.models.v2.accounts.orders.OrderBatchCancelResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderBatchCancelParams params = OrderBatchCancelParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .addOrderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        OrderBatchCancelResponse response = client.v2().accounts().orders().batchCancel(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orders->batchCancel',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orders->batchCancel(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderIDs: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orders.batchCancel(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { order_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'] },\n);\n\nconsole.log(response.cancel_queued_orders);",
       },
       python: {
         method: 'v2.accounts.orders.batch_cancel',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.orders.batch_cancel(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    order_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],\n)\nprint(response.cancel_queued_orders)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orders.batchCancel',
+      java: {
+        method: 'v2().accounts().orders().batchCancel',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orders.batchCancel(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { order_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'] },\n);\n\nconsole.log(response.cancel_queued_orders);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.OrderBatchCancelParams;\nimport com.dinari.api.models.v2.accounts.orders.OrderBatchCancelResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderBatchCancelParams params = OrderBatchCancelParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .addOrderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        OrderBatchCancelResponse response = client.v2().accounts().orders().batchCancel(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Orders.BatchCancel',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.Orders.BatchCancel(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderBatchCancelParams{\n\t\t\tOrderIDs: []string{"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.CancelQueuedOrders)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orders->batchCancel',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orders->batchCancel(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderIDs: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/orders/cancel \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "order_ids": [\n            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"\n          ]\n        }\'',
       },
     },
   },
@@ -1981,34 +1981,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## cancel\n\n`client.v2.accounts.orders.cancel(account_id: string, order_id: string): { id: string; chain_id: chain; created_dt: string; order_contract_address: string; order_side: order_side; order_tif: order_tif; order_transaction_hash: string; order_type: order_type; payment_token: string; status: brokerage_order_status; alloy_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; stock_id?: string; }`\n\n**post** `/api/v2/accounts/{account_id}/orders/{order_id}/cancel`\n\n\nCancel an `Order` by its ID. Note that this requires the `Order` ID, not the `OrderRequest` ID.\nOnce you submit a cancellation request, it cannot be undone. Be advised that orders with a\nstatus of PENDING_FILL, PENDING_ESCROW, FILLED, REJECTED, or CANCELLED cannot be cancelled.\n\n`Order` cancellation is not guaranteed nor is it immediate. The `Order` may still be executed\nif the cancellation request is not received in time.\n\nCheck the status using the \"Get Order by ID\" endpoint to confirm whether the `Order` has been cancelled.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `order_id: string`\n\n### Returns\n\n- `{ id: string; chain_id: string; created_dt: string; order_contract_address: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_transaction_hash: string; order_type: 'MARKET' | 'LIMIT'; payment_token: string; status: string; alloy_id?: string; asset_token?: string; asset_token_quantity?: number; cancel_transaction_hash?: string; client_order_id?: string; fee?: number; limit_price?: number; order_request_id?: string; payment_token_quantity?: number; stock_id?: string; }`\n\n  - `id: string`\n  - `chain_id: string`\n  - `created_dt: string`\n  - `order_contract_address: string`\n  - `order_side: 'BUY' | 'SELL'`\n  - `order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'`\n  - `order_transaction_hash: string`\n  - `order_type: 'MARKET' | 'LIMIT'`\n  - `payment_token: string`\n  - `status: string`\n  - `alloy_id?: string`\n  - `asset_token?: string`\n  - `asset_token_quantity?: number`\n  - `cancel_transaction_hash?: string`\n  - `client_order_id?: string`\n  - `fee?: number`\n  - `limit_price?: number`\n  - `order_request_id?: string`\n  - `payment_token_quantity?: number`\n  - `stock_id?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst order = await client.v2.accounts.orders.cancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });\n\nconsole.log(order);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Orders.Cancel',
+      typescript: {
+        method: 'client.v2.accounts.orders.cancel',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torder, err := client.V2.Accounts.Orders.Cancel(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderCancelParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", order.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/orders/$ORDER_ID/cancel \\\n    -X POST \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().orders().cancel',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.Order;\nimport com.dinari.api.models.v2.accounts.orders.OrderCancelParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderCancelParams params = OrderCancelParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        Order order = client.v2().accounts().orders().cancel(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orders->cancel',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$order = $client->v2->accounts->orders->cancel(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($order);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst order = await client.v2.accounts.orders.cancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {\n  account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n});\n\nconsole.log(order.id);",
       },
       python: {
         method: 'v2.accounts.orders.cancel',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\norder = client.v2.accounts.orders.cancel(\n    order_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(order.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orders.cancel',
+      java: {
+        method: 'v2().accounts().orders().cancel',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst order = await client.v2.accounts.orders.cancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {\n  account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n});\n\nconsole.log(order.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orders.Order;\nimport com.dinari.api.models.v2.accounts.orders.OrderCancelParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderCancelParams params = OrderCancelParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        Order order = client.v2().accounts().orders().cancel(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Orders.Cancel',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torder, err := client.V2.Accounts.Orders.Cancel(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderCancelParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", order.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orders->cancel',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$order = $client->v2->accounts->orders->cancel(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($order);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/orders/$ORDER_ID/cancel \\\n    -X POST \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -2035,34 +2035,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## query\n\n`client.v2.accounts.orderFulfillments.query(account_id: string, limit?: number, next?: string, order?: 'asc' | 'desc', order_ids?: string[], page?: number, page_size?: number, previous?: string): { id: string; asset_token_filled: number; asset_token_spent: number; chain_id: string; order_id: string; payment_token_filled: number; payment_token_spent: number; transaction_dt: string; transaction_hash: string; alloy_id?: string; payment_token_fee?: number; stock_id?: string; }[] | { data: object[]; pagination_metadata: object; _sv?: 'PaginatedAccountOrderFulfillmentResponse:v1'; }`\n\n**get** `/api/v2/accounts/{account_id}/order_fulfillments`\n\nQuery `OrderFulfillments` under the `Account`.\n\n### Parameters\n\n- `account_id: string`\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `order_ids?: string[]`\n  List of `Order` IDs to query `AccountOrderFulfillment` for.\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ id: string; asset_token_filled: number; asset_token_spent: number; chain_id: string; order_id: string; payment_token_filled: number; payment_token_spent: number; transaction_dt: string; transaction_hash: string; alloy_id?: string; payment_token_fee?: number; stock_id?: string; }[] | { data: { id: string; asset_token_filled: number; asset_token_spent: number; chain_id: string; order_id: string; payment_token_filled: number; payment_token_spent: number; transaction_dt: string; transaction_hash: string; alloy_id?: string; payment_token_fee?: number; stock_id?: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedAccountOrderFulfillmentResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.orderFulfillments.query('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderFulfillments.Query',
+      typescript: {
+        method: 'client.v2.accounts.orderFulfillments.query',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderFulfillments.Query(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderFulfillmentQueryParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_fulfillments \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().orderFulfillments().query',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.OrderFulfillmentQueryParams;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.OrderFulfillmentQueryResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderFulfillmentQueryResponse response = client.v2().accounts().orderFulfillments().query("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderFulfillments->query',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderFulfillments->query(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  orderIDs: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderFulfillments.query(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.accounts.order_fulfillments.query',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.order_fulfillments.query(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderFulfillments.query',
+      java: {
+        method: 'v2().accounts().orderFulfillments().query',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderFulfillments.query(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.OrderFulfillmentQueryParams;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.OrderFulfillmentQueryResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderFulfillmentQueryResponse response = client.v2().accounts().orderFulfillments().query("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderFulfillments.Query',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderFulfillments.Query(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderFulfillmentQueryParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderFulfillments->query',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderFulfillments->query(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  orderIDs: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_fulfillments \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -2080,34 +2080,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v2.accounts.orderFulfillments.retrieve(account_id: string, order_fulfillment_id: string): { id: string; asset_token_filled: number; asset_token_spent: number; chain_id: chain; order_id: string; payment_token_filled: number; payment_token_spent: number; transaction_dt: string; transaction_hash: string; alloy_id?: string; payment_token_fee?: number; stock_id?: string; }`\n\n**get** `/api/v2/accounts/{account_id}/order_fulfillments/{order_fulfillment_id}`\n\nGet a specific `OrderFulfillment` by its ID.\n\n### Parameters\n\n- `account_id: string`\n\n- `order_fulfillment_id: string`\n\n### Returns\n\n- `{ id: string; asset_token_filled: number; asset_token_spent: number; chain_id: string; order_id: string; payment_token_filled: number; payment_token_spent: number; transaction_dt: string; transaction_hash: string; alloy_id?: string; payment_token_fee?: number; stock_id?: string; }`\n  Information about a fulfillment of an `Order`. An order may be fulfilled in multiple transactions.\n\n  - `id: string`\n  - `asset_token_filled: number`\n  - `asset_token_spent: number`\n  - `chain_id: string`\n  - `order_id: string`\n  - `payment_token_filled: number`\n  - `payment_token_spent: number`\n  - `transaction_dt: string`\n  - `transaction_hash: string`\n  - `alloy_id?: string`\n  - `payment_token_fee?: number`\n  - `stock_id?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst fulfillment = await client.v2.accounts.orderFulfillments.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });\n\nconsole.log(fulfillment);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderFulfillments.Get',
+      typescript: {
+        method: 'client.v2.accounts.orderFulfillments.retrieve',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tfulfillment, err := client.V2.Accounts.OrderFulfillments.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderFulfillmentGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", fulfillment.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_fulfillments/$ORDER_FULFILLMENT_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().orderFulfillments().retrieve',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.Fulfillment;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.OrderFulfillmentRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderFulfillmentRetrieveParams params = OrderFulfillmentRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderFulfillmentId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        Fulfillment fulfillment = client.v2().accounts().orderFulfillments().retrieve(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderFulfillments->retrieve',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$fulfillment = $client->v2->accounts->orderFulfillments->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($fulfillment);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst fulfillment = await client.v2.accounts.orderFulfillments.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(fulfillment.id);",
       },
       python: {
         method: 'v2.accounts.order_fulfillments.retrieve',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nfulfillment = client.v2.accounts.order_fulfillments.retrieve(\n    order_fulfillment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(fulfillment.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderFulfillments.retrieve',
+      java: {
+        method: 'v2().accounts().orderFulfillments().retrieve',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst fulfillment = await client.v2.accounts.orderFulfillments.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(fulfillment.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.Fulfillment;\nimport com.dinari.api.models.v2.accounts.orderfulfillments.OrderFulfillmentRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderFulfillmentRetrieveParams params = OrderFulfillmentRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderFulfillmentId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        Fulfillment fulfillment = client.v2().accounts().orderFulfillments().retrieve(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderFulfillments.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tfulfillment, err := client.V2.Accounts.OrderFulfillments.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderFulfillmentGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", fulfillment.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderFulfillments->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$fulfillment = $client->v2->accounts->orderFulfillments->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($fulfillment);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_fulfillments/$ORDER_FULFILLMENT_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -2133,34 +2133,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_market_buy\n\n`client.v2.accounts.orderRequests.createMarketBuy(account_id: string, payment_amount: number, alloy_id?: string, client_order_id?: string, recipient_account_id?: string, stock_id?: string): { id: string; account_id: string; created_dt: string; order_side: order_side; order_tif: order_tif; order_type: order_type; status: order_request_status; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n\n**post** `/api/v2/accounts/{account_id}/order_requests/market_buy`\n\n\nCreate a managed `OrderRequest` to place a market buy `Order`.\n\nFees for the `Order` are included in the transaction. Refer to our [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/) for fee estimation.\n\nIf an `OrderRequest` with the same `client_order_id` already exists for the given account, the creation call will fail.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `payment_amount: number`\n  \nAmount of currency (USD for US equities and ETFs) to pay for the order.\nMust be a positive number with a precision of up to 2 decimal places.\n\n\n- `alloy_id?: string`\n  ID of `Alloy`.\n\n- `client_order_id?: string`\n  Customer-supplied ID to map this order to an order in their own systems. Must be unique within the entity.\n\n- `recipient_account_id?: string`\n  ID of `Account` to receive the `Order`.\n\n- `stock_id?: string`\n  ID of `Stock`.\n\n### Returns\n\n- `{ id: string; account_id: string; created_dt: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_type: 'MARKET' | 'LIMIT'; status: string; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n  \nA request to create an `Order`.\n\nAn `OrderRequest` is created when a user places an order through the Dinari API.\nThe `OrderRequest` is then fulfilled by creating an `Order` on-chain.\n\nThe `OrderRequest` is a record of the user's intent to place an order, while the `Order` is the actual transaction that occurs on the blockchain.\n    \n\n  - `id: string`\n  - `account_id: string`\n  - `created_dt: string`\n  - `order_side: 'BUY' | 'SELL'`\n  - `order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'`\n  - `order_type: 'MARKET' | 'LIMIT'`\n  - `status: string`\n  - `cancel_message?: string`\n  - `client_order_id?: string`\n  - `order_id?: string`\n  - `recipient_account_id?: string`\n  - `reject_message?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst orderRequest = await client.v2.accounts.orderRequests.createMarketBuy('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { payment_amount: 0 });\n\nconsole.log(orderRequest);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.NewMarketBuy',
+      typescript: {
+        method: 'client.v2.accounts.orderRequests.createMarketBuy',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequest, err := client.V2.Accounts.OrderRequests.NewMarketBuy(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestNewMarketBuyParams{\n\t\t\tCreateMarketBuyOrderInput: dinariapisdkgo.CreateMarketBuyOrderInputParam{\n\t\t\t\tPaymentAmount: 0,\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequest.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/market_buy \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "payment_amount": 0\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().createMarketBuy',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateMarketBuyOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateMarketBuyParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateMarketBuyParams params = OrderRequestCreateMarketBuyParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createMarketBuyOrderInput(CreateMarketBuyOrderInput.builder()\n                .paymentAmount(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createMarketBuy(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->createMarketBuy',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createMarketBuy(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  paymentAmount: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequest = await client.v2.accounts.orderRequests.createMarketBuy(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { payment_amount: 0 },\n);\n\nconsole.log(orderRequest.id);",
       },
       python: {
         method: 'v2.accounts.order_requests.create_market_buy',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\norder_request = client.v2.accounts.order_requests.create_market_buy(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    payment_amount=0,\n)\nprint(order_request.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.createMarketBuy',
+      java: {
+        method: 'v2().accounts().orderRequests().createMarketBuy',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequest = await client.v2.accounts.orderRequests.createMarketBuy(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { payment_amount: 0 },\n);\n\nconsole.log(orderRequest.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateMarketBuyOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateMarketBuyParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateMarketBuyParams params = OrderRequestCreateMarketBuyParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createMarketBuyOrderInput(CreateMarketBuyOrderInput.builder()\n                .paymentAmount(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createMarketBuy(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderRequests.NewMarketBuy',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequest, err := client.V2.Accounts.OrderRequests.NewMarketBuy(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestNewMarketBuyParams{\n\t\t\tCreateMarketBuyOrderInput: dinariapisdkgo.CreateMarketBuyOrderInputParam{\n\t\t\t\tPaymentAmount: 0,\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequest.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->createMarketBuy',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createMarketBuy(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  paymentAmount: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/market_buy \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "payment_amount": 0\n        }\'',
       },
     },
   },
@@ -2187,34 +2187,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_market_sell\n\n`client.v2.accounts.orderRequests.createMarketSell(account_id: string, asset_quantity: number, alloy_id?: string, client_order_id?: string, payment_token_address?: string, recipient_account_id?: string, stock_id?: string): { id: string; account_id: string; created_dt: string; order_side: order_side; order_tif: order_tif; order_type: order_type; status: order_request_status; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n\n**post** `/api/v2/accounts/{account_id}/order_requests/market_sell`\n\n\nCreate a managed `OrderRequest` to place a market sell `Order`.\n\nFees for the `Order` are included in the transaction. Refer to our [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/) for fee estimation.\n\nIf an `OrderRequest` with the same `client_order_id` already exists for the given account, the creation call will fail.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `asset_quantity: number`\n  Quantity of shares to trade. Must be a positive number with a precision of up to 6 decimal places.\n\n- `alloy_id?: string`\n  ID of `Alloy`.\n\n- `client_order_id?: string`\n  Customer-supplied ID to map this order to an order in their own systems. Must be unique within the entity.\n\n- `payment_token_address?: string`\n  Address of the payment token to be used for the sell order. If not provided, the default payment token (USD+) will be used. Should only be specified if `recipient_account_id` for a non-managed wallet account is also provided.\n\n- `recipient_account_id?: string`\n  ID of `Account` to receive the `Order`.\n\n- `stock_id?: string`\n  ID of `Stock`.\n\n### Returns\n\n- `{ id: string; account_id: string; created_dt: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_type: 'MARKET' | 'LIMIT'; status: string; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n  \nA request to create an `Order`.\n\nAn `OrderRequest` is created when a user places an order through the Dinari API.\nThe `OrderRequest` is then fulfilled by creating an `Order` on-chain.\n\nThe `OrderRequest` is a record of the user's intent to place an order, while the `Order` is the actual transaction that occurs on the blockchain.\n    \n\n  - `id: string`\n  - `account_id: string`\n  - `created_dt: string`\n  - `order_side: 'BUY' | 'SELL'`\n  - `order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'`\n  - `order_type: 'MARKET' | 'LIMIT'`\n  - `status: string`\n  - `cancel_message?: string`\n  - `client_order_id?: string`\n  - `order_id?: string`\n  - `recipient_account_id?: string`\n  - `reject_message?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst orderRequest = await client.v2.accounts.orderRequests.createMarketSell('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { asset_quantity: 0 });\n\nconsole.log(orderRequest);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.NewMarketSell',
+      typescript: {
+        method: 'client.v2.accounts.orderRequests.createMarketSell',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequest, err := client.V2.Accounts.OrderRequests.NewMarketSell(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestNewMarketSellParams{\n\t\t\tCreateMarketSellOrderInput: dinariapisdkgo.CreateMarketSellOrderInputParam{\n\t\t\t\tAssetQuantity: 0,\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequest.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/market_sell \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "asset_quantity": 0\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().createMarketSell',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateMarketSellOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateMarketSellParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateMarketSellParams params = OrderRequestCreateMarketSellParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createMarketSellOrderInput(CreateMarketSellOrderInput.builder()\n                .assetQuantity(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createMarketSell(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->createMarketSell',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createMarketSell(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetQuantity: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  paymentTokenAddress: 'payment_token_address',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequest = await client.v2.accounts.orderRequests.createMarketSell(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { asset_quantity: 0 },\n);\n\nconsole.log(orderRequest.id);",
       },
       python: {
         method: 'v2.accounts.order_requests.create_market_sell',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\norder_request = client.v2.accounts.order_requests.create_market_sell(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    asset_quantity=0,\n)\nprint(order_request.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.createMarketSell',
+      java: {
+        method: 'v2().accounts().orderRequests().createMarketSell',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequest = await client.v2.accounts.orderRequests.createMarketSell(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { asset_quantity: 0 },\n);\n\nconsole.log(orderRequest.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateMarketSellOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateMarketSellParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateMarketSellParams params = OrderRequestCreateMarketSellParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createMarketSellOrderInput(CreateMarketSellOrderInput.builder()\n                .assetQuantity(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createMarketSell(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderRequests.NewMarketSell',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequest, err := client.V2.Accounts.OrderRequests.NewMarketSell(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestNewMarketSellParams{\n\t\t\tCreateMarketSellOrderInput: dinariapisdkgo.CreateMarketSellOrderInputParam{\n\t\t\t\tAssetQuantity: 0,\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequest.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->createMarketSell',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createMarketSell(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetQuantity: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  paymentTokenAddress: 'payment_token_address',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/market_sell \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "asset_quantity": 0\n        }\'',
       },
     },
   },
@@ -2241,34 +2241,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_limit_buy\n\n`client.v2.accounts.orderRequests.createLimitBuy(account_id: string, asset_quantity: number, limit_price: number, alloy_id?: string, client_order_id?: string, recipient_account_id?: string, stock_id?: string): { id: string; account_id: string; created_dt: string; order_side: order_side; order_tif: order_tif; order_type: order_type; status: order_request_status; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n\n**post** `/api/v2/accounts/{account_id}/order_requests/limit_buy`\n\n\nCreate a managed `OrderRequest` to place a limit buy `Order`.\n\nFees for the `Order` are included in the transaction. Refer to our [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/) for fee estimation.\n\nIf an `OrderRequest` with the same `client_order_id` already exists for the given account, the creation call will fail.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `asset_quantity: number`\n  Amount of dShare asset involved. Required for limit `Order Requests` and market sell `Order Requests`. Must be a positive number with a precision of up to 4 decimal places.\n\n- `limit_price: number`\n  Price at which to execute the order. Must be a positive number with a precision of up to 2 decimal places.\n\n- `alloy_id?: string`\n  ID of `Alloy`.\n\n- `client_order_id?: string`\n  Customer-supplied ID to map this order to an order in their own systems. Must be unique within the entity.\n\n- `recipient_account_id?: string`\n  ID of `Account` to receive the `Order`.\n\n- `stock_id?: string`\n  ID of `Stock`.\n\n### Returns\n\n- `{ id: string; account_id: string; created_dt: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_type: 'MARKET' | 'LIMIT'; status: string; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n  \nA request to create an `Order`.\n\nAn `OrderRequest` is created when a user places an order through the Dinari API.\nThe `OrderRequest` is then fulfilled by creating an `Order` on-chain.\n\nThe `OrderRequest` is a record of the user's intent to place an order, while the `Order` is the actual transaction that occurs on the blockchain.\n    \n\n  - `id: string`\n  - `account_id: string`\n  - `created_dt: string`\n  - `order_side: 'BUY' | 'SELL'`\n  - `order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'`\n  - `order_type: 'MARKET' | 'LIMIT'`\n  - `status: string`\n  - `cancel_message?: string`\n  - `client_order_id?: string`\n  - `order_id?: string`\n  - `recipient_account_id?: string`\n  - `reject_message?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst orderRequest = await client.v2.accounts.orderRequests.createLimitBuy('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { asset_quantity: 0, limit_price: 0 });\n\nconsole.log(orderRequest);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.NewLimitBuy',
+      typescript: {
+        method: 'client.v2.accounts.orderRequests.createLimitBuy',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequest, err := client.V2.Accounts.OrderRequests.NewLimitBuy(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestNewLimitBuyParams{\n\t\t\tCreateLimitBuyOrderInput: dinariapisdkgo.CreateLimitBuyOrderInputParam{\n\t\t\t\tAssetQuantity: 0,\n\t\t\t\tLimitPrice:    0,\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequest.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/limit_buy \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "asset_quantity": 0,\n          "limit_price": 0\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().createLimitBuy',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateLimitBuyOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateLimitBuyParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateLimitBuyParams params = OrderRequestCreateLimitBuyParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createLimitBuyOrderInput(CreateLimitBuyOrderInput.builder()\n                .assetQuantity(0.0)\n                .limitPrice(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createLimitBuy(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->createLimitBuy',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createLimitBuy(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetQuantity: 0,\n  limitPrice: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequest = await client.v2.accounts.orderRequests.createLimitBuy(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { asset_quantity: 0, limit_price: 0 },\n);\n\nconsole.log(orderRequest.id);",
       },
       python: {
         method: 'v2.accounts.order_requests.create_limit_buy',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\norder_request = client.v2.accounts.order_requests.create_limit_buy(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    asset_quantity=0,\n    limit_price=0,\n)\nprint(order_request.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.createLimitBuy',
+      java: {
+        method: 'v2().accounts().orderRequests().createLimitBuy',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequest = await client.v2.accounts.orderRequests.createLimitBuy(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { asset_quantity: 0, limit_price: 0 },\n);\n\nconsole.log(orderRequest.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateLimitBuyOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateLimitBuyParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateLimitBuyParams params = OrderRequestCreateLimitBuyParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createLimitBuyOrderInput(CreateLimitBuyOrderInput.builder()\n                .assetQuantity(0.0)\n                .limitPrice(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createLimitBuy(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderRequests.NewLimitBuy',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequest, err := client.V2.Accounts.OrderRequests.NewLimitBuy(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestNewLimitBuyParams{\n\t\t\tCreateLimitBuyOrderInput: dinariapisdkgo.CreateLimitBuyOrderInputParam{\n\t\t\t\tAssetQuantity: 0,\n\t\t\t\tLimitPrice:    0,\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequest.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->createLimitBuy',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createLimitBuy(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetQuantity: 0,\n  limitPrice: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/limit_buy \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "asset_quantity": 0,\n          "limit_price": 0\n        }\'',
       },
     },
   },
@@ -2296,34 +2296,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_limit_sell\n\n`client.v2.accounts.orderRequests.createLimitSell(account_id: string, asset_quantity: number, limit_price: number, alloy_id?: string, client_order_id?: string, payment_token_address?: string, recipient_account_id?: string, stock_id?: string): { id: string; account_id: string; created_dt: string; order_side: order_side; order_tif: order_tif; order_type: order_type; status: order_request_status; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n\n**post** `/api/v2/accounts/{account_id}/order_requests/limit_sell`\n\n\nCreate a managed `OrderRequest` to place a limit sell `Order`.\n\nFees for the `Order` are included in the transaction. Refer to our [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/) for fee estimation.\n\nIf an `OrderRequest` with the same `client_order_id` already exists for the given account, the creation call will fail.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `asset_quantity: number`\n  Amount of dShare asset involved. Required for limit `Order Requests` and market sell `Order Requests`. Must be a positive number with a precision of up to 4 decimal places.\n\n- `limit_price: number`\n  Price at which to execute the order. Must be a positive number with a precision of up to 2 decimal places.\n\n- `alloy_id?: string`\n  ID of `Alloy`.\n\n- `client_order_id?: string`\n  Customer-supplied ID to map this order to an order in their own systems. Must be unique within the entity.\n\n- `payment_token_address?: string`\n  Address of the payment token to be used for the sell order. If not provided, the default payment token (USD+) will be used. Should only be specified if `recipient_account_id` for a non-managed wallet account is also provided.\n\n- `recipient_account_id?: string`\n  ID of `Account` to receive the `Order`.\n\n- `stock_id?: string`\n  ID of `Stock`.\n\n### Returns\n\n- `{ id: string; account_id: string; created_dt: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_type: 'MARKET' | 'LIMIT'; status: string; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n  \nA request to create an `Order`.\n\nAn `OrderRequest` is created when a user places an order through the Dinari API.\nThe `OrderRequest` is then fulfilled by creating an `Order` on-chain.\n\nThe `OrderRequest` is a record of the user's intent to place an order, while the `Order` is the actual transaction that occurs on the blockchain.\n    \n\n  - `id: string`\n  - `account_id: string`\n  - `created_dt: string`\n  - `order_side: 'BUY' | 'SELL'`\n  - `order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'`\n  - `order_type: 'MARKET' | 'LIMIT'`\n  - `status: string`\n  - `cancel_message?: string`\n  - `client_order_id?: string`\n  - `order_id?: string`\n  - `recipient_account_id?: string`\n  - `reject_message?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst orderRequest = await client.v2.accounts.orderRequests.createLimitSell('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { asset_quantity: 0, limit_price: 0 });\n\nconsole.log(orderRequest);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.NewLimitSell',
+      typescript: {
+        method: 'client.v2.accounts.orderRequests.createLimitSell',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequest, err := client.V2.Accounts.OrderRequests.NewLimitSell(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestNewLimitSellParams{\n\t\t\tCreateLimitSellOrderInput: dinariapisdkgo.CreateLimitSellOrderInputParam{\n\t\t\t\tAssetQuantity: 0,\n\t\t\t\tLimitPrice:    0,\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequest.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/limit_sell \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "asset_quantity": 0,\n          "limit_price": 0\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().createLimitSell',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateLimitSellOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateLimitSellParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateLimitSellParams params = OrderRequestCreateLimitSellParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createLimitSellOrderInput(CreateLimitSellOrderInput.builder()\n                .assetQuantity(0.0)\n                .limitPrice(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createLimitSell(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->createLimitSell',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createLimitSell(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetQuantity: 0,\n  limitPrice: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  paymentTokenAddress: 'payment_token_address',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequest = await client.v2.accounts.orderRequests.createLimitSell(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { asset_quantity: 0, limit_price: 0 },\n);\n\nconsole.log(orderRequest.id);",
       },
       python: {
         method: 'v2.accounts.order_requests.create_limit_sell',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\norder_request = client.v2.accounts.order_requests.create_limit_sell(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    asset_quantity=0,\n    limit_price=0,\n)\nprint(order_request.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.createLimitSell',
+      java: {
+        method: 'v2().accounts().orderRequests().createLimitSell',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequest = await client.v2.accounts.orderRequests.createLimitSell(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { asset_quantity: 0, limit_price: 0 },\n);\n\nconsole.log(orderRequest.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.CreateLimitSellOrderInput;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestCreateLimitSellParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestCreateLimitSellParams params = OrderRequestCreateLimitSellParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .createLimitSellOrderInput(CreateLimitSellOrderInput.builder()\n                .assetQuantity(0.0)\n                .limitPrice(0.0)\n                .build())\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().createLimitSell(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderRequests.NewLimitSell',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequest, err := client.V2.Accounts.OrderRequests.NewLimitSell(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestNewLimitSellParams{\n\t\t\tCreateLimitSellOrderInput: dinariapisdkgo.CreateLimitSellOrderInputParam{\n\t\t\t\tAssetQuantity: 0,\n\t\t\t\tLimitPrice:    0,\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequest.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->createLimitSell',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->createLimitSell(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetQuantity: 0,\n  limitPrice: 0,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  paymentTokenAddress: 'payment_token_address',\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/limit_sell \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "asset_quantity": 0,\n          "limit_price": 0\n        }\'',
       },
     },
   },
@@ -2353,34 +2353,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v2.accounts.orderRequests.list(account_id: string, client_order_id?: string, limit?: number, next?: string, order?: 'asc' | 'desc', order_id?: string, order_request_id?: string, page?: number, page_size?: number, previous?: string): { id: string; account_id: string; created_dt: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_type: 'MARKET' | 'LIMIT'; status: string; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }[] | { data: object[]; pagination_metadata: object; _sv?: 'PaginatedAccountOrderRequestResponse:v1'; }`\n\n**get** `/api/v2/accounts/{account_id}/order_requests`\n\nLists `OrderRequests`.<br>Optionally `OrderRequests` can be filtered by certain parameters.\n\n### Parameters\n\n- `account_id: string`\n\n- `client_order_id?: string`\n  Customer-supplied ID to map this `OrderRequest` to an order in their own systems.\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `order_id?: string`\n  Order ID for the `OrderRequest`\n\n- `order_request_id?: string`\n  Order Request ID for the `OrderRequest`\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ id: string; account_id: string; created_dt: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_type: 'MARKET' | 'LIMIT'; status: string; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }[] | { data: { id: string; account_id: string; created_dt: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_type: 'MARKET' | 'LIMIT'; status: string; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedAccountOrderRequestResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst orderRequests = await client.v2.accounts.orderRequests.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(orderRequests);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.List',
+      typescript: {
+        method: 'client.v2.accounts.orderRequests.list',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequests, err := client.V2.Accounts.OrderRequests.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequests)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().list',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestListParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestListResponse orderRequests = client.v2().accounts().orderRequests().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->list',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequests = $client->v2->accounts->orderRequests->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  orderID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($orderRequests);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequests = await client.v2.accounts.orderRequests.list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(orderRequests);",
       },
       python: {
         method: 'v2.accounts.order_requests.list',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\norder_requests = client.v2.accounts.order_requests.list(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(order_requests)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.list',
+      java: {
+        method: 'v2().accounts().orderRequests().list',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequests = await client.v2.accounts.orderRequests.list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(orderRequests);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestListParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestListResponse orderRequests = client.v2().accounts().orderRequests().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderRequests.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequests, err := client.V2.Accounts.OrderRequests.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequests)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequests = $client->v2->accounts->orderRequests->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  clientOrderID: 'client_order_id',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  orderID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($orderRequests);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -2398,34 +2398,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v2.accounts.orderRequests.retrieve(account_id: string, order_request_id: string): { id: string; account_id: string; created_dt: string; order_side: order_side; order_tif: order_tif; order_type: order_type; status: order_request_status; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n\n**get** `/api/v2/accounts/{account_id}/order_requests/{order_request_id}`\n\nGet a specific `OrderRequest` by its ID.\n\n### Parameters\n\n- `account_id: string`\n\n- `order_request_id: string`\n\n### Returns\n\n- `{ id: string; account_id: string; created_dt: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_type: 'MARKET' | 'LIMIT'; status: string; cancel_message?: string; client_order_id?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n  \nA request to create an `Order`.\n\nAn `OrderRequest` is created when a user places an order through the Dinari API.\nThe `OrderRequest` is then fulfilled by creating an `Order` on-chain.\n\nThe `OrderRequest` is a record of the user's intent to place an order, while the `Order` is the actual transaction that occurs on the blockchain.\n    \n\n  - `id: string`\n  - `account_id: string`\n  - `created_dt: string`\n  - `order_side: 'BUY' | 'SELL'`\n  - `order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'`\n  - `order_type: 'MARKET' | 'LIMIT'`\n  - `status: string`\n  - `cancel_message?: string`\n  - `client_order_id?: string`\n  - `order_id?: string`\n  - `recipient_account_id?: string`\n  - `reject_message?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst orderRequest = await client.v2.accounts.orderRequests.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });\n\nconsole.log(orderRequest);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.Get',
+      typescript: {
+        method: 'client.v2.accounts.orderRequests.retrieve',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequest, err := client.V2.Accounts.OrderRequests.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequest.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/$ORDER_REQUEST_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().retrieve',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestRetrieveParams params = OrderRequestRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().retrieve(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->retrieve',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequest = await client.v2.accounts.orderRequests.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(orderRequest.id);",
       },
       python: {
         method: 'v2.accounts.order_requests.retrieve',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\norder_request = client.v2.accounts.order_requests.retrieve(\n    order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(order_request.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.retrieve',
+      java: {
+        method: 'v2().accounts().orderRequests().retrieve',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst orderRequest = await client.v2.accounts.orderRequests.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(orderRequest.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequest;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestRetrieveParams params = OrderRequestRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        OrderRequest orderRequest = client.v2().accounts().orderRequests().retrieve(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderRequests.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\torderRequest, err := client.V2.Accounts.OrderRequests.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", orderRequest.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$orderRequest = $client->v2->accounts->orderRequests->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($orderRequest);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/$ORDER_REQUEST_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -2454,34 +2454,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_fee_quote\n\n`client.v2.accounts.orderRequests.getFeeQuote(account_id: string, order_side: 'BUY' | 'SELL', order_type: 'MARKET' | 'LIMIT', alloy_id?: string, asset_token_quantity?: number, chain_id?: string, limit_price?: number, payment_token_address?: string, payment_token_quantity?: number, stock_id?: string): { fee: number; }`\n\n**post** `/api/v2/accounts/{account_id}/order_requests/fee_quote`\n\n\nGet fee quote data for an `Order Request`. This is provided primarily for informational purposes.\n\nFor market buy orders, the notional amount of the order includes the fees.\nFor market and limit sell orders, fees are deducted from the proceeds of the sale.\nFor limit buy orders, the fees are added to the total cost of the order.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `order_side: 'BUY' | 'SELL'`\n  Indicates whether `Order Request` is a buy or sell.\n\n- `order_type: 'MARKET' | 'LIMIT'`\n  Type of `Order Request`.\n\n- `alloy_id?: string`\n  The `Alloy` ID associated with the Order Request\n\n- `asset_token_quantity?: number`\n  Amount of dShare asset tokens involved. Required for limit `Order Requests` and market sell `Order Requests`. Must be a positive number with a precision of up to 4 decimal places for limit `Order Requests` or up to 6 decimal places for market sell `Order Requests`.\n\n- `chain_id?: string`\n  CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If not provided, the default chain ID (eip155:42161) will be used.\n\n- `limit_price?: number`\n  Price per asset in the asset's native currency. USD for US equities and ETFs. Required for limit `Order Requests`.\n\n- `payment_token_address?: string`\n  Address of the payment token to be used for an order. If not provided, the default payment token (USD+) will be used.\n\n- `payment_token_quantity?: number`\n  Amount of payment tokens involved. Required for market buy `Order Requests`.\n\n- `stock_id?: string`\n  The `Stock` ID associated with the Order Request\n\n### Returns\n\n- `{ fee: number; }`\n  A preview of the fee that would be collected when placing an Order Request.\n\n  - `fee: number`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.orderRequests.getFeeQuote('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { order_side: 'BUY', order_type: 'MARKET' });\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.GetFeeQuote',
+      typescript: {
+        method: 'client.v2.accounts.orderRequests.getFeeQuote',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderRequests.GetFeeQuote(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestGetFeeQuoteParams{\n\t\t\tOrderSide: dinariapisdkgo.OrderSideBuy,\n\t\t\tOrderType: dinariapisdkgo.OrderTypeMarket,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Fee)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/fee_quote \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "order_side": "BUY",\n          "order_type": "MARKET"\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().getFeeQuote',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestGetFeeQuoteParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestGetFeeQuoteResponse;\nimport com.dinari.api.models.v2.accounts.orders.OrderSide;\nimport com.dinari.api.models.v2.accounts.orders.OrderType;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestGetFeeQuoteParams params = OrderRequestGetFeeQuoteParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderSide(OrderSide.BUY)\n            .orderType(OrderType.MARKET)\n            .build();\n        OrderRequestGetFeeQuoteResponse response = client.v2().accounts().orderRequests().getFeeQuote(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->getFeeQuote',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderRequests->getFeeQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderSide: OrderSide::BUY,\n  orderType: OrderType::MARKET,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetTokenQuantity: 0,\n  chainID: Chain::EIP155_1,\n  limitPrice: 0,\n  paymentTokenAddress: 'payment_token_address',\n  paymentTokenQuantity: 0,\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderRequests.getFeeQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { order_side: 'BUY', order_type: 'MARKET' },\n);\n\nconsole.log(response.fee);",
       },
       python: {
         method: 'v2.accounts.order_requests.get_fee_quote',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.order_requests.get_fee_quote(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    order_side="BUY",\n    order_type="MARKET",\n)\nprint(response.fee)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.getFeeQuote',
+      java: {
+        method: 'v2().accounts().orderRequests().getFeeQuote',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderRequests.getFeeQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { order_side: 'BUY', order_type: 'MARKET' },\n);\n\nconsole.log(response.fee);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestGetFeeQuoteParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestGetFeeQuoteResponse;\nimport com.dinari.api.models.v2.accounts.orders.OrderSide;\nimport com.dinari.api.models.v2.accounts.orders.OrderType;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestGetFeeQuoteParams params = OrderRequestGetFeeQuoteParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderSide(OrderSide.BUY)\n            .orderType(OrderType.MARKET)\n            .build();\n        OrderRequestGetFeeQuoteResponse response = client.v2().accounts().orderRequests().getFeeQuote(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderRequests.GetFeeQuote',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderRequests.GetFeeQuote(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestGetFeeQuoteParams{\n\t\t\tOrderSide: dinariapisdkgo.OrderSideBuy,\n\t\t\tOrderType: dinariapisdkgo.OrderTypeMarket,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Fee)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->getFeeQuote',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderRequests->getFeeQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderSide: OrderSide::BUY,\n  orderType: OrderType::MARKET,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetTokenQuantity: 0,\n  chainID: Chain::EIP155_1,\n  limitPrice: 0,\n  paymentTokenAddress: 'payment_token_address',\n  paymentTokenQuantity: 0,\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/fee_quote \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "order_side": "BUY",\n          "order_type": "MARKET"\n        }\'',
       },
     },
   },
@@ -2513,34 +2513,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_permit\n\n`client.v2.accounts.orderRequests.eip155.createPermit(account_id: string, chain_id: string, order_side: 'BUY' | 'SELL', order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK', order_type: 'MARKET' | 'LIMIT', payment_token: string, alloy_id?: string, asset_token_quantity?: number, client_order_id?: string, limit_price?: number, payment_token_quantity?: number, stock_id?: string, token_id?: string): { order_request_id: string; permit: object; }`\n\n**post** `/api/v2/accounts/{account_id}/order_requests/eip155/permit`\n\n\nGenerates a permit that can be signed and used to create an `OrderRequest` using Dinari's EVM smart contracts.\n\nThis is a convenience method to prepare the transactions needed to create an `OrderRequest` using Dinari's EVM smart contracts.\nOnce signed, the transactions can be sent to the EVM network to create the order.\nNote that the fee quote is already included in the transactions, so no additional fee quote lookup is needed.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `chain_id: string`\n  CAIP-2 chain ID of the blockchain where the `Order` will be placed.\n\n- `order_side: 'BUY' | 'SELL'`\n  Indicates whether `Order` is a buy or sell.\n\n- `order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'`\n  Time in force. Indicates how long `Order` is valid for.\n\n- `order_type: 'MARKET' | 'LIMIT'`\n  Type of `Order`.\n\n- `payment_token: string`\n  Address of payment token.\n\n- `alloy_id?: string`\n  The ID of the `Alloy` for which the `Order` is being placed.\n\n- `asset_token_quantity?: number`\n  Amount of dShare asset tokens involved. Required for limit `Order Requests` and market sell `Order Requests`. Must be a positive number with a precision of up to 4 decimal places for limit `Order Requests` or up to 6 decimal places for market sell `Order Requests`.\n\n- `client_order_id?: string`\n  Customer-supplied unique identifier to map this `Order` to an order in the customer's systems.\n\n- `limit_price?: number`\n  Price per asset in the asset's native currency. USD for US equities and ETFs. Required for limit `Orders`.\n\n- `payment_token_quantity?: number`\n  Amount of payment tokens involved. Required for market buy `Orders`.\n\n- `stock_id?: string`\n  The ID of the `Stock` for which the `Order` is being placed.\n\n- `token_id?: string`\n  The ID of the `Token` for which the `Order` is being placed.\n\n### Returns\n\n- `{ order_request_id: string; permit: object; }`\n  Token permit to be signed by the smart contract submitter.\n\n  - `order_request_id: string`\n  - `permit: object`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.orderRequests.eip155.createPermit('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {\n  chain_id: 'eip155:1',\n  order_side: 'BUY',\n  order_tif: 'DAY',\n  order_type: 'MARKET',\n  payment_token: 'payment_token',\n});\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.Eip155.NewPermit',
+      typescript: {
+        method: 'client.v2.accounts.orderRequests.eip155.createPermit',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderRequests.Eip155.NewPermit(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestEip155NewPermitParams{\n\t\t\tChainID:      dinariapisdkgo.ChainEip155_1,\n\t\t\tOrderSide:    dinariapisdkgo.OrderSideBuy,\n\t\t\tOrderTif:     dinariapisdkgo.OrderTifDay,\n\t\t\tOrderType:    dinariapisdkgo.OrderTypeMarket,\n\t\t\tPaymentToken: "payment_token",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.OrderRequestID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/eip155/permit \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "chain_id": "eip155:1",\n          "order_side": "BUY",\n          "order_tif": "DAY",\n          "order_type": "MARKET",\n          "payment_token": "payment_token"\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().eip155().createPermit',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.Chain;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitResponse;\nimport com.dinari.api.models.v2.accounts.orders.OrderSide;\nimport com.dinari.api.models.v2.accounts.orders.OrderTif;\nimport com.dinari.api.models.v2.accounts.orders.OrderType;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Eip155CreatePermitParams params = Eip155CreatePermitParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(Chain.EIP155_1)\n            .orderSide(OrderSide.BUY)\n            .orderTif(OrderTif.DAY)\n            .orderType(OrderType.MARKET)\n            .paymentToken("payment_token")\n            .build();\n        Eip155CreatePermitResponse response = client.v2().accounts().orderRequests().eip155().createPermit(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->eip155->createPermit',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderRequests->eip155->createPermit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: Chain::EIP155_1,\n  orderSide: OrderSide::BUY,\n  orderTif: OrderTif::DAY,\n  orderType: OrderType::MARKET,\n  paymentToken: 'payment_token',\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetTokenQuantity: 0,\n  clientOrderID: 'client_order_id',\n  limitPrice: 0,\n  paymentTokenQuantity: 0,\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  tokenID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderRequests.eip155.createPermit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  {\n    chain_id: 'eip155:1',\n    order_side: 'BUY',\n    order_tif: 'DAY',\n    order_type: 'MARKET',\n    payment_token: 'payment_token',\n  },\n);\n\nconsole.log(response.order_request_id);",
       },
       python: {
         method: 'v2.accounts.order_requests.eip155.create_permit',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.order_requests.eip155.create_permit(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    chain_id="eip155:1",\n    order_side="BUY",\n    order_tif="DAY",\n    order_type="MARKET",\n    payment_token="payment_token",\n)\nprint(response.order_request_id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.eip155.createPermit',
+      java: {
+        method: 'v2().accounts().orderRequests().eip155().createPermit',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderRequests.eip155.createPermit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  {\n    chain_id: 'eip155:1',\n    order_side: 'BUY',\n    order_tif: 'DAY',\n    order_type: 'MARKET',\n    payment_token: 'payment_token',\n  },\n);\n\nconsole.log(response.order_request_id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.Chain;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitResponse;\nimport com.dinari.api.models.v2.accounts.orders.OrderSide;\nimport com.dinari.api.models.v2.accounts.orders.OrderTif;\nimport com.dinari.api.models.v2.accounts.orders.OrderType;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Eip155CreatePermitParams params = Eip155CreatePermitParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .chainId(Chain.EIP155_1)\n            .orderSide(OrderSide.BUY)\n            .orderTif(OrderTif.DAY)\n            .orderType(OrderType.MARKET)\n            .paymentToken("payment_token")\n            .build();\n        Eip155CreatePermitResponse response = client.v2().accounts().orderRequests().eip155().createPermit(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderRequests.Eip155.NewPermit',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderRequests.Eip155.NewPermit(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestEip155NewPermitParams{\n\t\t\tChainID:      dinariapisdkgo.ChainEip155_1,\n\t\t\tOrderSide:    dinariapisdkgo.OrderSideBuy,\n\t\t\tOrderTif:     dinariapisdkgo.OrderTifDay,\n\t\t\tOrderType:    dinariapisdkgo.OrderTypeMarket,\n\t\t\tPaymentToken: "payment_token",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.OrderRequestID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->eip155->createPermit',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderRequests->eip155->createPermit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  chainID: Chain::EIP155_1,\n  orderSide: OrderSide::BUY,\n  orderTif: OrderTif::DAY,\n  orderType: OrderType::MARKET,\n  paymentToken: 'payment_token',\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetTokenQuantity: 0,\n  clientOrderID: 'client_order_id',\n  limitPrice: 0,\n  paymentTokenQuantity: 0,\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  tokenID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/eip155/permit \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "chain_id": "eip155:1",\n          "order_side": "BUY",\n          "order_tif": "DAY",\n          "order_type": "MARKET",\n          "payment_token": "payment_token"\n        }\'',
       },
     },
   },
@@ -2558,34 +2558,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_permit_transaction\n\n`client.v2.accounts.orderRequests.eip155.createPermitTransaction(account_id: string, order_request_id: string, permit_signature: string): { abi: object; args: object; contract_address: string; data: string; value: string; }`\n\n**post** `/api/v2/accounts/{account_id}/order_requests/eip155/permit_transaction`\n\n\nPrepare a transaction to be placed on EVM. The returned structure contains the necessary\ndata to create an `EIP155Transaction` object.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `order_request_id: string`\n  ID of the prepared proxied order to be submitted as a proxied order.\n\n- `permit_signature: string`\n  Signature of the permit typed data, allowing Dinari to spend the payment token or dShare asset token on behalf of the owner.\n\n### Returns\n\n- `{ abi: object; args: object; contract_address: string; data: string; value: string; }`\n\n  - `abi: object`\n  - `args: object`\n  - `contract_address: string`\n  - `data: string`\n  - `value: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.orderRequests.eip155.createPermitTransaction('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { order_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', permit_signature: '0xeaF12bD1DfFd' });\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.Eip155.NewPermitTransaction',
+      typescript: {
+        method: 'client.v2.accounts.orderRequests.eip155.createPermitTransaction',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderRequests.Eip155.NewPermitTransaction(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestEip155NewPermitTransactionParams{\n\t\t\tEip155OrderRequestPermitTransaction: dinariapisdkgo.Eip155OrderRequestPermitTransactionParam{\n\t\t\t\tOrderRequestID:  "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t\t\tPermitSignature: "0xeaF12bD1DfFd",\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Abi)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/eip155/permit_transaction \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "order_request_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "permit_signature": "0xeaF12bD1DfFd"\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().eip155().createPermitTransaction',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitTransactionParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitTransactionResponse;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155OrderRequestPermitTransaction;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Eip155CreatePermitTransactionParams params = Eip155CreatePermitTransactionParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .eip155OrderRequestPermitTransaction(Eip155OrderRequestPermitTransaction.builder()\n                .orderRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n                .permitSignature("0xeaF12bD1DfFd")\n                .build())\n            .build();\n        Eip155CreatePermitTransactionResponse response = client.v2().accounts().orderRequests().eip155().createPermitTransaction(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->eip155->createPermitTransaction',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client\n  ->v2\n  ->accounts\n  ->orderRequests\n  ->eip155\n  ->createPermitTransaction(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  permitSignature: '0xeaF12bD1DfFd',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderRequests.eip155.createPermitTransaction(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { order_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', permit_signature: '0xeaF12bD1DfFd' },\n);\n\nconsole.log(response.abi);",
       },
       python: {
         method: 'v2.accounts.order_requests.eip155.create_permit_transaction',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.order_requests.eip155.create_permit_transaction(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    permit_signature="0xeaF12bD1DfFd",\n)\nprint(response.abi)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.eip155.createPermitTransaction',
+      java: {
+        method: 'v2().accounts().orderRequests().eip155().createPermitTransaction',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderRequests.eip155.createPermitTransaction(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { order_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', permit_signature: '0xeaF12bD1DfFd' },\n);\n\nconsole.log(response.abi);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitTransactionParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155CreatePermitTransactionResponse;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155OrderRequestPermitTransaction;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Eip155CreatePermitTransactionParams params = Eip155CreatePermitTransactionParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .eip155OrderRequestPermitTransaction(Eip155OrderRequestPermitTransaction.builder()\n                .orderRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n                .permitSignature("0xeaF12bD1DfFd")\n                .build())\n            .build();\n        Eip155CreatePermitTransactionResponse response = client.v2().accounts().orderRequests().eip155().createPermitTransaction(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderRequests.Eip155.NewPermitTransaction',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderRequests.Eip155.NewPermitTransaction(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestEip155NewPermitTransactionParams{\n\t\t\tEip155OrderRequestPermitTransaction: dinariapisdkgo.Eip155OrderRequestPermitTransactionParam{\n\t\t\t\tOrderRequestID:  "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t\t\tPermitSignature: "0xeaF12bD1DfFd",\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Abi)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->eip155->createPermitTransaction',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client\n  ->v2\n  ->accounts\n  ->orderRequests\n  ->eip155\n  ->createPermitTransaction(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  permitSignature: '0xeaF12bD1DfFd',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/eip155/permit_transaction \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "order_request_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "permit_signature": "0xeaF12bD1DfFd"\n        }\'',
       },
     },
   },
@@ -2604,34 +2604,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## submit\n\n`client.v2.accounts.orderRequests.eip155.submit(account_id: string, order_request_id: string, permit_signature: string): { id: string; account_id: string; created_dt: string; order_side: order_side; order_tif: order_tif; order_type: order_type; status: order_request_status; cancel_message?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n\n**post** `/api/v2/accounts/{account_id}/order_requests/eip155`\n\n\nSubmits a transaction for an EIP155 Order Request given the EIP155OrderRequest ID and Permit Signature.\n\nAn `EIP155OrderRequest` representing the proxied order is returned.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `order_request_id: string`\n  ID of the prepared proxied order to be submitted as a proxied order.\n\n- `permit_signature: string`\n  Signature of the permit typed data, allowing Dinari to spend the payment token or dShare asset token on behalf of the owner.\n\n### Returns\n\n- `{ id: string; account_id: string; created_dt: string; order_side: 'BUY' | 'SELL'; order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'; order_type: 'MARKET' | 'LIMIT'; status: string; cancel_message?: string; order_id?: string; recipient_account_id?: string; reject_message?: string; }`\n  \nA request to create an `Order`.\n\nAn `EIP155OrderRequest` is created when a user places an order through the Dinari API.\nThe `EIP155OrderRequest` is then fulfilled by creating an `Order` on-chain.\n\nThe `EIP155OrderRequest` is a record of the user's intent to place an order, while the `Order` is the actual transaction that occurs on the blockchain.\n    \n\n  - `id: string`\n  - `account_id: string`\n  - `created_dt: string`\n  - `order_side: 'BUY' | 'SELL'`\n  - `order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK'`\n  - `order_type: 'MARKET' | 'LIMIT'`\n  - `status: string`\n  - `cancel_message?: string`\n  - `order_id?: string`\n  - `recipient_account_id?: string`\n  - `reject_message?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.orderRequests.eip155.submit('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { order_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', permit_signature: '0xeaF12bD1DfFd' });\n\nconsole.log(response);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.Eip155.Submit',
+      typescript: {
+        method: 'client.v2.accounts.orderRequests.eip155.submit',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderRequests.Eip155.Submit(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestEip155SubmitParams{\n\t\t\tEip155OrderRequestPermitTransaction: dinariapisdkgo.Eip155OrderRequestPermitTransactionParam{\n\t\t\t\tOrderRequestID:  "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t\t\tPermitSignature: "0xeaF12bD1DfFd",\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/eip155 \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "order_request_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "permit_signature": "0xeaF12bD1DfFd"\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().eip155().submit',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155OrderRequestPermitTransaction;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155SubmitParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155SubmitResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Eip155SubmitParams params = Eip155SubmitParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .eip155OrderRequestPermitTransaction(Eip155OrderRequestPermitTransaction.builder()\n                .orderRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n                .permitSignature("0xeaF12bD1DfFd")\n                .build())\n            .build();\n        Eip155SubmitResponse response = client.v2().accounts().orderRequests().eip155().submit(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->eip155->submit',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderRequests->eip155->submit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  permitSignature: '0xeaF12bD1DfFd',\n);\n\nvar_dump($response);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderRequests.eip155.submit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { order_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', permit_signature: '0xeaF12bD1DfFd' },\n);\n\nconsole.log(response.id);",
       },
       python: {
         method: 'v2.accounts.order_requests.eip155.submit',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.order_requests.eip155.submit(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    order_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    permit_signature="0xeaF12bD1DfFd",\n)\nprint(response.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.eip155.submit',
+      java: {
+        method: 'v2().accounts().orderRequests().eip155().submit',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderRequests.eip155.submit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { order_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', permit_signature: '0xeaF12bD1DfFd' },\n);\n\nconsole.log(response.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155OrderRequestPermitTransaction;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155SubmitParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.eip155.Eip155SubmitResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        Eip155SubmitParams params = Eip155SubmitParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .eip155OrderRequestPermitTransaction(Eip155OrderRequestPermitTransaction.builder()\n                .orderRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n                .permitSignature("0xeaF12bD1DfFd")\n                .build())\n            .build();\n        Eip155SubmitResponse response = client.v2().accounts().orderRequests().eip155().submit(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.OrderRequests.Eip155.Submit',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderRequests.Eip155.Submit(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestEip155SubmitParams{\n\t\t\tEip155OrderRequestPermitTransaction: dinariapisdkgo.Eip155OrderRequestPermitTransactionParam{\n\t\t\t\tOrderRequestID:  "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t\t\tPermitSignature: "0xeaF12bD1DfFd",\n\t\t\t},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->orderRequests->eip155->submit',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderRequests->eip155->submit(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  permitSignature: '0xeaF12bD1DfFd',\n);\n\nvar_dump($response);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/eip155 \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "order_request_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "permit_signature": "0xeaF12bD1DfFd"\n        }\'',
       },
     },
   },
@@ -2657,34 +2657,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v2.accounts.withdrawalRequests.list(account_id: string, limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string): object[] | { data: withdrawal_request[]; pagination_metadata: object; _sv?: 'PaginatedWithdrawalRequestResponse:v1'; }`\n\n**get** `/api/v2/accounts/{account_id}/withdrawal_requests`\n\nList `WithdrawalRequests` under the `Account`, sorted by most recent.\n\n### Parameters\n\n- `account_id: string`\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ id: string; account_id: string; created_dt: string; payment_token_amount: number; recipient_account_id: string; status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED'; updated_dt: string; }[] | { data: { id: string; account_id: string; created_dt: string; payment_token_amount: number; recipient_account_id: string; status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED'; updated_dt: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedWithdrawalRequestResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst withdrawalRequests = await client.v2.accounts.withdrawalRequests.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(withdrawalRequests);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.WithdrawalRequests.List',
+      typescript: {
+        method: 'client.v2.accounts.withdrawalRequests.list',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twithdrawalRequests, err := client.V2.Accounts.WithdrawalRequests.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWithdrawalRequestListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", withdrawalRequests)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/withdrawal_requests \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().withdrawalRequests().list',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestListParams;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRequestListResponse withdrawalRequests = client.v2().accounts().withdrawalRequests().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->withdrawalRequests->list',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawalRequests = $client->v2->accounts->withdrawalRequests->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($withdrawalRequests);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst withdrawalRequests = await client.v2.accounts.withdrawalRequests.list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(withdrawalRequests);",
       },
       python: {
         method: 'v2.accounts.withdrawal_requests.list',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nwithdrawal_requests = client.v2.accounts.withdrawal_requests.list(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(withdrawal_requests)',
       },
-      typescript: {
-        method: 'client.v2.accounts.withdrawalRequests.list',
+      java: {
+        method: 'v2().accounts().withdrawalRequests().list',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst withdrawalRequests = await client.v2.accounts.withdrawalRequests.list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(withdrawalRequests);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestListParams;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRequestListResponse withdrawalRequests = client.v2().accounts().withdrawalRequests().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.WithdrawalRequests.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twithdrawalRequests, err := client.V2.Accounts.WithdrawalRequests.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWithdrawalRequestListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", withdrawalRequests)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->withdrawalRequests->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawalRequests = $client->v2->accounts->withdrawalRequests->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($withdrawalRequests);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/withdrawal_requests \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -2703,34 +2703,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v2.accounts.withdrawalRequests.create(account_id: string, payment_token_quantity: number, recipient_account_id: string): { id: string; account_id: string; created_dt: string; payment_token_amount: number; recipient_account_id: string; status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED'; updated_dt: string; }`\n\n**post** `/api/v2/accounts/{account_id}/withdrawal_requests`\n\n\nRequest to withdraw USD+ payment tokens from a managed `Account` and send the equivalent amount of USDC to the specified recipient `Account`.\n\nThe recipient `Account` must belong to the same `Entity` as the managed `Account`.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `payment_token_quantity: number`\n  Amount of USD+ payment tokens to be withdrawn. Must be greater than 0 and have at most 6 decimal places.\n\n- `recipient_account_id: string`\n  ID of the `Account` that will receive payment tokens from the `Withdrawal`.\n\n### Returns\n\n- `{ id: string; account_id: string; created_dt: string; payment_token_amount: number; recipient_account_id: string; status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED'; updated_dt: string; }`\n  Information for a withdrawal request of payment tokens from an `Account` backed by a Dinari-managed `Wallet`.\n\n  - `id: string`\n  - `account_id: string`\n  - `created_dt: string`\n  - `payment_token_amount: number`\n  - `recipient_account_id: string`\n  - `status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED'`\n  - `updated_dt: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst withdrawalRequest = await client.v2.accounts.withdrawalRequests.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { payment_token_quantity: 0, recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });\n\nconsole.log(withdrawalRequest);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.WithdrawalRequests.New',
+      typescript: {
+        method: 'client.v2.accounts.withdrawalRequests.create',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twithdrawalRequest, err := client.V2.Accounts.WithdrawalRequests.New(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWithdrawalRequestNewParams{\n\t\t\tPaymentTokenQuantity: 0,\n\t\t\tRecipientAccountID:   "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", withdrawalRequest.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/withdrawal_requests \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "payment_token_quantity": 0,\n          "recipient_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().withdrawalRequests().create',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestCreateParams;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRequestCreateParams params = WithdrawalRequestCreateParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .paymentTokenQuantity(0.0)\n            .recipientAccountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        WithdrawalRequestCreateResponse withdrawalRequest = client.v2().accounts().withdrawalRequests().create(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->withdrawalRequests->create',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawalRequest = $client->v2->accounts->withdrawalRequests->create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  paymentTokenQuantity: 0,\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawalRequest);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst withdrawalRequest = await client.v2.accounts.withdrawalRequests.create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { payment_token_quantity: 0, recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(withdrawalRequest.id);",
       },
       python: {
         method: 'v2.accounts.withdrawal_requests.create',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nwithdrawal_request = client.v2.accounts.withdrawal_requests.create(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    payment_token_quantity=0,\n    recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(withdrawal_request.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.withdrawalRequests.create',
+      java: {
+        method: 'v2().accounts().withdrawalRequests().create',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst withdrawalRequest = await client.v2.accounts.withdrawalRequests.create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { payment_token_quantity: 0, recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(withdrawalRequest.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestCreateParams;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRequestCreateParams params = WithdrawalRequestCreateParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .paymentTokenQuantity(0.0)\n            .recipientAccountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        WithdrawalRequestCreateResponse withdrawalRequest = client.v2().accounts().withdrawalRequests().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.WithdrawalRequests.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twithdrawalRequest, err := client.V2.Accounts.WithdrawalRequests.New(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWithdrawalRequestNewParams{\n\t\t\tPaymentTokenQuantity: 0,\n\t\t\tRecipientAccountID:   "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", withdrawalRequest.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->withdrawalRequests->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawalRequest = $client->v2->accounts->withdrawalRequests->create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  paymentTokenQuantity: 0,\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawalRequest);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/withdrawal_requests \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "payment_token_quantity": 0,\n          "recipient_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"\n        }\'',
       },
     },
   },
@@ -2748,34 +2748,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v2.accounts.withdrawalRequests.retrieve(account_id: string, withdrawal_request_id: string): { id: string; account_id: string; created_dt: string; payment_token_amount: number; recipient_account_id: string; status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED'; updated_dt: string; }`\n\n**get** `/api/v2/accounts/{account_id}/withdrawal_requests/{withdrawal_request_id}`\n\nGet a specific `WithdrawalRequest` by its ID.\n\n### Parameters\n\n- `account_id: string`\n\n- `withdrawal_request_id: string`\n\n### Returns\n\n- `{ id: string; account_id: string; created_dt: string; payment_token_amount: number; recipient_account_id: string; status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED'; updated_dt: string; }`\n  Information for a withdrawal request of payment tokens from an `Account` backed by a Dinari-managed `Wallet`.\n\n  - `id: string`\n  - `account_id: string`\n  - `created_dt: string`\n  - `payment_token_amount: number`\n  - `recipient_account_id: string`\n  - `status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED'`\n  - `updated_dt: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst withdrawalRequest = await client.v2.accounts.withdrawalRequests.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });\n\nconsole.log(withdrawalRequest);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.WithdrawalRequests.Get',
+      typescript: {
+        method: 'client.v2.accounts.withdrawalRequests.retrieve',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twithdrawalRequest, err := client.V2.Accounts.WithdrawalRequests.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWithdrawalRequestGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", withdrawalRequest.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/withdrawal_requests/$WITHDRAWAL_REQUEST_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().withdrawalRequests().retrieve',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestRetrieveParams;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRequestRetrieveParams params = WithdrawalRequestRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .withdrawalRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        WithdrawalRequestRetrieveResponse withdrawalRequest = client.v2().accounts().withdrawalRequests().retrieve(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->withdrawalRequests->retrieve',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawalRequest = $client->v2->accounts->withdrawalRequests->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawalRequest);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst withdrawalRequest = await client.v2.accounts.withdrawalRequests.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(withdrawalRequest.id);",
       },
       python: {
         method: 'v2.accounts.withdrawal_requests.retrieve',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nwithdrawal_request = client.v2.accounts.withdrawal_requests.retrieve(\n    withdrawal_request_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(withdrawal_request.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.withdrawalRequests.retrieve',
+      java: {
+        method: 'v2().accounts().withdrawalRequests().retrieve',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst withdrawalRequest = await client.v2.accounts.withdrawalRequests.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(withdrawalRequest.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestRetrieveParams;\nimport com.dinari.api.models.v2.accounts.withdrawalrequests.WithdrawalRequestRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRequestRetrieveParams params = WithdrawalRequestRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .withdrawalRequestId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        WithdrawalRequestRetrieveResponse withdrawalRequest = client.v2().accounts().withdrawalRequests().retrieve(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.WithdrawalRequests.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twithdrawalRequest, err := client.V2.Accounts.WithdrawalRequests.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWithdrawalRequestGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", withdrawalRequest.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->withdrawalRequests->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawalRequest = $client->v2->accounts->withdrawalRequests->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawalRequest);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/withdrawal_requests/$WITHDRAWAL_REQUEST_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -2802,34 +2802,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v2.accounts.withdrawals.list(account_id: string, limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string, withdrawal_request_id?: string): object[] | { data: withdrawal[]; pagination_metadata: object; _sv?: 'PaginatedWithdrawalResponse:v1'; }`\n\n**get** `/api/v2/accounts/{account_id}/withdrawals`\n\nGet a list of all `Withdrawals` under the `Account`, sorted by most recent.\n\n### Parameters\n\n- `account_id: string`\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n- `withdrawal_request_id?: string`\n  ID of the `WithdrawalRequest` to find `Withdrawals` for.\n\n### Returns\n\n- `{ id: string; account_id: string; chain_id: string; payment_token_address: string; payment_token_amount: number; recipient_account_id: string; status: string; transaction_dt: string; transaction_hash: string; withdrawal_request_id: string; }[] | { data: { id: string; account_id: string; chain_id: string; payment_token_address: string; payment_token_amount: number; recipient_account_id: string; status: string; transaction_dt: string; transaction_hash: string; withdrawal_request_id: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedWithdrawalResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst withdrawals = await client.v2.accounts.withdrawals.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(withdrawals);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Withdrawals.List',
+      typescript: {
+        method: 'client.v2.accounts.withdrawals.list',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twithdrawals, err := client.V2.Accounts.Withdrawals.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWithdrawalListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", withdrawals)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/withdrawals \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().withdrawals().list',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawals.WithdrawalListParams;\nimport com.dinari.api.models.v2.accounts.withdrawals.WithdrawalListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalListResponse withdrawals = client.v2().accounts().withdrawals().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->withdrawals->list',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawals = $client->v2->accounts->withdrawals->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n  withdrawalRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawals);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst withdrawals = await client.v2.accounts.withdrawals.list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(withdrawals);",
       },
       python: {
         method: 'v2.accounts.withdrawals.list',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nwithdrawals = client.v2.accounts.withdrawals.list(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(withdrawals)',
       },
-      typescript: {
-        method: 'client.v2.accounts.withdrawals.list',
+      java: {
+        method: 'v2().accounts().withdrawals().list',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst withdrawals = await client.v2.accounts.withdrawals.list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(withdrawals);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawals.WithdrawalListParams;\nimport com.dinari.api.models.v2.accounts.withdrawals.WithdrawalListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalListResponse withdrawals = client.v2().accounts().withdrawals().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Withdrawals.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twithdrawals, err := client.V2.Accounts.Withdrawals.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWithdrawalListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", withdrawals)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->withdrawals->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawals = $client->v2->accounts->withdrawals->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n  withdrawalRequestID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawals);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/withdrawals \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -2847,34 +2847,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v2.accounts.withdrawals.retrieve(account_id: string, withdrawal_id: string): { id: string; account_id: string; chain_id: chain; payment_token_address: string; payment_token_amount: number; recipient_account_id: string; status: brokerage_order_status; transaction_dt: string; transaction_hash: string; withdrawal_request_id: string; }`\n\n**get** `/api/v2/accounts/{account_id}/withdrawals/{withdrawal_id}`\n\nGet a specific `Withdrawal` by its ID.\n\n### Parameters\n\n- `account_id: string`\n\n- `withdrawal_id: string`\n\n### Returns\n\n- `{ id: string; account_id: string; chain_id: string; payment_token_address: string; payment_token_amount: number; recipient_account_id: string; status: string; transaction_dt: string; transaction_hash: string; withdrawal_request_id: string; }`\n  Information for a withdrawal of payment tokens from an `Account` backed by a Dinari-managed `Wallet`.\n\n  - `id: string`\n  - `account_id: string`\n  - `chain_id: string`\n  - `payment_token_address: string`\n  - `payment_token_amount: number`\n  - `recipient_account_id: string`\n  - `status: string`\n  - `transaction_dt: string`\n  - `transaction_hash: string`\n  - `withdrawal_request_id: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst withdrawal = await client.v2.accounts.withdrawals.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });\n\nconsole.log(withdrawal);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Withdrawals.Get',
+      typescript: {
+        method: 'client.v2.accounts.withdrawals.retrieve',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twithdrawal, err := client.V2.Accounts.Withdrawals.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWithdrawalGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", withdrawal.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/withdrawals/$WITHDRAWAL_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().withdrawals().retrieve',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawals.WithdrawalRetrieveParams;\nimport com.dinari.api.models.v2.accounts.withdrawals.WithdrawalRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRetrieveParams params = WithdrawalRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .withdrawalId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        WithdrawalRetrieveResponse withdrawal = client.v2().accounts().withdrawals().retrieve(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->withdrawals->retrieve',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawal = $client->v2->accounts->withdrawals->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawal);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst withdrawal = await client.v2.accounts.withdrawals.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(withdrawal.id);",
       },
       python: {
         method: 'v2.accounts.withdrawals.retrieve',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nwithdrawal = client.v2.accounts.withdrawals.retrieve(\n    withdrawal_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(withdrawal.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.withdrawals.retrieve',
+      java: {
+        method: 'v2().accounts().withdrawals().retrieve',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst withdrawal = await client.v2.accounts.withdrawals.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(withdrawal.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.withdrawals.WithdrawalRetrieveParams;\nimport com.dinari.api.models.v2.accounts.withdrawals.WithdrawalRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        WithdrawalRetrieveParams params = WithdrawalRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .withdrawalId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        WithdrawalRetrieveResponse withdrawal = client.v2().accounts().withdrawals().retrieve(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Withdrawals.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\twithdrawal, err := client.V2.Accounts.Withdrawals.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountWithdrawalGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", withdrawal.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->withdrawals->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$withdrawal = $client->v2->accounts->withdrawals->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($withdrawal);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/withdrawals/$WITHDRAWAL_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -2901,34 +2901,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v2.accounts.tokenTransfers.list(account_id: string, limit?: number, next?: string, order?: 'asc' | 'desc', page?: number, page_size?: number, previous?: string): object[] | { data: token_transfer[]; pagination_metadata: object; _sv?: 'PaginatedTokenTransferResponse:v1'; }`\n\n**get** `/api/v2/accounts/{account_id}/token_transfers`\n\n\nGet `TokenTransfer`s made from this `Account`.\n\nA `TokenTransfer` represents a transfer of tokens through the Dinari platform from one `Account` to another.\nAs such, only `Account`s that are connected to Dinari-managed `Wallet`s can initiate `TokenTransfer`s.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `limit?: number`\n  Number of results to return\n\n- `next?: string`\n  Cursor for next page\n\n- `order?: 'asc' | 'desc'`\n  Sort order\n\n- `page?: number`\n\n- `page_size?: number`\n\n- `previous?: string`\n  Cursor for previous page\n\n### Returns\n\n- `{ id: string; chain_id: string; created_dt: string; quantity: number; recipient_account_id: string; sender_account_id: string; status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE' | 'FAILED'; token_address: string; updated_dt: string; transaction_hash?: string; }[] | { data: { id: string; chain_id: string; created_dt: string; quantity: number; recipient_account_id: string; sender_account_id: string; status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE' | 'FAILED'; token_address: string; updated_dt: string; transaction_hash?: string; }[]; pagination_metadata: { next?: string; previous?: string; }; _sv?: 'PaginatedTokenTransferResponse:v1'; }`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst tokenTransfers = await client.v2.accounts.tokenTransfers.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(tokenTransfers);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.TokenTransfers.List',
+      typescript: {
+        method: 'client.v2.accounts.tokenTransfers.list',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\ttokenTransfers, err := client.V2.Accounts.TokenTransfers.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountTokenTransferListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tokenTransfers)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/token_transfers \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().tokenTransfers().list',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferListParams;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        TokenTransferListResponse tokenTransfers = client.v2().accounts().tokenTransfers().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->tokenTransfers->list',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$tokenTransfers = $client->v2->accounts->tokenTransfers->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($tokenTransfers);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst tokenTransfers = await client.v2.accounts.tokenTransfers.list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(tokenTransfers);",
       },
       python: {
         method: 'v2.accounts.token_transfers.list',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\ntoken_transfers = client.v2.accounts.token_transfers.list(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(token_transfers)',
       },
-      typescript: {
-        method: 'client.v2.accounts.tokenTransfers.list',
+      java: {
+        method: 'v2().accounts().tokenTransfers().list',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst tokenTransfers = await client.v2.accounts.tokenTransfers.list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(tokenTransfers);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferListParams;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        TokenTransferListResponse tokenTransfers = client.v2().accounts().tokenTransfers().list("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.TokenTransfers.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\ttokenTransfers, err := client.V2.Accounts.TokenTransfers.List(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountTokenTransferListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tokenTransfers)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->tokenTransfers->list',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$tokenTransfers = $client->v2->accounts->tokenTransfers->list(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  limit: 20,\n  next: 'next',\n  order: 'asc',\n  page: 1,\n  pageSize: 1,\n  previous: 'previous',\n);\n\nvar_dump($tokenTransfers);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/token_transfers \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -2952,34 +2952,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v2.accounts.tokenTransfers.create(account_id: string, quantity: number, recipient_account_id: string, token_address: string): { id: string; chain_id: string; created_dt: string; quantity: number; recipient_account_id: string; sender_account_id: string; status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE' | 'FAILED'; token_address: string; updated_dt: string; transaction_hash?: string; }`\n\n**post** `/api/v2/accounts/{account_id}/token_transfers`\n\n\nCreates a `TokenTransfer` from this `Account`.\n\nA `TokenTransfer` represents a transfer of tokens through the Dinari platform from one `Account` to another.\nAs such, only `Account`s that are connected to Dinari-managed `Wallet`s can initiate `TokenTransfer`s.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `quantity: number`\n  Quantity of the token to transfer.\n\n- `recipient_account_id: string`\n  ID of the recipient account to which the tokens will be transferred.\n\n- `token_address: string`\n  Address of the token to transfer.\n\n### Returns\n\n- `{ id: string; chain_id: string; created_dt: string; quantity: number; recipient_account_id: string; sender_account_id: string; status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE' | 'FAILED'; token_address: string; updated_dt: string; transaction_hash?: string; }`\n  Information about a token transfer between accounts.\n\n  - `id: string`\n  - `chain_id: string`\n  - `created_dt: string`\n  - `quantity: number`\n  - `recipient_account_id: string`\n  - `sender_account_id: string`\n  - `status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE' | 'FAILED'`\n  - `token_address: string`\n  - `updated_dt: string`\n  - `transaction_hash?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst tokenTransfer = await client.v2.accounts.tokenTransfers.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {\n  quantity: 0,\n  recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  token_address: 'token_address',\n});\n\nconsole.log(tokenTransfer);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.TokenTransfers.New',
+      typescript: {
+        method: 'client.v2.accounts.tokenTransfers.create',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\ttokenTransfer, err := client.V2.Accounts.TokenTransfers.New(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountTokenTransferNewParams{\n\t\t\tQuantity:           0,\n\t\t\tRecipientAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t\tTokenAddress:       "token_address",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tokenTransfer.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/token_transfers \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "quantity": 0,\n          "recipient_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "token_address": "token_address"\n        }\'',
-      },
-      java: {
-        method: 'v2().accounts().tokenTransfers().create',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransfer;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        TokenTransferCreateParams params = TokenTransferCreateParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .quantity(0.0)\n            .recipientAccountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .tokenAddress("token_address")\n            .build();\n        TokenTransfer tokenTransfer = client.v2().accounts().tokenTransfers().create(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->tokenTransfers->create',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$tokenTransfer = $client->v2->accounts->tokenTransfers->create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  quantity: 0,\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  tokenAddress: 'token_address',\n);\n\nvar_dump($tokenTransfer);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst tokenTransfer = await client.v2.accounts.tokenTransfers.create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  {\n    quantity: 0,\n    recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n    token_address: 'token_address',\n  },\n);\n\nconsole.log(tokenTransfer.id);",
       },
       python: {
         method: 'v2.accounts.token_transfers.create',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\ntoken_transfer = client.v2.accounts.token_transfers.create(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    quantity=0,\n    recipient_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    token_address="token_address",\n)\nprint(token_transfer.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.tokenTransfers.create',
+      java: {
+        method: 'v2().accounts().tokenTransfers().create',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst tokenTransfer = await client.v2.accounts.tokenTransfers.create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  {\n    quantity: 0,\n    recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n    token_address: 'token_address',\n  },\n);\n\nconsole.log(tokenTransfer.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransfer;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        TokenTransferCreateParams params = TokenTransferCreateParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .quantity(0.0)\n            .recipientAccountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .tokenAddress("token_address")\n            .build();\n        TokenTransfer tokenTransfer = client.v2().accounts().tokenTransfers().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.TokenTransfers.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\ttokenTransfer, err := client.V2.Accounts.TokenTransfers.New(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountTokenTransferNewParams{\n\t\t\tQuantity:           0,\n\t\t\tRecipientAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t\tTokenAddress:       "token_address",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tokenTransfer.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->tokenTransfers->create',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$tokenTransfer = $client->v2->accounts->tokenTransfers->create(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  quantity: 0,\n  recipientAccountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  tokenAddress: 'token_address',\n);\n\nvar_dump($tokenTransfer);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/token_transfers \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "quantity": 0,\n          "recipient_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "token_address": "token_address"\n        }\'',
       },
     },
   },
@@ -2998,34 +2998,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v2.accounts.tokenTransfers.retrieve(account_id: string, transfer_id: string): { id: string; chain_id: string; created_dt: string; quantity: number; recipient_account_id: string; sender_account_id: string; status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE' | 'FAILED'; token_address: string; updated_dt: string; transaction_hash?: string; }`\n\n**get** `/api/v2/accounts/{account_id}/token_transfers/{transfer_id}`\n\n\nGet a specific `TokenTransfer` made from this `Account` by its ID.\n\nA `TokenTransfer` represents a transfer of tokens through the Dinari platform from one `Account` to another.\nAs such, only `Account`s that are connected to Dinari-managed `Wallet`s can initiate `TokenTransfer`s.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `transfer_id: string`\n\n### Returns\n\n- `{ id: string; chain_id: string; created_dt: string; quantity: number; recipient_account_id: string; sender_account_id: string; status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE' | 'FAILED'; token_address: string; updated_dt: string; transaction_hash?: string; }`\n  Information about a token transfer between accounts.\n\n  - `id: string`\n  - `chain_id: string`\n  - `created_dt: string`\n  - `quantity: number`\n  - `recipient_account_id: string`\n  - `sender_account_id: string`\n  - `status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETE' | 'FAILED'`\n  - `token_address: string`\n  - `updated_dt: string`\n  - `transaction_hash?: string`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst tokenTransfer = await client.v2.accounts.tokenTransfers.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });\n\nconsole.log(tokenTransfer);\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.TokenTransfers.Get',
+      typescript: {
+        method: 'client.v2.accounts.tokenTransfers.retrieve',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\ttokenTransfer, err := client.V2.Accounts.TokenTransfers.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountTokenTransferGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tokenTransfer.ID)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/token_transfers/$TRANSFER_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().tokenTransfers().retrieve',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransfer;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        TokenTransferRetrieveParams params = TokenTransferRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .transferId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        TokenTransfer tokenTransfer = client.v2().accounts().tokenTransfers().retrieve(params);\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->tokenTransfers->retrieve',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$tokenTransfer = $client->v2->accounts->tokenTransfers->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($tokenTransfer);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst tokenTransfer = await client.v2.accounts.tokenTransfers.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(tokenTransfer.id);",
       },
       python: {
         method: 'v2.accounts.token_transfers.retrieve',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\ntoken_transfer = client.v2.accounts.token_transfers.retrieve(\n    transfer_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(token_transfer.id)',
       },
-      typescript: {
-        method: 'client.v2.accounts.tokenTransfers.retrieve',
+      java: {
+        method: 'v2().accounts().tokenTransfers().retrieve',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst tokenTransfer = await client.v2.accounts.tokenTransfers.retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },\n);\n\nconsole.log(tokenTransfer.id);",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransfer;\nimport com.dinari.api.models.v2.accounts.tokentransfers.TokenTransferRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        TokenTransferRetrieveParams params = TokenTransferRetrieveParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .transferId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .build();\n        TokenTransfer tokenTransfer = client.v2().accounts().tokenTransfers().retrieve(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.TokenTransfers.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\ttokenTransfer, err := client.V2.Accounts.TokenTransfers.Get(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountTokenTransferGetParams{\n\t\t\tAccountID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tokenTransfer.ID)\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->tokenTransfers->retrieve',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$tokenTransfer = $client->v2->accounts->tokenTransfers->retrieve(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  accountID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($tokenTransfer);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/token_transfers/$TRANSFER_ID \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
@@ -3042,34 +3042,34 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_brokerage\n\n`client.v2.accounts.activities.retrieveBrokerage(account_id: string, page_size?: number, page_token?: string): void`\n\n**get** `/api/v2/accounts/{account_id}/activities/brokerage`\n\n\nGet a list of brokerage activities tied to the specified `Account`.\n\n**⚠️ ALPHA: This endpoint is in early development and subject to breaking changes.**\n\n\n### Parameters\n\n- `account_id: string`\n\n- `page_size?: number`\n  The maximum number of entries to return in the response. Defaults to 100.\n\n- `page_token?: string`\n  Pagination token. Set to the `id` field of the last Activity returned in the previous page to get the next page of results.\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nawait client.v2.accounts.activities.retrieveBrokerage('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e')\n```",
     perLanguage: {
-      go: {
-        method: 'client.V2.Accounts.Activities.GetBrokerage',
+      typescript: {
+        method: 'client.v2.accounts.activities.retrieveBrokerage',
         example:
-          'package main\n\nimport (\n\t"context"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\terr := client.V2.Accounts.Activities.GetBrokerage(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountActivityGetBrokerageParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n}\n',
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/activities/brokerage \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
-      },
-      java: {
-        method: 'v2().accounts().activities().retrieveBrokerage',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.activities.ActivityRetrieveBrokerageParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        client.v2().accounts().activities().retrieveBrokerage("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
-      },
-      php: {
-        method: 'v2->accounts->activities->retrieveBrokerage',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$result = $client->v2->accounts->activities->retrieveBrokerage(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', pageSize: 1, pageToken: 'page_token'\n);\n\nvar_dump($result);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nawait client.v2.accounts.activities.retrieveBrokerage('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');",
       },
       python: {
         method: 'v2.accounts.activities.retrieve_brokerage',
         example:
           'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nclient.v2.accounts.activities.retrieve_brokerage(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)',
       },
-      typescript: {
-        method: 'client.v2.accounts.activities.retrieveBrokerage',
+      java: {
+        method: 'v2().accounts().activities().retrieveBrokerage',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nawait client.v2.accounts.activities.retrieveBrokerage('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');",
+          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.activities.ActivityRetrieveBrokerageParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        client.v2().accounts().activities().retrieveBrokerage("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e");\n    }\n}',
+      },
+      go: {
+        method: 'client.V2.Accounts.Activities.GetBrokerage',
+        example:
+          'package main\n\nimport (\n\t"context"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\terr := client.V2.Accounts.Activities.GetBrokerage(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountActivityGetBrokerageParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n}\n',
+      },
+      php: {
+        method: 'v2->accounts->activities->retrieveBrokerage',
+        example:
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$result = $client->v2->accounts->activities->retrieveBrokerage(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', pageSize: 1, pageToken: 'page_token'\n);\n\nvar_dump($result);",
+      },
+      http: {
+        example:
+          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/activities/brokerage \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY"',
       },
     },
   },
