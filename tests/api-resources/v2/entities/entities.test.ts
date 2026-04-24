@@ -5,7 +5,7 @@ import Dinari from '@dinari/api-sdk';
 const client = new Dinari({
   apiKeyID: 'My API Key ID',
   apiSecretKey: 'My API Secret Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource entities', () => {
@@ -53,20 +53,17 @@ describe('resource entities', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v2.entities.list(
-        {
-          limit: 20,
-          next: 'next',
-          order: 'asc',
-          page: 1,
-          page_size: 1,
-          previous: 'previous',
-          reference_id: 'x',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Dinari.NotFoundError);
+    await expect(client.v2.entities.list({
+    limit: 20,
+    next: 'next',
+    order: 'asc',
+    page: 1,
+    page_size: 1,
+    previous: 'previous',
+    reference_id: 'x',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Dinari.NotFoundError);
   });
 
   // Mock server tests are disabled

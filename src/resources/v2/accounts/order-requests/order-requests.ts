@@ -4,16 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as AccountsAPI from '../accounts';
 import * as OrdersAPI from '../orders';
 import * as Eip155API from './eip155';
-import {
-  Eip155,
-  Eip155CreatePermitParams,
-  Eip155CreatePermitResponse,
-  Eip155CreatePermitTransactionParams,
-  Eip155CreatePermitTransactionResponse,
-  Eip155OrderRequestPermitTransaction,
-  Eip155SubmitParams,
-  Eip155SubmitResponse,
-} from './eip155';
+import { Eip155, Eip155CreatePermitParams, Eip155CreatePermitResponse, Eip155CreatePermitTransactionParams, Eip155CreatePermitTransactionResponse, Eip155OrderRequestPermitTransaction, Eip155SubmitParams, Eip155SubmitResponse } from './eip155';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -33,12 +24,8 @@ export class OrderRequests extends APIResource {
    *   );
    * ```
    */
-  retrieve(
-    orderRequestID: string,
-    params: OrderRequestRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderRequest> {
-    const { account_id } = params;
+  retrieve(orderRequestID: string, params: OrderRequestRetrieveParams, options?: RequestOptions): APIPromise<OrderRequest> {
+    const { account_id } = params
     return this._client.get(path`/api/v2/accounts/${account_id}/order_requests/${orderRequestID}`, options);
   }
 
@@ -54,11 +41,7 @@ export class OrderRequests extends APIResource {
    *   );
    * ```
    */
-  list(
-    accountID: string,
-    query: OrderRequestListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<OrderRequestListResponse> {
+  list(accountID: string, query: OrderRequestListParams | null | undefined = {}, options?: RequestOptions): APIPromise<OrderRequestListResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/order_requests`, { query, ...options });
   }
 
@@ -81,15 +64,8 @@ export class OrderRequests extends APIResource {
    *   );
    * ```
    */
-  createLimitBuy(
-    accountID: string,
-    body: OrderRequestCreateLimitBuyParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderRequest> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/limit_buy`, {
-      body,
-      ...options,
-    });
+  createLimitBuy(accountID: string, body: OrderRequestCreateLimitBuyParams, options?: RequestOptions): APIPromise<OrderRequest> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/limit_buy`, { body, ...options });
   }
 
   /**
@@ -111,15 +87,8 @@ export class OrderRequests extends APIResource {
    *   );
    * ```
    */
-  createLimitSell(
-    accountID: string,
-    body: OrderRequestCreateLimitSellParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderRequest> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/limit_sell`, {
-      body,
-      ...options,
-    });
+  createLimitSell(accountID: string, body: OrderRequestCreateLimitSellParams, options?: RequestOptions): APIPromise<OrderRequest> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/limit_sell`, { body, ...options });
   }
 
   /**
@@ -141,15 +110,8 @@ export class OrderRequests extends APIResource {
    *   );
    * ```
    */
-  createMarketBuy(
-    accountID: string,
-    body: OrderRequestCreateMarketBuyParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderRequest> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/market_buy`, {
-      body,
-      ...options,
-    });
+  createMarketBuy(accountID: string, body: OrderRequestCreateMarketBuyParams, options?: RequestOptions): APIPromise<OrderRequest> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/market_buy`, { body, ...options });
   }
 
   /**
@@ -171,15 +133,8 @@ export class OrderRequests extends APIResource {
    *   );
    * ```
    */
-  createMarketSell(
-    accountID: string,
-    body: OrderRequestCreateMarketSellParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderRequest> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/market_sell`, {
-      body,
-      ...options,
-    });
+  createMarketSell(accountID: string, body: OrderRequestCreateMarketSellParams, options?: RequestOptions): APIPromise<OrderRequest> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/market_sell`, { body, ...options });
   }
 
   /**
@@ -199,15 +154,8 @@ export class OrderRequests extends APIResource {
    *   );
    * ```
    */
-  getFeeQuote(
-    accountID: string,
-    body: OrderRequestGetFeeQuoteParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderRequestGetFeeQuoteResponse> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/fee_quote`, {
-      body,
-      ...options,
-    });
+  getFeeQuote(accountID: string, body: OrderRequestGetFeeQuoteParams, options?: RequestOptions): APIPromise<OrderRequestGetFeeQuoteResponse> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/fee_quote`, { body, ...options });
   }
 }
 
@@ -450,19 +398,9 @@ export interface OrderRequest {
   reject_message?: string | null;
 }
 
-export type OrderRequestStatus =
-  | 'QUOTED'
-  | 'PENDING'
-  | 'PENDING_BRIDGE'
-  | 'SUBMITTED'
-  | 'ERROR'
-  | 'CANCELLED'
-  | 'EXPIRED'
-  | 'REJECTED';
+export type OrderRequestStatus = 'QUOTED' | 'PENDING' | 'PENDING_BRIDGE' | 'SUBMITTED' | 'ERROR' | 'CANCELLED' | 'EXPIRED' | 'REJECTED'
 
-export type OrderRequestListResponse =
-  | Array<OrderRequestListResponse.UnionMember0>
-  | OrderRequestListResponse.PaginatedAccountOrderRequestResponse;
+export type OrderRequestListResponse = Array<OrderRequestListResponse.UnionMember0> | OrderRequestListResponse.PaginatedAccountOrderRequestResponse
 
 export namespace OrderRequestListResponse {
   /**
@@ -518,15 +456,7 @@ export namespace OrderRequestListResponse {
      * - `EXPIRED`: Order request expired due to deadline passing
      * - `REJECTED`: Order request was rejected
      */
-    status:
-      | 'QUOTED'
-      | 'PENDING'
-      | 'PENDING_BRIDGE'
-      | 'SUBMITTED'
-      | 'ERROR'
-      | 'CANCELLED'
-      | 'EXPIRED'
-      | 'REJECTED';
+    status: 'QUOTED' | 'PENDING' | 'PENDING_BRIDGE' | 'SUBMITTED' | 'ERROR' | 'CANCELLED' | 'EXPIRED' | 'REJECTED';
 
     /**
      * Reason for the order cancellation if the order status is CANCELLED
@@ -627,15 +557,7 @@ export namespace OrderRequestListResponse {
        * - `EXPIRED`: Order request expired due to deadline passing
        * - `REJECTED`: Order request was rejected
        */
-      status:
-        | 'QUOTED'
-        | 'PENDING'
-        | 'PENDING_BRIDGE'
-        | 'SUBMITTED'
-        | 'ERROR'
-        | 'CANCELLED'
-        | 'EXPIRED'
-        | 'REJECTED';
+      status: 'QUOTED' | 'PENDING' | 'PENDING_BRIDGE' | 'SUBMITTED' | 'ERROR' | 'CANCELLED' | 'EXPIRED' | 'REJECTED';
 
       /**
        * Reason for the order cancellation if the order status is CANCELLED
@@ -953,7 +875,7 @@ export declare namespace OrderRequests {
     type OrderRequestCreateLimitSellParams as OrderRequestCreateLimitSellParams,
     type OrderRequestCreateMarketBuyParams as OrderRequestCreateMarketBuyParams,
     type OrderRequestCreateMarketSellParams as OrderRequestCreateMarketSellParams,
-    type OrderRequestGetFeeQuoteParams as OrderRequestGetFeeQuoteParams,
+    type OrderRequestGetFeeQuoteParams as OrderRequestGetFeeQuoteParams
   };
 
   export {
@@ -964,6 +886,6 @@ export declare namespace OrderRequests {
     type Eip155SubmitResponse as Eip155SubmitResponse,
     type Eip155CreatePermitParams as Eip155CreatePermitParams,
     type Eip155CreatePermitTransactionParams as Eip155CreatePermitTransactionParams,
-    type Eip155SubmitParams as Eip155SubmitParams,
+    type Eip155SubmitParams as Eip155SubmitParams
   };
 }

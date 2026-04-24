@@ -5,15 +5,13 @@ import Dinari from '@dinari/api-sdk';
 const client = new Dinari({
   apiKeyID: 'My API Key ID',
   apiSecretKey: 'My API Secret Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource orders', () => {
   // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.v2.accounts.orders.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    });
+    const responsePromise = client.v2.accounts.orders.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,9 +23,7 @@ describe('resource orders', () => {
 
   // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.v2.accounts.orders.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    });
+    const response = await client.v2.accounts.orders.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
   });
 
   // Mock server tests are disabled
@@ -45,30 +41,24 @@ describe('resource orders', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v2.accounts.orders.list(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        {
-          chain_id: 'chain_id',
-          client_order_id: 'client_order_id',
-          limit: 20,
-          next: 'next',
-          order: 'asc',
-          order_transaction_hash: 'order_transaction_hash',
-          page: 1,
-          page_size: 1,
-          previous: 'previous',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Dinari.NotFoundError);
+    await expect(client.v2.accounts.orders.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    chain_id: 'chain_id',
+    client_order_id: 'client_order_id',
+    limit: 20,
+    next: 'next',
+    order: 'asc',
+    order_transaction_hash: 'order_transaction_hash',
+    page: 1,
+    page_size: 1,
+    previous: 'previous',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Dinari.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('batchCancel: only required params', async () => {
-    const responsePromise = client.v2.accounts.orders.batchCancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      order_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
-    });
+    const responsePromise = client.v2.accounts.orders.batchCancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { order_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,16 +70,12 @@ describe('resource orders', () => {
 
   // Mock server tests are disabled
   test.skip('batchCancel: required and optional params', async () => {
-    const response = await client.v2.accounts.orders.batchCancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      order_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
-    });
+    const response = await client.v2.accounts.orders.batchCancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { order_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'] });
   });
 
   // Mock server tests are disabled
   test.skip('cancel: only required params', async () => {
-    const responsePromise = client.v2.accounts.orders.cancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    });
+    const responsePromise = client.v2.accounts.orders.cancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -101,17 +87,12 @@ describe('resource orders', () => {
 
   // Mock server tests are disabled
   test.skip('cancel: required and optional params', async () => {
-    const response = await client.v2.accounts.orders.cancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    });
+    const response = await client.v2.accounts.orders.cancel('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
   });
 
   // Mock server tests are disabled
   test.skip('getFulfillments: only required params', async () => {
-    const responsePromise = client.v2.accounts.orders.getFulfillments(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
-    );
+    const responsePromise = client.v2.accounts.orders.getFulfillments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -124,13 +105,13 @@ describe('resource orders', () => {
   // Mock server tests are disabled
   test.skip('getFulfillments: required and optional params', async () => {
     const response = await client.v2.accounts.orders.getFulfillments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      limit: 20,
-      next: 'next',
-      order: 'asc',
-      page: 1,
-      page_size: 1,
-      previous: 'previous',
-    });
+    account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    limit: 20,
+    next: 'next',
+    order: 'asc',
+    page: 1,
+    page_size: 1,
+    previous: 'previous',
+  });
   });
 });

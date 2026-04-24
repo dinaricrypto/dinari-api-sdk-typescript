@@ -3,14 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as KYCAPI from './kyc';
 import * as DocumentAPI from './document';
-import {
-  Document,
-  DocumentRetrieveParams,
-  DocumentRetrieveResponse,
-  DocumentUploadParams,
-  KYCDocument,
-  KYCDocumentType,
-} from './document';
+import { Document, DocumentRetrieveParams, DocumentRetrieveResponse, DocumentUploadParams, KYCDocument, KYCDocumentType } from './document';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -168,7 +161,7 @@ export interface BaselineKYCCheckData {
 /**
  * KYC information for an `Entity` in the baseline jurisdiction.
  */
-export type KYCInfo = KYCInfo.BaselineKYC | KYCInfo.UsKYC;
+export type KYCInfo = KYCInfo.BaselineKYC | KYCInfo.UsKYC
 
 export namespace KYCInfo {
   /**
@@ -232,7 +225,7 @@ export namespace KYCInfo {
   }
 }
 
-export type KYCStatus = 'PASS' | 'FAIL' | 'PENDING' | 'INCOMPLETE' | 'NEEDS_REVIEW';
+export type KYCStatus = 'PASS' | 'FAIL' | 'PENDING' | 'INCOMPLETE' | 'NEEDS_REVIEW'
 
 /**
  * KYC data for an `Entity` in the US jurisdiction.
@@ -428,9 +421,7 @@ export namespace UsKYCCheckData {
      * One or more of the following: employment_income, investments, inheritance,
      * business_income, savings, family.
      */
-    funding_sources: Array<
-      'EMPLOYMENT_INCOME' | 'INVESTMENTS' | 'INHERITANCE' | 'BUSINESS_INCOME' | 'SAVINGS' | 'FAMILY'
-    >;
+    funding_sources: Array<'EMPLOYMENT_INCOME' | 'INVESTMENTS' | 'INHERITANCE' | 'BUSINESS_INCOME' | 'SAVINGS' | 'FAMILY'>;
 
     /**
      * The upper bound of the user's liquid net worth (USD).
@@ -655,21 +646,7 @@ export namespace UsKYCCheckData {
     /**
      * Type of visa the individual holds. Required if not a permanent resident.
      */
-    visa_type?:
-      | 'B1'
-      | 'B2'
-      | 'DACA'
-      | 'E1'
-      | 'E2'
-      | 'E3'
-      | 'F1'
-      | 'G4'
-      | 'H1B'
-      | 'J1'
-      | 'L1'
-      | 'Other'
-      | 'O1'
-      | 'TN1';
+    visa_type?: 'B1' | 'B2' | 'DACA' | 'E1' | 'E2' | 'E3' | 'F1' | 'G4' | 'H1B' | 'J1' | 'L1' | 'Other' | 'O1' | 'TN1';
   }
 }
 
@@ -688,7 +665,7 @@ export interface KYCCreateManagedCheckResponse {
   expiration_dt: string;
 }
 
-export type KYCSubmitParams = KYCSubmitParams.CreateBaselineKYCInput | KYCSubmitParams.CreateUsKYCInput;
+export type KYCSubmitParams = KYCSubmitParams.CreateBaselineKYCInput | KYCSubmitParams.CreateUsKYCInput
 
 export declare namespace KYCSubmitParams {
   export interface CreateBaselineKYCInput {
@@ -735,7 +712,7 @@ export declare namespace KYC {
     type KYCStatus as KYCStatus,
     type UsKYCCheckData as UsKYCCheckData,
     type KYCCreateManagedCheckResponse as KYCCreateManagedCheckResponse,
-    type KYCSubmitParams as KYCSubmitParams,
+    type KYCSubmitParams as KYCSubmitParams
   };
 
   export {
@@ -744,6 +721,6 @@ export declare namespace KYC {
     type KYCDocumentType as KYCDocumentType,
     type DocumentRetrieveResponse as DocumentRetrieveResponse,
     type DocumentRetrieveParams as DocumentRetrieveParams,
-    type DocumentUploadParams as DocumentUploadParams,
+    type DocumentUploadParams as DocumentUploadParams
   };
 }

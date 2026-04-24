@@ -39,15 +39,8 @@ export class Eip155 extends APIResource {
    *   );
    * ```
    */
-  createPermit(
-    accountID: string,
-    body: Eip155CreatePermitParams,
-    options?: RequestOptions,
-  ): APIPromise<Eip155CreatePermitResponse> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/eip155/permit`, {
-      body,
-      ...options,
-    });
+  createPermit(accountID: string, body: Eip155CreatePermitParams, options?: RequestOptions): APIPromise<Eip155CreatePermitResponse> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/eip155/permit`, { body, ...options });
   }
 
   /**
@@ -67,15 +60,8 @@ export class Eip155 extends APIResource {
    *   );
    * ```
    */
-  createPermitTransaction(
-    accountID: string,
-    body: Eip155CreatePermitTransactionParams,
-    options?: RequestOptions,
-  ): APIPromise<Eip155CreatePermitTransactionResponse> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/eip155/permit_transaction`, {
-      body,
-      ...options,
-    });
+  createPermitTransaction(accountID: string, body: Eip155CreatePermitTransactionParams, options?: RequestOptions): APIPromise<Eip155CreatePermitTransactionResponse> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/eip155/permit_transaction`, { body, ...options });
   }
 
   /**
@@ -97,11 +83,7 @@ export class Eip155 extends APIResource {
    *   );
    * ```
    */
-  submit(
-    accountID: string,
-    body: Eip155SubmitParams,
-    options?: RequestOptions,
-  ): APIPromise<Eip155SubmitResponse> {
+  submit(accountID: string, body: Eip155SubmitParams, options?: RequestOptions): APIPromise<Eip155SubmitResponse> {
     return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/eip155`, { body, ...options });
   }
 }
@@ -347,6 +329,6 @@ export declare namespace Eip155 {
     type Eip155SubmitResponse as Eip155SubmitResponse,
     type Eip155CreatePermitParams as Eip155CreatePermitParams,
     type Eip155CreatePermitTransactionParams as Eip155CreatePermitTransactionParams,
-    type Eip155SubmitParams as Eip155SubmitParams,
+    type Eip155SubmitParams as Eip155SubmitParams
   };
 }

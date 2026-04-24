@@ -3,25 +3,9 @@
 import { APIResource } from '../../../core/resource';
 import * as EntitiesAPI from './entities';
 import * as AccountsAPI from './accounts';
-import {
-  Account,
-  AccountCreateParams,
-  AccountCreateResponse,
-  AccountListParams,
-  AccountListResponse,
-  Accounts,
-  Jurisdiction,
-} from './accounts';
+import { Account, AccountCreateParams, AccountCreateResponse, AccountListParams, AccountListResponse, Accounts, Jurisdiction } from './accounts';
 import * as KYCAPI from './kyc/kyc';
-import {
-  BaselineKYCCheckData,
-  KYC,
-  KYCCreateManagedCheckResponse,
-  KYCInfo,
-  KYCStatus,
-  KYCSubmitParams,
-  UsKYCCheckData,
-} from './kyc/kyc';
+import { BaselineKYCCheckData, KYC, KYCCreateManagedCheckResponse, KYCInfo, KYCStatus, KYCSubmitParams, UsKYCCheckData } from './kyc/kyc';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -61,11 +45,7 @@ export class Entities extends APIResource {
    * );
    * ```
    */
-  update(
-    entityID: string,
-    body: EntityUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<EntityUpdateResponse> {
+  update(entityID: string, body: EntityUpdateParams, options?: RequestOptions): APIPromise<EntityUpdateResponse> {
     return this._client.patch(path`/api/v2/entities/${entityID}`, { body, ...options });
   }
 
@@ -78,10 +58,7 @@ export class Entities extends APIResource {
    * const entities = await client.v2.entities.list();
    * ```
    */
-  list(
-    query: EntityListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<EntityListResponse> {
+  list(query: EntityListParams | null | undefined = {}, options?: RequestOptions): APIPromise<EntityListResponse> {
     return this._client.get('/api/v2/entities/', { query, ...options });
   }
 
@@ -226,7 +203,7 @@ export interface EntityUpdateResponse {
   reference_id?: string | null;
 }
 
-export type EntityListResponse = Array<Entity> | EntityListResponse.PaginatedEntityResponse;
+export type EntityListResponse = Array<Entity> | EntityListResponse.PaginatedEntityResponse
 
 export namespace EntityListResponse {
   export interface PaginatedEntityResponse {
@@ -405,7 +382,7 @@ export declare namespace Entities {
     type EntityRetrieveCurrentResponse as EntityRetrieveCurrentResponse,
     type EntityCreateParams as EntityCreateParams,
     type EntityUpdateParams as EntityUpdateParams,
-    type EntityListParams as EntityListParams,
+    type EntityListParams as EntityListParams
   };
 
   export {
@@ -415,7 +392,7 @@ export declare namespace Entities {
     type AccountCreateResponse as AccountCreateResponse,
     type AccountListResponse as AccountListResponse,
     type AccountCreateParams as AccountCreateParams,
-    type AccountListParams as AccountListParams,
+    type AccountListParams as AccountListParams
   };
 
   export {
@@ -425,6 +402,6 @@ export declare namespace Entities {
     type KYCStatus as KYCStatus,
     type UsKYCCheckData as UsKYCCheckData,
     type KYCCreateManagedCheckResponse as KYCCreateManagedCheckResponse,
-    type KYCSubmitParams as KYCSubmitParams,
+    type KYCSubmitParams as KYCSubmitParams
   };
 }

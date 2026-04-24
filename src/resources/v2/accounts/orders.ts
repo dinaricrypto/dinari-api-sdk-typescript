@@ -26,7 +26,7 @@ export class Orders extends APIResource {
    * ```
    */
   retrieve(orderID: string, params: OrderRetrieveParams, options?: RequestOptions): APIPromise<Order> {
-    const { account_id } = params;
+    const { account_id } = params
     return this._client.get(path`/api/v2/accounts/${account_id}/orders/${orderID}`, options);
   }
 
@@ -41,11 +41,7 @@ export class Orders extends APIResource {
    * );
    * ```
    */
-  list(
-    accountID: string,
-    query: OrderListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<OrderListResponse> {
+  list(accountID: string, query: OrderListParams | null | undefined = {}, options?: RequestOptions): APIPromise<OrderListResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/orders`, { query, ...options });
   }
 
@@ -72,11 +68,7 @@ export class Orders extends APIResource {
    *   );
    * ```
    */
-  batchCancel(
-    accountID: string,
-    body: OrderBatchCancelParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderBatchCancelResponse> {
+  batchCancel(accountID: string, body: OrderBatchCancelParams, options?: RequestOptions): APIPromise<OrderBatchCancelResponse> {
     return this._client.post(path`/api/v2/accounts/${accountID}/orders/cancel`, { body, ...options });
   }
 
@@ -101,7 +93,7 @@ export class Orders extends APIResource {
    * ```
    */
   cancel(orderID: string, params: OrderCancelParams, options?: RequestOptions): APIPromise<Order> {
-    const { account_id } = params;
+    const { account_id } = params
     return this._client.post(path`/api/v2/accounts/${account_id}/orders/${orderID}/cancel`, options);
   }
 
@@ -117,32 +109,13 @@ export class Orders extends APIResource {
    *   );
    * ```
    */
-  getFulfillments(
-    orderID: string,
-    params: OrderGetFulfillmentsParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderGetFulfillmentsResponse> {
-    const { account_id, ...query } = params;
-    return this._client.get(path`/api/v2/accounts/${account_id}/orders/${orderID}/fulfillments`, {
-      query,
-      ...options,
-    });
+  getFulfillments(orderID: string, params: OrderGetFulfillmentsParams, options?: RequestOptions): APIPromise<OrderGetFulfillmentsResponse> {
+    const { account_id, ...query } = params
+    return this._client.get(path`/api/v2/accounts/${account_id}/orders/${orderID}/fulfillments`, { query, ...options });
   }
 }
 
-export type BrokerageOrderStatus =
-  | 'PENDING_SUBMIT'
-  | 'PENDING_CANCEL'
-  | 'PENDING_ESCROW'
-  | 'PENDING_FILL'
-  | 'ESCROWED'
-  | 'SUBMITTED'
-  | 'CANCELLED'
-  | 'PARTIALLY_FILLED'
-  | 'FILLED'
-  | 'REJECTED'
-  | 'REQUIRING_CONTACT'
-  | 'ERROR';
+export type BrokerageOrderStatus = 'PENDING_SUBMIT' | 'PENDING_CANCEL' | 'PENDING_ESCROW' | 'PENDING_FILL' | 'ESCROWED' | 'SUBMITTED' | 'CANCELLED' | 'PARTIALLY_FILLED' | 'FILLED' | 'REJECTED' | 'REQUIRING_CONTACT' | 'ERROR'
 
 export interface Order {
   /**
@@ -249,15 +222,13 @@ export interface Order {
   stock_id?: string | null;
 }
 
-export type OrderSide = 'BUY' | 'SELL';
+export type OrderSide = 'BUY' | 'SELL'
 
-export type OrderTif = 'DAY' | 'GTC' | 'IOC' | 'FOK';
+export type OrderTif = 'DAY' | 'GTC' | 'IOC' | 'FOK'
 
-export type OrderType = 'MARKET' | 'LIMIT';
+export type OrderType = 'MARKET' | 'LIMIT'
 
-export type OrderListResponse =
-  | Array<OrderListResponse.UnionMember0>
-  | OrderListResponse.PaginatedAccountOrderResponse;
+export type OrderListResponse = Array<OrderListResponse.UnionMember0> | OrderListResponse.PaginatedAccountOrderResponse
 
 export namespace OrderListResponse {
   export interface UnionMember0 {
@@ -310,19 +281,7 @@ export namespace OrderListResponse {
     /**
      * Status of the `Order`.
      */
-    status:
-      | 'PENDING_SUBMIT'
-      | 'PENDING_CANCEL'
-      | 'PENDING_ESCROW'
-      | 'PENDING_FILL'
-      | 'ESCROWED'
-      | 'SUBMITTED'
-      | 'CANCELLED'
-      | 'PARTIALLY_FILLED'
-      | 'FILLED'
-      | 'REJECTED'
-      | 'REQUIRING_CONTACT'
-      | 'ERROR';
+    status: 'PENDING_SUBMIT' | 'PENDING_CANCEL' | 'PENDING_ESCROW' | 'PENDING_FILL' | 'ESCROWED' | 'SUBMITTED' | 'CANCELLED' | 'PARTIALLY_FILLED' | 'FILLED' | 'REJECTED' | 'REQUIRING_CONTACT' | 'ERROR';
 
     /**
      * The `Stock` ID associated with the `Order`
@@ -440,19 +399,7 @@ export namespace OrderListResponse {
       /**
        * Status of the `Order`.
        */
-      status:
-        | 'PENDING_SUBMIT'
-        | 'PENDING_CANCEL'
-        | 'PENDING_ESCROW'
-        | 'PENDING_FILL'
-        | 'ESCROWED'
-        | 'SUBMITTED'
-        | 'CANCELLED'
-        | 'PARTIALLY_FILLED'
-        | 'FILLED'
-        | 'REJECTED'
-        | 'REQUIRING_CONTACT'
-        | 'ERROR';
+      status: 'PENDING_SUBMIT' | 'PENDING_CANCEL' | 'PENDING_ESCROW' | 'PENDING_FILL' | 'ESCROWED' | 'SUBMITTED' | 'CANCELLED' | 'PARTIALLY_FILLED' | 'FILLED' | 'REJECTED' | 'REQUIRING_CONTACT' | 'ERROR';
 
       /**
        * The `Stock` ID associated with the `Order`
@@ -531,9 +478,7 @@ export interface OrderBatchCancelResponse {
   failed_to_cancel_orders: Array<Order>;
 }
 
-export type OrderGetFulfillmentsResponse =
-  | Array<OrderGetFulfillmentsResponse.UnionMember0>
-  | OrderGetFulfillmentsResponse.PaginatedAccountOrderFulfillmentResponse;
+export type OrderGetFulfillmentsResponse = Array<OrderGetFulfillmentsResponse.UnionMember0> | OrderGetFulfillmentsResponse.PaginatedAccountOrderFulfillmentResponse
 
 export namespace OrderGetFulfillmentsResponse {
   /**
@@ -810,6 +755,6 @@ export declare namespace Orders {
     type OrderListParams as OrderListParams,
     type OrderBatchCancelParams as OrderBatchCancelParams,
     type OrderCancelParams as OrderCancelParams,
-    type OrderGetFulfillmentsParams as OrderGetFulfillmentsParams,
+    type OrderGetFulfillmentsParams as OrderGetFulfillmentsParams
   };
 }

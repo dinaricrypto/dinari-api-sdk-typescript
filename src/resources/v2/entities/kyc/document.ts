@@ -29,12 +29,8 @@ export class Document extends APIResource {
    *   );
    * ```
    */
-  retrieve(
-    kycID: string,
-    params: DocumentRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<DocumentRetrieveResponse> {
-    const { entity_id } = params;
+  retrieve(kycID: string, params: DocumentRetrieveParams, options?: RequestOptions): APIPromise<DocumentRetrieveResponse> {
+    const { entity_id } = params
     return this._client.get(path`/api/v2/entities/${entity_id}/kyc/${kycID}/document`, options);
   }
 
@@ -56,11 +52,8 @@ export class Document extends APIResource {
    * ```
    */
   upload(kycID: string, params: DocumentUploadParams, options?: RequestOptions): APIPromise<KYCDocument> {
-    const { entity_id, document_type, ...body } = params;
-    return this._client.post(
-      path`/api/v2/entities/${entity_id}/kyc/${kycID}/document`,
-      multipartFormRequestOptions({ query: { document_type }, body, ...options }, this._client),
-    );
+    const { entity_id, document_type, ...body } = params
+    return this._client.post(path`/api/v2/entities/${entity_id}/kyc/${kycID}/document`, multipartFormRequestOptions({ query: { document_type }, body, ...options }, this._client));
   }
 }
 
@@ -89,9 +82,9 @@ export interface KYCDocument {
   url: string;
 }
 
-export type KYCDocumentType = 'GOVERNMENT_ID' | 'SELFIE' | 'RESIDENCY' | 'UNKNOWN';
+export type KYCDocumentType = 'GOVERNMENT_ID' | 'SELFIE' | 'RESIDENCY' | 'UNKNOWN'
 
-export type DocumentRetrieveResponse = Array<KYCDocument>;
+export type DocumentRetrieveResponse = Array<KYCDocument>
 
 export interface DocumentRetrieveParams {
   entity_id: string;
@@ -121,6 +114,6 @@ export declare namespace Document {
     type KYCDocumentType as KYCDocumentType,
     type DocumentRetrieveResponse as DocumentRetrieveResponse,
     type DocumentRetrieveParams as DocumentRetrieveParams,
-    type DocumentUploadParams as DocumentUploadParams,
+    type DocumentUploadParams as DocumentUploadParams
   };
 }

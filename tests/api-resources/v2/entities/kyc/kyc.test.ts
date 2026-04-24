@@ -5,7 +5,7 @@ import Dinari from '@dinari/api-sdk';
 const client = new Dinari({
   apiKeyID: 'My API Key ID',
   apiSecretKey: 'My API Secret Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource kyc', () => {
@@ -36,13 +36,13 @@ describe('resource kyc', () => {
   // Mock server tests are disabled
   test.skip('submit: only required params', async () => {
     const responsePromise = client.v2.entities.kyc.submit('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      data: {
-        address_country_code: 'SG',
-        country_code: 'SG',
-        last_name: 'Doe',
-      },
-      provider_name: 'x',
-    });
+    data: {
+    address_country_code: 'SG',
+    country_code: 'SG',
+    last_name: 'Doe',
+  },
+    provider_name: 'x',
+  });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -55,23 +55,23 @@ describe('resource kyc', () => {
   // Mock server tests are disabled
   test.skip('submit: required and optional params', async () => {
     const response = await client.v2.entities.kyc.submit('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      data: {
-        address_country_code: 'SG',
-        country_code: 'SG',
-        last_name: 'Doe',
-        address_city: 'San Francisco',
-        address_postal_code: '94111',
-        address_street_1: '123 Main St.',
-        address_street_2: 'Apt. 123',
-        address_subdivision: 'California',
-        birth_date: '2019-12-27',
-        email: 'johndoe@website.com',
-        first_name: 'John',
-        middle_name: 'x',
-        tax_id_number: '12-3456789',
-      },
-      provider_name: 'x',
-      jurisdiction: 'BASELINE',
-    });
+    data: {
+    address_country_code: 'SG',
+    country_code: 'SG',
+    last_name: 'Doe',
+    address_city: 'San Francisco',
+    address_postal_code: '94111',
+    address_street_1: '123 Main St.',
+    address_street_2: 'Apt. 123',
+    address_subdivision: 'California',
+    birth_date: '2019-12-27',
+    email: 'johndoe@website.com',
+    first_name: 'John',
+    middle_name: 'x',
+    tax_id_number: '12-3456789',
+  },
+    provider_name: 'x',
+    jurisdiction: 'BASELINE',
+  });
   });
 });

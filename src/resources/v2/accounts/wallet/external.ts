@@ -32,11 +32,7 @@ export class External extends APIResource {
    *   );
    * ```
    */
-  connect(
-    accountID: string,
-    body: ExternalConnectParams,
-    options?: RequestOptions,
-  ): APIPromise<WalletAPI.Wallet> {
+  connect(accountID: string, body: ExternalConnectParams, options?: RequestOptions): APIPromise<WalletAPI.Wallet> {
     return this._client.post(path`/api/v2/accounts/${accountID}/wallet/external`, { body, ...options });
   }
 
@@ -55,34 +51,12 @@ export class External extends APIResource {
    *   );
    * ```
    */
-  getNonce(
-    accountID: string,
-    query: ExternalGetNonceParams,
-    options?: RequestOptions,
-  ): APIPromise<ExternalGetNonceResponse> {
+  getNonce(accountID: string, query: ExternalGetNonceParams, options?: RequestOptions): APIPromise<ExternalGetNonceResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/wallet/external/nonce`, { query, ...options });
   }
 }
 
-export type WalletChainID =
-  | 'eip155:0'
-  | 'eip155:1'
-  | 'eip155:42161'
-  | 'eip155:8453'
-  | 'eip155:81457'
-  | 'eip155:98866'
-  | 'eip155:999'
-  | 'eip155:11155111'
-  | 'eip155:421614'
-  | 'eip155:84532'
-  | 'eip155:168587773'
-  | 'eip155:98867'
-  | 'eip155:998'
-  | 'eip155:202110'
-  | 'eip155:179205'
-  | 'eip155:179202'
-  | 'eip155:98865'
-  | 'eip155:7887';
+export type WalletChainID = 'eip155:0' | 'eip155:1' | 'eip155:42161' | 'eip155:8453' | 'eip155:81457' | 'eip155:98866' | 'eip155:999' | 'eip155:11155111' | 'eip155:421614' | 'eip155:84532' | 'eip155:168587773' | 'eip155:98867' | 'eip155:998' | 'eip155:202110' | 'eip155:179205' | 'eip155:179202' | 'eip155:98865' | 'eip155:7887'
 
 /**
  * Connection message to sign to prove ownership of the `Wallet`.
@@ -140,6 +114,6 @@ export declare namespace External {
     type WalletChainID as WalletChainID,
     type ExternalGetNonceResponse as ExternalGetNonceResponse,
     type ExternalConnectParams as ExternalConnectParams,
-    type ExternalGetNonceParams as ExternalGetNonceParams,
+    type ExternalGetNonceParams as ExternalGetNonceParams
   };
 }
