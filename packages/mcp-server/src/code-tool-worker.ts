@@ -59,8 +59,8 @@ function getTSDiagnostics(code: string): string[] {
   const codeWithImport = [
     'import { Dinari } from "@dinari/api-sdk";',
     functionSource.type === 'declaration' ?
-      `async function run(${functionSource.client}: Dinari)`
-    : `const run: (${functionSource.client}: Dinari) => Promise<unknown> =`,
+      `async function run(${functionSource.client}: Dinari)` :
+      `const run: (${functionSource.client}: Dinari) => Promise<unknown> =`,
     functionSource.code,
   ].join('\n');
   const sourcePath = path.resolve('code.ts');
@@ -108,68 +108,68 @@ function getTSDiagnostics(code: string): string[] {
 
 const fuse = new Fuse(
   [
-    'client.v2.listOrders',
-    'client.v2.marketData.retrieveMarketHours',
-    'client.v2.marketData.stocks.list',
-    'client.v2.marketData.stocks.retrieveCurrentPrice',
-    'client.v2.marketData.stocks.retrieveCurrentQuote',
-    'client.v2.marketData.stocks.retrieveDividends',
-    'client.v2.marketData.stocks.retrieveHistoricalPrices',
-    'client.v2.marketData.stocks.retrieveNews',
-    'client.v2.marketData.stocks.splits.list',
-    'client.v2.marketData.stocks.splits.listForStock',
-    'client.v2.marketData.alloys.list',
-    'client.v2.marketData.alloys.retrieveCurrentPrice',
-    'client.v2.marketData.alloys.retrieveHistoricalPrices',
-    'client.v2.entities.create',
-    'client.v2.entities.list',
-    'client.v2.entities.retrieveByID',
-    'client.v2.entities.retrieveCurrent',
-    'client.v2.entities.update',
-    'client.v2.entities.accounts.create',
-    'client.v2.entities.accounts.list',
-    'client.v2.entities.kyc.createManagedCheck',
-    'client.v2.entities.kyc.retrieve',
-    'client.v2.entities.kyc.submit',
-    'client.v2.entities.kyc.document.retrieve',
-    'client.v2.entities.kyc.document.upload',
-    'client.v2.accounts.deactivate',
-    'client.v2.accounts.getCashBalances',
-    'client.v2.accounts.getDividendPayments',
-    'client.v2.accounts.getInterestPayments',
-    'client.v2.accounts.getPortfolio',
-    'client.v2.accounts.mintSandboxTokens',
-    'client.v2.accounts.retrieve',
-    'client.v2.accounts.wallet.connectInternal',
-    'client.v2.accounts.wallet.get',
-    'client.v2.accounts.wallet.external.connect',
-    'client.v2.accounts.wallet.external.getNonce',
-    'client.v2.accounts.orders.batchCancel',
-    'client.v2.accounts.orders.cancel',
-    'client.v2.accounts.orders.getFulfillments',
-    'client.v2.accounts.orders.list',
-    'client.v2.accounts.orders.retrieve',
-    'client.v2.accounts.orderFulfillments.query',
-    'client.v2.accounts.orderFulfillments.retrieve',
-    'client.v2.accounts.orderRequests.createLimitBuy',
-    'client.v2.accounts.orderRequests.createLimitSell',
-    'client.v2.accounts.orderRequests.createMarketBuy',
-    'client.v2.accounts.orderRequests.createMarketSell',
-    'client.v2.accounts.orderRequests.getFeeQuote',
-    'client.v2.accounts.orderRequests.list',
-    'client.v2.accounts.orderRequests.retrieve',
-    'client.v2.accounts.orderRequests.eip155.createPermit',
-    'client.v2.accounts.orderRequests.eip155.createPermitTransaction',
-    'client.v2.accounts.orderRequests.eip155.submit',
-    'client.v2.accounts.withdrawalRequests.create',
-    'client.v2.accounts.withdrawalRequests.list',
-    'client.v2.accounts.withdrawalRequests.retrieve',
-    'client.v2.accounts.withdrawals.list',
-    'client.v2.accounts.withdrawals.retrieve',
-    'client.v2.accounts.tokenTransfers.create',
-    'client.v2.accounts.tokenTransfers.list',
-    'client.v2.accounts.tokenTransfers.retrieve',
-    'client.v2.accounts.activities.retrieveBrokerage',
+    "client.v2.listOrders",
+    "client.v2.marketData.retrieveMarketHours",
+    "client.v2.marketData.stocks.list",
+    "client.v2.marketData.stocks.retrieveCurrentPrice",
+    "client.v2.marketData.stocks.retrieveCurrentQuote",
+    "client.v2.marketData.stocks.retrieveDividends",
+    "client.v2.marketData.stocks.retrieveHistoricalPrices",
+    "client.v2.marketData.stocks.retrieveNews",
+    "client.v2.marketData.stocks.splits.list",
+    "client.v2.marketData.stocks.splits.listForStock",
+    "client.v2.marketData.alloys.list",
+    "client.v2.marketData.alloys.retrieveCurrentPrice",
+    "client.v2.marketData.alloys.retrieveHistoricalPrices",
+    "client.v2.entities.create",
+    "client.v2.entities.list",
+    "client.v2.entities.retrieveByID",
+    "client.v2.entities.retrieveCurrent",
+    "client.v2.entities.update",
+    "client.v2.entities.accounts.create",
+    "client.v2.entities.accounts.list",
+    "client.v2.entities.kyc.createManagedCheck",
+    "client.v2.entities.kyc.retrieve",
+    "client.v2.entities.kyc.submit",
+    "client.v2.entities.kyc.document.retrieve",
+    "client.v2.entities.kyc.document.upload",
+    "client.v2.accounts.deactivate",
+    "client.v2.accounts.getCashBalances",
+    "client.v2.accounts.getDividendPayments",
+    "client.v2.accounts.getInterestPayments",
+    "client.v2.accounts.getPortfolio",
+    "client.v2.accounts.mintSandboxTokens",
+    "client.v2.accounts.retrieve",
+    "client.v2.accounts.wallet.connectInternal",
+    "client.v2.accounts.wallet.get",
+    "client.v2.accounts.wallet.external.connect",
+    "client.v2.accounts.wallet.external.getNonce",
+    "client.v2.accounts.orders.batchCancel",
+    "client.v2.accounts.orders.cancel",
+    "client.v2.accounts.orders.getFulfillments",
+    "client.v2.accounts.orders.list",
+    "client.v2.accounts.orders.retrieve",
+    "client.v2.accounts.orderFulfillments.query",
+    "client.v2.accounts.orderFulfillments.retrieve",
+    "client.v2.accounts.orderRequests.createLimitBuy",
+    "client.v2.accounts.orderRequests.createLimitSell",
+    "client.v2.accounts.orderRequests.createMarketBuy",
+    "client.v2.accounts.orderRequests.createMarketSell",
+    "client.v2.accounts.orderRequests.getFeeQuote",
+    "client.v2.accounts.orderRequests.list",
+    "client.v2.accounts.orderRequests.retrieve",
+    "client.v2.accounts.orderRequests.eip155.createPermit",
+    "client.v2.accounts.orderRequests.eip155.createPermitTransaction",
+    "client.v2.accounts.orderRequests.eip155.submit",
+    "client.v2.accounts.withdrawalRequests.create",
+    "client.v2.accounts.withdrawalRequests.list",
+    "client.v2.accounts.withdrawalRequests.retrieve",
+    "client.v2.accounts.withdrawals.list",
+    "client.v2.accounts.withdrawals.retrieve",
+    "client.v2.accounts.tokenTransfers.create",
+    "client.v2.accounts.tokenTransfers.list",
+    "client.v2.accounts.tokenTransfers.retrieve",
+    "client.v2.accounts.activities.retrieveBrokerage"
   ],
   { threshold: 1, shouldSort: true },
 );
@@ -252,12 +252,7 @@ function parseError(code: string, error: unknown): string | undefined {
     // Deno uses V8; the first "<anonymous>:LINE:COLUMN" is the top of stack.
     const lineNumber = error.stack?.match(/<anonymous>:([0-9]+):[0-9]+/)?.[1];
     // -1 for the zero-based indexing
-    const line =
-      lineNumber &&
-      code
-        .split('\n')
-        .at(parseInt(lineNumber, 10) - 1)
-        ?.trim();
+    const line = lineNumber && code.split('\n').at(parseInt(lineNumber, 10) - 1)?.trim();
     return line ? `${message}\n  at line ${lineNumber}\n    ${line}` : message;
   } catch {
     return message;
@@ -269,9 +264,8 @@ const fetch = async (req: Request): Promise<Response> => {
 
   const runFunctionSource = code ? getRunFunctionSource(code) : null;
   if (!runFunctionSource) {
-    const message =
-      code ?
-        'The code is missing a top-level `run` function.'
+    const message = code
+      ? 'The code is missing a top-level `run` function.'
       : 'The code argument is missing. Provide one containing a top-level `run` function.';
     return Response.json(
       {
@@ -316,7 +310,7 @@ const fetch = async (req: Request): Promise<Response> => {
   try {
     let run_ = async (client: any) => {};
     run_ = (await tseval(`${code}\nexport default run;`)).default;
-    const result = await run_(makeSdkProxy(client, { path: ['client'] }));
+    const result = await run_(makeSdkProxy(client, { path: ["client"] }));
     return Response.json({
       is_error: false,
       result,

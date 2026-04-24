@@ -19,10 +19,7 @@ export class Alloys extends APIResource {
    * const alloys = await client.v2.marketData.alloys.list();
    * ```
    */
-  list(
-    query: AlloyListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AlloyListResponse> {
+  list(query: AlloyListParams | null | undefined = {}, options?: RequestOptions): APIPromise<AlloyListResponse> {
     return this._client.get('/api/v2/market_data/alloys/', { query, ...options });
   }
 
@@ -37,10 +34,7 @@ export class Alloys extends APIResource {
    *   );
    * ```
    */
-  retrieveCurrentPrice(
-    alloyID: string,
-    options?: RequestOptions,
-  ): APIPromise<AlloyRetrieveCurrentPriceResponse> {
+  retrieveCurrentPrice(alloyID: string, options?: RequestOptions): APIPromise<AlloyRetrieveCurrentPriceResponse> {
     return this._client.get(path`/api/v2/market_data/alloys/${alloyID}/current_price`, options);
   }
 
@@ -57,15 +51,8 @@ export class Alloys extends APIResource {
    *   );
    * ```
    */
-  retrieveHistoricalPrices(
-    alloyID: string,
-    query: AlloyRetrieveHistoricalPricesParams,
-    options?: RequestOptions,
-  ): APIPromise<AlloyRetrieveHistoricalPricesResponse> {
-    return this._client.get(path`/api/v2/market_data/alloys/${alloyID}/historical_prices/`, {
-      query,
-      ...options,
-    });
+  retrieveHistoricalPrices(alloyID: string, query: AlloyRetrieveHistoricalPricesParams, options?: RequestOptions): APIPromise<AlloyRetrieveHistoricalPricesResponse> {
+    return this._client.get(path`/api/v2/market_data/alloys/${alloyID}/historical_prices/`, { query, ...options });
   }
 }
 
@@ -158,8 +145,7 @@ export interface AlloyRetrieveCurrentPriceResponse {
   _sv?: 'AlloyPrice:v1';
 }
 
-export type AlloyRetrieveHistoricalPricesResponse =
-  Array<AlloyRetrieveHistoricalPricesResponse.AlloyRetrieveHistoricalPricesResponseItem>;
+export type AlloyRetrieveHistoricalPricesResponse = Array<AlloyRetrieveHistoricalPricesResponse.AlloyRetrieveHistoricalPricesResponseItem>
 
 export namespace AlloyRetrieveHistoricalPricesResponse {
   /**
@@ -238,6 +224,6 @@ export declare namespace Alloys {
     type AlloyRetrieveCurrentPriceResponse as AlloyRetrieveCurrentPriceResponse,
     type AlloyRetrieveHistoricalPricesResponse as AlloyRetrieveHistoricalPricesResponse,
     type AlloyListParams as AlloyListParams,
-    type AlloyRetrieveHistoricalPricesParams as AlloyRetrieveHistoricalPricesParams,
+    type AlloyRetrieveHistoricalPricesParams as AlloyRetrieveHistoricalPricesParams
   };
 }

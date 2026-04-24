@@ -25,16 +25,8 @@ export class Activities extends APIResource {
    * );
    * ```
    */
-  retrieveBrokerage(
-    accountID: string,
-    query: ActivityRetrieveBrokerageParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.get(path`/api/v2/accounts/${accountID}/activities/brokerage`, {
-      query,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  retrieveBrokerage(accountID: string, query: ActivityRetrieveBrokerageParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    return this._client.get(path`/api/v2/accounts/${accountID}/activities/brokerage`, { query, ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -52,5 +44,7 @@ export interface ActivityRetrieveBrokerageParams {
 }
 
 export declare namespace Activities {
-  export { type ActivityRetrieveBrokerageParams as ActivityRetrieveBrokerageParams };
+  export {
+    type ActivityRetrieveBrokerageParams as ActivityRetrieveBrokerageParams
+  };
 }

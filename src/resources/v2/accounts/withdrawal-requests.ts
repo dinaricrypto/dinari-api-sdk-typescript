@@ -36,11 +36,7 @@ export class WithdrawalRequests extends APIResource {
    *   );
    * ```
    */
-  create(
-    accountID: string,
-    body: WithdrawalRequestCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<WithdrawalRequestCreateResponse> {
+  create(accountID: string, body: WithdrawalRequestCreateParams, options?: RequestOptions): APIPromise<WithdrawalRequestCreateResponse> {
     return this._client.post(path`/api/v2/accounts/${accountID}/withdrawal_requests`, { body, ...options });
   }
 
@@ -56,16 +52,9 @@ export class WithdrawalRequests extends APIResource {
    *   );
    * ```
    */
-  retrieve(
-    withdrawalRequestID: string,
-    params: WithdrawalRequestRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<WithdrawalRequestRetrieveResponse> {
-    const { account_id } = params;
-    return this._client.get(
-      path`/api/v2/accounts/${account_id}/withdrawal_requests/${withdrawalRequestID}`,
-      options,
-    );
+  retrieve(withdrawalRequestID: string, params: WithdrawalRequestRetrieveParams, options?: RequestOptions): APIPromise<WithdrawalRequestRetrieveResponse> {
+    const { account_id } = params
+    return this._client.get(path`/api/v2/accounts/${account_id}/withdrawal_requests/${withdrawalRequestID}`, options);
   }
 
   /**
@@ -79,11 +68,7 @@ export class WithdrawalRequests extends APIResource {
    *   );
    * ```
    */
-  list(
-    accountID: string,
-    query: WithdrawalRequestListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<WithdrawalRequestListResponse> {
+  list(accountID: string, query: WithdrawalRequestListParams | null | undefined = {}, options?: RequestOptions): APIPromise<WithdrawalRequestListResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/withdrawal_requests`, { query, ...options });
   }
 }
@@ -217,9 +202,7 @@ export interface WithdrawalRequestRetrieveResponse {
   updated_dt: string;
 }
 
-export type WithdrawalRequestListResponse =
-  | Array<WithdrawalRequest>
-  | WithdrawalRequestListResponse.PaginatedWithdrawalRequestResponse;
+export type WithdrawalRequestListResponse = Array<WithdrawalRequest> | WithdrawalRequestListResponse.PaginatedWithdrawalRequestResponse
 
 export namespace WithdrawalRequestListResponse {
   export interface PaginatedWithdrawalRequestResponse {
@@ -308,6 +291,6 @@ export declare namespace WithdrawalRequests {
     type WithdrawalRequestListResponse as WithdrawalRequestListResponse,
     type WithdrawalRequestCreateParams as WithdrawalRequestCreateParams,
     type WithdrawalRequestRetrieveParams as WithdrawalRequestRetrieveParams,
-    type WithdrawalRequestListParams as WithdrawalRequestListParams,
+    type WithdrawalRequestListParams as WithdrawalRequestListParams
   };
 }

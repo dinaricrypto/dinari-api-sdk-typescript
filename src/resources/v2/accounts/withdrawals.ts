@@ -30,12 +30,8 @@ export class Withdrawals extends APIResource {
    *   );
    * ```
    */
-  retrieve(
-    withdrawalID: string,
-    params: WithdrawalRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<WithdrawalRetrieveResponse> {
-    const { account_id } = params;
+  retrieve(withdrawalID: string, params: WithdrawalRetrieveParams, options?: RequestOptions): APIPromise<WithdrawalRetrieveResponse> {
+    const { account_id } = params
     return this._client.get(path`/api/v2/accounts/${account_id}/withdrawals/${withdrawalID}`, options);
   }
 
@@ -50,11 +46,7 @@ export class Withdrawals extends APIResource {
    *   );
    * ```
    */
-  list(
-    accountID: string,
-    query: WithdrawalListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<WithdrawalListResponse> {
+  list(accountID: string, query: WithdrawalListParams | null | undefined = {}, options?: RequestOptions): APIPromise<WithdrawalListResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/withdrawals`, { query, ...options });
   }
 }
@@ -99,19 +91,7 @@ export interface Withdrawal {
   /**
    * Status of the `Withdrawal`.
    */
-  status:
-    | 'PENDING_SUBMIT'
-    | 'PENDING_CANCEL'
-    | 'PENDING_ESCROW'
-    | 'PENDING_FILL'
-    | 'ESCROWED'
-    | 'SUBMITTED'
-    | 'CANCELLED'
-    | 'PARTIALLY_FILLED'
-    | 'FILLED'
-    | 'REJECTED'
-    | 'REQUIRING_CONTACT'
-    | 'ERROR';
+  status: 'PENDING_SUBMIT' | 'PENDING_CANCEL' | 'PENDING_ESCROW' | 'PENDING_FILL' | 'ESCROWED' | 'SUBMITTED' | 'CANCELLED' | 'PARTIALLY_FILLED' | 'FILLED' | 'REJECTED' | 'REQUIRING_CONTACT' | 'ERROR';
 
   /**
    * Datetime at which the `Withdrawal` was transacted. ISO 8601 timestamp.
@@ -187,7 +167,7 @@ export interface WithdrawalRetrieveResponse {
   withdrawal_request_id: string;
 }
 
-export type WithdrawalListResponse = Array<Withdrawal> | WithdrawalListResponse.PaginatedWithdrawalResponse;
+export type WithdrawalListResponse = Array<Withdrawal> | WithdrawalListResponse.PaginatedWithdrawalResponse
 
 export namespace WithdrawalListResponse {
   export interface PaginatedWithdrawalResponse {
@@ -266,6 +246,6 @@ export declare namespace Withdrawals {
     type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalRetrieveParams as WithdrawalRetrieveParams,
-    type WithdrawalListParams as WithdrawalListParams,
+    type WithdrawalListParams as WithdrawalListParams
   };
 }

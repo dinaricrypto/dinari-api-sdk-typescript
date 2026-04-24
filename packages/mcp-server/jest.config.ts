@@ -10,7 +10,9 @@ const config: JestConfigWithTsJest = {
     '^@dinari/api-sdk-mcp$': '<rootDir>/src/index.ts',
     '^@dinari/api-sdk-mcp/(.*)$': '<rootDir>/src/$1',
   },
-  modulePathIgnorePatterns: ['<rootDir>/dist/'],
+  modulePathIgnorePatterns: [
+    '<rootDir>/dist/',
+  ],
   testPathIgnorePatterns: ['scripts'],
 };
 
