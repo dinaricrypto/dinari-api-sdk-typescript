@@ -23,7 +23,11 @@ export class Accounts extends APIResource {
    * );
    * ```
    */
-  create(entityID: string, body: AccountCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<AccountCreateResponse> {
+  create(
+    entityID: string,
+    body: AccountCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountCreateResponse> {
     return this._client.post(path`/api/v2/entities/${entityID}/accounts`, { body, ...options });
   }
 
@@ -39,7 +43,11 @@ export class Accounts extends APIResource {
    * );
    * ```
    */
-  list(entityID: string, query: AccountListParams | null | undefined = {}, options?: RequestOptions): APIPromise<AccountListResponse> {
+  list(
+    entityID: string,
+    query: AccountListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountListResponse> {
     return this._client.get(path`/api/v2/entities/${entityID}/accounts`, { query, ...options });
   }
 }
@@ -79,7 +87,7 @@ export interface Account {
   brokerage_account_id?: string | null;
 }
 
-export type Jurisdiction = 'BASELINE' | 'US'
+export type Jurisdiction = 'BASELINE' | 'US';
 
 /**
  * Information about an `Account` owned by an `Entity`.
@@ -116,7 +124,7 @@ export interface AccountCreateResponse {
   brokerage_account_id?: string | null;
 }
 
-export type AccountListResponse = Array<Account> | AccountListResponse.PaginatedAccountResponse
+export type AccountListResponse = Array<Account> | AccountListResponse.PaginatedAccountResponse;
 
 export namespace AccountListResponse {
   export interface PaginatedAccountResponse {
@@ -194,6 +202,6 @@ export declare namespace Accounts {
     type AccountCreateResponse as AccountCreateResponse,
     type AccountListResponse as AccountListResponse,
     type AccountCreateParams as AccountCreateParams,
-    type AccountListParams as AccountListParams
+    type AccountListParams as AccountListParams,
   };
 }

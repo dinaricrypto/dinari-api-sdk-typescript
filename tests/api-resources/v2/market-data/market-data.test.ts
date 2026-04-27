@@ -5,7 +5,7 @@ import Dinari from '@dinari/api-sdk';
 const client = new Dinari({
   apiKeyID: 'My API Key ID',
   apiSecretKey: 'My API Secret Key',
-  baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource marketData', () => {

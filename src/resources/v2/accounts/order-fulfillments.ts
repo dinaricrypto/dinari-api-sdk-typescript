@@ -26,9 +26,16 @@ export class OrderFulfillments extends APIResource {
    *   );
    * ```
    */
-  retrieve(orderFulfillmentID: string, params: OrderFulfillmentRetrieveParams, options?: RequestOptions): APIPromise<Fulfillment> {
-    const { account_id } = params
-    return this._client.get(path`/api/v2/accounts/${account_id}/order_fulfillments/${orderFulfillmentID}`, options);
+  retrieve(
+    orderFulfillmentID: string,
+    params: OrderFulfillmentRetrieveParams,
+    options?: RequestOptions,
+  ): APIPromise<Fulfillment> {
+    const { account_id } = params;
+    return this._client.get(
+      path`/api/v2/accounts/${account_id}/order_fulfillments/${orderFulfillmentID}`,
+      options,
+    );
   }
 
   /**
@@ -42,7 +49,11 @@ export class OrderFulfillments extends APIResource {
    *   );
    * ```
    */
-  query(accountID: string, query: OrderFulfillmentQueryParams | null | undefined = {}, options?: RequestOptions): APIPromise<OrderFulfillmentQueryResponse> {
+  query(
+    accountID: string,
+    query: OrderFulfillmentQueryParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OrderFulfillmentQueryResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/order_fulfillments`, { query, ...options });
   }
 }
@@ -113,7 +124,9 @@ export interface Fulfillment {
   stock_id?: string | null;
 }
 
-export type OrderFulfillmentQueryResponse = Array<OrderFulfillmentQueryResponse.UnionMember0> | OrderFulfillmentQueryResponse.PaginatedAccountOrderFulfillmentResponse
+export type OrderFulfillmentQueryResponse =
+  | Array<OrderFulfillmentQueryResponse.UnionMember0>
+  | OrderFulfillmentQueryResponse.PaginatedAccountOrderFulfillmentResponse;
 
 export namespace OrderFulfillmentQueryResponse {
   /**
@@ -323,6 +336,6 @@ export declare namespace OrderFulfillments {
     type Fulfillment as Fulfillment,
     type OrderFulfillmentQueryResponse as OrderFulfillmentQueryResponse,
     type OrderFulfillmentRetrieveParams as OrderFulfillmentRetrieveParams,
-    type OrderFulfillmentQueryParams as OrderFulfillmentQueryParams
+    type OrderFulfillmentQueryParams as OrderFulfillmentQueryParams,
   };
 }

@@ -30,7 +30,10 @@ export class Splits extends APIResource {
    *   await client.v2.marketData.stocks.splits.list();
    * ```
    */
-  list(query: SplitListParams | null | undefined = {}, options?: RequestOptions): APIPromise<SplitListResponse> {
+  list(
+    query: SplitListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SplitListResponse> {
     return this._client.get('/api/v2/market_data/stocks/splits', { query, ...options });
   }
 
@@ -53,7 +56,11 @@ export class Splits extends APIResource {
    *   );
    * ```
    */
-  listForStock(stockID: string, query: SplitListForStockParams | null | undefined = {}, options?: RequestOptions): APIPromise<SplitListForStockResponse> {
+  listForStock(
+    stockID: string,
+    query: SplitListForStockParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SplitListForStockResponse> {
     return this._client.get(path`/api/v2/market_data/stocks/${stockID}/splits`, { query, ...options });
   }
 }
@@ -114,7 +121,7 @@ export interface StockSplit {
   stock_id: string;
 }
 
-export type SplitListResponse = Array<StockSplit> | SplitListResponse.PaginatedStockSplitResponse
+export type SplitListResponse = Array<StockSplit> | SplitListResponse.PaginatedStockSplitResponse;
 
 export namespace SplitListResponse {
   export interface PaginatedStockSplitResponse {
@@ -152,7 +159,9 @@ export namespace SplitListResponse {
   }
 }
 
-export type SplitListForStockResponse = Array<StockSplit> | SplitListForStockResponse.PaginatedStockSplitResponse
+export type SplitListForStockResponse =
+  | Array<StockSplit>
+  | SplitListForStockResponse.PaginatedStockSplitResponse;
 
 export namespace SplitListForStockResponse {
   export interface PaginatedStockSplitResponse {
@@ -248,6 +257,6 @@ export declare namespace Splits {
     type SplitListResponse as SplitListResponse,
     type SplitListForStockResponse as SplitListForStockResponse,
     type SplitListParams as SplitListParams,
-    type SplitListForStockParams as SplitListForStockParams
+    type SplitListForStockParams as SplitListForStockParams,
   };
 }

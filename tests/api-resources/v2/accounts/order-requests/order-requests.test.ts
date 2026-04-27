@@ -5,13 +5,16 @@ import Dinari from '@dinari/api-sdk';
 const client = new Dinari({
   apiKeyID: 'My API Key ID',
   apiSecretKey: 'My API Secret Key',
-  baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource orderRequests', () => {
   // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.v2.accounts.orderRequests.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
+    const responsePromise = client.v2.accounts.orderRequests.retrieve(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +26,9 @@ describe('resource orderRequests', () => {
 
   // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.v2.accounts.orderRequests.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
+    const response = await client.v2.accounts.orderRequests.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    });
   });
 
   // Mock server tests are disabled
@@ -41,24 +46,31 @@ describe('resource orderRequests', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.v2.accounts.orderRequests.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-    client_order_id: 'client_order_id',
-    limit: 20,
-    next: 'next',
-    order: 'asc',
-    order_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    order_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    page: 1,
-    page_size: 1,
-    previous: 'previous',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Dinari.NotFoundError);
+    await expect(
+      client.v2.accounts.orderRequests.list(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        {
+          client_order_id: 'client_order_id',
+          limit: 20,
+          next: 'next',
+          order: 'asc',
+          order_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          order_request_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          page: 1,
+          page_size: 1,
+          previous: 'previous',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Dinari.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('createLimitBuy: only required params', async () => {
-    const responsePromise = client.v2.accounts.orderRequests.createLimitBuy('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { asset_quantity: 0, limit_price: 0 });
+    const responsePromise = client.v2.accounts.orderRequests.createLimitBuy(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { asset_quantity: 0, limit_price: 0 },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -70,19 +82,25 @@ describe('resource orderRequests', () => {
 
   // Mock server tests are disabled
   test.skip('createLimitBuy: required and optional params', async () => {
-    const response = await client.v2.accounts.orderRequests.createLimitBuy('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-    asset_quantity: 0,
-    limit_price: 0,
-    alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    client_order_id: 'client_order_id',
-    recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-  });
+    const response = await client.v2.accounts.orderRequests.createLimitBuy(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        asset_quantity: 0,
+        limit_price: 0,
+        alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        client_order_id: 'client_order_id',
+        recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      },
+    );
   });
 
   // Mock server tests are disabled
   test.skip('createLimitSell: only required params', async () => {
-    const responsePromise = client.v2.accounts.orderRequests.createLimitSell('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { asset_quantity: 0, limit_price: 0 });
+    const responsePromise = client.v2.accounts.orderRequests.createLimitSell(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { asset_quantity: 0, limit_price: 0 },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -94,20 +112,26 @@ describe('resource orderRequests', () => {
 
   // Mock server tests are disabled
   test.skip('createLimitSell: required and optional params', async () => {
-    const response = await client.v2.accounts.orderRequests.createLimitSell('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-    asset_quantity: 0,
-    limit_price: 0,
-    alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    client_order_id: 'client_order_id',
-    payment_token_address: 'payment_token_address',
-    recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-  });
+    const response = await client.v2.accounts.orderRequests.createLimitSell(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        asset_quantity: 0,
+        limit_price: 0,
+        alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        client_order_id: 'client_order_id',
+        payment_token_address: 'payment_token_address',
+        recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      },
+    );
   });
 
   // Mock server tests are disabled
   test.skip('createMarketBuy: only required params', async () => {
-    const responsePromise = client.v2.accounts.orderRequests.createMarketBuy('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { payment_amount: 0 });
+    const responsePromise = client.v2.accounts.orderRequests.createMarketBuy(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { payment_amount: 0 },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -119,18 +143,24 @@ describe('resource orderRequests', () => {
 
   // Mock server tests are disabled
   test.skip('createMarketBuy: required and optional params', async () => {
-    const response = await client.v2.accounts.orderRequests.createMarketBuy('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-    payment_amount: 0,
-    alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    client_order_id: 'client_order_id',
-    recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-  });
+    const response = await client.v2.accounts.orderRequests.createMarketBuy(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        payment_amount: 0,
+        alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        client_order_id: 'client_order_id',
+        recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      },
+    );
   });
 
   // Mock server tests are disabled
   test.skip('createMarketSell: only required params', async () => {
-    const responsePromise = client.v2.accounts.orderRequests.createMarketSell('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { asset_quantity: 0 });
+    const responsePromise = client.v2.accounts.orderRequests.createMarketSell(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { asset_quantity: 0 },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -142,19 +172,25 @@ describe('resource orderRequests', () => {
 
   // Mock server tests are disabled
   test.skip('createMarketSell: required and optional params', async () => {
-    const response = await client.v2.accounts.orderRequests.createMarketSell('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-    asset_quantity: 0,
-    alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    client_order_id: 'client_order_id',
-    payment_token_address: 'payment_token_address',
-    recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-  });
+    const response = await client.v2.accounts.orderRequests.createMarketSell(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        asset_quantity: 0,
+        alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        client_order_id: 'client_order_id',
+        payment_token_address: 'payment_token_address',
+        recipient_account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      },
+    );
   });
 
   // Mock server tests are disabled
   test.skip('getFeeQuote: only required params', async () => {
-    const responsePromise = client.v2.accounts.orderRequests.getFeeQuote('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { order_side: 'BUY', order_type: 'MARKET' });
+    const responsePromise = client.v2.accounts.orderRequests.getFeeQuote(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { order_side: 'BUY', order_type: 'MARKET' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -166,16 +202,19 @@ describe('resource orderRequests', () => {
 
   // Mock server tests are disabled
   test.skip('getFeeQuote: required and optional params', async () => {
-    const response = await client.v2.accounts.orderRequests.getFeeQuote('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-    order_side: 'BUY',
-    order_type: 'MARKET',
-    alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    asset_token_quantity: 0,
-    chain_id: 'eip155:1',
-    limit_price: 0,
-    payment_token_address: 'payment_token_address',
-    payment_token_quantity: 0,
-    stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-  });
+    const response = await client.v2.accounts.orderRequests.getFeeQuote(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        order_side: 'BUY',
+        order_type: 'MARKET',
+        alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        asset_token_quantity: 0,
+        chain_id: 'eip155:1',
+        limit_price: 0,
+        payment_token_address: 'payment_token_address',
+        payment_token_quantity: 0,
+        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      },
+    );
   });
 });

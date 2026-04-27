@@ -5,18 +5,79 @@ import * as AccountsAPI from './accounts';
 import * as ActivitiesAPI from './activities';
 import { Activities, ActivityRetrieveBrokerageParams } from './activities';
 import * as OrderFulfillmentsAPI from './order-fulfillments';
-import { Fulfillment, OrderFulfillmentQueryParams, OrderFulfillmentQueryResponse, OrderFulfillmentRetrieveParams, OrderFulfillments } from './order-fulfillments';
+import {
+  Fulfillment,
+  OrderFulfillmentQueryParams,
+  OrderFulfillmentQueryResponse,
+  OrderFulfillmentRetrieveParams,
+  OrderFulfillments,
+} from './order-fulfillments';
 import * as OrdersAPI from './orders';
-import { BrokerageOrderStatus, Order, OrderBatchCancelParams, OrderBatchCancelResponse, OrderCancelParams, OrderGetFulfillmentsParams, OrderGetFulfillmentsResponse, OrderListParams, OrderListResponse, OrderRetrieveParams, OrderSide, OrderTif, OrderType, Orders } from './orders';
+import {
+  BrokerageOrderStatus,
+  Order,
+  OrderBatchCancelParams,
+  OrderBatchCancelResponse,
+  OrderCancelParams,
+  OrderGetFulfillmentsParams,
+  OrderGetFulfillmentsResponse,
+  OrderListParams,
+  OrderListResponse,
+  OrderRetrieveParams,
+  OrderSide,
+  OrderTif,
+  OrderType,
+  Orders,
+} from './orders';
 import * as TokenTransfersAPI from './token-transfers';
-import { TokenTransfer, TokenTransferCreateParams, TokenTransferListParams, TokenTransferListResponse, TokenTransferRetrieveParams, TokenTransfers } from './token-transfers';
+import {
+  TokenTransfer,
+  TokenTransferCreateParams,
+  TokenTransferListParams,
+  TokenTransferListResponse,
+  TokenTransferRetrieveParams,
+  TokenTransfers,
+} from './token-transfers';
 import * as WithdrawalRequestsAPI from './withdrawal-requests';
-import { WithdrawalRequest, WithdrawalRequestCreateParams, WithdrawalRequestCreateResponse, WithdrawalRequestListParams, WithdrawalRequestListResponse, WithdrawalRequestRetrieveParams, WithdrawalRequestRetrieveResponse, WithdrawalRequests } from './withdrawal-requests';
+import {
+  WithdrawalRequest,
+  WithdrawalRequestCreateParams,
+  WithdrawalRequestCreateResponse,
+  WithdrawalRequestListParams,
+  WithdrawalRequestListResponse,
+  WithdrawalRequestRetrieveParams,
+  WithdrawalRequestRetrieveResponse,
+  WithdrawalRequests,
+} from './withdrawal-requests';
 import * as WithdrawalsAPI from './withdrawals';
-import { Withdrawal, WithdrawalListParams, WithdrawalListResponse, WithdrawalRetrieveParams, WithdrawalRetrieveResponse, Withdrawals } from './withdrawals';
+import {
+  Withdrawal,
+  WithdrawalListParams,
+  WithdrawalListResponse,
+  WithdrawalRetrieveParams,
+  WithdrawalRetrieveResponse,
+  Withdrawals,
+} from './withdrawals';
 import * as EntitiesAccountsAPI from '../entities/accounts';
 import * as OrderRequestsAPI from './order-requests/order-requests';
-import { CreateLimitBuyOrderInput, CreateLimitSellOrderInput, CreateMarketBuyOrderInput, CreateMarketSellOrderInput, OrderRequest, OrderRequestCreateLimitBuyParams, OrderRequestCreateLimitSellParams, OrderRequestCreateMarketBuyParams, OrderRequestCreateMarketSellParams, OrderRequestGetFeeQuoteParams, OrderRequestGetFeeQuoteResponse, OrderRequestListParams, OrderRequestListResponse, OrderRequestRetrieveParams, OrderRequestStatus, OrderRequests } from './order-requests/order-requests';
+import {
+  CreateLimitBuyOrderInput,
+  CreateLimitSellOrderInput,
+  CreateMarketBuyOrderInput,
+  CreateMarketSellOrderInput,
+  OrderRequest,
+  OrderRequestCreateLimitBuyParams,
+  OrderRequestCreateLimitSellParams,
+  OrderRequestCreateMarketBuyParams,
+  OrderRequestCreateMarketSellParams,
+  OrderRequestGetFeeQuoteParams,
+  OrderRequestGetFeeQuoteResponse,
+  OrderRequestListParams,
+  OrderRequestListResponse,
+  OrderRequestRetrieveParams,
+  OrderRequestStatus,
+  OrderRequests,
+} from './order-requests/order-requests';
 import * as WalletAPI from './wallet/wallet';
 import { Wallet, WalletConnectInternalParams, WalletResource } from './wallet/wallet';
 import { APIPromise } from '../../../core/api-promise';
@@ -32,9 +93,13 @@ import { path } from '../../../internal/utils/path';
 export class Accounts extends APIResource {
   wallet: WalletAPI.WalletResource = new WalletAPI.WalletResource(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
-  orderFulfillments: OrderFulfillmentsAPI.OrderFulfillments = new OrderFulfillmentsAPI.OrderFulfillments(this._client);
+  orderFulfillments: OrderFulfillmentsAPI.OrderFulfillments = new OrderFulfillmentsAPI.OrderFulfillments(
+    this._client,
+  );
   orderRequests: OrderRequestsAPI.OrderRequests = new OrderRequestsAPI.OrderRequests(this._client);
-  withdrawalRequests: WithdrawalRequestsAPI.WithdrawalRequests = new WithdrawalRequestsAPI.WithdrawalRequests(this._client);
+  withdrawalRequests: WithdrawalRequestsAPI.WithdrawalRequests = new WithdrawalRequestsAPI.WithdrawalRequests(
+    this._client,
+  );
   withdrawals: WithdrawalsAPI.Withdrawals = new WithdrawalsAPI.Withdrawals(this._client);
   tokenTransfers: TokenTransfersAPI.TokenTransfers = new TokenTransfersAPI.TokenTransfers(this._client);
   activities: ActivitiesAPI.Activities = new ActivitiesAPI.Activities(this._client);
@@ -95,7 +160,11 @@ export class Accounts extends APIResource {
    *   );
    * ```
    */
-  getDividendPayments(accountID: string, query: AccountGetDividendPaymentsParams, options?: RequestOptions): APIPromise<AccountGetDividendPaymentsResponse> {
+  getDividendPayments(
+    accountID: string,
+    query: AccountGetDividendPaymentsParams,
+    options?: RequestOptions,
+  ): APIPromise<AccountGetDividendPaymentsResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/dividend_payments`, { query, ...options });
   }
 
@@ -114,7 +183,11 @@ export class Accounts extends APIResource {
    *   );
    * ```
    */
-  getInterestPayments(accountID: string, query: AccountGetInterestPaymentsParams, options?: RequestOptions): APIPromise<AccountGetInterestPaymentsResponse> {
+  getInterestPayments(
+    accountID: string,
+    query: AccountGetInterestPaymentsParams,
+    options?: RequestOptions,
+  ): APIPromise<AccountGetInterestPaymentsResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/interest_payments`, { query, ...options });
   }
 
@@ -129,7 +202,11 @@ export class Accounts extends APIResource {
    * );
    * ```
    */
-  getPortfolio(accountID: string, query: AccountGetPortfolioParams | null | undefined = {}, options?: RequestOptions): APIPromise<AccountGetPortfolioResponse> {
+  getPortfolio(
+    accountID: string,
+    query: AccountGetPortfolioParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountGetPortfolioResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/portfolio`, { query, ...options });
   }
 
@@ -146,12 +223,37 @@ export class Accounts extends APIResource {
    * );
    * ```
    */
-  mintSandboxTokens(accountID: string, body: AccountMintSandboxTokensParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/faucet`, { body, ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+  mintSandboxTokens(
+    accountID: string,
+    body: AccountMintSandboxTokensParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    return this._client.post(path`/api/v2/accounts/${accountID}/faucet`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 
-export type Chain = 'eip155:1' | 'eip155:42161' | 'eip155:8453' | 'eip155:81457' | 'eip155:98866' | 'eip155:999' | 'eip155:11155111' | 'eip155:421614' | 'eip155:84532' | 'eip155:168587773' | 'eip155:98867' | 'eip155:998' | 'eip155:202110' | 'eip155:179205' | 'eip155:179202' | 'eip155:98865' | 'eip155:7887'
+export type Chain =
+  | 'eip155:1'
+  | 'eip155:42161'
+  | 'eip155:8453'
+  | 'eip155:81457'
+  | 'eip155:98866'
+  | 'eip155:999'
+  | 'eip155:11155111'
+  | 'eip155:421614'
+  | 'eip155:84532'
+  | 'eip155:168587773'
+  | 'eip155:98867'
+  | 'eip155:998'
+  | 'eip155:202110'
+  | 'eip155:179205'
+  | 'eip155:179202'
+  | 'eip155:98865'
+  | 'eip155:7887';
 
 /**
  * Information about an `Account` owned by an `Entity`.
@@ -223,7 +325,8 @@ export interface AccountDeactivateResponse {
   brokerage_account_id?: string | null;
 }
 
-export type AccountGetCashBalancesResponse = Array<AccountGetCashBalancesResponse.AccountGetCashBalancesResponseItem>
+export type AccountGetCashBalancesResponse =
+  Array<AccountGetCashBalancesResponse.AccountGetCashBalancesResponseItem>;
 
 export namespace AccountGetCashBalancesResponse {
   /**
@@ -252,7 +355,9 @@ export namespace AccountGetCashBalancesResponse {
   }
 }
 
-export type AccountGetDividendPaymentsResponse = Array<AccountGetDividendPaymentsResponse.UnionMember0> | AccountGetDividendPaymentsResponse.PaginatedDividendPaymentResponse
+export type AccountGetDividendPaymentsResponse =
+  | Array<AccountGetDividendPaymentsResponse.UnionMember0>
+  | AccountGetDividendPaymentsResponse.PaginatedDividendPaymentResponse;
 
 export namespace AccountGetDividendPaymentsResponse {
   /**
@@ -340,7 +445,9 @@ export namespace AccountGetDividendPaymentsResponse {
   }
 }
 
-export type AccountGetInterestPaymentsResponse = Array<AccountGetInterestPaymentsResponse.UnionMember0> | AccountGetInterestPaymentsResponse.PaginatedInterestPaymentResponse
+export type AccountGetInterestPaymentsResponse =
+  | Array<AccountGetInterestPaymentsResponse.UnionMember0>
+  | AccountGetInterestPaymentsResponse.PaginatedInterestPaymentResponse;
 
 export namespace AccountGetInterestPaymentsResponse {
   /**
@@ -579,13 +686,13 @@ export declare namespace Accounts {
     type AccountGetDividendPaymentsParams as AccountGetDividendPaymentsParams,
     type AccountGetInterestPaymentsParams as AccountGetInterestPaymentsParams,
     type AccountGetPortfolioParams as AccountGetPortfolioParams,
-    type AccountMintSandboxTokensParams as AccountMintSandboxTokensParams
+    type AccountMintSandboxTokensParams as AccountMintSandboxTokensParams,
   };
 
   export {
     WalletResource as WalletResource,
     type Wallet as Wallet,
-    type WalletConnectInternalParams as WalletConnectInternalParams
+    type WalletConnectInternalParams as WalletConnectInternalParams,
   };
 
   export {
@@ -602,7 +709,7 @@ export declare namespace Accounts {
     type OrderListParams as OrderListParams,
     type OrderBatchCancelParams as OrderBatchCancelParams,
     type OrderCancelParams as OrderCancelParams,
-    type OrderGetFulfillmentsParams as OrderGetFulfillmentsParams
+    type OrderGetFulfillmentsParams as OrderGetFulfillmentsParams,
   };
 
   export {
@@ -610,7 +717,7 @@ export declare namespace Accounts {
     type Fulfillment as Fulfillment,
     type OrderFulfillmentQueryResponse as OrderFulfillmentQueryResponse,
     type OrderFulfillmentRetrieveParams as OrderFulfillmentRetrieveParams,
-    type OrderFulfillmentQueryParams as OrderFulfillmentQueryParams
+    type OrderFulfillmentQueryParams as OrderFulfillmentQueryParams,
   };
 
   export {
@@ -629,7 +736,7 @@ export declare namespace Accounts {
     type OrderRequestCreateLimitSellParams as OrderRequestCreateLimitSellParams,
     type OrderRequestCreateMarketBuyParams as OrderRequestCreateMarketBuyParams,
     type OrderRequestCreateMarketSellParams as OrderRequestCreateMarketSellParams,
-    type OrderRequestGetFeeQuoteParams as OrderRequestGetFeeQuoteParams
+    type OrderRequestGetFeeQuoteParams as OrderRequestGetFeeQuoteParams,
   };
 
   export {
@@ -640,7 +747,7 @@ export declare namespace Accounts {
     type WithdrawalRequestListResponse as WithdrawalRequestListResponse,
     type WithdrawalRequestCreateParams as WithdrawalRequestCreateParams,
     type WithdrawalRequestRetrieveParams as WithdrawalRequestRetrieveParams,
-    type WithdrawalRequestListParams as WithdrawalRequestListParams
+    type WithdrawalRequestListParams as WithdrawalRequestListParams,
   };
 
   export {
@@ -649,7 +756,7 @@ export declare namespace Accounts {
     type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalRetrieveParams as WithdrawalRetrieveParams,
-    type WithdrawalListParams as WithdrawalListParams
+    type WithdrawalListParams as WithdrawalListParams,
   };
 
   export {
@@ -658,11 +765,11 @@ export declare namespace Accounts {
     type TokenTransferListResponse as TokenTransferListResponse,
     type TokenTransferCreateParams as TokenTransferCreateParams,
     type TokenTransferRetrieveParams as TokenTransferRetrieveParams,
-    type TokenTransferListParams as TokenTransferListParams
+    type TokenTransferListParams as TokenTransferListParams,
   };
 
   export {
     Activities as Activities,
-    type ActivityRetrieveBrokerageParams as ActivityRetrieveBrokerageParams
+    type ActivityRetrieveBrokerageParams as ActivityRetrieveBrokerageParams,
   };
 }

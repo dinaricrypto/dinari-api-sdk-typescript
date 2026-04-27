@@ -33,7 +33,11 @@ export class TokenTransfers extends APIResource {
    *   );
    * ```
    */
-  create(accountID: string, body: TokenTransferCreateParams, options?: RequestOptions): APIPromise<TokenTransfer> {
+  create(
+    accountID: string,
+    body: TokenTransferCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<TokenTransfer> {
     return this._client.post(path`/api/v2/accounts/${accountID}/token_transfers`, { body, ...options });
   }
 
@@ -53,8 +57,12 @@ export class TokenTransfers extends APIResource {
    *   );
    * ```
    */
-  retrieve(transferID: string, params: TokenTransferRetrieveParams, options?: RequestOptions): APIPromise<TokenTransfer> {
-    const { account_id } = params
+  retrieve(
+    transferID: string,
+    params: TokenTransferRetrieveParams,
+    options?: RequestOptions,
+  ): APIPromise<TokenTransfer> {
+    const { account_id } = params;
     return this._client.get(path`/api/v2/accounts/${account_id}/token_transfers/${transferID}`, options);
   }
 
@@ -73,7 +81,11 @@ export class TokenTransfers extends APIResource {
    *   );
    * ```
    */
-  list(accountID: string, query: TokenTransferListParams | null | undefined = {}, options?: RequestOptions): APIPromise<TokenTransferListResponse> {
+  list(
+    accountID: string,
+    query: TokenTransferListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TokenTransferListResponse> {
     return this._client.get(path`/api/v2/accounts/${accountID}/token_transfers`, { query, ...options });
   }
 }
@@ -90,7 +102,24 @@ export interface TokenTransfer {
   /**
    * CAIP-2 chain ID of the blockchain that the transfer is made on.
    */
-  chain_id: 'eip155:1' | 'eip155:42161' | 'eip155:8453' | 'eip155:81457' | 'eip155:98866' | 'eip155:999' | 'eip155:11155111' | 'eip155:421614' | 'eip155:84532' | 'eip155:168587773' | 'eip155:98867' | 'eip155:998' | 'eip155:202110' | 'eip155:179205' | 'eip155:179202' | 'eip155:98865' | 'eip155:7887';
+  chain_id:
+    | 'eip155:1'
+    | 'eip155:42161'
+    | 'eip155:8453'
+    | 'eip155:81457'
+    | 'eip155:98866'
+    | 'eip155:999'
+    | 'eip155:11155111'
+    | 'eip155:421614'
+    | 'eip155:84532'
+    | 'eip155:168587773'
+    | 'eip155:98867'
+    | 'eip155:998'
+    | 'eip155:202110'
+    | 'eip155:179205'
+    | 'eip155:179202'
+    | 'eip155:98865'
+    | 'eip155:7887';
 
   /**
    * Datetime at which the transfer was created. ISO 8601 timestamp.
@@ -134,7 +163,9 @@ export interface TokenTransfer {
   transaction_hash?: string | null;
 }
 
-export type TokenTransferListResponse = Array<TokenTransfer> | TokenTransferListResponse.PaginatedTokenTransferResponse
+export type TokenTransferListResponse =
+  | Array<TokenTransfer>
+  | TokenTransferListResponse.PaginatedTokenTransferResponse;
 
 export namespace TokenTransferListResponse {
   export interface PaginatedTokenTransferResponse {
@@ -225,6 +256,6 @@ export declare namespace TokenTransfers {
     type TokenTransferListResponse as TokenTransferListResponse,
     type TokenTransferCreateParams as TokenTransferCreateParams,
     type TokenTransferRetrieveParams as TokenTransferRetrieveParams,
-    type TokenTransferListParams as TokenTransferListParams
+    type TokenTransferListParams as TokenTransferListParams,
   };
 }
