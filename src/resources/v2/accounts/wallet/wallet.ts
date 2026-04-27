@@ -2,7 +2,13 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ExternalAPI from './external';
-import { External, ExternalConnectParams, ExternalGetNonceParams, ExternalGetNonceResponse, WalletChainID } from './external';
+import {
+  External,
+  ExternalConnectParams,
+  ExternalGetNonceParams,
+  ExternalGetNonceResponse,
+  WalletChainID,
+} from './external';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -33,7 +39,11 @@ export class WalletResource extends APIResource {
    *   );
    * ```
    */
-  connectInternal(accountID: string, body: WalletConnectInternalParams, options?: RequestOptions): APIPromise<Wallet> {
+  connectInternal(
+    accountID: string,
+    body: WalletConnectInternalParams,
+    options?: RequestOptions,
+  ): APIPromise<Wallet> {
     return this._client.post(path`/api/v2/accounts/${accountID}/wallet/internal`, { body, ...options });
   }
 
@@ -99,16 +109,13 @@ export interface WalletConnectInternalParams {
 WalletResource.External = External;
 
 export declare namespace WalletResource {
-  export {
-    type Wallet as Wallet,
-    type WalletConnectInternalParams as WalletConnectInternalParams
-  };
+  export { type Wallet as Wallet, type WalletConnectInternalParams as WalletConnectInternalParams };
 
   export {
     External as External,
     type WalletChainID as WalletChainID,
     type ExternalGetNonceResponse as ExternalGetNonceResponse,
     type ExternalConnectParams as ExternalConnectParams,
-    type ExternalGetNonceParams as ExternalGetNonceParams
+    type ExternalGetNonceParams as ExternalGetNonceParams,
   };
 }

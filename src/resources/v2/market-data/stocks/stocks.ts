@@ -2,7 +2,14 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as SplitsAPI from './splits';
-import { SplitListForStockParams, SplitListForStockResponse, SplitListParams, SplitListResponse, Splits, StockSplit } from './splits';
+import {
+  SplitListForStockParams,
+  SplitListForStockResponse,
+  SplitListParams,
+  SplitListResponse,
+  Splits,
+  StockSplit,
+} from './splits';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -18,7 +25,10 @@ export class Stocks extends APIResource {
    * const stocks = await client.v2.marketData.stocks.list();
    * ```
    */
-  list(query: StockListParams | null | undefined = {}, options?: RequestOptions): APIPromise<StockListResponse> {
+  list(
+    query: StockListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<StockListResponse> {
     return this._client.get('/api/v2/market_data/stocks/', { query, ...options });
   }
 
@@ -33,7 +43,10 @@ export class Stocks extends APIResource {
    *   );
    * ```
    */
-  retrieveCurrentPrice(stockID: string, options?: RequestOptions): APIPromise<StockRetrieveCurrentPriceResponse> {
+  retrieveCurrentPrice(
+    stockID: string,
+    options?: RequestOptions,
+  ): APIPromise<StockRetrieveCurrentPriceResponse> {
     return this._client.get(path`/api/v2/market_data/stocks/${stockID}/current_price`, options);
   }
 
@@ -48,7 +61,10 @@ export class Stocks extends APIResource {
    *   );
    * ```
    */
-  retrieveCurrentQuote(stockID: string, options?: RequestOptions): APIPromise<StockRetrieveCurrentQuoteResponse> {
+  retrieveCurrentQuote(
+    stockID: string,
+    options?: RequestOptions,
+  ): APIPromise<StockRetrieveCurrentQuoteResponse> {
     return this._client.get(path`/api/v2/market_data/stocks/${stockID}/current_quote`, options);
   }
 
@@ -83,8 +99,15 @@ export class Stocks extends APIResource {
    *   );
    * ```
    */
-  retrieveHistoricalPrices(stockID: string, query: StockRetrieveHistoricalPricesParams, options?: RequestOptions): APIPromise<StockRetrieveHistoricalPricesResponse> {
-    return this._client.get(path`/api/v2/market_data/stocks/${stockID}/historical_prices/`, { query, ...options });
+  retrieveHistoricalPrices(
+    stockID: string,
+    query: StockRetrieveHistoricalPricesParams,
+    options?: RequestOptions,
+  ): APIPromise<StockRetrieveHistoricalPricesResponse> {
+    return this._client.get(path`/api/v2/market_data/stocks/${stockID}/historical_prices/`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -99,12 +122,18 @@ export class Stocks extends APIResource {
    *   );
    * ```
    */
-  retrieveNews(stockID: string, query: StockRetrieveNewsParams | null | undefined = {}, options?: RequestOptions): APIPromise<StockRetrieveNewsResponse> {
+  retrieveNews(
+    stockID: string,
+    query: StockRetrieveNewsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<StockRetrieveNewsResponse> {
     return this._client.get(path`/api/v2/market_data/stocks/${stockID}/news`, { query, ...options });
   }
 }
 
-export type StockListResponse = Array<StockListResponse.UnionMember0> | StockListResponse.PaginatedStockResponse
+export type StockListResponse =
+  | Array<StockListResponse.UnionMember0>
+  | StockListResponse.PaginatedStockResponse;
 
 export namespace StockListResponse {
   /**
@@ -386,7 +415,8 @@ export interface StockRetrieveCurrentQuoteResponse {
   timestamp: string;
 }
 
-export type StockRetrieveDividendsResponse = Array<StockRetrieveDividendsResponse.StockRetrieveDividendsResponseItem>
+export type StockRetrieveDividendsResponse =
+  Array<StockRetrieveDividendsResponse.StockRetrieveDividendsResponseItem>;
 
 export namespace StockRetrieveDividendsResponse {
   /**
@@ -436,7 +466,8 @@ export namespace StockRetrieveDividendsResponse {
   }
 }
 
-export type StockRetrieveHistoricalPricesResponse = Array<StockRetrieveHistoricalPricesResponse.StockRetrieveHistoricalPricesResponseItem>
+export type StockRetrieveHistoricalPricesResponse =
+  Array<StockRetrieveHistoricalPricesResponse.StockRetrieveHistoricalPricesResponseItem>;
 
 export namespace StockRetrieveHistoricalPricesResponse {
   /**
@@ -470,7 +501,7 @@ export namespace StockRetrieveHistoricalPricesResponse {
   }
 }
 
-export type StockRetrieveNewsResponse = Array<StockRetrieveNewsResponse.StockRetrieveNewsResponseItem>
+export type StockRetrieveNewsResponse = Array<StockRetrieveNewsResponse.StockRetrieveNewsResponseItem>;
 
 export namespace StockRetrieveNewsResponse {
   /**
@@ -568,7 +599,7 @@ export declare namespace Stocks {
     type StockRetrieveNewsResponse as StockRetrieveNewsResponse,
     type StockListParams as StockListParams,
     type StockRetrieveHistoricalPricesParams as StockRetrieveHistoricalPricesParams,
-    type StockRetrieveNewsParams as StockRetrieveNewsParams
+    type StockRetrieveNewsParams as StockRetrieveNewsParams,
   };
 
   export {
@@ -577,6 +608,6 @@ export declare namespace Stocks {
     type SplitListResponse as SplitListResponse,
     type SplitListForStockResponse as SplitListForStockResponse,
     type SplitListParams as SplitListParams,
-    type SplitListForStockParams as SplitListForStockParams
+    type SplitListForStockParams as SplitListForStockParams,
   };
 }

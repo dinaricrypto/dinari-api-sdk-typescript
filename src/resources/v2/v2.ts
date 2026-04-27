@@ -2,9 +2,33 @@
 
 import { APIResource } from '../../core/resource';
 import * as AccountsAPI from './accounts/accounts';
-import { AccountDeactivateResponse, AccountGetCashBalancesResponse, AccountGetDividendPaymentsParams, AccountGetDividendPaymentsResponse, AccountGetInterestPaymentsParams, AccountGetInterestPaymentsResponse, AccountGetPortfolioParams, AccountGetPortfolioResponse, AccountMintSandboxTokensParams, AccountRetrieveResponse, Accounts, Chain } from './accounts/accounts';
+import {
+  AccountDeactivateResponse,
+  AccountGetCashBalancesResponse,
+  AccountGetDividendPaymentsParams,
+  AccountGetDividendPaymentsResponse,
+  AccountGetInterestPaymentsParams,
+  AccountGetInterestPaymentsResponse,
+  AccountGetPortfolioParams,
+  AccountGetPortfolioResponse,
+  AccountMintSandboxTokensParams,
+  AccountRetrieveResponse,
+  Accounts,
+  Chain,
+} from './accounts/accounts';
 import * as EntitiesAPI from './entities/entities';
-import { Entities, Entity, EntityCreateParams, EntityCreateResponse, EntityListParams, EntityListResponse, EntityRetrieveByIDResponse, EntityRetrieveCurrentResponse, EntityUpdateParams, EntityUpdateResponse } from './entities/entities';
+import {
+  Entities,
+  Entity,
+  EntityCreateParams,
+  EntityCreateResponse,
+  EntityListParams,
+  EntityListResponse,
+  EntityRetrieveByIDResponse,
+  EntityRetrieveCurrentResponse,
+  EntityUpdateParams,
+  EntityUpdateResponse,
+} from './entities/entities';
 import * as MarketDataAPI from './market-data/market-data';
 import { MarketData, MarketDataRetrieveMarketHoursResponse } from './market-data/market-data';
 import { APIPromise } from '../../core/api-promise';
@@ -31,12 +55,17 @@ export class V2 extends APIResource {
    * const response = await client.v2.listOrders();
    * ```
    */
-  listOrders(query: V2ListOrdersParams | null | undefined = {}, options?: RequestOptions): APIPromise<V2ListOrdersResponse> {
+  listOrders(
+    query: V2ListOrdersParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<V2ListOrdersResponse> {
     return this._client.get('/api/v2/orders/', { query, ...options });
   }
 }
 
-export type V2ListOrdersResponse = Array<V2ListOrdersResponse.UnionMember0> | V2ListOrdersResponse.PaginatedEntityOrderResponse
+export type V2ListOrdersResponse =
+  | Array<V2ListOrdersResponse.UnionMember0>
+  | V2ListOrdersResponse.PaginatedEntityOrderResponse;
 
 export namespace V2ListOrdersResponse {
   export interface UnionMember0 {
@@ -89,7 +118,19 @@ export namespace V2ListOrdersResponse {
     /**
      * Status of the `Order`.
      */
-    status: 'PENDING_SUBMIT' | 'PENDING_CANCEL' | 'PENDING_ESCROW' | 'PENDING_FILL' | 'ESCROWED' | 'SUBMITTED' | 'CANCELLED' | 'PARTIALLY_FILLED' | 'FILLED' | 'REJECTED' | 'REQUIRING_CONTACT' | 'ERROR';
+    status:
+      | 'PENDING_SUBMIT'
+      | 'PENDING_CANCEL'
+      | 'PENDING_ESCROW'
+      | 'PENDING_FILL'
+      | 'ESCROWED'
+      | 'SUBMITTED'
+      | 'CANCELLED'
+      | 'PARTIALLY_FILLED'
+      | 'FILLED'
+      | 'REJECTED'
+      | 'REQUIRING_CONTACT'
+      | 'ERROR';
 
     /**
      * The `Stock` ID associated with the `Order`
@@ -217,7 +258,19 @@ export namespace V2ListOrdersResponse {
       /**
        * Status of the `Order`.
        */
-      status: 'PENDING_SUBMIT' | 'PENDING_CANCEL' | 'PENDING_ESCROW' | 'PENDING_FILL' | 'ESCROWED' | 'SUBMITTED' | 'CANCELLED' | 'PARTIALLY_FILLED' | 'FILLED' | 'REJECTED' | 'REQUIRING_CONTACT' | 'ERROR';
+      status:
+        | 'PENDING_SUBMIT'
+        | 'PENDING_CANCEL'
+        | 'PENDING_ESCROW'
+        | 'PENDING_FILL'
+        | 'ESCROWED'
+        | 'SUBMITTED'
+        | 'CANCELLED'
+        | 'PARTIALLY_FILLED'
+        | 'FILLED'
+        | 'REJECTED'
+        | 'REQUIRING_CONTACT'
+        | 'ERROR';
 
       /**
        * The `Stock` ID associated with the `Order`
@@ -345,14 +398,11 @@ V2.Entities = Entities;
 V2.Accounts = Accounts;
 
 export declare namespace V2 {
-  export {
-    type V2ListOrdersResponse as V2ListOrdersResponse,
-    type V2ListOrdersParams as V2ListOrdersParams
-  };
+  export { type V2ListOrdersResponse as V2ListOrdersResponse, type V2ListOrdersParams as V2ListOrdersParams };
 
   export {
     MarketData as MarketData,
-    type MarketDataRetrieveMarketHoursResponse as MarketDataRetrieveMarketHoursResponse
+    type MarketDataRetrieveMarketHoursResponse as MarketDataRetrieveMarketHoursResponse,
   };
 
   export {
@@ -365,7 +415,7 @@ export declare namespace V2 {
     type EntityRetrieveCurrentResponse as EntityRetrieveCurrentResponse,
     type EntityCreateParams as EntityCreateParams,
     type EntityUpdateParams as EntityUpdateParams,
-    type EntityListParams as EntityListParams
+    type EntityListParams as EntityListParams,
   };
 
   export {
@@ -380,6 +430,6 @@ export declare namespace V2 {
     type AccountGetDividendPaymentsParams as AccountGetDividendPaymentsParams,
     type AccountGetInterestPaymentsParams as AccountGetInterestPaymentsParams,
     type AccountGetPortfolioParams as AccountGetPortfolioParams,
-    type AccountMintSandboxTokensParams as AccountMintSandboxTokensParams
+    type AccountMintSandboxTokensParams as AccountMintSandboxTokensParams,
   };
 }

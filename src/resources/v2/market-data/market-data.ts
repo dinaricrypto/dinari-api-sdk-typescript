@@ -2,9 +2,27 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AlloysAPI from './alloys';
-import { AlloyListParams, AlloyListResponse, AlloyRetrieveCurrentPriceResponse, AlloyRetrieveHistoricalPricesParams, AlloyRetrieveHistoricalPricesResponse, Alloys } from './alloys';
+import {
+  AlloyListParams,
+  AlloyListResponse,
+  AlloyRetrieveCurrentPriceResponse,
+  AlloyRetrieveHistoricalPricesParams,
+  AlloyRetrieveHistoricalPricesResponse,
+  Alloys,
+} from './alloys';
 import * as StocksAPI from './stocks/stocks';
-import { StockListParams, StockListResponse, StockRetrieveCurrentPriceResponse, StockRetrieveCurrentQuoteResponse, StockRetrieveDividendsResponse, StockRetrieveHistoricalPricesParams, StockRetrieveHistoricalPricesResponse, StockRetrieveNewsParams, StockRetrieveNewsResponse, Stocks } from './stocks/stocks';
+import {
+  StockListParams,
+  StockListResponse,
+  StockRetrieveCurrentPriceResponse,
+  StockRetrieveCurrentQuoteResponse,
+  StockRetrieveDividendsResponse,
+  StockRetrieveHistoricalPricesParams,
+  StockRetrieveHistoricalPricesResponse,
+  StockRetrieveNewsParams,
+  StockRetrieveNewsResponse,
+  Stocks,
+} from './stocks/stocks';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -95,9 +113,7 @@ MarketData.Stocks = Stocks;
 MarketData.Alloys = Alloys;
 
 export declare namespace MarketData {
-  export {
-    type MarketDataRetrieveMarketHoursResponse as MarketDataRetrieveMarketHoursResponse
-  };
+  export { type MarketDataRetrieveMarketHoursResponse as MarketDataRetrieveMarketHoursResponse };
 
   export {
     Stocks as Stocks,
@@ -109,7 +125,7 @@ export declare namespace MarketData {
     type StockRetrieveNewsResponse as StockRetrieveNewsResponse,
     type StockListParams as StockListParams,
     type StockRetrieveHistoricalPricesParams as StockRetrieveHistoricalPricesParams,
-    type StockRetrieveNewsParams as StockRetrieveNewsParams
+    type StockRetrieveNewsParams as StockRetrieveNewsParams,
   };
 
   export {
@@ -118,6 +134,6 @@ export declare namespace MarketData {
     type AlloyRetrieveCurrentPriceResponse as AlloyRetrieveCurrentPriceResponse,
     type AlloyRetrieveHistoricalPricesResponse as AlloyRetrieveHistoricalPricesResponse,
     type AlloyListParams as AlloyListParams,
-    type AlloyRetrieveHistoricalPricesParams as AlloyRetrieveHistoricalPricesParams
+    type AlloyRetrieveHistoricalPricesParams as AlloyRetrieveHistoricalPricesParams,
   };
 }
