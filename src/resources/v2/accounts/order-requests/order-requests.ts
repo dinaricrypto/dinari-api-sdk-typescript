@@ -65,9 +65,8 @@ export class OrderRequests extends APIResource {
   /**
    * Create a managed `OrderRequest` to place a limit buy `Order`.
    *
-   * Fees for the `Order` are included in the transaction. Refer to our
-   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-   * for fee estimation.
+   * Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+   * orders in USD, supporting up to 6 decimal places
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
    * given account, the creation call will fail.
@@ -95,9 +94,8 @@ export class OrderRequests extends APIResource {
   /**
    * Create a managed `OrderRequest` to place a limit sell `Order`.
    *
-   * Fees for the `Order` are included in the transaction. Refer to our
-   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-   * for fee estimation.
+   * Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+   * orders in USD, supporting up to 6 decimal places
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
    * given account, the creation call will fail.
@@ -125,9 +123,8 @@ export class OrderRequests extends APIResource {
   /**
    * Create a managed `OrderRequest` to place a market buy `Order`.
    *
-   * Fees for the `Order` are included in the transaction. Refer to our
-   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-   * for fee estimation.
+   * Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+   * orders in USD, supporting up to 6 decimal places
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
    * given account, the creation call will fail.
@@ -155,9 +152,8 @@ export class OrderRequests extends APIResource {
   /**
    * Create a managed `OrderRequest` to place a market sell `Order`.
    *
-   * Fees for the `Order` are included in the transaction. Refer to our
-   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-   * for fee estimation.
+   * Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+   * orders in USD, supporting up to 6 decimal places
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
    * given account, the creation call will fail.
@@ -183,6 +179,9 @@ export class OrderRequests extends APIResource {
   }
 
   /**
+   * **DEPRECATED:** This endpoint is deprecated and will be removed on May
+   * 14th, 2026.
+   *
    * Get fee quote data for an `Order Request`. This is provided primarily for
    * informational purposes.
    *
@@ -240,6 +239,12 @@ export interface CreateLimitBuyOrderInput {
   client_order_id?: string | null;
 
   /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -277,6 +282,12 @@ export interface CreateLimitSellOrderInput {
    * unique within the entity.
    */
   client_order_id?: string | null;
+
+  /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
 
   /**
    * Address of the payment token to be used for the sell order. If not provided, the
@@ -318,6 +329,12 @@ export interface CreateMarketBuyOrderInput {
   client_order_id?: string | null;
 
   /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -348,6 +365,12 @@ export interface CreateMarketSellOrderInput {
    * unique within the entity.
    */
   client_order_id?: string | null;
+
+  /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
 
   /**
    * Address of the payment token to be used for the sell order. If not provided, the
@@ -764,6 +787,12 @@ export interface OrderRequestCreateLimitBuyParams {
   client_order_id?: string | null;
 
   /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -798,6 +827,12 @@ export interface OrderRequestCreateLimitSellParams {
    * unique within the entity.
    */
   client_order_id?: string | null;
+
+  /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
 
   /**
    * Address of the payment token to be used for the sell order. If not provided, the
@@ -836,6 +871,12 @@ export interface OrderRequestCreateMarketBuyParams {
   client_order_id?: string | null;
 
   /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -863,6 +904,12 @@ export interface OrderRequestCreateMarketSellParams {
    * unique within the entity.
    */
   client_order_id?: string | null;
+
+  /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
 
   /**
    * Address of the payment token to be used for the sell order. If not provided, the
