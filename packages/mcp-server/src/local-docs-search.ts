@@ -2434,62 +2434,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
-    name: 'get_fee_quote',
-    endpoint: '/api/v2/accounts/{account_id}/order_requests/fee_quote',
-    httpMethod: 'post',
-    summary: 'Get Order Request Fee Quote',
-    description:
-      '\n**DEPRECATED:** This endpoint is deprecated and will be removed on May 14th, 2026.\n\nGet fee quote data for an `Order Request`. This is provided primarily for informational purposes.\n\nFor market buy orders, the notional amount of the order includes the fees.\nFor market and limit sell orders, fees are deducted from the proceeds of the sale.\nFor limit buy orders, the fees are added to the total cost of the order.\n',
-    stainlessPath: '(resource) v2.accounts.order_requests > (method) get_fee_quote',
-    qualified: 'client.v2.accounts.orderRequests.getFeeQuote',
-    params: [
-      'account_id: string;',
-      "order_side: 'BUY' | 'SELL';",
-      "order_type: 'MARKET' | 'LIMIT';",
-      'alloy_id?: string;',
-      'asset_token_quantity?: number;',
-      'chain_id?: string;',
-      'limit_price?: number;',
-      'payment_token_address?: string;',
-      'payment_token_quantity?: number;',
-      'stock_id?: string;',
-    ],
-    response: '{ fee: number; }',
-    markdown:
-      "## get_fee_quote\n\n`client.v2.accounts.orderRequests.getFeeQuote(account_id: string, order_side: 'BUY' | 'SELL', order_type: 'MARKET' | 'LIMIT', alloy_id?: string, asset_token_quantity?: number, chain_id?: string, limit_price?: number, payment_token_address?: string, payment_token_quantity?: number, stock_id?: string): { fee: number; }`\n\n**post** `/api/v2/accounts/{account_id}/order_requests/fee_quote`\n\n\n**DEPRECATED:** This endpoint is deprecated and will be removed on May 14th, 2026.\n\nGet fee quote data for an `Order Request`. This is provided primarily for informational purposes.\n\nFor market buy orders, the notional amount of the order includes the fees.\nFor market and limit sell orders, fees are deducted from the proceeds of the sale.\nFor limit buy orders, the fees are added to the total cost of the order.\n\n\n### Parameters\n\n- `account_id: string`\n\n- `order_side: 'BUY' | 'SELL'`\n  Indicates whether `Order Request` is a buy or sell.\n\n- `order_type: 'MARKET' | 'LIMIT'`\n  Type of `Order Request`.\n\n- `alloy_id?: string`\n  The `Alloy` ID associated with the Order Request\n\n- `asset_token_quantity?: number`\n  Amount of dShare asset tokens involved. Required for limit `Order Requests` and market sell `Order Requests`. Must be a positive number with a precision of up to 4 decimal places for limit `Order Requests` or up to 6 decimal places for market sell `Order Requests`.\n\n- `chain_id?: string`\n  CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If not provided, the default chain ID (eip155:42161) will be used.\n\n- `limit_price?: number`\n  Price per asset in the asset's native currency. USD for US equities and ETFs. Required for limit `Order Requests`.\n\n- `payment_token_address?: string`\n  Address of the payment token to be used for an order. If not provided, the default payment token (USD+) will be used.\n\n- `payment_token_quantity?: number`\n  Amount of payment tokens involved. Required for market buy `Order Requests`.\n\n- `stock_id?: string`\n  The `Stock` ID associated with the Order Request\n\n### Returns\n\n- `{ fee: number; }`\n  A preview of the fee that would be collected when placing an Order Request.\n\n  - `fee: number`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.accounts.orderRequests.getFeeQuote('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { order_side: 'BUY', order_type: 'MARKET' });\n\nconsole.log(response);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v2.accounts.orderRequests.getFeeQuote',
-        example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.accounts.orderRequests.getFeeQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  { order_side: 'BUY', order_type: 'MARKET' },\n);\n\nconsole.log(response.fee);",
-      },
-      python: {
-        method: 'v2.accounts.order_requests.get_fee_quote',
-        example:
-          'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.accounts.order_requests.get_fee_quote(\n    account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    order_side="BUY",\n    order_type="MARKET",\n)\nprint(response.fee)',
-      },
-      java: {
-        method: 'v2().accounts().orderRequests().getFeeQuote',
-        example:
-          'package com.dinari.api.example;\n\nimport com.dinari.api.client.DinariClient;\nimport com.dinari.api.client.okhttp.DinariOkHttpClient;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestGetFeeQuoteParams;\nimport com.dinari.api.models.v2.accounts.orderrequests.OrderRequestGetFeeQuoteResponse;\nimport com.dinari.api.models.v2.accounts.orders.OrderSide;\nimport com.dinari.api.models.v2.accounts.orders.OrderType;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        DinariClient client = DinariOkHttpClient.fromEnv();\n\n        OrderRequestGetFeeQuoteParams params = OrderRequestGetFeeQuoteParams.builder()\n            .accountId("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n            .orderSide(OrderSide.BUY)\n            .orderType(OrderType.MARKET)\n            .build();\n        OrderRequestGetFeeQuoteResponse response = client.v2().accounts().orderRequests().getFeeQuote(params);\n    }\n}',
-      },
-      go: {
-        method: 'client.V2.Accounts.OrderRequests.GetFeeQuote',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.Accounts.OrderRequests.GetFeeQuote(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2AccountOrderRequestGetFeeQuoteParams{\n\t\t\tOrderSide: dinariapisdkgo.OrderSideBuy,\n\t\t\tOrderType: dinariapisdkgo.OrderTypeMarket,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Fee)\n}\n',
-      },
-      php: {
-        method: 'v2->accounts->orderRequests->getFeeQuote',
-        example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->accounts->orderRequests->getFeeQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  orderSide: OrderSide::BUY,\n  orderType: OrderType::MARKET,\n  alloyID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  assetTokenQuantity: 0,\n  chainID: Chain::EIP155_1,\n  limitPrice: 0,\n  paymentTokenAddress: 'payment_token_address',\n  paymentTokenQuantity: 0,\n  stockID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nvar_dump($response);",
-      },
-      http: {
-        example:
-          'curl https://api-enterprise.sbt.dinari.com/api/v2/accounts/$ACCOUNT_ID/order_requests/fee_quote \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-Key-Id: $DINARI_API_KEY_ID" \\\n    -H "X-API-Secret-Key: $DINARI_API_SECRET_KEY" \\\n    -d \'{\n          "order_side": "BUY",\n          "order_type": "MARKET"\n        }\'',
-      },
-    },
-  },
-  {
     name: 'create_permit',
     endpoint: '/api/v2/accounts/{account_id}/order_requests/eip155/permit',
     httpMethod: 'post',

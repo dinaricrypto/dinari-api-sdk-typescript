@@ -188,37 +188,4 @@ describe('resource orderRequests', () => {
       },
     );
   });
-
-  // Mock server tests are disabled
-  test.skip('getFeeQuote: only required params', async () => {
-    const responsePromise = client.v2.accounts.orderRequests.getFeeQuote(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { order_side: 'BUY', order_type: 'MARKET' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('getFeeQuote: required and optional params', async () => {
-    const response = await client.v2.accounts.orderRequests.getFeeQuote(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        order_side: 'BUY',
-        order_type: 'MARKET',
-        alloy_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        asset_token_quantity: 0,
-        chain_id: 'eip155:1',
-        limit_price: 0,
-        payment_token_address: 'payment_token_address',
-        payment_token_quantity: 0,
-        stock_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      },
-    );
-  });
 });

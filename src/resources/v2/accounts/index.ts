@@ -31,14 +31,12 @@ export {
   type OrderRequest,
   type OrderRequestStatus,
   type OrderRequestListResponse,
-  type OrderRequestGetFeeQuoteResponse,
   type OrderRequestRetrieveParams,
   type OrderRequestListParams,
   type OrderRequestCreateLimitBuyParams,
   type OrderRequestCreateLimitSellParams,
   type OrderRequestCreateMarketBuyParams,
   type OrderRequestCreateMarketSellParams,
-  type OrderRequestGetFeeQuoteParams,
 } from './order-requests/index';
 export {
   Orders,

@@ -305,12 +305,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v2/accounts/{account_id}/order_requests/market_sell',
   },
   {
-    clientCallName: 'client.v2.accounts.orderRequests.getFeeQuote',
-    fullyQualifiedName: 'v2.accounts.orderRequests.getFeeQuote',
-    httpMethod: 'post',
-    httpPath: '/api/v2/accounts/{account_id}/order_requests/fee_quote',
-  },
-  {
     clientCallName: 'client.v2.accounts.orderRequests.eip155.createPermit',
     fullyQualifiedName: 'v2.accounts.orderRequests.eip155.createPermit',
     httpMethod: 'post',

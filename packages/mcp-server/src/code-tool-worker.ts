@@ -155,7 +155,6 @@ const fuse = new Fuse(
     'client.v2.accounts.orderRequests.createLimitSell',
     'client.v2.accounts.orderRequests.createMarketBuy',
     'client.v2.accounts.orderRequests.createMarketSell',
-    'client.v2.accounts.orderRequests.getFeeQuote',
     'client.v2.accounts.orderRequests.list',
     'client.v2.accounts.orderRequests.retrieve',
     'client.v2.accounts.orderRequests.eip155.createPermit',

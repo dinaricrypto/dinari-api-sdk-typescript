@@ -70,8 +70,6 @@ import {
   OrderRequestCreateLimitSellParams,
   OrderRequestCreateMarketBuyParams,
   OrderRequestCreateMarketSellParams,
-  OrderRequestGetFeeQuoteParams,
-  OrderRequestGetFeeQuoteResponse,
   OrderRequestListParams,
   OrderRequestListResponse,
   OrderRequestRetrieveParams,
@@ -729,14 +727,12 @@ export declare namespace Accounts {
     type OrderRequest as OrderRequest,
     type OrderRequestStatus as OrderRequestStatus,
     type OrderRequestListResponse as OrderRequestListResponse,
-    type OrderRequestGetFeeQuoteResponse as OrderRequestGetFeeQuoteResponse,
     type OrderRequestRetrieveParams as OrderRequestRetrieveParams,
     type OrderRequestListParams as OrderRequestListParams,
     type OrderRequestCreateLimitBuyParams as OrderRequestCreateLimitBuyParams,
     type OrderRequestCreateLimitSellParams as OrderRequestCreateLimitSellParams,
     type OrderRequestCreateMarketBuyParams as OrderRequestCreateMarketBuyParams,
     type OrderRequestCreateMarketSellParams as OrderRequestCreateMarketSellParams,
-    type OrderRequestGetFeeQuoteParams as OrderRequestGetFeeQuoteParams,
   };
 
   export {
