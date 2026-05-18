@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as AccountsAPI from '../accounts';
 import * as OrdersAPI from '../orders';
 import * as Eip155API from './eip155';
 import {
@@ -173,37 +172,6 @@ export class OrderRequests extends APIResource {
     options?: RequestOptions,
   ): APIPromise<OrderRequest> {
     return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/market_sell`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
-   * **DEPRECATED:** This endpoint is deprecated and will be removed on May
-   * 14th, 2026.
-   *
-   * Get fee quote data for an `Order Request`. This is provided primarily for
-   * informational purposes.
-   *
-   * For market buy orders, the notional amount of the order includes the fees. For
-   * market and limit sell orders, fees are deducted from the proceeds of the sale.
-   * For limit buy orders, the fees are added to the total cost of the order.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v2.accounts.orderRequests.getFeeQuote(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { order_side: 'BUY', order_type: 'MARKET' },
-   *   );
-   * ```
-   */
-  getFeeQuote(
-    accountID: string,
-    body: OrderRequestGetFeeQuoteParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderRequestGetFeeQuoteResponse> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/fee_quote`, {
       body,
       ...options,
     });
@@ -705,16 +673,6 @@ export namespace OrderRequestListResponse {
   }
 }
 
-/**
- * A preview of the fee that would be collected when placing an Order Request.
- */
-export interface OrderRequestGetFeeQuoteResponse {
-  /**
-   * Cash amount in USD paid for fees for the Order Request.
-   */
-  fee: number;
-}
-
 export interface OrderRequestRetrieveParams {
   account_id: string;
 }
@@ -929,59 +887,6 @@ export interface OrderRequestCreateMarketSellParams {
   stock_id?: string | null;
 }
 
-export interface OrderRequestGetFeeQuoteParams {
-  /**
-   * Indicates whether `Order Request` is a buy or sell.
-   */
-  order_side: OrdersAPI.OrderSide;
-
-  /**
-   * Type of `Order Request`.
-   */
-  order_type: OrdersAPI.OrderType;
-
-  /**
-   * The `Alloy` ID associated with the Order Request
-   */
-  alloy_id?: string | null;
-
-  /**
-   * Amount of dShare asset tokens involved. Required for limit `Order Requests` and
-   * market sell `Order Requests`. Must be a positive number with a precision of up
-   * to 4 decimal places for limit `Order Requests` or up to 6 decimal places for
-   * market sell `Order Requests`.
-   */
-  asset_token_quantity?: number | null;
-
-  /**
-   * CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
-   * not provided, the default chain ID (eip155:42161) will be used.
-   */
-  chain_id?: AccountsAPI.Chain;
-
-  /**
-   * Price per asset in the asset's native currency. USD for US equities and ETFs.
-   * Required for limit `Order Requests`.
-   */
-  limit_price?: number | null;
-
-  /**
-   * Address of the payment token to be used for an order. If not provided, the
-   * default payment token (USD+) will be used.
-   */
-  payment_token_address?: string | null;
-
-  /**
-   * Amount of payment tokens involved. Required for market buy `Order Requests`.
-   */
-  payment_token_quantity?: number | null;
-
-  /**
-   * The `Stock` ID associated with the Order Request
-   */
-  stock_id?: string | null;
-}
-
 OrderRequests.Eip155 = Eip155;
 
 export declare namespace OrderRequests {
@@ -993,14 +898,12 @@ export declare namespace OrderRequests {
     type OrderRequest as OrderRequest,
     type OrderRequestStatus as OrderRequestStatus,
     type OrderRequestListResponse as OrderRequestListResponse,
-    type OrderRequestGetFeeQuoteResponse as OrderRequestGetFeeQuoteResponse,
     type OrderRequestRetrieveParams as OrderRequestRetrieveParams,
     type OrderRequestListParams as OrderRequestListParams,
     type OrderRequestCreateLimitBuyParams as OrderRequestCreateLimitBuyParams,
     type OrderRequestCreateLimitSellParams as OrderRequestCreateLimitSellParams,
     type OrderRequestCreateMarketBuyParams as OrderRequestCreateMarketBuyParams,
     type OrderRequestCreateMarketSellParams as OrderRequestCreateMarketSellParams,
-    type OrderRequestGetFeeQuoteParams as OrderRequestGetFeeQuoteParams,
   };
 
   export {
