@@ -394,21 +394,21 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     description: 'Get quote for a specified `Stock`.',
     stainlessPath: '(resource) v2.market_data.stocks > (method) retrieve_current_quote',
     qualified: 'client.v2.marketData.stocks.retrieveCurrentQuote',
-    params: ['stock_id: string;'],
+    params: ['stock_id: string;', "feed?: 'sip';", 'X-API-Version?: string;'],
     response:
-      "{ ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; _sv?: 'StockQuote:v1'; }",
+      "{ ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; _sv?: 'StockQuote:v1'; } | { ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; _sv?: 'StockQuote:v2'; ask_exchange?: string; bid_exchange?: string; }",
     markdown:
-      "## retrieve_current_quote\n\n`client.v2.marketData.stocks.retrieveCurrentQuote(stock_id: string): { ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; _sv?: 'StockQuote:v1'; }`\n\n**get** `/api/v2/market_data/stocks/{stock_id}/current_quote`\n\nGet quote for a specified `Stock`.\n\n### Parameters\n\n- `stock_id: string`\n\n### Returns\n\n- `{ ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; _sv?: 'StockQuote:v1'; }`\n  Stock Quote\n\n  - `ask_price: number`\n  - `ask_size: number`\n  - `bid_price: number`\n  - `bid_size: number`\n  - `stock_id: string`\n  - `timestamp: string`\n  - `_sv?: 'StockQuote:v1'`\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.stocks.retrieveCurrentQuote('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
+      "## retrieve_current_quote\n\n`client.v2.marketData.stocks.retrieveCurrentQuote(stock_id: string, feed?: 'sip', X-API-Version?: string): { ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; _sv?: 'StockQuote:v1'; } | { ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; _sv?: 'StockQuote:v2'; ask_exchange?: string; bid_exchange?: string; }`\n\n**get** `/api/v2/market_data/stocks/{stock_id}/current_quote`\n\nGet quote for a specified `Stock`.\n\n### Parameters\n\n- `stock_id: string`\n\n- `feed?: 'sip'`\n  Requested data source for the quote. Only applies when using x-api-version: 2.\nAllowed values:\n\n- `null`: (default) Selects the highest quality available free data source.\n- `sip`: Consolidated quote from all U.S. exchanges (NBBO). This is a paid data source and incurs usage-based billing.\n\n- `X-API-Version?: string`\n\n### Returns\n\n- `{ ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; _sv?: 'StockQuote:v1'; } | { ask_price: number; ask_size: number; bid_price: number; bid_size: number; stock_id: string; timestamp: string; _sv?: 'StockQuote:v2'; ask_exchange?: string; bid_exchange?: string; }`\n  Stock Quote\n\n### Example\n\n```typescript\nimport Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari();\n\nconst response = await client.v2.marketData.stocks.retrieveCurrentQuote('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v2.marketData.stocks.retrieveCurrentQuote',
         example:
-          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveCurrentQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response.bid_price);",
+          "import Dinari from '@dinari/api-sdk';\n\nconst client = new Dinari({\n  apiKeyID: process.env['DINARI_API_KEY_ID'], // This is the default and can be omitted\n  apiSecretKey: process.env['DINARI_API_SECRET_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v2.marketData.stocks.retrieveCurrentQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n);\n\nconsole.log(response);",
       },
       python: {
         method: 'v2.market_data.stocks.retrieve_current_quote',
         example:
-          'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.stocks.retrieve_current_quote(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response.bid_price)',
+          'import os\nfrom dinari_api_sdk import Dinari\n\nclient = Dinari(\n    api_key_id=os.environ.get("DINARI_API_KEY_ID"),  # This is the default and can be omitted\n    api_secret_key=os.environ.get("DINARI_API_SECRET_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v2.market_data.stocks.retrieve_current_quote(\n    stock_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response)',
       },
       java: {
         method: 'v2().marketData().stocks().retrieveCurrentQuote',
@@ -418,12 +418,12 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       go: {
         method: 'client.V2.MarketData.Stocks.GetCurrentQuote',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetCurrentQuote(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.BidPrice)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/dinaricrypto/dinari-api-sdk-go"\n\t"github.com/dinaricrypto/dinari-api-sdk-go/option"\n)\n\nfunc main() {\n\tclient := dinariapisdkgo.NewClient(\n\t\toption.WithAPIKeyID("My API Key ID"),\n\t\toption.WithAPISecretKey("My API Secret Key"),\n\t)\n\tresponse, err := client.V2.MarketData.Stocks.GetCurrentQuote(\n\t\tcontext.TODO(),\n\t\t"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n\t\tdinariapisdkgo.V2MarketDataStockGetCurrentQuoteParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
       },
       php: {
         method: 'v2->marketData->stocks->retrieveCurrentQuote',
         example:
-          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveCurrentQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'\n);\n\nvar_dump($response);",
+          "<?php\n\nrequire_once dirname(__DIR__) . '/vendor/autoload.php';\n\n$client = new Client(\n  apiKeyID: 'My API Key ID',\n  apiSecretKey: 'My API Secret Key',\n  environment: 'sandbox',\n);\n\n$response = $client->v2->marketData->stocks->retrieveCurrentQuote(\n  '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',\n  feed: 'sip',\n  xAPIVersion: 'X-API-Version',\n);\n\nvar_dump($response);",
       },
       http: {
         example:
