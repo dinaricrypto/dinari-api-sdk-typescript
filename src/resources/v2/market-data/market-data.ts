@@ -15,6 +15,7 @@ import {
   StockListParams,
   StockListResponse,
   StockRetrieveCurrentPriceResponse,
+  StockRetrieveCurrentQuoteParams,
   StockRetrieveCurrentQuoteResponse,
   StockRetrieveDividendsResponse,
   StockRetrieveHistoricalPricesParams,
@@ -124,6 +125,7 @@ export declare namespace MarketData {
     type StockRetrieveHistoricalPricesResponse as StockRetrieveHistoricalPricesResponse,
     type StockRetrieveNewsResponse as StockRetrieveNewsResponse,
     type StockListParams as StockListParams,
+    type StockRetrieveCurrentQuoteParams as StockRetrieveCurrentQuoteParams,
     type StockRetrieveHistoricalPricesParams as StockRetrieveHistoricalPricesParams,
     type StockRetrieveNewsParams as StockRetrieveNewsParams,
   };

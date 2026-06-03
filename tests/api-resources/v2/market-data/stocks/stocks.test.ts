@@ -69,6 +69,18 @@ describe('resource stocks', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('retrieveCurrentQuote: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v2.marketData.stocks.retrieveCurrentQuote(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { feed: 'sip', 'X-API-Version': 'X-API-Version' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Dinari.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('retrieveDividends', async () => {
     const responsePromise = client.v2.marketData.stocks.retrieveDividends(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

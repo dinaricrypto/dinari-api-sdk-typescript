@@ -18,6 +18,7 @@ export {
   type StockRetrieveHistoricalPricesResponse,
   type StockRetrieveNewsResponse,
   type StockListParams,
+  type StockRetrieveCurrentQuoteParams,
   type StockRetrieveHistoricalPricesParams,
   type StockRetrieveNewsParams,
 } from './stocks/index';

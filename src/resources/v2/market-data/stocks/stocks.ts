@@ -11,6 +11,7 @@ import {
   StockSplit,
 } from './splits';
 import { APIPromise } from '../../../../core/api-promise';
+import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -63,9 +64,18 @@ export class Stocks extends APIResource {
    */
   retrieveCurrentQuote(
     stockID: string,
+    params: StockRetrieveCurrentQuoteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<StockRetrieveCurrentQuoteResponse> {
-    return this._client.get(path`/api/v2/market_data/stocks/${stockID}/current_quote`, options);
+    const { 'X-API-Version': xAPIVersion, ...query } = params ?? {};
+    return this._client.get(path`/api/v2/market_data/stocks/${stockID}/current_quote`, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        { ...(xAPIVersion != null ? { 'X-API-Version': xAPIVersion } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -386,41 +396,100 @@ export interface StockRetrieveCurrentPriceResponse {
 /**
  * Stock Quote
  */
-export interface StockRetrieveCurrentQuoteResponse {
+export type StockRetrieveCurrentQuoteResponse =
+  | StockRetrieveCurrentQuoteResponse.StockQuoteResponseV1
+  | StockRetrieveCurrentQuoteResponse.StockQuoteResponseV2;
+
+export namespace StockRetrieveCurrentQuoteResponse {
   /**
-   * The ask price. 0 if there is no active ask.
+   * Stock Quote
    */
-  ask_price: number;
+  export interface StockQuoteResponseV1 {
+    /**
+     * The ask price. 0 if there is no active ask.
+     */
+    ask_price: number;
+
+    /**
+     * The ask size in shares.
+     */
+    ask_size: number;
+
+    /**
+     * The bid price. 0 if there is no active bid.
+     */
+    bid_price: number;
+
+    /**
+     * The bid size in shares.
+     */
+    bid_size: number;
+
+    /**
+     * ID of the `Stock`
+     */
+    stock_id: string;
+
+    /**
+     * When the `StockQuote` was generated.
+     */
+    timestamp: string;
+
+    /**
+     * Schema version
+     */
+    _sv?: 'StockQuote:v1';
+  }
 
   /**
-   * The ask size in shares.
+   * Stock Quote
    */
-  ask_size: number;
+  export interface StockQuoteResponseV2 {
+    /**
+     * The ask price. 0 if there is no active ask.
+     */
+    ask_price: number;
 
-  /**
-   * The bid price. 0 if there is no active bid.
-   */
-  bid_price: number;
+    /**
+     * The ask size in shares.
+     */
+    ask_size: number;
 
-  /**
-   * The bid size in shares.
-   */
-  bid_size: number;
+    /**
+     * The bid price. 0 if there is no active bid.
+     */
+    bid_price: number;
 
-  /**
-   * ID of the `Stock`
-   */
-  stock_id: string;
+    /**
+     * The bid size in shares.
+     */
+    bid_size: number;
 
-  /**
-   * When the `StockQuote` was generated.
-   */
-  timestamp: string;
+    /**
+     * ID of the `Stock`
+     */
+    stock_id: string;
 
-  /**
-   * Schema version
-   */
-  _sv?: 'StockQuote:v1';
+    /**
+     * When the `StockQuote` was generated.
+     */
+    timestamp: string;
+
+    /**
+     * Schema version
+     */
+    _sv?: 'StockQuote:v2';
+
+    /**
+     * The ask exchange.
+     */
+    ask_exchange?: string | null;
+
+    /**
+     * The bid exchange.
+     */
+    bid_exchange?: string | null;
+  }
 }
 
 export type StockRetrieveDividendsResponse =
@@ -581,6 +650,23 @@ export interface StockListParams {
   symbols?: Array<string>;
 }
 
+export interface StockRetrieveCurrentQuoteParams {
+  /**
+   * Query param: Requested data source for the quote. Only applies when using
+   * x-api-version: 2. Allowed values:
+   *
+   * - `null`: (default) Selects the highest quality available free data source.
+   * - `sip`: Consolidated quote from all U.S. exchanges (NBBO). This is a paid data
+   *   source and incurs usage-based billing.
+   */
+  feed?: 'sip' | null;
+
+  /**
+   * Header param: Version for this method
+   */
+  'X-API-Version'?: string;
+}
+
 export interface StockRetrieveHistoricalPricesParams {
   /**
    * The timespan of the historical prices to query.
@@ -606,6 +692,7 @@ export declare namespace Stocks {
     type StockRetrieveHistoricalPricesResponse as StockRetrieveHistoricalPricesResponse,
     type StockRetrieveNewsResponse as StockRetrieveNewsResponse,
     type StockListParams as StockListParams,
+    type StockRetrieveCurrentQuoteParams as StockRetrieveCurrentQuoteParams,
     type StockRetrieveHistoricalPricesParams as StockRetrieveHistoricalPricesParams,
     type StockRetrieveNewsParams as StockRetrieveNewsParams,
   };
