@@ -271,7 +271,8 @@ export interface Eip155CreatePermitParams {
   order_type: OrdersAPI.OrderType;
 
   /**
-   * Address of payment token.
+   * Address of payment token. Required for Accounts outside of US jurisdiction.
+   * Accounts inside US jurisdiction must use USDC.
    */
   payment_token: string;
 
