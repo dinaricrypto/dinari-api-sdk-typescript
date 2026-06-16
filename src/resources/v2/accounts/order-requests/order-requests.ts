@@ -213,6 +213,12 @@ export interface CreateLimitBuyOrderInput {
   fee?: number | null;
 
   /**
+   * Address of the payment token to be used for the payment of the order. If not
+   * provided, the default payment token (USD+) will be used.
+   */
+  payment_token_address?: string | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -301,6 +307,12 @@ export interface CreateMarketBuyOrderInput {
    * positive number with a precision of up to 6 decimal places.
    */
   fee?: number | null;
+
+  /**
+   * Address of the payment token to be used for the payment of the order. If not
+   * provided, the default payment token (USD+) will be used.
+   */
+  payment_token_address?: string | null;
 
   /**
    * ID of `Account` to receive the `Order`.
@@ -751,6 +763,12 @@ export interface OrderRequestCreateLimitBuyParams {
   fee?: number | null;
 
   /**
+   * Address of the payment token to be used for the payment of the order. If not
+   * provided, the default payment token (USD+) will be used.
+   */
+  payment_token_address?: string | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -833,6 +851,12 @@ export interface OrderRequestCreateMarketBuyParams {
    * positive number with a precision of up to 6 decimal places.
    */
   fee?: number | null;
+
+  /**
+   * Address of the payment token to be used for the payment of the order. If not
+   * provided, the default payment token (USD+) will be used.
+   */
+  payment_token_address?: string | null;
 
   /**
    * ID of `Account` to receive the `Order`.
