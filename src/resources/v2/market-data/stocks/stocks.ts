@@ -131,13 +131,28 @@ export class Stocks extends APIResource {
   }
 }
 
-export type StockListResponse = Array<StockListResponse.StockListResponseItem>;
+export interface StockListResponse {
+  /**
+   * List of Stock
+   */
+  data: Array<StockListResponse.Data>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: StockListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedStockResponse:v1';
+}
 
 export namespace StockListResponse {
   /**
    * Information about stock available for trading.
    */
-  export interface StockListResponseItem {
+  export interface Data {
     /**
      * ID of the `Stock`
      */
@@ -205,11 +220,26 @@ export namespace StockListResponse {
      */
     logo_url?: string | null;
   }
+
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
+    /**
+     * Cursor for next page
+     */
+    next?: string;
+
+    /**
+     * Cursor for previous page
+     */
+    previous?: string;
+  }
 }
 
 export interface StockRetrieveCurrentPriceResponse {
   /**
-   * The ask price.
+   * The price (fair market value) of the asset at the given time period.
    */
   price: number;
 
@@ -219,7 +249,7 @@ export interface StockRetrieveCurrentPriceResponse {
   stock_id: string;
 
   /**
-   * When the Stock Quote was generated.
+   * When the `StockPrice` was generated.
    */
   timestamp: string;
 
@@ -249,8 +279,8 @@ export interface StockRetrieveCurrentPriceResponse {
   low?: number | null;
 
   /**
-   * The most recent close price of the ticker multiplied by weighted outstanding
-   * shares.
+   * The market capitalization of the `Stock` calculated at the most recent close
+   * price.
    */
   market_cap?: number | null;
 
@@ -265,7 +295,7 @@ export interface StockRetrieveCurrentPriceResponse {
   previous_close?: number | null;
 
   /**
-   * The trading volume from the given time period.
+   * The trading volume in shares from the given time period.
    */
   volume?: number | null;
 
@@ -275,24 +305,27 @@ export interface StockRetrieveCurrentPriceResponse {
   weighted_shares_outstanding?: number | null;
 }
 
+/**
+ * Stock Quote
+ */
 export interface StockRetrieveCurrentQuoteResponse {
   /**
-   * The ask price.
+   * The ask price. 0 if there is no active ask.
    */
   ask_price: number;
 
   /**
-   * The ask size.
+   * The ask size in shares.
    */
   ask_size: number;
 
   /**
-   * The bid price.
+   * The bid price. 0 if there is no active bid.
    */
   bid_price: number;
 
   /**
-   * The bid size.
+   * The bid size in shares.
    */
   bid_size: number;
 
@@ -302,9 +335,14 @@ export interface StockRetrieveCurrentQuoteResponse {
   stock_id: string;
 
   /**
-   * When the Stock Quote was generated.
+   * When the `StockQuote` was generated.
    */
   timestamp: string;
+
+  /**
+   * Schema version
+   */
+  _sv?: 'StockQuote:v1';
 }
 
 export type StockRetrieveDividendsResponse =
@@ -435,9 +473,25 @@ export namespace StockRetrieveNewsResponse {
 }
 
 export interface StockListParams {
-  page?: number;
+  /**
+   * Number of results to return
+   */
+  limit?: number;
 
-  page_size?: number;
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 
   /**
    * List of `Stock` symbols to query. If not provided, all `Stocks` are returned.

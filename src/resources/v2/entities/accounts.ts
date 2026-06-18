@@ -26,7 +26,7 @@ export class Accounts extends APIResource {
     entityID: string,
     body: AccountCreateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Account> {
+  ): APIPromise<AccountCreateResponse> {
     return this._client.post(path`/api/v2/entities/${entityID}/accounts`, { body, ...options });
   }
 
@@ -78,7 +78,7 @@ export interface Account {
   /**
    * Jurisdiction of the `Account`.
    */
-  jurisdiction: Jurisdiction;
+  jurisdiction: 'BASELINE' | 'US';
 
   /**
    * ID of the brokerage account associated with the `Account`.
@@ -88,7 +88,74 @@ export interface Account {
 
 export type Jurisdiction = 'BASELINE' | 'US';
 
-export type AccountListResponse = Array<Account>;
+/**
+ * Information about an `Account` owned by an `Entity`.
+ */
+export interface AccountCreateResponse {
+  /**
+   * Unique ID for the `Account`.
+   */
+  id: string;
+
+  /**
+   * Datetime when the `Account` was created. ISO 8601 timestamp.
+   */
+  created_dt: string;
+
+  /**
+   * ID for the `Entity` that owns the `Account`.
+   */
+  entity_id: string;
+
+  /**
+   * Indicates whether the `Account` is active.
+   */
+  is_active: boolean;
+
+  /**
+   * Jurisdiction of the `Account`.
+   */
+  jurisdiction: Jurisdiction;
+
+  /**
+   * ID of the brokerage account associated with the `Account`.
+   */
+  brokerage_account_id?: string | null;
+}
+
+export interface AccountListResponse {
+  /**
+   * List of Account
+   */
+  data: Array<Account>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: AccountListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedAccountResponse:v1';
+}
+
+export namespace AccountListResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
+    /**
+     * Cursor for next page
+     */
+    next?: string;
+
+    /**
+     * Cursor for previous page
+     */
+    previous?: string;
+  }
+}
 
 export interface AccountCreateParams {
   /**
@@ -98,15 +165,32 @@ export interface AccountCreateParams {
 }
 
 export interface AccountListParams {
-  page?: number;
+  /**
+   * Number of results to return
+   */
+  limit?: number;
 
-  page_size?: number;
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 export declare namespace Accounts {
   export {
     type Account as Account,
     type Jurisdiction as Jurisdiction,
+    type AccountCreateResponse as AccountCreateResponse,
     type AccountListResponse as AccountListResponse,
     type AccountCreateParams as AccountCreateParams,
     type AccountListParams as AccountListParams,

@@ -49,11 +49,13 @@ describe('resource orders', () => {
       client.v2.accounts.orders.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         {
-          chain_id: 'eip155:1',
+          chain_id: 'chain_id',
           client_order_id: 'client_order_id',
+          limit: 20,
+          next: 'next',
+          order: 'asc',
           order_transaction_hash: 'order_transaction_hash',
-          page: 1,
-          page_size: 1,
+          previous: 'previous',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -121,8 +123,10 @@ describe('resource orders', () => {
   test.skip('getFulfillments: required and optional params', async () => {
     const response = await client.v2.accounts.orders.getFulfillments('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      page: 1,
-      page_size: 1,
+      limit: 20,
+      next: 'next',
+      order: 'asc',
+      previous: 'previous',
     });
   });
 });

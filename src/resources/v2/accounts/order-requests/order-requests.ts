@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as AccountsAPI from '../accounts';
 import * as OrdersAPI from '../orders';
 import * as Eip155API from './eip155';
 import {
@@ -65,9 +64,8 @@ export class OrderRequests extends APIResource {
   /**
    * Create a managed `OrderRequest` to place a limit buy `Order`.
    *
-   * Fees for the `Order` are included in the transaction. Refer to our
-   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-   * for fee estimation.
+   * Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+   * orders in USD, supporting up to 6 decimal places
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
    * given account, the creation call will fail.
@@ -95,9 +93,8 @@ export class OrderRequests extends APIResource {
   /**
    * Create a managed `OrderRequest` to place a limit sell `Order`.
    *
-   * Fees for the `Order` are included in the transaction. Refer to our
-   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-   * for fee estimation.
+   * Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+   * orders in USD, supporting up to 6 decimal places
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
    * given account, the creation call will fail.
@@ -125,9 +122,8 @@ export class OrderRequests extends APIResource {
   /**
    * Create a managed `OrderRequest` to place a market buy `Order`.
    *
-   * Fees for the `Order` are included in the transaction. Refer to our
-   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-   * for fee estimation.
+   * Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+   * orders in USD, supporting up to 6 decimal places
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
    * given account, the creation call will fail.
@@ -155,9 +151,8 @@ export class OrderRequests extends APIResource {
   /**
    * Create a managed `OrderRequest` to place a market sell `Order`.
    *
-   * Fees for the `Order` are included in the transaction. Refer to our
-   * [Fee Quote API](https://docs.dinari.com/reference/createproxiedorderfeequote#/)
-   * for fee estimation.
+   * Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+   * orders in USD, supporting up to 6 decimal places
    *
    * If an `OrderRequest` with the same `client_order_id` already exists for the
    * given account, the creation call will fail.
@@ -177,34 +172,6 @@ export class OrderRequests extends APIResource {
     options?: RequestOptions,
   ): APIPromise<OrderRequest> {
     return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/market_sell`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
-   * Get fee quote data for an `Order Request`. This is provided primarily for
-   * informational purposes.
-   *
-   * For market buy orders, the notional amount of the order includes the fees. For
-   * market and limit sell orders, fees are deducted from the proceeds of the sale.
-   * For limit buy orders, the fees are added to the total cost of the order.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v2.accounts.orderRequests.getFeeQuote(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { order_side: 'BUY', order_type: 'MARKET' },
-   *   );
-   * ```
-   */
-  getFeeQuote(
-    accountID: string,
-    body: OrderRequestGetFeeQuoteParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderRequestGetFeeQuoteResponse> {
-    return this._client.post(path`/api/v2/accounts/${accountID}/order_requests/fee_quote`, {
       body,
       ...options,
     });
@@ -238,6 +205,18 @@ export interface CreateLimitBuyOrderInput {
    * unique within the entity.
    */
   client_order_id?: string | null;
+
+  /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
+   * Address of the payment token to be used for the payment of the order. If not
+   * provided, the default payment token (USD+) will be used.
+   */
+  payment_token_address?: string | null;
 
   /**
    * ID of `Account` to receive the `Order`.
@@ -279,6 +258,12 @@ export interface CreateLimitSellOrderInput {
   client_order_id?: string | null;
 
   /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
    * Address of the payment token to be used for the sell order. If not provided, the
    * default payment token (USD+) will be used. Should only be specified if
    * `recipient_account_id` for a non-managed wallet account is also provided.
@@ -318,6 +303,18 @@ export interface CreateMarketBuyOrderInput {
   client_order_id?: string | null;
 
   /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
+   * Address of the payment token to be used for the payment of the order. If not
+   * provided, the default payment token (USD+) will be used.
+   */
+  payment_token_address?: string | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -348,6 +345,12 @@ export interface CreateMarketSellOrderInput {
    * unique within the entity.
    */
   client_order_id?: string | null;
+
+  /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
 
   /**
    * Address of the payment token to be used for the sell order. If not provided, the
@@ -460,16 +463,129 @@ export type OrderRequestStatus =
   | 'EXPIRED'
   | 'REJECTED';
 
-export type OrderRequestListResponse = Array<OrderRequest>;
-
-/**
- * A preview of the fee that would be collected when placing an Order Request.
- */
-export interface OrderRequestGetFeeQuoteResponse {
+export interface OrderRequestListResponse {
   /**
-   * Cash amount in USD paid for fees for the Order Request.
+   * List of AccountOrder
    */
-  fee: number;
+  data: Array<OrderRequestListResponse.Data>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: OrderRequestListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedAccountOrderRequestResponse:v1';
+}
+
+export namespace OrderRequestListResponse {
+  /**
+   * A request to create an `Order`.
+   *
+   * An `OrderRequest` is created when a user places an order through the Dinari API.
+   * The `OrderRequest` is then fulfilled by creating an `Order` on-chain.
+   *
+   * The `OrderRequest` is a record of the user's intent to place an order, while the
+   * `Order` is the actual transaction that occurs on the blockchain.
+   */
+  export interface Data {
+    /**
+     * ID of `OrderRequest`. This is the primary identifier for the `/order_requests`
+     * routes.
+     */
+    id: string;
+
+    /**
+     * ID of `Account` placing the `OrderRequest`.
+     */
+    account_id: string;
+
+    /**
+     * Datetime at which the `OrderRequest` was created. ISO 8601 timestamp.
+     */
+    created_dt: string;
+
+    /**
+     * Indicates whether `Order` is a buy or sell.
+     */
+    order_side: 'BUY' | 'SELL';
+
+    /**
+     * Indicates how long `Order` is valid for.
+     */
+    order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
+
+    /**
+     * Type of `Order`.
+     */
+    order_type: 'MARKET' | 'LIMIT';
+
+    /**
+     * Status of `OrderRequest`. Possible values:
+     *
+     * - `QUOTED`: Order request created with fee quote provided, ready for processing
+     * - `PENDING`: Order request is being prepared for submission
+     * - `PENDING_BRIDGE`: Order is waiting for bridge transaction to complete
+     * - `SUBMITTED`: Order has been successfully submitted to the order book
+     * - `ERROR`: An error occurred during order processing
+     * - `CANCELLED`: Order request was cancelled
+     * - `EXPIRED`: Order request expired due to deadline passing
+     * - `REJECTED`: Order request was rejected
+     */
+    status:
+      | 'QUOTED'
+      | 'PENDING'
+      | 'PENDING_BRIDGE'
+      | 'SUBMITTED'
+      | 'ERROR'
+      | 'CANCELLED'
+      | 'EXPIRED'
+      | 'REJECTED';
+
+    /**
+     * Reason for the order cancellation if the order status is CANCELLED
+     */
+    cancel_message?: string | null;
+
+    /**
+     * Customer-supplied ID to map this `OrderRequest` to an order in their own
+     * systems.
+     */
+    client_order_id?: string | null;
+
+    /**
+     * ID of `Order` created from the `OrderRequest`. This is the primary identifier
+     * for the `/orders` routes.
+     */
+    order_id?: string | null;
+
+    /**
+     * ID of recipient `Account`.
+     */
+    recipient_account_id?: string | null;
+
+    /**
+     * Reason for the order rejection if the order status is REJECTED
+     */
+    reject_message?: string | null;
+  }
+
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
+    /**
+     * Cursor for next page
+     */
+    next?: string;
+
+    /**
+     * Cursor for previous page
+     */
+    previous?: string;
+  }
 }
 
 export interface OrderRequestRetrieveParams {
@@ -484,6 +600,21 @@ export interface OrderRequestListParams {
   client_order_id?: string | null;
 
   /**
+   * Number of results to return
+   */
+  limit?: number;
+
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
+  /**
    * Order ID for the `OrderRequest`
    */
   order_id?: string | null;
@@ -493,9 +624,10 @@ export interface OrderRequestListParams {
    */
   order_request_id?: string | null;
 
-  page?: number;
-
-  page_size?: number;
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 export interface OrderRequestCreateLimitBuyParams {
@@ -522,6 +654,18 @@ export interface OrderRequestCreateLimitBuyParams {
    * unique within the entity.
    */
   client_order_id?: string | null;
+
+  /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
+   * Address of the payment token to be used for the payment of the order. If not
+   * provided, the default payment token (USD+) will be used.
+   */
+  payment_token_address?: string | null;
 
   /**
    * ID of `Account` to receive the `Order`.
@@ -560,6 +704,12 @@ export interface OrderRequestCreateLimitSellParams {
   client_order_id?: string | null;
 
   /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
    * Address of the payment token to be used for the sell order. If not provided, the
    * default payment token (USD+) will be used. Should only be specified if
    * `recipient_account_id` for a non-managed wallet account is also provided.
@@ -596,6 +746,18 @@ export interface OrderRequestCreateMarketBuyParams {
   client_order_id?: string | null;
 
   /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
+   * Address of the payment token to be used for the payment of the order. If not
+   * provided, the default payment token (USD+) will be used.
+   */
+  payment_token_address?: string | null;
+
+  /**
    * ID of `Account` to receive the `Order`.
    */
   recipient_account_id?: string | null;
@@ -625,6 +787,12 @@ export interface OrderRequestCreateMarketSellParams {
   client_order_id?: string | null;
 
   /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
+
+  /**
    * Address of the payment token to be used for the sell order. If not provided, the
    * default payment token (USD+) will be used. Should only be specified if
    * `recipient_account_id` for a non-managed wallet account is also provided.
@@ -642,59 +810,6 @@ export interface OrderRequestCreateMarketSellParams {
   stock_id?: string | null;
 }
 
-export interface OrderRequestGetFeeQuoteParams {
-  /**
-   * Indicates whether `Order Request` is a buy or sell.
-   */
-  order_side: OrdersAPI.OrderSide;
-
-  /**
-   * Type of `Order Request`.
-   */
-  order_type: OrdersAPI.OrderType;
-
-  /**
-   * The `Alloy` ID associated with the Order Request
-   */
-  alloy_id?: string | null;
-
-  /**
-   * Amount of dShare asset tokens involved. Required for limit `Order Requests` and
-   * market sell `Order Requests`. Must be a positive number with a precision of up
-   * to 4 decimal places for limit `Order Requests` or up to 6 decimal places for
-   * market sell `Order Requests`.
-   */
-  asset_token_quantity?: number | null;
-
-  /**
-   * CAIP-2 chain ID of the blockchain where the `Order Request` will be placed. If
-   * not provided, the default chain ID (eip155:42161) will be used.
-   */
-  chain_id?: AccountsAPI.Chain | null;
-
-  /**
-   * Price per asset in the asset's native currency. USD for US equities and ETFs.
-   * Required for limit `Order Requests`.
-   */
-  limit_price?: number | null;
-
-  /**
-   * Address of the payment token to be used for an order. If not provided, the
-   * default payment token (USD+) will be used.
-   */
-  payment_token_address?: string | null;
-
-  /**
-   * Amount of payment tokens involved. Required for market buy `Order Requests`.
-   */
-  payment_token_quantity?: number | null;
-
-  /**
-   * The `Stock` ID associated with the Order Request
-   */
-  stock_id?: string | null;
-}
-
 OrderRequests.Eip155 = Eip155;
 
 export declare namespace OrderRequests {
@@ -706,14 +821,12 @@ export declare namespace OrderRequests {
     type OrderRequest as OrderRequest,
     type OrderRequestStatus as OrderRequestStatus,
     type OrderRequestListResponse as OrderRequestListResponse,
-    type OrderRequestGetFeeQuoteResponse as OrderRequestGetFeeQuoteResponse,
     type OrderRequestRetrieveParams as OrderRequestRetrieveParams,
     type OrderRequestListParams as OrderRequestListParams,
     type OrderRequestCreateLimitBuyParams as OrderRequestCreateLimitBuyParams,
     type OrderRequestCreateLimitSellParams as OrderRequestCreateLimitSellParams,
     type OrderRequestCreateMarketBuyParams as OrderRequestCreateMarketBuyParams,
     type OrderRequestCreateMarketSellParams as OrderRequestCreateMarketSellParams,
-    type OrderRequestGetFeeQuoteParams as OrderRequestGetFeeQuoteParams,
   };
 
   export {

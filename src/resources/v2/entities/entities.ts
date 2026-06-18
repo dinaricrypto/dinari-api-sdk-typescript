@@ -5,6 +5,7 @@ import * as AccountsAPI from './accounts';
 import {
   Account,
   AccountCreateParams,
+  AccountCreateResponse,
   AccountListParams,
   AccountListResponse,
   Accounts,
@@ -45,7 +46,7 @@ export class Entities extends APIResource {
    * });
    * ```
    */
-  create(body: EntityCreateParams, options?: RequestOptions): APIPromise<Entity> {
+  create(body: EntityCreateParams, options?: RequestOptions): APIPromise<EntityCreateResponse> {
     return this._client.post('/api/v2/entities/', { body, ...options });
   }
 
@@ -59,7 +60,11 @@ export class Entities extends APIResource {
    * );
    * ```
    */
-  update(entityID: string, body: EntityUpdateParams, options?: RequestOptions): APIPromise<Entity> {
+  update(
+    entityID: string,
+    body: EntityUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<EntityUpdateResponse> {
     return this._client.patch(path`/api/v2/entities/${entityID}`, { body, ...options });
   }
 
@@ -84,12 +89,12 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const entity = await client.v2.entities.retrieveByID(
+   * const response = await client.v2.entities.retrieveByID(
    *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    * );
    * ```
    */
-  retrieveByID(entityID: string, options?: RequestOptions): APIPromise<Entity> {
+  retrieveByID(entityID: string, options?: RequestOptions): APIPromise<EntityRetrieveByIDResponse> {
     return this._client.get(path`/api/v2/entities/${entityID}`, options);
   }
 
@@ -98,10 +103,10 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const entity = await client.v2.entities.retrieveCurrent();
+   * const response = await client.v2.entities.retrieveCurrent();
    * ```
    */
-  retrieveCurrent(options?: RequestOptions): APIPromise<Entity> {
+  retrieveCurrent(options?: RequestOptions): APIPromise<EntityRetrieveCurrentResponse> {
     return this._client.get('/api/v2/entities/me', options);
   }
 }
@@ -144,7 +149,191 @@ export interface Entity {
   reference_id?: string | null;
 }
 
-export type EntityListResponse = Array<Entity>;
+/**
+ * Information about an `Entity`, which can be either an individual or an
+ * organization.
+ */
+export interface EntityCreateResponse {
+  /**
+   * Unique ID of the `Entity`.
+   */
+  id: string;
+
+  /**
+   * Type of `Entity`. `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their
+   * individual customers.
+   */
+  entity_type: 'INDIVIDUAL' | 'ORGANIZATION';
+
+  /**
+   * Indicates if `Entity` completed KYC.
+   */
+  is_kyc_complete: boolean;
+
+  /**
+   * Name of `Entity`.
+   */
+  name?: string | null;
+
+  /**
+   * Nationality or home country of the `Entity`.
+   */
+  nationality?: string | null;
+
+  /**
+   * Case sensitive unique reference ID that you can set for the `Entity`. We
+   * recommend setting this to the unique ID of the `Entity` in your system.
+   */
+  reference_id?: string | null;
+}
+
+/**
+ * Information about an `Entity`, which can be either an individual or an
+ * organization.
+ */
+export interface EntityUpdateResponse {
+  /**
+   * Unique ID of the `Entity`.
+   */
+  id: string;
+
+  /**
+   * Type of `Entity`. `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their
+   * individual customers.
+   */
+  entity_type: 'INDIVIDUAL' | 'ORGANIZATION';
+
+  /**
+   * Indicates if `Entity` completed KYC.
+   */
+  is_kyc_complete: boolean;
+
+  /**
+   * Name of `Entity`.
+   */
+  name?: string | null;
+
+  /**
+   * Nationality or home country of the `Entity`.
+   */
+  nationality?: string | null;
+
+  /**
+   * Case sensitive unique reference ID that you can set for the `Entity`. We
+   * recommend setting this to the unique ID of the `Entity` in your system.
+   */
+  reference_id?: string | null;
+}
+
+export interface EntityListResponse {
+  /**
+   * List of Entity
+   */
+  data: Array<Entity>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: EntityListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedEntityResponse:v1';
+}
+
+export namespace EntityListResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
+    /**
+     * Cursor for next page
+     */
+    next?: string;
+
+    /**
+     * Cursor for previous page
+     */
+    previous?: string;
+  }
+}
+
+/**
+ * Information about an `Entity`, which can be either an individual or an
+ * organization.
+ */
+export interface EntityRetrieveByIDResponse {
+  /**
+   * Unique ID of the `Entity`.
+   */
+  id: string;
+
+  /**
+   * Type of `Entity`. `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their
+   * individual customers.
+   */
+  entity_type: 'INDIVIDUAL' | 'ORGANIZATION';
+
+  /**
+   * Indicates if `Entity` completed KYC.
+   */
+  is_kyc_complete: boolean;
+
+  /**
+   * Name of `Entity`.
+   */
+  name?: string | null;
+
+  /**
+   * Nationality or home country of the `Entity`.
+   */
+  nationality?: string | null;
+
+  /**
+   * Case sensitive unique reference ID that you can set for the `Entity`. We
+   * recommend setting this to the unique ID of the `Entity` in your system.
+   */
+  reference_id?: string | null;
+}
+
+/**
+ * Information about an `Entity`, which can be either an individual or an
+ * organization.
+ */
+export interface EntityRetrieveCurrentResponse {
+  /**
+   * Unique ID of the `Entity`.
+   */
+  id: string;
+
+  /**
+   * Type of `Entity`. `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their
+   * individual customers.
+   */
+  entity_type: 'INDIVIDUAL' | 'ORGANIZATION';
+
+  /**
+   * Indicates if `Entity` completed KYC.
+   */
+  is_kyc_complete: boolean;
+
+  /**
+   * Name of `Entity`.
+   */
+  name?: string | null;
+
+  /**
+   * Nationality or home country of the `Entity`.
+   */
+  nationality?: string | null;
+
+  /**
+   * Case sensitive unique reference ID that you can set for the `Entity`. We
+   * recommend setting this to the unique ID of the `Entity` in your system.
+   */
+  reference_id?: string | null;
+}
 
 export interface EntityCreateParams {
   /**
@@ -168,9 +357,25 @@ export interface EntityUpdateParams {
 }
 
 export interface EntityListParams {
-  page?: number;
+  /**
+   * Number of results to return
+   */
+  limit?: number;
 
-  page_size?: number;
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 
   /**
    * Case sensitive unique reference ID for the `Entity`.
@@ -184,7 +389,11 @@ Entities.KYC = KYC;
 export declare namespace Entities {
   export {
     type Entity as Entity,
+    type EntityCreateResponse as EntityCreateResponse,
+    type EntityUpdateResponse as EntityUpdateResponse,
     type EntityListResponse as EntityListResponse,
+    type EntityRetrieveByIDResponse as EntityRetrieveByIDResponse,
+    type EntityRetrieveCurrentResponse as EntityRetrieveCurrentResponse,
     type EntityCreateParams as EntityCreateParams,
     type EntityUpdateParams as EntityUpdateParams,
     type EntityListParams as EntityListParams,
@@ -194,6 +403,7 @@ export declare namespace Entities {
     Accounts as Accounts,
     type Account as Account,
     type Jurisdiction as Jurisdiction,
+    type AccountCreateResponse as AccountCreateResponse,
     type AccountListResponse as AccountListResponse,
     type AccountCreateParams as AccountCreateParams,
     type AccountListParams as AccountListParams,

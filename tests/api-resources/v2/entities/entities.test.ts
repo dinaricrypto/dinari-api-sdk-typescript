@@ -56,8 +56,10 @@ describe('resource entities', () => {
     await expect(
       client.v2.entities.list(
         {
-          page: 1,
-          page_size: 1,
+          limit: 20,
+          next: 'next',
+          order: 'asc',
+          previous: 'previous',
           reference_id: 'x',
         },
         { path: '/_stainless_unknown_path' },

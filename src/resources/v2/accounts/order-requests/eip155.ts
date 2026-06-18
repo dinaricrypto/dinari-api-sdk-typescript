@@ -24,6 +24,9 @@ export class Eip155 extends APIResource {
    * already included in the transactions, so no additional fee quote lookup is
    * needed.
    *
+   * Fees for the `Order` can optionally be specified in the `OrderRequest` for DFN
+   * orders in USD, supporting up to 6 decimal places.
+   *
    * @example
    * ```ts
    * const response =
@@ -135,7 +138,7 @@ export interface Eip155CreatePermitResponse {
    * Token permit that is to be signed by smart contract submitter for authorizing
    * token transfer for the `OrderRequest`
    */
-  permit: { [key: string]: null };
+  permit: { [key: string]: unknown };
 }
 
 export interface Eip155CreatePermitTransactionResponse {
@@ -268,7 +271,8 @@ export interface Eip155CreatePermitParams {
   order_type: OrdersAPI.OrderType;
 
   /**
-   * Address of payment token.
+   * Address of payment token. Required for Accounts outside of US jurisdiction.
+   * Accounts inside US jurisdiction must use USDC.
    */
   payment_token: string;
 
@@ -290,6 +294,12 @@ export interface Eip155CreatePermitParams {
    * customer's systems.
    */
   client_order_id?: string | null;
+
+  /**
+   * Optional fee amount associated with `Order` in USD for DFN orders. Must be a
+   * positive number with a precision of up to 6 decimal places.
+   */
+  fee?: number | null;
 
   /**
    * Price per asset in the asset's native currency. USD for US equities and ETFs.

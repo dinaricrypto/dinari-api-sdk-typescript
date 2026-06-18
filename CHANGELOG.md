@@ -1,5 +1,66 @@
 # Changelog
 
+## 0.14.0 (2026-06-18)
+
+Full Changelog: [v0.13.0...v0.14.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.13.0...v0.14.0)
+
+### Features
+
+* **api:** api update ([60ab229](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/60ab229c4cfd624b8260e502d96c1641fb6578d0))
+* **api:** api update ([bc374c1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/bc374c1ca14cc0e414c2e4e93cdd030b8f483e89))
+* **api:** api update ([0b26a39](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/0b26a39d8a7382fa6f88b2cb04af54c40b77cfc6))
+* **api:** api update ([cc75a2f](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/cc75a2f8bf9fa9b6b56b39ae36dd056124892457))
+* **api:** api update ([677487a](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/677487a6c6f61efb4c899b35426ea24ac0feb38f))
+* **api:** api update ([b915c63](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/b915c63117b24bfbf3ae51011fbe01432594c2a6))
+* **api:** api update ([489a409](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/489a4091833e7765549e281c7ccc63f3f94c84a1))
+* **api:** api update ([d8ed2e4](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/d8ed2e4d859b5764f82212f16520f34368633b33))
+* **api:** api update ([12a4ef2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/12a4ef251e0e4dd72e2055122f209e11b11eff4b))
+* **api:** api update ([2baa150](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/2baa1504b28e4e0d112e5fecc16e2a562db64110))
+* **api:** v20260617-0199ffd version sync ([bac5812](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/bac5812cecf9f704c52f8cdd38a8963e5fdce68f))
+* support setting headers via env ([8d8d09c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/8d8d09c45c92ae5b869832628bc94d741aa2d8ae))
+
+
+### Bug Fixes
+
+* **client:** send content-type header for requests with an omitted optional body ([604f3b2](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/604f3b28ea8cc5702fa24b2cfdc58dbb973ffe04))
+* **internal:** gitignore generated `oidc` dir ([6a8eba4](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/6a8eba429f922e0ac5d3c93ebfb8fd39b3b504f5))
+* **typescript:** upgrade tsc-multi so that it works with Node 26 ([cd07436](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/cd07436a2624a6a1ace40f967e6f27c91e78a4d3))
+
+
+### Chores
+
+* avoid formatting file that gets changed during releases ([c3277ff](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c3277ff887800fb28ebf6a3733c8ce89a1043a24))
+* **ci:** escape input path in publish-npm workflow ([791acaf](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/791acaff775eea9043e1b53fb0b8467fe266675c))
+* fix example snippet imports ([9a4456b](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/9a4456babc411dfdc02c0fd71fbdc892c0ab68ec))
+* **format:** run eslint and prettier separately ([2da7dd3](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/2da7dd324f23088ac00394b14393a271c1ddf951))
+* **formatter:** run prettier and eslint separately ([6cc081a](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/6cc081a45c673c607df28294359cd43b1e21ab4f))
+* **internal:** codegen related update ([8d88375](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/8d88375b270e5fc2236c1cfd0c8504b3312f6d5c))
+* **internal:** codegen related update ([9b94dab](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/9b94dab8d37c2ec7a0b816c71bc8b04287ab4420))
+* **internal:** codegen related update ([e64f5e1](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/e64f5e1913956760be79184856c3fb8c6faba2ec))
+* **internal:** codegen related update ([8204049](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/820404973ccb96294bb99b18cb772525c691da02))
+* **internal:** fix MCP server import ordering ([479859c](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/479859ca9f496b19dfe1219b5ad51435ac686aa8))
+* **internal:** improve local docs search for MCP servers ([2e1df9d](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/2e1df9dcfde521b5079446ee163e621feadb1eeb))
+* **internal:** improve local docs search for MCP servers ([0ba540d](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/0ba540df435284956a7274e3cee2029671422374))
+* **internal:** more robust bootstrap script ([e2a18f6](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/e2a18f6fe8bf4b30e941d41c8be7c4aedf35ee0c))
+* **internal:** show error causes in MCP servers when running in local mode ([f52c4fc](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/f52c4fcc5af05190906130142b8cad214af27731))
+* **internal:** support custom-instructions-path flag in MCP servers ([90013b4](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/90013b45872170cfbab59f80954cc08110f8b77c))
+* **internal:** support local docs search in MCP servers ([f76f190](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/f76f190864246343e4640bc92e62adc4fe8cd6b6))
+* **internal:** support type annotations when running MCP in local execution mode ([0dc0ba9](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/0dc0ba938ce23565e171432bff220fc85026fe8b))
+* **internal:** update docs ordering ([425e312](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/425e31286c4f6651873cc68217b794b653538fbe))
+* **mcp-server:** add support for session id, forward client info ([4df3790](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/4df37907debb4e5d02edeb0d2dc12dbc2ffc5875))
+* **mcp-server:** increase local docs search result count from 5 to 10 ([ebd5a1f](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/ebd5a1f2aece1bd3efe32270ab38a53818b8a791))
+* **mcp-server:** log client info ([5ed8c69](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/5ed8c69a638b534e754f028833c71ad6cf976901))
+* redact api-key headers in debug logs ([6206486](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/6206486edcf6def86a1130f31c1e8e6169866fd8))
+* restructure docs search code ([1cfb519](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/1cfb519a4cc862ec5c3cc3fa2a91553b90e9d7c9))
+* **tests:** remove redundant File import ([2be6405](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/2be6405a65e75c1399f0496ba8ebbbf101a246d2))
+
+
+### Documentation
+
+* clarify forwards compat behavior ([920cc40](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/920cc405464fb723ff4362ccdb1b26c7e91cf0ca))
+* update logging docs ([c50df48](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/c50df489e7bf593be1ca9db0b811795d30f07dd1))
+* update with proxy auth info ([8d2512b](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/8d2512b1272dff10f94306ab3b8d2bfaabebb0a5))
+
 ## 0.13.0 (2026-03-26)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.12.0...v0.13.0)

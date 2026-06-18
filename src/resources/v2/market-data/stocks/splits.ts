@@ -25,7 +25,7 @@ export class Splits extends APIResource {
    *
    * @example
    * ```ts
-   * const stockSplits =
+   * const splits =
    *   await client.v2.marketData.stocks.splits.list();
    * ```
    */
@@ -49,7 +49,7 @@ export class Splits extends APIResource {
    *
    * @example
    * ```ts
-   * const stockSplits =
+   * const response =
    *   await client.v2.marketData.stocks.splits.listForStock(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *   );
@@ -120,20 +120,116 @@ export interface StockSplit {
   stock_id: string;
 }
 
-export type SplitListResponse = Array<StockSplit>;
+export interface SplitListResponse {
+  /**
+   * List of StockSplit
+   */
+  data: Array<StockSplit>;
 
-export type SplitListForStockResponse = Array<StockSplit>;
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: SplitListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedStockSplitResponse:v1';
+}
+
+export namespace SplitListResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
+    /**
+     * Cursor for next page
+     */
+    next?: string;
+
+    /**
+     * Cursor for previous page
+     */
+    previous?: string;
+  }
+}
+
+export interface SplitListForStockResponse {
+  /**
+   * List of StockSplit
+   */
+  data: Array<StockSplit>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: SplitListForStockResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedStockSplitResponse:v1';
+}
+
+export namespace SplitListForStockResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
+    /**
+     * Cursor for next page
+     */
+    next?: string;
+
+    /**
+     * Cursor for previous page
+     */
+    previous?: string;
+  }
+}
 
 export interface SplitListParams {
-  page?: number;
+  /**
+   * Number of results to return
+   */
+  limit?: number;
 
-  page_size?: number;
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 export interface SplitListForStockParams {
-  page?: number;
+  /**
+   * Number of results to return
+   */
+  limit?: number;
 
-  page_size?: number;
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 export declare namespace Splits {

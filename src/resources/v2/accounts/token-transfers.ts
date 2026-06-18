@@ -107,11 +107,15 @@ export interface TokenTransfer {
     | 'eip155:8453'
     | 'eip155:81457'
     | 'eip155:98866'
+    | 'eip155:999'
+    | 'eip155:43114'
     | 'eip155:11155111'
     | 'eip155:421614'
     | 'eip155:84532'
     | 'eip155:168587773'
     | 'eip155:98867'
+    | 'eip155:998'
+    | 'eip155:43113'
     | 'eip155:202110'
     | 'eip155:179205'
     | 'eip155:179202'
@@ -160,7 +164,39 @@ export interface TokenTransfer {
   transaction_hash?: string | null;
 }
 
-export type TokenTransferListResponse = Array<TokenTransfer>;
+export interface TokenTransferListResponse {
+  /**
+   * List of TokenTransfer
+   */
+  data: Array<TokenTransfer>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: TokenTransferListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedTokenTransferResponse:v1';
+}
+
+export namespace TokenTransferListResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
+    /**
+     * Cursor for next page
+     */
+    next?: string;
+
+    /**
+     * Cursor for previous page
+     */
+    previous?: string;
+  }
+}
 
 export interface TokenTransferCreateParams {
   /**
@@ -184,9 +220,25 @@ export interface TokenTransferRetrieveParams {
 }
 
 export interface TokenTransferListParams {
-  page?: number;
+  /**
+   * Number of results to return
+   */
+  limit?: number;
 
-  page_size?: number;
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 export declare namespace TokenTransfers {

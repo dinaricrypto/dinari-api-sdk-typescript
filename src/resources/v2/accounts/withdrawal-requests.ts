@@ -39,7 +39,7 @@ export class WithdrawalRequests extends APIResource {
     accountID: string,
     body: WithdrawalRequestCreateParams,
     options?: RequestOptions,
-  ): APIPromise<WithdrawalRequest> {
+  ): APIPromise<WithdrawalRequestCreateResponse> {
     return this._client.post(path`/api/v2/accounts/${accountID}/withdrawal_requests`, { body, ...options });
   }
 
@@ -59,7 +59,7 @@ export class WithdrawalRequests extends APIResource {
     withdrawalRequestID: string,
     params: WithdrawalRequestRetrieveParams,
     options?: RequestOptions,
-  ): APIPromise<WithdrawalRequest> {
+  ): APIPromise<WithdrawalRequestRetrieveResponse> {
     const { account_id } = params;
     return this._client.get(
       path`/api/v2/accounts/${account_id}/withdrawal_requests/${withdrawalRequestID}`,
@@ -130,7 +130,125 @@ export interface WithdrawalRequest {
   updated_dt: string;
 }
 
-export type WithdrawalRequestListResponse = Array<WithdrawalRequest>;
+/**
+ * Information for a withdrawal request of payment tokens from an `Account` backed
+ * by a Dinari-managed `Wallet`.
+ */
+export interface WithdrawalRequestCreateResponse {
+  /**
+   * ID of the `WithdrawalRequest`.
+   */
+  id: string;
+
+  /**
+   * ID of the `Account` of the `WithdrawalRequest`.
+   */
+  account_id: string;
+
+  /**
+   * Datetime at which the `WithdrawalRequest` was created. ISO 8601 timestamp.
+   */
+  created_dt: string;
+
+  /**
+   * Amount of USD+ payment tokens submitted for withdrawal.
+   */
+  payment_token_amount: number;
+
+  /**
+   * ID of the `Account` that will receive USDC payment tokens from the `Withdrawal`.
+   * This `Account` must be connected to a non-managed `Wallet` and belong to the
+   * same `Entity`.
+   */
+  recipient_account_id: string;
+
+  /**
+   * Status of the `WithdrawalRequest`
+   */
+  status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED';
+
+  /**
+   * Datetime at which the `WithdrawalRequest` was updated. ISO 8601 timestamp.
+   */
+  updated_dt: string;
+}
+
+/**
+ * Information for a withdrawal request of payment tokens from an `Account` backed
+ * by a Dinari-managed `Wallet`.
+ */
+export interface WithdrawalRequestRetrieveResponse {
+  /**
+   * ID of the `WithdrawalRequest`.
+   */
+  id: string;
+
+  /**
+   * ID of the `Account` of the `WithdrawalRequest`.
+   */
+  account_id: string;
+
+  /**
+   * Datetime at which the `WithdrawalRequest` was created. ISO 8601 timestamp.
+   */
+  created_dt: string;
+
+  /**
+   * Amount of USD+ payment tokens submitted for withdrawal.
+   */
+  payment_token_amount: number;
+
+  /**
+   * ID of the `Account` that will receive USDC payment tokens from the `Withdrawal`.
+   * This `Account` must be connected to a non-managed `Wallet` and belong to the
+   * same `Entity`.
+   */
+  recipient_account_id: string;
+
+  /**
+   * Status of the `WithdrawalRequest`
+   */
+  status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED';
+
+  /**
+   * Datetime at which the `WithdrawalRequest` was updated. ISO 8601 timestamp.
+   */
+  updated_dt: string;
+}
+
+export interface WithdrawalRequestListResponse {
+  /**
+   * List of WithdrawalRequest
+   */
+  data: Array<WithdrawalRequest>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: WithdrawalRequestListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedWithdrawalRequestResponse:v1';
+}
+
+export namespace WithdrawalRequestListResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
+    /**
+     * Cursor for next page
+     */
+    next?: string;
+
+    /**
+     * Cursor for previous page
+     */
+    previous?: string;
+  }
+}
 
 export interface WithdrawalRequestCreateParams {
   /**
@@ -150,14 +268,32 @@ export interface WithdrawalRequestRetrieveParams {
 }
 
 export interface WithdrawalRequestListParams {
-  page?: number;
+  /**
+   * Number of results to return
+   */
+  limit?: number;
 
-  page_size?: number;
+  /**
+   * Cursor for next page
+   */
+  next?: string | null;
+
+  /**
+   * Sort order
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string | null;
 }
 
 export declare namespace WithdrawalRequests {
   export {
     type WithdrawalRequest as WithdrawalRequest,
+    type WithdrawalRequestCreateResponse as WithdrawalRequestCreateResponse,
+    type WithdrawalRequestRetrieveResponse as WithdrawalRequestRetrieveResponse,
     type WithdrawalRequestListResponse as WithdrawalRequestListResponse,
     type WithdrawalRequestCreateParams as WithdrawalRequestCreateParams,
     type WithdrawalRequestRetrieveParams as WithdrawalRequestRetrieveParams,
