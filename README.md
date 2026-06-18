@@ -38,6 +38,8 @@ const client = new Dinari({
 });
 
 const stocks = await client.v2.marketData.stocks.list();
+
+console.log(stocks.data);
 ```
 
 ### Request & Response types
@@ -202,7 +204,7 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: stocks, response: raw } = await client.v2.marketData.stocks.list().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(stocks);
+console.log(stocks.data);
 ```
 
 ### Logging

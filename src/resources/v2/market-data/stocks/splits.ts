@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as SplitsAPI from './splits';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -121,81 +120,71 @@ export interface StockSplit {
   stock_id: string;
 }
 
-export type SplitListResponse = Array<StockSplit> | SplitListResponse.PaginatedStockSplitResponse;
+export interface SplitListResponse {
+  /**
+   * List of StockSplit
+   */
+  data: Array<StockSplit>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: SplitListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedStockSplitResponse:v1';
+}
 
 export namespace SplitListResponse {
-  export interface PaginatedStockSplitResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of StockSplit
+     * Cursor for next page
      */
-    data: Array<SplitsAPI.StockSplit>;
+    next?: string;
 
     /**
-     * Pagination metadata
+     * Cursor for previous page
      */
-    pagination_metadata: PaginatedStockSplitResponse.PaginationMetadata;
-
-    /**
-     * Version
-     */
-    _sv?: 'PaginatedStockSplitResponse:v1';
-  }
-
-  export namespace PaginatedStockSplitResponse {
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
-export type SplitListForStockResponse =
-  | Array<StockSplit>
-  | SplitListForStockResponse.PaginatedStockSplitResponse;
+export interface SplitListForStockResponse {
+  /**
+   * List of StockSplit
+   */
+  data: Array<StockSplit>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: SplitListForStockResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedStockSplitResponse:v1';
+}
 
 export namespace SplitListForStockResponse {
-  export interface PaginatedStockSplitResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of StockSplit
+     * Cursor for next page
      */
-    data: Array<SplitsAPI.StockSplit>;
+    next?: string;
 
     /**
-     * Pagination metadata
+     * Cursor for previous page
      */
-    pagination_metadata: PaginatedStockSplitResponse.PaginationMetadata;
-
-    /**
-     * Version
-     */
-    _sv?: 'PaginatedStockSplitResponse:v1';
-  }
-
-  export namespace PaginatedStockSplitResponse {
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
@@ -214,10 +203,6 @@ export interface SplitListParams {
    * Sort order
    */
   order?: 'asc' | 'desc';
-
-  page?: number;
-
-  page_size?: number;
 
   /**
    * Cursor for previous page
@@ -240,10 +225,6 @@ export interface SplitListForStockParams {
    * Sort order
    */
   order?: 'asc' | 'desc';
-
-  page?: number;
-
-  page_size?: number;
 
   /**
    * Cursor for previous page

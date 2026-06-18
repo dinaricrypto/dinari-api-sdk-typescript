@@ -33,7 +33,7 @@ Methods:
 
 - <code title="get /api/v2/market_data/stocks/">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">list</a>({ ...params }) -> StockListResponse</code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/current_price">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveCurrentPrice</a>(stockID) -> StockRetrieveCurrentPriceResponse</code>
-- <code title="get /api/v2/market_data/stocks/{stock_id}/current_quote">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveCurrentQuote</a>(stockID, { ...params }) -> StockRetrieveCurrentQuoteResponse</code>
+- <code title="get /api/v2/market_data/stocks/{stock_id}/current_quote">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveCurrentQuote</a>(stockID) -> StockRetrieveCurrentQuoteResponse</code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/dividends">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveDividends</a>(stockID) -> StockRetrieveDividendsResponse</code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/historical_prices/">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveHistoricalPrices</a>(stockID, { ...params }) -> StockRetrieveHistoricalPricesResponse</code>
 - <code title="get /api/v2/market_data/stocks/{stock_id}/news">client.v2.marketData.stocks.<a href="./src/resources/v2/market-data/stocks/stocks.ts">retrieveNews</a>(stockID, { ...params }) -> StockRetrieveNewsResponse</code>

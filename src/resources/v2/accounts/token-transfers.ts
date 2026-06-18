@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as TokenTransfersAPI from './token-transfers';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -165,43 +164,37 @@ export interface TokenTransfer {
   transaction_hash?: string | null;
 }
 
-export type TokenTransferListResponse =
-  | Array<TokenTransfer>
-  | TokenTransferListResponse.PaginatedTokenTransferResponse;
+export interface TokenTransferListResponse {
+  /**
+   * List of TokenTransfer
+   */
+  data: Array<TokenTransfer>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: TokenTransferListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedTokenTransferResponse:v1';
+}
 
 export namespace TokenTransferListResponse {
-  export interface PaginatedTokenTransferResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of TokenTransfer
+     * Cursor for next page
      */
-    data: Array<TokenTransfersAPI.TokenTransfer>;
+    next?: string;
 
     /**
-     * Pagination metadata
+     * Cursor for previous page
      */
-    pagination_metadata: PaginatedTokenTransferResponse.PaginationMetadata;
-
-    /**
-     * Version
-     */
-    _sv?: 'PaginatedTokenTransferResponse:v1';
-  }
-
-  export namespace PaginatedTokenTransferResponse {
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
@@ -241,10 +234,6 @@ export interface TokenTransferListParams {
    * Sort order
    */
   order?: 'asc' | 'desc';
-
-  page?: number;
-
-  page_size?: number;
 
   /**
    * Cursor for previous page

@@ -355,15 +355,28 @@ export namespace AccountGetCashBalancesResponse {
   }
 }
 
-export type AccountGetDividendPaymentsResponse =
-  | Array<AccountGetDividendPaymentsResponse.UnionMember0>
-  | AccountGetDividendPaymentsResponse.PaginatedDividendPaymentResponse;
+export interface AccountGetDividendPaymentsResponse {
+  /**
+   * List of DividendPayment
+   */
+  data: Array<AccountGetDividendPaymentsResponse.Data>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: AccountGetDividendPaymentsResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedDividendPaymentResponse:v1';
+}
 
 export namespace AccountGetDividendPaymentsResponse {
   /**
    * Represents a dividend payment event for an `Account`.
    */
-  export interface UnionMember0 {
+  export interface Data {
     /**
      * Amount of the dividend paid.
      */
@@ -385,75 +398,44 @@ export namespace AccountGetDividendPaymentsResponse {
     stock_id: string;
   }
 
-  export interface PaginatedDividendPaymentResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of DividendPayment
+     * Cursor for next page
      */
-    data: Array<PaginatedDividendPaymentResponse.Data>;
-
-    /**
-     * Pagination metadata
-     */
-    pagination_metadata: PaginatedDividendPaymentResponse.PaginationMetadata;
+    next?: string;
 
     /**
-     * Version
+     * Cursor for previous page
      */
-    _sv?: 'PaginatedDividendPaymentResponse:v1';
-  }
-
-  export namespace PaginatedDividendPaymentResponse {
-    /**
-     * Represents a dividend payment event for an `Account`.
-     */
-    export interface Data {
-      /**
-       * Amount of the dividend paid.
-       */
-      amount: number;
-
-      /**
-       * Currency in which the dividend was paid. (e.g. USD)
-       */
-      currency: string;
-
-      /**
-       * Date the dividend was distributed to the account. ISO 8601 format, YYYY-MM-DD.
-       */
-      payment_date: string;
-
-      /**
-       * ID of the `Stock` for which the dividend was paid.
-       */
-      stock_id: string;
-    }
-
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
-export type AccountGetInterestPaymentsResponse =
-  | Array<AccountGetInterestPaymentsResponse.UnionMember0>
-  | AccountGetInterestPaymentsResponse.PaginatedInterestPaymentResponse;
+export interface AccountGetInterestPaymentsResponse {
+  /**
+   * List of InterestPayment
+   */
+  data: Array<AccountGetInterestPaymentsResponse.Data>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: AccountGetInterestPaymentsResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedInterestPaymentResponse:v1';
+}
 
 export namespace AccountGetInterestPaymentsResponse {
   /**
    * An object representing an interest payment from stablecoin holdings.
    */
-  export interface UnionMember0 {
+  export interface Data {
     /**
      * Amount of interest paid.
      */
@@ -470,58 +452,19 @@ export namespace AccountGetInterestPaymentsResponse {
     payment_date: string;
   }
 
-  export interface PaginatedInterestPaymentResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of InterestPayment
+     * Cursor for next page
      */
-    data: Array<PaginatedInterestPaymentResponse.Data>;
-
-    /**
-     * Pagination metadata
-     */
-    pagination_metadata: PaginatedInterestPaymentResponse.PaginationMetadata;
+    next?: string;
 
     /**
-     * Version
+     * Cursor for previous page
      */
-    _sv?: 'PaginatedInterestPaymentResponse:v1';
-  }
-
-  export namespace PaginatedInterestPaymentResponse {
-    /**
-     * An object representing an interest payment from stablecoin holdings.
-     */
-    export interface Data {
-      /**
-       * Amount of interest paid.
-       */
-      amount: number;
-
-      /**
-       * Currency in which the interest was paid (e.g. USD).
-       */
-      currency: string;
-
-      /**
-       * Date of interest payment in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
-       */
-      payment_date: string;
-    }
-
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
@@ -593,10 +536,6 @@ export interface AccountGetDividendPaymentsParams {
    */
   order?: 'asc' | 'desc';
 
-  page?: number;
-
-  page_size?: number;
-
   /**
    * Cursor for previous page
    */
@@ -633,10 +572,6 @@ export interface AccountGetInterestPaymentsParams {
    * Sort order
    */
   order?: 'asc' | 'desc';
-
-  page?: number;
-
-  page_size?: number;
 
   /**
    * Cursor for previous page

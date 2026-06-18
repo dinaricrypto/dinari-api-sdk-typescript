@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as WithdrawalRequestsAPI from './withdrawal-requests';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -217,43 +216,37 @@ export interface WithdrawalRequestRetrieveResponse {
   updated_dt: string;
 }
 
-export type WithdrawalRequestListResponse =
-  | Array<WithdrawalRequest>
-  | WithdrawalRequestListResponse.PaginatedWithdrawalRequestResponse;
+export interface WithdrawalRequestListResponse {
+  /**
+   * List of WithdrawalRequest
+   */
+  data: Array<WithdrawalRequest>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: WithdrawalRequestListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedWithdrawalRequestResponse:v1';
+}
 
 export namespace WithdrawalRequestListResponse {
-  export interface PaginatedWithdrawalRequestResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of WithdrawalRequest
+     * Cursor for next page
      */
-    data: Array<WithdrawalRequestsAPI.WithdrawalRequest>;
+    next?: string;
 
     /**
-     * Pagination metadata
+     * Cursor for previous page
      */
-    pagination_metadata: PaginatedWithdrawalRequestResponse.PaginationMetadata;
-
-    /**
-     * Version
-     */
-    _sv?: 'PaginatedWithdrawalRequestResponse:v1';
-  }
-
-  export namespace PaginatedWithdrawalRequestResponse {
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
@@ -289,10 +282,6 @@ export interface WithdrawalRequestListParams {
    * Sort order
    */
   order?: 'asc' | 'desc';
-
-  page?: number;
-
-  page_size?: number;
 
   /**
    * Cursor for previous page

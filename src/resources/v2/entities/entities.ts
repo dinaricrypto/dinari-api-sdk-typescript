@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as EntitiesAPI from './entities';
 import * as AccountsAPI from './accounts';
 import {
   Account,
@@ -226,41 +225,37 @@ export interface EntityUpdateResponse {
   reference_id?: string | null;
 }
 
-export type EntityListResponse = Array<Entity> | EntityListResponse.PaginatedEntityResponse;
+export interface EntityListResponse {
+  /**
+   * List of Entity
+   */
+  data: Array<Entity>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: EntityListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedEntityResponse:v1';
+}
 
 export namespace EntityListResponse {
-  export interface PaginatedEntityResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of Entity
+     * Cursor for next page
      */
-    data: Array<EntitiesAPI.Entity>;
+    next?: string;
 
     /**
-     * Pagination metadata
+     * Cursor for previous page
      */
-    pagination_metadata: PaginatedEntityResponse.PaginationMetadata;
-
-    /**
-     * Version
-     */
-    _sv?: 'PaginatedEntityResponse:v1';
-  }
-
-  export namespace PaginatedEntityResponse {
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
@@ -376,10 +371,6 @@ export interface EntityListParams {
    * Sort order
    */
   order?: 'asc' | 'desc';
-
-  page?: number;
-
-  page_size?: number;
 
   /**
    * Cursor for previous page
