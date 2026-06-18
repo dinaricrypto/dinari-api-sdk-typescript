@@ -79,8 +79,6 @@ describe('resource withdrawalRequests', () => {
           limit: 20,
           next: 'next',
           order: 'asc',
-          page: 1,
-          page_size: 1,
           previous: 'previous',
         },
         { path: '/_stainless_unknown_path' },

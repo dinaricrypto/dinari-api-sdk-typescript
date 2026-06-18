@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as WithdrawalsAPI from './withdrawals';
 import * as AccountsAPI from './accounts';
 import * as OrdersAPI from './orders';
 import { APIPromise } from '../../../core/api-promise';
@@ -187,41 +186,37 @@ export interface WithdrawalRetrieveResponse {
   withdrawal_request_id: string;
 }
 
-export type WithdrawalListResponse = Array<Withdrawal> | WithdrawalListResponse.PaginatedWithdrawalResponse;
+export interface WithdrawalListResponse {
+  /**
+   * List of Withdrawal
+   */
+  data: Array<Withdrawal>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: WithdrawalListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedWithdrawalResponse:v1';
+}
 
 export namespace WithdrawalListResponse {
-  export interface PaginatedWithdrawalResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of Withdrawal
+     * Cursor for next page
      */
-    data: Array<WithdrawalsAPI.Withdrawal>;
+    next?: string;
 
     /**
-     * Pagination metadata
+     * Cursor for previous page
      */
-    pagination_metadata: PaginatedWithdrawalResponse.PaginationMetadata;
-
-    /**
-     * Version
-     */
-    _sv?: 'PaginatedWithdrawalResponse:v1';
-  }
-
-  export namespace PaginatedWithdrawalResponse {
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
@@ -244,10 +239,6 @@ export interface WithdrawalListParams {
    * Sort order
    */
   order?: 'asc' | 'desc';
-
-  page?: number;
-
-  page_size?: number;
 
   /**
    * Cursor for previous page

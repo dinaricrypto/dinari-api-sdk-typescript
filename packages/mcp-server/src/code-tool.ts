@@ -26,6 +26,8 @@ For example:
 \`\`\`
 async function run(client) {
   const stocks = await client.v2.marketData.stocks.list();
+
+  console.log(stocks.data);
 }
 \`\`\`
 

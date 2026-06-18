@@ -11,7 +11,6 @@ import {
   StockSplit,
 } from './splits';
 import { APIPromise } from '../../../../core/api-promise';
-import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -64,18 +63,9 @@ export class Stocks extends APIResource {
    */
   retrieveCurrentQuote(
     stockID: string,
-    params: StockRetrieveCurrentQuoteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<StockRetrieveCurrentQuoteResponse> {
-    const { 'X-API-Version': xAPIVersion, ...query } = params ?? {};
-    return this._client.get(path`/api/v2/market_data/stocks/${stockID}/current_quote`, {
-      query,
-      ...options,
-      headers: buildHeaders([
-        { ...(xAPIVersion != null ? { 'X-API-Version': xAPIVersion } : undefined) },
-        options?.headers,
-      ]),
-    });
+    return this._client.get(path`/api/v2/market_data/stocks/${stockID}/current_quote`, options);
   }
 
   /**
@@ -141,15 +131,28 @@ export class Stocks extends APIResource {
   }
 }
 
-export type StockListResponse =
-  | Array<StockListResponse.UnionMember0>
-  | StockListResponse.PaginatedStockResponse;
+export interface StockListResponse {
+  /**
+   * List of Stock
+   */
+  data: Array<StockListResponse.Data>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: StockListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedStockResponse:v1';
+}
 
 export namespace StockListResponse {
   /**
    * Information about stock available for trading.
    */
-  export interface UnionMember0 {
+  export interface Data {
     /**
      * ID of the `Stock`
      */
@@ -218,110 +221,19 @@ export namespace StockListResponse {
     logo_url?: string | null;
   }
 
-  export interface PaginatedStockResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of Stock
+     * Cursor for next page
      */
-    data: Array<PaginatedStockResponse.Data>;
-
-    /**
-     * Pagination metadata
-     */
-    pagination_metadata: PaginatedStockResponse.PaginationMetadata;
+    next?: string;
 
     /**
-     * Version
+     * Cursor for previous page
      */
-    _sv?: 'PaginatedStockResponse:v1';
-  }
-
-  export namespace PaginatedStockResponse {
-    /**
-     * Information about stock available for trading.
-     */
-    export interface Data {
-      /**
-       * ID of the `Stock`
-       */
-      id: string;
-
-      /**
-       * Whether the `Stock` allows for fractional trading. If it is not fractionable,
-       * Dinari only supports limit orders for the `Stock`.
-       */
-      is_fractionable: boolean;
-
-      /**
-       * Whether the `Stock` is available for trading.
-       */
-      is_tradable: boolean;
-
-      /**
-       * Company name
-       */
-      name: string;
-
-      /**
-       * Ticker symbol
-       */
-      symbol: string;
-
-      /**
-       * List of CAIP-10 formatted token addresses.
-       */
-      tokens: Array<string>;
-
-      /**
-       * SEC Central Index Key. Refer to
-       * [this link](https://www.sec.gov/submit-filings/filer-support-resources/how-do-i-guides/understand-utilize-edgar-ciks-passphrases-access-codes)
-       * for more information.
-       */
-      cik?: string | null;
-
-      /**
-       * Composite FIGI ID. Refer to [this link](https://www.openfigi.com/about/figi) for
-       * more information.
-       */
-      composite_figi?: string | null;
-
-      /**
-       * CUSIP ID. Refer to [this link](https://www.cusip.com/identifiers.html) for more
-       * information. A license agreement with CUSIP Global Services is required to
-       * receive this value.
-       */
-      cusip?: string | null;
-
-      /**
-       * Description of the company and their services.
-       */
-      description?: string | null;
-
-      /**
-       * Name of `Stock` for application display. If defined, this supercedes the `name`
-       * field for displaying the name.
-       */
-      display_name?: string | null;
-
-      /**
-       * URL of the company's logo. Supported formats are SVG and PNG.
-       */
-      logo_url?: string | null;
-    }
-
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
@@ -396,100 +308,41 @@ export interface StockRetrieveCurrentPriceResponse {
 /**
  * Stock Quote
  */
-export type StockRetrieveCurrentQuoteResponse =
-  | StockRetrieveCurrentQuoteResponse.StockQuoteResponseV1
-  | StockRetrieveCurrentQuoteResponse.StockQuoteResponseV2;
-
-export namespace StockRetrieveCurrentQuoteResponse {
+export interface StockRetrieveCurrentQuoteResponse {
   /**
-   * Stock Quote
+   * The ask price. 0 if there is no active ask.
    */
-  export interface StockQuoteResponseV1 {
-    /**
-     * The ask price. 0 if there is no active ask.
-     */
-    ask_price: number;
-
-    /**
-     * The ask size in shares.
-     */
-    ask_size: number;
-
-    /**
-     * The bid price. 0 if there is no active bid.
-     */
-    bid_price: number;
-
-    /**
-     * The bid size in shares.
-     */
-    bid_size: number;
-
-    /**
-     * ID of the `Stock`
-     */
-    stock_id: string;
-
-    /**
-     * When the `StockQuote` was generated.
-     */
-    timestamp: string;
-
-    /**
-     * Schema version
-     */
-    _sv?: 'StockQuote:v1';
-  }
+  ask_price: number;
 
   /**
-   * Stock Quote
+   * The ask size in shares.
    */
-  export interface StockQuoteResponseV2 {
-    /**
-     * The ask price. 0 if there is no active ask.
-     */
-    ask_price: number;
+  ask_size: number;
 
-    /**
-     * The ask size in shares.
-     */
-    ask_size: number;
+  /**
+   * The bid price. 0 if there is no active bid.
+   */
+  bid_price: number;
 
-    /**
-     * The bid price. 0 if there is no active bid.
-     */
-    bid_price: number;
+  /**
+   * The bid size in shares.
+   */
+  bid_size: number;
 
-    /**
-     * The bid size in shares.
-     */
-    bid_size: number;
+  /**
+   * ID of the `Stock`
+   */
+  stock_id: string;
 
-    /**
-     * ID of the `Stock`
-     */
-    stock_id: string;
+  /**
+   * When the `StockQuote` was generated.
+   */
+  timestamp: string;
 
-    /**
-     * When the `StockQuote` was generated.
-     */
-    timestamp: string;
-
-    /**
-     * Schema version
-     */
-    _sv?: 'StockQuote:v2';
-
-    /**
-     * The ask exchange.
-     */
-    ask_exchange?: string | null;
-
-    /**
-     * The bid exchange.
-     */
-    bid_exchange?: string | null;
-  }
+  /**
+   * Schema version
+   */
+  _sv?: 'StockQuote:v1';
 }
 
 export type StockRetrieveDividendsResponse =
@@ -635,10 +488,6 @@ export interface StockListParams {
    */
   order?: 'asc' | 'desc';
 
-  page?: number;
-
-  page_size?: number;
-
   /**
    * Cursor for previous page
    */
@@ -648,23 +497,6 @@ export interface StockListParams {
    * List of `Stock` symbols to query. If not provided, all `Stocks` are returned.
    */
   symbols?: Array<string>;
-}
-
-export interface StockRetrieveCurrentQuoteParams {
-  /**
-   * Query param: Requested data source for the quote. Only applies when using
-   * x-api-version: 2. Allowed values:
-   *
-   * - `null`: (default) Selects the highest quality available free data source.
-   * - `sip`: Consolidated quote from all U.S. exchanges (NBBO). This is a paid data
-   *   source and incurs usage-based billing.
-   */
-  feed?: 'sip' | null;
-
-  /**
-   * Header param: Version for this method
-   */
-  'X-API-Version'?: string;
 }
 
 export interface StockRetrieveHistoricalPricesParams {
@@ -692,7 +524,6 @@ export declare namespace Stocks {
     type StockRetrieveHistoricalPricesResponse as StockRetrieveHistoricalPricesResponse,
     type StockRetrieveNewsResponse as StockRetrieveNewsResponse,
     type StockListParams as StockListParams,
-    type StockRetrieveCurrentQuoteParams as StockRetrieveCurrentQuoteParams,
     type StockRetrieveHistoricalPricesParams as StockRetrieveHistoricalPricesParams,
     type StockRetrieveNewsParams as StockRetrieveNewsParams,
   };

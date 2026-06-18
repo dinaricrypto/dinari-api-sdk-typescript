@@ -55,8 +55,6 @@ describe('resource orders', () => {
           next: 'next',
           order: 'asc',
           order_transaction_hash: 'order_transaction_hash',
-          page: 1,
-          page_size: 1,
           previous: 'previous',
         },
         { path: '/_stainless_unknown_path' },
@@ -128,8 +126,6 @@ describe('resource orders', () => {
       limit: 20,
       next: 'next',
       order: 'asc',
-      page: 1,
-      page_size: 1,
       previous: 'previous',
     });
   });

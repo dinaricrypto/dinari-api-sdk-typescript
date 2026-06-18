@@ -124,16 +124,29 @@ export interface Fulfillment {
   stock_id?: string | null;
 }
 
-export type OrderFulfillmentQueryResponse =
-  | Array<OrderFulfillmentQueryResponse.UnionMember0>
-  | OrderFulfillmentQueryResponse.PaginatedAccountOrderFulfillmentResponse;
+export interface OrderFulfillmentQueryResponse {
+  /**
+   * List of AccountOrderFulfillment
+   */
+  data: Array<OrderFulfillmentQueryResponse.Data>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: OrderFulfillmentQueryResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedAccountOrderFulfillmentResponse:v1';
+}
 
 export namespace OrderFulfillmentQueryResponse {
   /**
    * Information about a fulfillment of an `Order`. An order may be fulfilled in
    * multiple transactions.
    */
-  export interface UnionMember0 {
+  export interface Data {
     /**
      * ID of the `OrderFulfillment`.
      */
@@ -195,104 +208,19 @@ export namespace OrderFulfillmentQueryResponse {
     stock_id?: string | null;
   }
 
-  export interface PaginatedAccountOrderFulfillmentResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of AccountOrderFulfillment
+     * Cursor for next page
      */
-    data: Array<PaginatedAccountOrderFulfillmentResponse.Data>;
-
-    /**
-     * Pagination metadata
-     */
-    pagination_metadata: PaginatedAccountOrderFulfillmentResponse.PaginationMetadata;
+    next?: string;
 
     /**
-     * Version
+     * Cursor for previous page
      */
-    _sv?: 'PaginatedAccountOrderFulfillmentResponse:v1';
-  }
-
-  export namespace PaginatedAccountOrderFulfillmentResponse {
-    /**
-     * Information about a fulfillment of an `Order`. An order may be fulfilled in
-     * multiple transactions.
-     */
-    export interface Data {
-      /**
-       * ID of the `OrderFulfillment`.
-       */
-      id: string;
-
-      /**
-       * Amount of dShare asset token filled for `BUY` orders.
-       */
-      asset_token_filled: number;
-
-      /**
-       * Amount of dShare asset token spent for `SELL` orders.
-       */
-      asset_token_spent: number;
-
-      /**
-       * Blockchain that the transaction was run on.
-       */
-      chain_id: string;
-
-      /**
-       * ID of the `Order` this `OrderFulfillment` is for.
-       */
-      order_id: string;
-
-      /**
-       * Amount of payment token filled for `SELL` orders.
-       */
-      payment_token_filled: number;
-
-      /**
-       * Amount of payment token spent for `BUY` orders.
-       */
-      payment_token_spent: number;
-
-      /**
-       * Time when transaction occurred.
-       */
-      transaction_dt: string;
-
-      /**
-       * Transaction hash for this fulfillment.
-       */
-      transaction_hash: string;
-
-      /**
-       * The `Alloy` ID associated with the `Order`
-       */
-      alloy_id?: string | null;
-
-      /**
-       * Fee amount, in payment tokens.
-       */
-      payment_token_fee?: number | null;
-
-      /**
-       * The `Stock` ID associated with the `Order`
-       */
-      stock_id?: string | null;
-    }
-
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
@@ -320,10 +248,6 @@ export interface OrderFulfillmentQueryParams {
    * List of `Order` IDs to query `AccountOrderFulfillment` for.
    */
   order_ids?: Array<string>;
-
-  page?: number;
-
-  page_size?: number;
 
   /**
    * Cursor for previous page

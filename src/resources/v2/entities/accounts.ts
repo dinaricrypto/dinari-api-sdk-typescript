@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as AccountsAPI from './accounts';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -124,41 +123,37 @@ export interface AccountCreateResponse {
   brokerage_account_id?: string | null;
 }
 
-export type AccountListResponse = Array<Account> | AccountListResponse.PaginatedAccountResponse;
+export interface AccountListResponse {
+  /**
+   * List of Account
+   */
+  data: Array<Account>;
+
+  /**
+   * Pagination metadata
+   */
+  pagination_metadata: AccountListResponse.PaginationMetadata;
+
+  /**
+   * Version
+   */
+  _sv?: 'PaginatedAccountResponse:v1';
+}
 
 export namespace AccountListResponse {
-  export interface PaginatedAccountResponse {
+  /**
+   * Pagination metadata
+   */
+  export interface PaginationMetadata {
     /**
-     * List of Account
+     * Cursor for next page
      */
-    data: Array<AccountsAPI.Account>;
+    next?: string;
 
     /**
-     * Pagination metadata
+     * Cursor for previous page
      */
-    pagination_metadata: PaginatedAccountResponse.PaginationMetadata;
-
-    /**
-     * Version
-     */
-    _sv?: 'PaginatedAccountResponse:v1';
-  }
-
-  export namespace PaginatedAccountResponse {
-    /**
-     * Pagination metadata
-     */
-    export interface PaginationMetadata {
-      /**
-       * Cursor for next page
-       */
-      next?: string;
-
-      /**
-       * Cursor for previous page
-       */
-      previous?: string;
-    }
+    previous?: string;
   }
 }
 
@@ -184,10 +179,6 @@ export interface AccountListParams {
    * Sort order
    */
   order?: 'asc' | 'desc';
-
-  page?: number;
-
-  page_size?: number;
 
   /**
    * Cursor for previous page
