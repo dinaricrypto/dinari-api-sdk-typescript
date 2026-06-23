@@ -598,8 +598,9 @@ export class Dinari {
     // Note the `retry-after-ms` header may not be standard, but is a good idea and we'd like proactive support for it.
     const retryAfterMillisHeader = responseHeaders?.get('retry-after-ms');
     if (retryAfterMillisHeader) {
-      const timeoutMs = parseFloat(retryAfterMillisHeader);
-      if (!Number.isNaN(timeoutMs)) {
+      const trimmedHeader = retryAfterMillisHeader.trim();
+      const timeoutMs = Number(trimmedHeader);
+      if (trimmedHeader !== '' && Number.isFinite(timeoutMs) && timeoutMs >= 0) {
         timeoutMillis = timeoutMs;
       }
     }
@@ -607,11 +608,14 @@ export class Dinari {
     // About the Retry-After header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After
     const retryAfterHeader = responseHeaders?.get('retry-after');
     if (retryAfterHeader && !timeoutMillis) {
-      const timeoutSeconds = parseFloat(retryAfterHeader);
-      if (!Number.isNaN(timeoutSeconds)) {
-        timeoutMillis = timeoutSeconds * 1000;
+      const trimmedHeader = retryAfterHeader.trim();
+      if (/^\d+$/.test(trimmedHeader)) {
+        timeoutMillis = Number(trimmedHeader) * 1000;
       } else {
-        timeoutMillis = Date.parse(retryAfterHeader) - Date.now();
+        const retryDate = Date.parse(trimmedHeader);
+        if (!Number.isNaN(retryDate)) {
+          timeoutMillis = retryDate - Date.now();
+        }
       }
     }
 

@@ -813,6 +813,31 @@ describe('retries', () => {
     expect(count).toEqual(3);
   });
 
+  test('retry on 429 ignores malformed retry-after', async () => {
+    let count = 0;
+    const testFetch = async (url: string | URL | Request, init: RequestInit = {}): Promise<Response> => {
+      count++;
+      if (count === 1) {
+        return new Response(undefined, {
+          status: 429,
+          headers: {
+            'Retry-After': '0.1abc',
+          },
+        });
+      }
+      return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
+    };
+
+    const client = new Dinari({
+      apiKeyID: 'My API Key ID',
+      apiSecretKey: 'My API Secret Key',
+      fetch: testFetch,
+    });
+
+    expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
+    expect(count).toEqual(2);
+  });
+
   test('retry on 429 with retry-after-ms', async () => {
     let count = 0;
     const testFetch = async (
