@@ -2,6 +2,7 @@
 
 export {
   Alloys,
+  type PaginationMetadata,
   type AlloyListResponse,
   type AlloyRetrieveCurrentPriceResponse,
   type AlloyRetrieveHistoricalPricesResponse,

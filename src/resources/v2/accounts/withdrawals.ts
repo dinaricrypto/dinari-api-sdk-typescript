@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as V2API from '../v2';
 import * as AccountsAPI from './accounts';
 import * as OrdersAPI from './orders';
+import * as AlloysAPI from '../market-data/alloys';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -98,19 +100,7 @@ export interface Withdrawal {
   /**
    * Status of the `Withdrawal`.
    */
-  status:
-    | 'PENDING_SUBMIT'
-    | 'PENDING_CANCEL'
-    | 'PENDING_ESCROW'
-    | 'PENDING_FILL'
-    | 'ESCROWED'
-    | 'SUBMITTED'
-    | 'CANCELLED'
-    | 'PARTIALLY_FILLED'
-    | 'FILLED'
-    | 'REJECTED'
-    | 'REQUIRING_CONTACT'
-    | 'ERROR';
+  status: V2API.BrokerageOrderStatus;
 
   /**
    * Datetime at which the `Withdrawal` was transacted. ISO 8601 timestamp.
@@ -195,29 +185,12 @@ export interface WithdrawalListResponse {
   /**
    * Pagination metadata
    */
-  pagination_metadata: WithdrawalListResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
    */
   _sv?: 'PaginatedWithdrawalResponse:v1';
-}
-
-export namespace WithdrawalListResponse {
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
-  }
 }
 
 export interface WithdrawalRetrieveParams {

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as AlloysAPI from '../market-data/alloys';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -173,29 +174,12 @@ export interface TokenTransferListResponse {
   /**
    * Pagination metadata
    */
-  pagination_metadata: TokenTransferListResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
    */
   _sv?: 'PaginatedTokenTransferResponse:v1';
-}
-
-export namespace TokenTransferListResponse {
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
-  }
 }
 
 export interface TokenTransferCreateParams {

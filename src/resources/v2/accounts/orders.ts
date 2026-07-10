@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as V2API from '../v2';
 import * as AccountsAPI from './accounts';
+import * as OrderFulfillmentsAPI from './order-fulfillments';
+import * as AlloysAPI from '../market-data/alloys';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -110,7 +113,7 @@ export class Orders extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const paginatedOrderFulfillment =
    *   await client.v2.accounts.orders.getFulfillments(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
@@ -121,7 +124,7 @@ export class Orders extends APIResource {
     orderID: string,
     params: OrderGetFulfillmentsParams,
     options?: RequestOptions,
-  ): APIPromise<OrderGetFulfillmentsResponse> {
+  ): APIPromise<OrderFulfillmentsAPI.PaginatedOrderFulfillment> {
     const { account_id, ...query } = params;
     return this._client.get(path`/api/v2/accounts/${account_id}/orders/${orderID}/fulfillments`, {
       query,
@@ -264,7 +267,7 @@ export interface OrderListResponse {
   /**
    * Pagination metadata
    */
-  pagination_metadata: OrderListResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
@@ -298,12 +301,12 @@ export namespace OrderListResponse {
     /**
      * Indicates whether `Order` is a buy or sell.
      */
-    order_side: 'BUY' | 'SELL';
+    order_side: V2API.OrderSide;
 
     /**
      * Time in force. Indicates how long `Order` is valid for.
      */
-    order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
+    order_tif: V2API.OrderTif;
 
     /**
      * Transaction hash for the `Order` creation.
@@ -313,7 +316,7 @@ export namespace OrderListResponse {
     /**
      * Type of `Order`.
      */
-    order_type: 'MARKET' | 'LIMIT';
+    order_type: V2API.OrderType;
 
     /**
      * The payment token (stablecoin) address.
@@ -323,19 +326,7 @@ export namespace OrderListResponse {
     /**
      * Status of the `Order`.
      */
-    status:
-      | 'PENDING_SUBMIT'
-      | 'PENDING_CANCEL'
-      | 'PENDING_ESCROW'
-      | 'PENDING_FILL'
-      | 'ESCROWED'
-      | 'SUBMITTED'
-      | 'CANCELLED'
-      | 'PARTIALLY_FILLED'
-      | 'FILLED'
-      | 'REJECTED'
-      | 'REQUIRING_CONTACT'
-      | 'ERROR';
+    status: V2API.BrokerageOrderStatus;
 
     /**
      * The `Stock` ID associated with the `Order`
@@ -384,21 +375,6 @@ export namespace OrderListResponse {
      */
     payment_token_quantity?: number | null;
   }
-
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
-  }
 }
 
 export interface OrderBatchCancelResponse {
@@ -411,106 +387,6 @@ export interface OrderBatchCancelResponse {
    * Orders that could not be queued to cancel.
    */
   failed_to_cancel_orders: Array<Order>;
-}
-
-export interface OrderGetFulfillmentsResponse {
-  /**
-   * List of AccountOrderFulfillment
-   */
-  data: Array<OrderGetFulfillmentsResponse.Data>;
-
-  /**
-   * Pagination metadata
-   */
-  pagination_metadata: OrderGetFulfillmentsResponse.PaginationMetadata;
-
-  /**
-   * Version
-   */
-  _sv?: 'PaginatedAccountOrderFulfillmentResponse:v1';
-}
-
-export namespace OrderGetFulfillmentsResponse {
-  /**
-   * Information about a fulfillment of an `Order`. An order may be fulfilled in
-   * multiple transactions.
-   */
-  export interface Data {
-    /**
-     * ID of the `OrderFulfillment`.
-     */
-    id: string;
-
-    /**
-     * Amount of dShare asset token filled for `BUY` orders.
-     */
-    asset_token_filled: number;
-
-    /**
-     * Amount of dShare asset token spent for `SELL` orders.
-     */
-    asset_token_spent: number;
-
-    /**
-     * Blockchain that the transaction was run on.
-     */
-    chain_id: string;
-
-    /**
-     * ID of the `Order` this `OrderFulfillment` is for.
-     */
-    order_id: string;
-
-    /**
-     * Amount of payment token filled for `SELL` orders.
-     */
-    payment_token_filled: number;
-
-    /**
-     * Amount of payment token spent for `BUY` orders.
-     */
-    payment_token_spent: number;
-
-    /**
-     * Time when transaction occurred.
-     */
-    transaction_dt: string;
-
-    /**
-     * Transaction hash for this fulfillment.
-     */
-    transaction_hash: string;
-
-    /**
-     * The `Alloy` ID associated with the `Order`
-     */
-    alloy_id?: string | null;
-
-    /**
-     * Fee amount, in payment tokens.
-     */
-    payment_token_fee?: number | null;
-
-    /**
-     * The `Stock` ID associated with the `Order`
-     */
-    stock_id?: string | null;
-  }
-
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
-  }
 }
 
 export interface OrderRetrieveParams {
@@ -601,7 +477,6 @@ export declare namespace Orders {
     type OrderType as OrderType,
     type OrderListResponse as OrderListResponse,
     type OrderBatchCancelResponse as OrderBatchCancelResponse,
-    type OrderGetFulfillmentsResponse as OrderGetFulfillmentsResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
     type OrderListParams as OrderListParams,
     type OrderBatchCancelParams as OrderBatchCancelParams,
