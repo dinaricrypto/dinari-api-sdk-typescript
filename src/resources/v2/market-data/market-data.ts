@@ -9,6 +9,7 @@ import {
   AlloyRetrieveHistoricalPricesParams,
   AlloyRetrieveHistoricalPricesResponse,
   Alloys,
+  PaginationMetadata,
 } from './alloys';
 import * as StocksAPI from './stocks/stocks';
 import {
@@ -130,6 +131,7 @@ export declare namespace MarketData {
 
   export {
     Alloys as Alloys,
+    type PaginationMetadata as PaginationMetadata,
     type AlloyListResponse as AlloyListResponse,
     type AlloyRetrieveCurrentPriceResponse as AlloyRetrieveCurrentPriceResponse,
     type AlloyRetrieveHistoricalPricesResponse as AlloyRetrieveHistoricalPricesResponse,

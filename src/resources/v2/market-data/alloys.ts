@@ -69,6 +69,18 @@ export class Alloys extends APIResource {
   }
 }
 
+export interface PaginationMetadata {
+  /**
+   * Cursor for next page
+   */
+  next?: string;
+
+  /**
+   * Cursor for previous page
+   */
+  previous?: string;
+}
+
 /**
  * Paginated response containing a list of Alloys.
  */
@@ -81,7 +93,7 @@ export interface AlloyListResponse {
   /**
    * Pagination metadata
    */
-  pagination_metadata: AlloyListResponse.PaginationMetadata;
+  pagination_metadata: PaginationMetadata;
 
   /**
    * Schema version
@@ -118,21 +130,6 @@ export namespace AlloyListResponse {
      * Schema version
      */
     _sv?: 'Alloy:v1';
-  }
-
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
   }
 }
 
@@ -234,6 +231,7 @@ export interface AlloyRetrieveHistoricalPricesParams {
 
 export declare namespace Alloys {
   export {
+    type PaginationMetadata as PaginationMetadata,
     type AlloyListResponse as AlloyListResponse,
     type AlloyRetrieveCurrentPriceResponse as AlloyRetrieveCurrentPriceResponse,
     type AlloyRetrieveHistoricalPricesResponse as AlloyRetrieveHistoricalPricesResponse,

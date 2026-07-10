@@ -5,16 +5,17 @@ import * as AccountsAPI from './accounts';
 import {
   Account,
   AccountCreateParams,
-  AccountCreateResponse,
   AccountListParams,
   AccountListResponse,
   Accounts,
   Jurisdiction,
 } from './accounts';
+import * as AlloysAPI from '../market-data/alloys';
 import * as KYCAPI from './kyc/kyc';
 import {
   BaselineKYCCheckData,
   KYC,
+  KYCCreateManagedCheckParams,
   KYCCreateManagedCheckResponse,
   KYCInfo,
   KYCStatus,
@@ -46,7 +47,7 @@ export class Entities extends APIResource {
    * });
    * ```
    */
-  create(body: EntityCreateParams, options?: RequestOptions): APIPromise<EntityCreateResponse> {
+  create(body: EntityCreateParams, options?: RequestOptions): APIPromise<Entity> {
     return this._client.post('/api/v2/entities/', { body, ...options });
   }
 
@@ -60,11 +61,7 @@ export class Entities extends APIResource {
    * );
    * ```
    */
-  update(
-    entityID: string,
-    body: EntityUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<EntityUpdateResponse> {
+  update(entityID: string, body: EntityUpdateParams, options?: RequestOptions): APIPromise<Entity> {
     return this._client.patch(path`/api/v2/entities/${entityID}`, { body, ...options });
   }
 
@@ -89,12 +86,12 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v2.entities.retrieveByID(
+   * const entity = await client.v2.entities.retrieveByID(
    *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    * );
    * ```
    */
-  retrieveByID(entityID: string, options?: RequestOptions): APIPromise<EntityRetrieveByIDResponse> {
+  retrieveByID(entityID: string, options?: RequestOptions): APIPromise<Entity> {
     return this._client.get(path`/api/v2/entities/${entityID}`, options);
   }
 
@@ -103,10 +100,10 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v2.entities.retrieveCurrent();
+   * const entity = await client.v2.entities.retrieveCurrent();
    * ```
    */
-  retrieveCurrent(options?: RequestOptions): APIPromise<EntityRetrieveCurrentResponse> {
+  retrieveCurrent(options?: RequestOptions): APIPromise<Entity> {
     return this._client.get('/api/v2/entities/me', options);
   }
 }
@@ -149,92 +146,16 @@ export interface Entity {
   reference_id?: string | null;
 }
 
-/**
- * Information about an `Entity`, which can be either an individual or an
- * organization.
- */
-export interface EntityCreateResponse {
-  /**
-   * Unique ID of the `Entity`.
-   */
-  id: string;
-
-  /**
-   * Type of `Entity`. `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their
-   * individual customers.
-   */
-  entity_type: 'INDIVIDUAL' | 'ORGANIZATION';
-
-  /**
-   * Indicates if `Entity` completed KYC.
-   */
-  is_kyc_complete: boolean;
-
-  /**
-   * Name of `Entity`.
-   */
-  name?: string | null;
-
-  /**
-   * Nationality or home country of the `Entity`.
-   */
-  nationality?: string | null;
-
-  /**
-   * Case sensitive unique reference ID that you can set for the `Entity`. We
-   * recommend setting this to the unique ID of the `Entity` in your system.
-   */
-  reference_id?: string | null;
-}
-
-/**
- * Information about an `Entity`, which can be either an individual or an
- * organization.
- */
-export interface EntityUpdateResponse {
-  /**
-   * Unique ID of the `Entity`.
-   */
-  id: string;
-
-  /**
-   * Type of `Entity`. `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their
-   * individual customers.
-   */
-  entity_type: 'INDIVIDUAL' | 'ORGANIZATION';
-
-  /**
-   * Indicates if `Entity` completed KYC.
-   */
-  is_kyc_complete: boolean;
-
-  /**
-   * Name of `Entity`.
-   */
-  name?: string | null;
-
-  /**
-   * Nationality or home country of the `Entity`.
-   */
-  nationality?: string | null;
-
-  /**
-   * Case sensitive unique reference ID that you can set for the `Entity`. We
-   * recommend setting this to the unique ID of the `Entity` in your system.
-   */
-  reference_id?: string | null;
-}
-
 export interface EntityListResponse {
   /**
    * List of Entity
    */
-  data: Array<Entity>;
+  data: Array<EntityListResponse.Data>;
 
   /**
    * Pagination metadata
    */
-  pagination_metadata: EntityListResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
@@ -244,95 +165,42 @@ export interface EntityListResponse {
 
 export namespace EntityListResponse {
   /**
-   * Pagination metadata
+   * Information about an `Entity`, which can be either an individual or an
+   * organization.
    */
-  export interface PaginationMetadata {
+  export interface Data {
     /**
-     * Cursor for next page
+     * Unique ID of the `Entity`.
      */
-    next?: string;
+    id: string;
 
     /**
-     * Cursor for previous page
+     * Type of `Entity`. `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their
+     * individual customers.
      */
-    previous?: string;
+    entity_type: 'INDIVIDUAL' | 'ORGANIZATION';
+
+    /**
+     * Indicates if `Entity` completed KYC.
+     */
+    is_kyc_complete: boolean;
+
+    /**
+     * Name of `Entity`.
+     */
+    name?: string | null;
+
+    /**
+     * Nationality or home country of the `Entity`.
+     */
+    nationality?: string | null;
+
+    /**
+     * Case sensitive unique reference ID that you can set for the `Entity`. We
+     * recommend setting this to the unique ID of the `Entity` in your system.
+     */
+    reference_id?: string | null;
   }
-}
-
-/**
- * Information about an `Entity`, which can be either an individual or an
- * organization.
- */
-export interface EntityRetrieveByIDResponse {
-  /**
-   * Unique ID of the `Entity`.
-   */
-  id: string;
-
-  /**
-   * Type of `Entity`. `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their
-   * individual customers.
-   */
-  entity_type: 'INDIVIDUAL' | 'ORGANIZATION';
-
-  /**
-   * Indicates if `Entity` completed KYC.
-   */
-  is_kyc_complete: boolean;
-
-  /**
-   * Name of `Entity`.
-   */
-  name?: string | null;
-
-  /**
-   * Nationality or home country of the `Entity`.
-   */
-  nationality?: string | null;
-
-  /**
-   * Case sensitive unique reference ID that you can set for the `Entity`. We
-   * recommend setting this to the unique ID of the `Entity` in your system.
-   */
-  reference_id?: string | null;
-}
-
-/**
- * Information about an `Entity`, which can be either an individual or an
- * organization.
- */
-export interface EntityRetrieveCurrentResponse {
-  /**
-   * Unique ID of the `Entity`.
-   */
-  id: string;
-
-  /**
-   * Type of `Entity`. `ORGANIZATION` for Dinari Partners and `INDIVIDUAL` for their
-   * individual customers.
-   */
-  entity_type: 'INDIVIDUAL' | 'ORGANIZATION';
-
-  /**
-   * Indicates if `Entity` completed KYC.
-   */
-  is_kyc_complete: boolean;
-
-  /**
-   * Name of `Entity`.
-   */
-  name?: string | null;
-
-  /**
-   * Nationality or home country of the `Entity`.
-   */
-  nationality?: string | null;
-
-  /**
-   * Case sensitive unique reference ID that you can set for the `Entity`. We
-   * recommend setting this to the unique ID of the `Entity` in your system.
-   */
-  reference_id?: string | null;
 }
 
 export interface EntityCreateParams {
@@ -389,11 +257,7 @@ Entities.KYC = KYC;
 export declare namespace Entities {
   export {
     type Entity as Entity,
-    type EntityCreateResponse as EntityCreateResponse,
-    type EntityUpdateResponse as EntityUpdateResponse,
     type EntityListResponse as EntityListResponse,
-    type EntityRetrieveByIDResponse as EntityRetrieveByIDResponse,
-    type EntityRetrieveCurrentResponse as EntityRetrieveCurrentResponse,
     type EntityCreateParams as EntityCreateParams,
     type EntityUpdateParams as EntityUpdateParams,
     type EntityListParams as EntityListParams,
@@ -403,7 +267,6 @@ export declare namespace Entities {
     Accounts as Accounts,
     type Account as Account,
     type Jurisdiction as Jurisdiction,
-    type AccountCreateResponse as AccountCreateResponse,
     type AccountListResponse as AccountListResponse,
     type AccountCreateParams as AccountCreateParams,
     type AccountListParams as AccountListParams,
@@ -416,6 +279,7 @@ export declare namespace Entities {
     type KYCStatus as KYCStatus,
     type UsKYCCheckData as UsKYCCheckData,
     type KYCCreateManagedCheckResponse as KYCCreateManagedCheckResponse,
+    type KYCCreateManagedCheckParams as KYCCreateManagedCheckParams,
     type KYCSubmitParams as KYCSubmitParams,
   };
 }

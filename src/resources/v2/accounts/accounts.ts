@@ -8,9 +8,9 @@ import * as OrderFulfillmentsAPI from './order-fulfillments';
 import {
   Fulfillment,
   OrderFulfillmentQueryParams,
-  OrderFulfillmentQueryResponse,
   OrderFulfillmentRetrieveParams,
   OrderFulfillments,
+  PaginatedOrderFulfillment,
 } from './order-fulfillments';
 import * as OrdersAPI from './orders';
 import {
@@ -20,7 +20,6 @@ import {
   OrderBatchCancelResponse,
   OrderCancelParams,
   OrderGetFulfillmentsParams,
-  OrderGetFulfillmentsResponse,
   OrderListParams,
   OrderListResponse,
   OrderRetrieveParams,
@@ -42,11 +41,9 @@ import * as WithdrawalRequestsAPI from './withdrawal-requests';
 import {
   WithdrawalRequest,
   WithdrawalRequestCreateParams,
-  WithdrawalRequestCreateResponse,
   WithdrawalRequestListParams,
   WithdrawalRequestListResponse,
   WithdrawalRequestRetrieveParams,
-  WithdrawalRequestRetrieveResponse,
   WithdrawalRequests,
 } from './withdrawal-requests';
 import * as WithdrawalsAPI from './withdrawals';
@@ -59,6 +56,7 @@ import {
   Withdrawals,
 } from './withdrawals';
 import * as EntitiesAccountsAPI from '../entities/accounts';
+import * as AlloysAPI from '../market-data/alloys';
 import * as OrderRequestsAPI from './order-requests/order-requests';
 import {
   CreateLimitBuyOrderInput,
@@ -112,7 +110,7 @@ export class Accounts extends APIResource {
    * );
    * ```
    */
-  retrieve(accountID: string, options?: RequestOptions): APIPromise<AccountRetrieveResponse> {
+  retrieve(accountID: string, options?: RequestOptions): APIPromise<EntitiesAccountsAPI.Account> {
     return this._client.get(path`/api/v2/accounts/${accountID}`, options);
   }
 
@@ -121,12 +119,12 @@ export class Accounts extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v2.accounts.deactivate(
+   * const account = await client.v2.accounts.deactivate(
    *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    * );
    * ```
    */
-  deactivate(accountID: string, options?: RequestOptions): APIPromise<AccountDeactivateResponse> {
+  deactivate(accountID: string, options?: RequestOptions): APIPromise<EntitiesAccountsAPI.Account> {
     return this._client.post(path`/api/v2/accounts/${accountID}/deactivate`, options);
   }
 
@@ -255,76 +253,6 @@ export type Chain =
   | 'eip155:98865'
   | 'eip155:7887';
 
-/**
- * Information about an `Account` owned by an `Entity`.
- */
-export interface AccountRetrieveResponse {
-  /**
-   * Unique ID for the `Account`.
-   */
-  id: string;
-
-  /**
-   * Datetime when the `Account` was created. ISO 8601 timestamp.
-   */
-  created_dt: string;
-
-  /**
-   * ID for the `Entity` that owns the `Account`.
-   */
-  entity_id: string;
-
-  /**
-   * Indicates whether the `Account` is active.
-   */
-  is_active: boolean;
-
-  /**
-   * Jurisdiction of the `Account`.
-   */
-  jurisdiction: EntitiesAccountsAPI.Jurisdiction;
-
-  /**
-   * ID of the brokerage account associated with the `Account`.
-   */
-  brokerage_account_id?: string | null;
-}
-
-/**
- * Information about an `Account` owned by an `Entity`.
- */
-export interface AccountDeactivateResponse {
-  /**
-   * Unique ID for the `Account`.
-   */
-  id: string;
-
-  /**
-   * Datetime when the `Account` was created. ISO 8601 timestamp.
-   */
-  created_dt: string;
-
-  /**
-   * ID for the `Entity` that owns the `Account`.
-   */
-  entity_id: string;
-
-  /**
-   * Indicates whether the `Account` is active.
-   */
-  is_active: boolean;
-
-  /**
-   * Jurisdiction of the `Account`.
-   */
-  jurisdiction: EntitiesAccountsAPI.Jurisdiction;
-
-  /**
-   * ID of the brokerage account associated with the `Account`.
-   */
-  brokerage_account_id?: string | null;
-}
-
 export type AccountGetCashBalancesResponse =
   Array<AccountGetCashBalancesResponse.AccountGetCashBalancesResponseItem>;
 
@@ -364,7 +292,7 @@ export interface AccountGetDividendPaymentsResponse {
   /**
    * Pagination metadata
    */
-  pagination_metadata: AccountGetDividendPaymentsResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
@@ -397,21 +325,6 @@ export namespace AccountGetDividendPaymentsResponse {
      */
     stock_id: string;
   }
-
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
-  }
 }
 
 export interface AccountGetInterestPaymentsResponse {
@@ -423,7 +336,7 @@ export interface AccountGetInterestPaymentsResponse {
   /**
    * Pagination metadata
    */
-  pagination_metadata: AccountGetInterestPaymentsResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
@@ -450,21 +363,6 @@ export namespace AccountGetInterestPaymentsResponse {
      * Date of interest payment in US Eastern time zone. ISO 8601 format, YYYY-MM-DD.
      */
     payment_date: string;
-  }
-
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
   }
 }
 
@@ -612,8 +510,6 @@ Accounts.Activities = Activities;
 export declare namespace Accounts {
   export {
     type Chain as Chain,
-    type AccountRetrieveResponse as AccountRetrieveResponse,
-    type AccountDeactivateResponse as AccountDeactivateResponse,
     type AccountGetCashBalancesResponse as AccountGetCashBalancesResponse,
     type AccountGetDividendPaymentsResponse as AccountGetDividendPaymentsResponse,
     type AccountGetInterestPaymentsResponse as AccountGetInterestPaymentsResponse,
@@ -639,7 +535,6 @@ export declare namespace Accounts {
     type OrderType as OrderType,
     type OrderListResponse as OrderListResponse,
     type OrderBatchCancelResponse as OrderBatchCancelResponse,
-    type OrderGetFulfillmentsResponse as OrderGetFulfillmentsResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
     type OrderListParams as OrderListParams,
     type OrderBatchCancelParams as OrderBatchCancelParams,
@@ -650,7 +545,7 @@ export declare namespace Accounts {
   export {
     OrderFulfillments as OrderFulfillments,
     type Fulfillment as Fulfillment,
-    type OrderFulfillmentQueryResponse as OrderFulfillmentQueryResponse,
+    type PaginatedOrderFulfillment as PaginatedOrderFulfillment,
     type OrderFulfillmentRetrieveParams as OrderFulfillmentRetrieveParams,
     type OrderFulfillmentQueryParams as OrderFulfillmentQueryParams,
   };
@@ -675,8 +570,6 @@ export declare namespace Accounts {
   export {
     WithdrawalRequests as WithdrawalRequests,
     type WithdrawalRequest as WithdrawalRequest,
-    type WithdrawalRequestCreateResponse as WithdrawalRequestCreateResponse,
-    type WithdrawalRequestRetrieveResponse as WithdrawalRequestRetrieveResponse,
     type WithdrawalRequestListResponse as WithdrawalRequestListResponse,
     type WithdrawalRequestCreateParams as WithdrawalRequestCreateParams,
     type WithdrawalRequestRetrieveParams as WithdrawalRequestRetrieveParams,

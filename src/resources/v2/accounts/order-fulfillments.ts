@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AccountsAPI from './accounts';
+import * as AlloysAPI from '../market-data/alloys';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -43,7 +44,7 @@ export class OrderFulfillments extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const paginatedOrderFulfillment =
    *   await client.v2.accounts.orderFulfillments.query(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *   );
@@ -53,7 +54,7 @@ export class OrderFulfillments extends APIResource {
     accountID: string,
     query: OrderFulfillmentQueryParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<OrderFulfillmentQueryResponse> {
+  ): APIPromise<PaginatedOrderFulfillment> {
     return this._client.get(path`/api/v2/accounts/${accountID}/order_fulfillments`, { query, ...options });
   }
 }
@@ -124,16 +125,16 @@ export interface Fulfillment {
   stock_id?: string | null;
 }
 
-export interface OrderFulfillmentQueryResponse {
+export interface PaginatedOrderFulfillment {
   /**
    * List of AccountOrderFulfillment
    */
-  data: Array<OrderFulfillmentQueryResponse.Data>;
+  data: Array<PaginatedOrderFulfillment.Data>;
 
   /**
    * Pagination metadata
    */
-  pagination_metadata: OrderFulfillmentQueryResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
@@ -141,7 +142,7 @@ export interface OrderFulfillmentQueryResponse {
   _sv?: 'PaginatedAccountOrderFulfillmentResponse:v1';
 }
 
-export namespace OrderFulfillmentQueryResponse {
+export namespace PaginatedOrderFulfillment {
   /**
    * Information about a fulfillment of an `Order`. An order may be fulfilled in
    * multiple transactions.
@@ -207,21 +208,6 @@ export namespace OrderFulfillmentQueryResponse {
      */
     stock_id?: string | null;
   }
-
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
-  }
 }
 
 export interface OrderFulfillmentRetrieveParams {
@@ -258,7 +244,7 @@ export interface OrderFulfillmentQueryParams {
 export declare namespace OrderFulfillments {
   export {
     type Fulfillment as Fulfillment,
-    type OrderFulfillmentQueryResponse as OrderFulfillmentQueryResponse,
+    type PaginatedOrderFulfillment as PaginatedOrderFulfillment,
     type OrderFulfillmentRetrieveParams as OrderFulfillmentRetrieveParams,
     type OrderFulfillmentQueryParams as OrderFulfillmentQueryParams,
   };

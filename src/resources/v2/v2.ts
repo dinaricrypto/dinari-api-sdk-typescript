@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as V2API from './v2';
 import * as AccountsAPI from './accounts/accounts';
 import {
-  AccountDeactivateResponse,
   AccountGetCashBalancesResponse,
   AccountGetDividendPaymentsParams,
   AccountGetDividendPaymentsResponse,
@@ -12,7 +12,6 @@ import {
   AccountGetPortfolioParams,
   AccountGetPortfolioResponse,
   AccountMintSandboxTokensParams,
-  AccountRetrieveResponse,
   Accounts,
   Chain,
 } from './accounts/accounts';
@@ -21,14 +20,11 @@ import {
   Entities,
   Entity,
   EntityCreateParams,
-  EntityCreateResponse,
   EntityListParams,
   EntityListResponse,
-  EntityRetrieveByIDResponse,
-  EntityRetrieveCurrentResponse,
   EntityUpdateParams,
-  EntityUpdateResponse,
 } from './entities/entities';
+import * as AlloysAPI from './market-data/alloys';
 import * as MarketDataAPI from './market-data/market-data';
 import { MarketData, MarketDataRetrieveMarketHoursResponse } from './market-data/market-data';
 import { APIPromise } from '../../core/api-promise';
@@ -63,6 +59,26 @@ export class V2 extends APIResource {
   }
 }
 
+export type BrokerageOrderStatus =
+  | 'PENDING_SUBMIT'
+  | 'PENDING_CANCEL'
+  | 'PENDING_ESCROW'
+  | 'PENDING_FILL'
+  | 'ESCROWED'
+  | 'SUBMITTED'
+  | 'CANCELLED'
+  | 'PARTIALLY_FILLED'
+  | 'FILLED'
+  | 'REJECTED'
+  | 'REQUIRING_CONTACT'
+  | 'ERROR';
+
+export type OrderSide = 'BUY' | 'SELL';
+
+export type OrderTif = 'DAY' | 'GTC' | 'IOC' | 'FOK';
+
+export type OrderType = 'MARKET' | 'LIMIT';
+
 export interface V2ListOrdersResponse {
   /**
    * List of EntityOrder
@@ -72,7 +88,7 @@ export interface V2ListOrdersResponse {
   /**
    * Pagination metadata
    */
-  pagination_metadata: V2ListOrdersResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
@@ -106,12 +122,12 @@ export namespace V2ListOrdersResponse {
     /**
      * Indicates whether `Order` is a buy or sell.
      */
-    order_side: 'BUY' | 'SELL';
+    order_side: V2API.OrderSide;
 
     /**
      * Time in force. Indicates how long `Order` is valid for.
      */
-    order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
+    order_tif: V2API.OrderTif;
 
     /**
      * Transaction hash for the `Order` creation.
@@ -121,7 +137,7 @@ export namespace V2ListOrdersResponse {
     /**
      * Type of `Order`.
      */
-    order_type: 'MARKET' | 'LIMIT';
+    order_type: V2API.OrderType;
 
     /**
      * The payment token (stablecoin) address.
@@ -131,19 +147,7 @@ export namespace V2ListOrdersResponse {
     /**
      * Status of the `Order`.
      */
-    status:
-      | 'PENDING_SUBMIT'
-      | 'PENDING_CANCEL'
-      | 'PENDING_ESCROW'
-      | 'PENDING_FILL'
-      | 'ESCROWED'
-      | 'SUBMITTED'
-      | 'CANCELLED'
-      | 'PARTIALLY_FILLED'
-      | 'FILLED'
-      | 'REJECTED'
-      | 'REQUIRING_CONTACT'
-      | 'ERROR';
+    status: V2API.BrokerageOrderStatus;
 
     /**
      * The `Stock` ID associated with the `Order`
@@ -202,21 +206,6 @@ export namespace V2ListOrdersResponse {
      */
     payment_token_quantity?: number | null;
   }
-
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
-  }
 }
 
 export interface V2ListOrdersParams {
@@ -266,7 +255,14 @@ V2.Entities = Entities;
 V2.Accounts = Accounts;
 
 export declare namespace V2 {
-  export { type V2ListOrdersResponse as V2ListOrdersResponse, type V2ListOrdersParams as V2ListOrdersParams };
+  export {
+    type BrokerageOrderStatus as BrokerageOrderStatus,
+    type OrderSide as OrderSide,
+    type OrderTif as OrderTif,
+    type OrderType as OrderType,
+    type V2ListOrdersResponse as V2ListOrdersResponse,
+    type V2ListOrdersParams as V2ListOrdersParams,
+  };
 
   export {
     MarketData as MarketData,
@@ -276,11 +272,7 @@ export declare namespace V2 {
   export {
     Entities as Entities,
     type Entity as Entity,
-    type EntityCreateResponse as EntityCreateResponse,
-    type EntityUpdateResponse as EntityUpdateResponse,
     type EntityListResponse as EntityListResponse,
-    type EntityRetrieveByIDResponse as EntityRetrieveByIDResponse,
-    type EntityRetrieveCurrentResponse as EntityRetrieveCurrentResponse,
     type EntityCreateParams as EntityCreateParams,
     type EntityUpdateParams as EntityUpdateParams,
     type EntityListParams as EntityListParams,
@@ -289,8 +281,6 @@ export declare namespace V2 {
   export {
     Accounts as Accounts,
     type Chain as Chain,
-    type AccountRetrieveResponse as AccountRetrieveResponse,
-    type AccountDeactivateResponse as AccountDeactivateResponse,
     type AccountGetCashBalancesResponse as AccountGetCashBalancesResponse,
     type AccountGetDividendPaymentsResponse as AccountGetDividendPaymentsResponse,
     type AccountGetInterestPaymentsResponse as AccountGetInterestPaymentsResponse,

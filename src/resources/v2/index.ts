@@ -3,8 +3,6 @@
 export {
   Accounts,
   type Chain,
-  type AccountRetrieveResponse,
-  type AccountDeactivateResponse,
   type AccountGetCashBalancesResponse,
   type AccountGetDividendPaymentsResponse,
   type AccountGetInterestPaymentsResponse,
@@ -17,14 +15,18 @@ export {
 export {
   Entities,
   type Entity,
-  type EntityCreateResponse,
-  type EntityUpdateResponse,
   type EntityListResponse,
-  type EntityRetrieveByIDResponse,
-  type EntityRetrieveCurrentResponse,
   type EntityCreateParams,
   type EntityUpdateParams,
   type EntityListParams,
 } from './entities/index';
 export { MarketData, type MarketDataRetrieveMarketHoursResponse } from './market-data/index';
-export { V2, type V2ListOrdersResponse, type V2ListOrdersParams } from './v2';
+export {
+  V2,
+  type BrokerageOrderStatus,
+  type OrderSide,
+  type OrderTif,
+  type OrderType,
+  type V2ListOrdersResponse,
+  type V2ListOrdersParams,
+} from './v2';

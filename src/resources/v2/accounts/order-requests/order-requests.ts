@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as V2API from '../../v2';
 import * as OrdersAPI from '../orders';
+import * as AlloysAPI from '../../market-data/alloys';
 import * as Eip155API from './eip155';
 import {
   Eip155,
@@ -472,7 +474,7 @@ export interface OrderRequestListResponse {
   /**
    * Pagination metadata
    */
-  pagination_metadata: OrderRequestListResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
@@ -510,17 +512,17 @@ export namespace OrderRequestListResponse {
     /**
      * Indicates whether `Order` is a buy or sell.
      */
-    order_side: 'BUY' | 'SELL';
+    order_side: V2API.OrderSide;
 
     /**
      * Indicates how long `Order` is valid for.
      */
-    order_tif: 'DAY' | 'GTC' | 'IOC' | 'FOK';
+    order_tif: V2API.OrderTif;
 
     /**
      * Type of `Order`.
      */
-    order_type: 'MARKET' | 'LIMIT';
+    order_type: V2API.OrderType;
 
     /**
      * Status of `OrderRequest`. Possible values:
@@ -570,21 +572,6 @@ export namespace OrderRequestListResponse {
      * Reason for the order rejection if the order status is REJECTED
      */
     reject_message?: string | null;
-  }
-
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
   }
 }
 

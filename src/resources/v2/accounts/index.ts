@@ -3,8 +3,6 @@
 export {
   Accounts,
   type Chain,
-  type AccountRetrieveResponse,
-  type AccountDeactivateResponse,
   type AccountGetCashBalancesResponse,
   type AccountGetDividendPaymentsResponse,
   type AccountGetInterestPaymentsResponse,
@@ -18,7 +16,7 @@ export { Activities, type ActivityRetrieveBrokerageParams } from './activities';
 export {
   OrderFulfillments,
   type Fulfillment,
-  type OrderFulfillmentQueryResponse,
+  type PaginatedOrderFulfillment,
   type OrderFulfillmentRetrieveParams,
   type OrderFulfillmentQueryParams,
 } from './order-fulfillments';
@@ -47,7 +45,6 @@ export {
   type OrderType,
   type OrderListResponse,
   type OrderBatchCancelResponse,
-  type OrderGetFulfillmentsResponse,
   type OrderRetrieveParams,
   type OrderListParams,
   type OrderBatchCancelParams,
@@ -66,8 +63,6 @@ export { WalletResource, type Wallet, type WalletConnectInternalParams } from '.
 export {
   WithdrawalRequests,
   type WithdrawalRequest,
-  type WithdrawalRequestCreateResponse,
-  type WithdrawalRequestRetrieveResponse,
   type WithdrawalRequestListResponse,
   type WithdrawalRequestCreateParams,
   type WithdrawalRequestRetrieveParams,

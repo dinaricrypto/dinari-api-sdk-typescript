@@ -15,5 +15,6 @@ export {
   type KYCStatus,
   type UsKYCCheckData,
   type KYCCreateManagedCheckResponse,
+  type KYCCreateManagedCheckParams,
   type KYCSubmitParams,
 } from './kyc';

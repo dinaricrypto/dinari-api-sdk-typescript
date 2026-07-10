@@ -2,9 +2,8 @@
 
 export {
   Splits,
+  type PaginatedStockSplit,
   type StockSplit,
-  type SplitListResponse,
-  type SplitListForStockResponse,
   type SplitListParams,
   type SplitListForStockParams,
 } from './splits';
