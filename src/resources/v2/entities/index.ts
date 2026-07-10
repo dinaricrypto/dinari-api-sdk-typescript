@@ -4,7 +4,6 @@ export {
   Accounts,
   type Account,
   type Jurisdiction,
-  type AccountCreateResponse,
   type AccountListResponse,
   type AccountCreateParams,
   type AccountListParams,
@@ -12,11 +11,7 @@ export {
 export {
   Entities,
   type Entity,
-  type EntityCreateResponse,
-  type EntityUpdateResponse,
   type EntityListResponse,
-  type EntityRetrieveByIDResponse,
-  type EntityRetrieveCurrentResponse,
   type EntityCreateParams,
   type EntityUpdateParams,
   type EntityListParams,
@@ -28,5 +23,6 @@ export {
   type KYCStatus,
   type UsKYCCheckData,
   type KYCCreateManagedCheckResponse,
+  type KYCCreateManagedCheckParams,
   type KYCSubmitParams,
 } from './kyc/index';

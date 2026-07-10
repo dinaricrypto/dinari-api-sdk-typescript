@@ -1,15 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as AlloysAPI from '../alloys';
 import * as SplitsAPI from './splits';
-import {
-  SplitListForStockParams,
-  SplitListForStockResponse,
-  SplitListParams,
-  SplitListResponse,
-  Splits,
-  StockSplit,
-} from './splits';
+import { PaginatedStockSplit, SplitListForStockParams, SplitListParams, Splits, StockSplit } from './splits';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -140,7 +134,7 @@ export interface StockListResponse {
   /**
    * Pagination metadata
    */
-  pagination_metadata: StockListResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
@@ -219,21 +213,6 @@ export namespace StockListResponse {
      * URL of the company's logo. Supported formats are SVG and PNG.
      */
     logo_url?: string | null;
-  }
-
-  /**
-   * Pagination metadata
-   */
-  export interface PaginationMetadata {
-    /**
-     * Cursor for next page
-     */
-    next?: string;
-
-    /**
-     * Cursor for previous page
-     */
-    previous?: string;
   }
 }
 
@@ -530,9 +509,8 @@ export declare namespace Stocks {
 
   export {
     Splits as Splits,
+    type PaginatedStockSplit as PaginatedStockSplit,
     type StockSplit as StockSplit,
-    type SplitListResponse as SplitListResponse,
-    type SplitListForStockResponse as SplitListForStockResponse,
     type SplitListParams as SplitListParams,
     type SplitListForStockParams as SplitListForStockParams,
   };

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as AlloysAPI from '../market-data/alloys';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -39,7 +40,7 @@ export class WithdrawalRequests extends APIResource {
     accountID: string,
     body: WithdrawalRequestCreateParams,
     options?: RequestOptions,
-  ): APIPromise<WithdrawalRequestCreateResponse> {
+  ): APIPromise<WithdrawalRequest> {
     return this._client.post(path`/api/v2/accounts/${accountID}/withdrawal_requests`, { body, ...options });
   }
 
@@ -59,7 +60,7 @@ export class WithdrawalRequests extends APIResource {
     withdrawalRequestID: string,
     params: WithdrawalRequestRetrieveParams,
     options?: RequestOptions,
-  ): APIPromise<WithdrawalRequestRetrieveResponse> {
+  ): APIPromise<WithdrawalRequest> {
     const { account_id } = params;
     return this._client.get(
       path`/api/v2/accounts/${account_id}/withdrawal_requests/${withdrawalRequestID}`,
@@ -130,102 +131,16 @@ export interface WithdrawalRequest {
   updated_dt: string;
 }
 
-/**
- * Information for a withdrawal request of payment tokens from an `Account` backed
- * by a Dinari-managed `Wallet`.
- */
-export interface WithdrawalRequestCreateResponse {
-  /**
-   * ID of the `WithdrawalRequest`.
-   */
-  id: string;
-
-  /**
-   * ID of the `Account` of the `WithdrawalRequest`.
-   */
-  account_id: string;
-
-  /**
-   * Datetime at which the `WithdrawalRequest` was created. ISO 8601 timestamp.
-   */
-  created_dt: string;
-
-  /**
-   * Amount of USD+ payment tokens submitted for withdrawal.
-   */
-  payment_token_amount: number;
-
-  /**
-   * ID of the `Account` that will receive USDC payment tokens from the `Withdrawal`.
-   * This `Account` must be connected to a non-managed `Wallet` and belong to the
-   * same `Entity`.
-   */
-  recipient_account_id: string;
-
-  /**
-   * Status of the `WithdrawalRequest`
-   */
-  status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED';
-
-  /**
-   * Datetime at which the `WithdrawalRequest` was updated. ISO 8601 timestamp.
-   */
-  updated_dt: string;
-}
-
-/**
- * Information for a withdrawal request of payment tokens from an `Account` backed
- * by a Dinari-managed `Wallet`.
- */
-export interface WithdrawalRequestRetrieveResponse {
-  /**
-   * ID of the `WithdrawalRequest`.
-   */
-  id: string;
-
-  /**
-   * ID of the `Account` of the `WithdrawalRequest`.
-   */
-  account_id: string;
-
-  /**
-   * Datetime at which the `WithdrawalRequest` was created. ISO 8601 timestamp.
-   */
-  created_dt: string;
-
-  /**
-   * Amount of USD+ payment tokens submitted for withdrawal.
-   */
-  payment_token_amount: number;
-
-  /**
-   * ID of the `Account` that will receive USDC payment tokens from the `Withdrawal`.
-   * This `Account` must be connected to a non-managed `Wallet` and belong to the
-   * same `Entity`.
-   */
-  recipient_account_id: string;
-
-  /**
-   * Status of the `WithdrawalRequest`
-   */
-  status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED';
-
-  /**
-   * Datetime at which the `WithdrawalRequest` was updated. ISO 8601 timestamp.
-   */
-  updated_dt: string;
-}
-
 export interface WithdrawalRequestListResponse {
   /**
    * List of WithdrawalRequest
    */
-  data: Array<WithdrawalRequest>;
+  data: Array<WithdrawalRequestListResponse.Data>;
 
   /**
    * Pagination metadata
    */
-  pagination_metadata: WithdrawalRequestListResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
@@ -235,18 +150,46 @@ export interface WithdrawalRequestListResponse {
 
 export namespace WithdrawalRequestListResponse {
   /**
-   * Pagination metadata
+   * Information for a withdrawal request of payment tokens from an `Account` backed
+   * by a Dinari-managed `Wallet`.
    */
-  export interface PaginationMetadata {
+  export interface Data {
     /**
-     * Cursor for next page
+     * ID of the `WithdrawalRequest`.
      */
-    next?: string;
+    id: string;
 
     /**
-     * Cursor for previous page
+     * ID of the `Account` of the `WithdrawalRequest`.
      */
-    previous?: string;
+    account_id: string;
+
+    /**
+     * Datetime at which the `WithdrawalRequest` was created. ISO 8601 timestamp.
+     */
+    created_dt: string;
+
+    /**
+     * Amount of USD+ payment tokens submitted for withdrawal.
+     */
+    payment_token_amount: number;
+
+    /**
+     * ID of the `Account` that will receive USDC payment tokens from the `Withdrawal`.
+     * This `Account` must be connected to a non-managed `Wallet` and belong to the
+     * same `Entity`.
+     */
+    recipient_account_id: string;
+
+    /**
+     * Status of the `WithdrawalRequest`
+     */
+    status: 'PENDING' | 'SUBMITTED' | 'ERROR' | 'CANCELLED';
+
+    /**
+     * Datetime at which the `WithdrawalRequest` was updated. ISO 8601 timestamp.
+     */
+    updated_dt: string;
   }
 }
 
@@ -292,8 +235,6 @@ export interface WithdrawalRequestListParams {
 export declare namespace WithdrawalRequests {
   export {
     type WithdrawalRequest as WithdrawalRequest,
-    type WithdrawalRequestCreateResponse as WithdrawalRequestCreateResponse,
-    type WithdrawalRequestRetrieveResponse as WithdrawalRequestRetrieveResponse,
     type WithdrawalRequestListResponse as WithdrawalRequestListResponse,
     type WithdrawalRequestCreateParams as WithdrawalRequestCreateParams,
     type WithdrawalRequestRetrieveParams as WithdrawalRequestRetrieveParams,

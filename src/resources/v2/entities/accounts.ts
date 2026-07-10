@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as AlloysAPI from '../market-data/alloys';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -26,7 +27,7 @@ export class Accounts extends APIResource {
     entityID: string,
     body: AccountCreateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<AccountCreateResponse> {
+  ): APIPromise<Account> {
     return this._client.post(path`/api/v2/entities/${entityID}/accounts`, { body, ...options });
   }
 
@@ -78,7 +79,7 @@ export interface Account {
   /**
    * Jurisdiction of the `Account`.
    */
-  jurisdiction: 'BASELINE' | 'US';
+  jurisdiction: Jurisdiction;
 
   /**
    * ID of the brokerage account associated with the `Account`.
@@ -88,51 +89,16 @@ export interface Account {
 
 export type Jurisdiction = 'BASELINE' | 'US';
 
-/**
- * Information about an `Account` owned by an `Entity`.
- */
-export interface AccountCreateResponse {
-  /**
-   * Unique ID for the `Account`.
-   */
-  id: string;
-
-  /**
-   * Datetime when the `Account` was created. ISO 8601 timestamp.
-   */
-  created_dt: string;
-
-  /**
-   * ID for the `Entity` that owns the `Account`.
-   */
-  entity_id: string;
-
-  /**
-   * Indicates whether the `Account` is active.
-   */
-  is_active: boolean;
-
-  /**
-   * Jurisdiction of the `Account`.
-   */
-  jurisdiction: Jurisdiction;
-
-  /**
-   * ID of the brokerage account associated with the `Account`.
-   */
-  brokerage_account_id?: string | null;
-}
-
 export interface AccountListResponse {
   /**
    * List of Account
    */
-  data: Array<Account>;
+  data: Array<AccountListResponse.Data>;
 
   /**
    * Pagination metadata
    */
-  pagination_metadata: AccountListResponse.PaginationMetadata;
+  pagination_metadata: AlloysAPI.PaginationMetadata;
 
   /**
    * Version
@@ -142,18 +108,38 @@ export interface AccountListResponse {
 
 export namespace AccountListResponse {
   /**
-   * Pagination metadata
+   * Information about an `Account` owned by an `Entity`.
    */
-  export interface PaginationMetadata {
+  export interface Data {
     /**
-     * Cursor for next page
+     * Unique ID for the `Account`.
      */
-    next?: string;
+    id: string;
 
     /**
-     * Cursor for previous page
+     * Datetime when the `Account` was created. ISO 8601 timestamp.
      */
-    previous?: string;
+    created_dt: string;
+
+    /**
+     * ID for the `Entity` that owns the `Account`.
+     */
+    entity_id: string;
+
+    /**
+     * Indicates whether the `Account` is active.
+     */
+    is_active: boolean;
+
+    /**
+     * Jurisdiction of the `Account`.
+     */
+    jurisdiction: 'BASELINE' | 'US';
+
+    /**
+     * ID of the brokerage account associated with the `Account`.
+     */
+    brokerage_account_id?: string | null;
   }
 }
 
@@ -190,7 +176,6 @@ export declare namespace Accounts {
   export {
     type Account as Account,
     type Jurisdiction as Jurisdiction,
-    type AccountCreateResponse as AccountCreateResponse,
     type AccountListResponse as AccountListResponse,
     type AccountCreateParams as AccountCreateParams,
     type AccountListParams as AccountListParams,

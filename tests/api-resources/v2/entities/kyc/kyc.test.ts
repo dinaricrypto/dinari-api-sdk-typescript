@@ -23,7 +23,10 @@ describe('resource kyc', () => {
 
   // Mock server tests are disabled
   test.skip('createManagedCheck', async () => {
-    const responsePromise = client.v2.entities.kyc.createManagedCheck('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+    const responsePromise = client.v2.entities.kyc.createManagedCheck(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {},
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as KYCAPI from './kyc';
+import * as AccountsAPI from '../accounts';
 import * as DocumentAPI from './document';
 import {
   Document,
@@ -61,8 +62,12 @@ export class KYC extends APIResource {
    *   );
    * ```
    */
-  createManagedCheck(entityID: string, options?: RequestOptions): APIPromise<KYCCreateManagedCheckResponse> {
-    return this._client.post(path`/api/v2/entities/${entityID}/kyc/url`, options);
+  createManagedCheck(
+    entityID: string,
+    body: KYCCreateManagedCheckParams,
+    options?: RequestOptions,
+  ): APIPromise<KYCCreateManagedCheckResponse> {
+    return this._client.post(path`/api/v2/entities/${entityID}/kyc/url`, { body, ...options });
   }
 
   /**
@@ -688,6 +693,13 @@ export interface KYCCreateManagedCheckResponse {
   expiration_dt: string;
 }
 
+export interface KYCCreateManagedCheckParams {
+  /**
+   * Jurisdiction for the KYC check. Defaults to BASELINE.
+   */
+  jurisdiction?: AccountsAPI.Jurisdiction;
+}
+
 export type KYCSubmitParams = KYCSubmitParams.CreateBaselineKYCInput | KYCSubmitParams.CreateUsKYCInput;
 
 export declare namespace KYCSubmitParams {
@@ -735,6 +747,7 @@ export declare namespace KYC {
     type KYCStatus as KYCStatus,
     type UsKYCCheckData as UsKYCCheckData,
     type KYCCreateManagedCheckResponse as KYCCreateManagedCheckResponse,
+    type KYCCreateManagedCheckParams as KYCCreateManagedCheckParams,
     type KYCSubmitParams as KYCSubmitParams,
   };
 
