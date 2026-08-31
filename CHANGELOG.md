@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.16.0 (2026-08-31)
+
+Full Changelog: [v0.15.0...v0.16.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.15.0...v0.16.0)
+
+### Features
+
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([f1b9256](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/f1b925696de6bf2895f7fb3e86aa833016c0f1cf))
+
+
+### Bug Fixes
+
+* **ci:** bump @arethetypeswrong/cli to ^0.18.0 and run CI workflows on Node 24 ([5b23cfc](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/5b23cfcedc8f962bd44f2da61794ea0f4be2f953))
+
+
+### Chores
+
+* **internal:** codegen related update ([bc42184](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/bc42184e20251bd5de96066b610c884279c70f4e))
+
+
+### Documentation
+
+* **mcp:** document code execution modes and the local code runner ([a168de0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/commit/a168de06afb965cafeb8326e01c60dc89f7d220c))
+
 ## 0.15.0 (2026-07-10)
 
 Full Changelog: [v0.14.0...v0.15.0](https://github.com/dinaricrypto/dinari-api-sdk-typescript/compare/v0.14.0...v0.15.0)
