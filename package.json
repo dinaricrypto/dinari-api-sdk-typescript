@@ -1,79 +1,190 @@
 {
-  "name": "@dinari/api-sdk",
-  "version": "0.15.0",
-  "description": "The official TypeScript library for the Dinari API",
-  "author": "Dinari <hello@dinari.com>",
-  "types": "dist/index.d.ts",
-  "main": "dist/index.js",
-  "type": "commonjs",
-  "repository": "github:dinaricrypto/dinari-api-sdk-typescript",
-  "license": "Apache-2.0",
-  "packageManager": "pnpm@10.30.1",
-  "files": [
-    "**/*"
-  ],
-  "private": false,
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "test": "./scripts/test",
-    "build": "./scripts/build",
-    "prepublishOnly": "echo 'to publish, run pnpm build && (cd dist; pnpm publish)' && exit 1",
-    "format": "./scripts/format",
-    "prepare": "if ./scripts/utils/check-is-in-git-install.sh; then ./scripts/build && ./scripts/utils/git-swap.sh; fi",
-    "tsn": "ts-node -r tsconfig-paths/register",
-    "lint": "./scripts/lint",
-    "fix": "./scripts/format"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "@arethetypeswrong/cli": "^0.17.0",
-    "@swc/core": "^1.3.102",
-    "@swc/jest": "^0.2.29",
-    "@types/jest": "^29.4.0",
-    "@types/node": "^20.17.6",
-    "@typescript-eslint/eslint-plugin": "8.31.1",
-    "@typescript-eslint/parser": "8.31.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-unused-imports": "^4.1.4",
-    "iconv-lite": "^0.6.3",
-    "jest": "^29.4.0",
-    "prettier": "^3.0.0",
-    "publint": "^0.2.12",
-    "ts-jest": "^29.1.0",
-    "ts-node": "^10.5.0",
-    "tsc-multi": "https://github.com/stainless-api/tsc-multi/releases/download/v1.1.11/tsc-multi.tgz",
-    "tsconfig-paths": "^4.0.0",
-    "tslib": "^2.8.1",
-    "typescript": "5.8.3",
-    "typescript-eslint": "8.31.1"
-  },
-  "overrides": {
-    "minimatch": "^9.0.5"
-  },
-  "pnpm": {
-    "overrides": {
-      "minimatch": "^9.0.5"
-    }
-  },
-  "resolutions": {
-    "minimatch": "^9.0.5"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+    "name": "@dinari/api-sdk",
+    "version": "1.0.0",
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dinaricrypto/dinari-api-sdk-typescript.git"
     },
-    "./*.mjs": {
-      "default": "./dist/*.mjs"
+    "type": "commonjs",
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.mjs",
+    "types": "./dist/cjs/index.d.ts",
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./dist/esm/index.d.mts",
+                "default": "./dist/esm/index.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/index.d.ts",
+                "default": "./dist/cjs/index.js"
+            },
+            "default": "./dist/cjs/index.js"
+        },
+        "./serialization": {
+            "import": {
+                "types": "./dist/esm/serialization/index.d.mts",
+                "default": "./dist/esm/serialization/index.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/serialization/index.d.ts",
+                "default": "./dist/cjs/serialization/index.js"
+            },
+            "default": "./dist/cjs/serialization/index.js"
+        },
+        "./marketData": {
+            "import": {
+                "types": "./dist/esm/api/resources/marketData/exports.d.mts",
+                "default": "./dist/esm/api/resources/marketData/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/marketData/exports.d.ts",
+                "default": "./dist/cjs/api/resources/marketData/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/marketData/exports.js"
+        },
+        "./corporateActions": {
+            "import": {
+                "types": "./dist/esm/api/resources/corporateActions/exports.d.mts",
+                "default": "./dist/esm/api/resources/corporateActions/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/corporateActions/exports.d.ts",
+                "default": "./dist/cjs/api/resources/corporateActions/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/corporateActions/exports.js"
+        },
+        "./entities": {
+            "import": {
+                "types": "./dist/esm/api/resources/entities/exports.d.mts",
+                "default": "./dist/esm/api/resources/entities/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/entities/exports.d.ts",
+                "default": "./dist/cjs/api/resources/entities/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/entities/exports.js"
+        },
+        "./accounts": {
+            "import": {
+                "types": "./dist/esm/api/resources/accounts/exports.d.mts",
+                "default": "./dist/esm/api/resources/accounts/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/accounts/exports.d.ts",
+                "default": "./dist/cjs/api/resources/accounts/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/accounts/exports.js"
+        },
+        "./kyc": {
+            "import": {
+                "types": "./dist/esm/api/resources/kyc/exports.d.mts",
+                "default": "./dist/esm/api/resources/kyc/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/kyc/exports.d.ts",
+                "default": "./dist/cjs/api/resources/kyc/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/kyc/exports.js"
+        },
+        "./orders": {
+            "import": {
+                "types": "./dist/esm/api/resources/orders/exports.d.mts",
+                "default": "./dist/esm/api/resources/orders/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/orders/exports.d.ts",
+                "default": "./dist/cjs/api/resources/orders/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/orders/exports.js"
+        },
+        "./wallets": {
+            "import": {
+                "types": "./dist/esm/api/resources/wallets/exports.d.mts",
+                "default": "./dist/esm/api/resources/wallets/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/wallets/exports.d.ts",
+                "default": "./dist/cjs/api/resources/wallets/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/wallets/exports.js"
+        },
+        "./orderRequests": {
+            "import": {
+                "types": "./dist/esm/api/resources/orderRequests/exports.d.mts",
+                "default": "./dist/esm/api/resources/orderRequests/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/orderRequests/exports.d.ts",
+                "default": "./dist/cjs/api/resources/orderRequests/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/orderRequests/exports.js"
+        },
+        "./managedOrders": {
+            "import": {
+                "types": "./dist/esm/api/resources/managedOrders/exports.d.mts",
+                "default": "./dist/esm/api/resources/managedOrders/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/managedOrders/exports.d.ts",
+                "default": "./dist/cjs/api/resources/managedOrders/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/managedOrders/exports.js"
+        },
+        "./withdrawals": {
+            "import": {
+                "types": "./dist/esm/api/resources/withdrawals/exports.d.mts",
+                "default": "./dist/esm/api/resources/withdrawals/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/withdrawals/exports.d.ts",
+                "default": "./dist/cjs/api/resources/withdrawals/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/withdrawals/exports.js"
+        },
+        "./package.json": "./package.json"
     },
-    "./*.js": {
-      "default": "./dist/*.js"
+    "files": [
+        "dist",
+        "reference.md",
+        "README.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "format": "biome format --write --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+        "format:check": "biome format --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+        "lint": "biome lint --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+        "lint:fix": "biome lint --fix --unsafe --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+        "check": "biome check --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+        "check:fix": "biome check --fix --unsafe --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
+        "build": "pnpm build:cjs && pnpm build:esm",
+        "build:cjs": "tsc --project ./tsconfig.cjs.json",
+        "build:esm": "tsc --project ./tsconfig.esm.json && node scripts/rename-to-esm-files.js dist/esm",
+        "test": "vitest",
+        "test:unit": "vitest --project unit",
+        "test:wire": "vitest --project wire"
     },
-    "./*": {
-      "import": "./dist/*.mjs",
-      "require": "./dist/*.js"
-    }
-  }
+    "dependencies": {},
+    "devDependencies": {
+        "webpack": "^5.105.4",
+        "ts-loader": "^9.5.4",
+        "vitest": "^4.1.1",
+        "msw": "2.11.2",
+        "@types/node": "^20.0.0",
+        "typescript": "~5.9.3",
+        "@biomejs/biome": "2.4.10"
+    },
+    "browser": {
+        "fs": false,
+        "os": false,
+        "path": false,
+        "stream": false,
+        "crypto": false
+    },
+    "packageManager": "pnpm@10.33.0",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "sideEffects": false
 }
