@@ -1,0 +1,20 @@
+{
+    "cliVersion": "5.168.1",
+    "generatorName": "fernapi/fern-typescript-sdk",
+    "generatorVersion": "3.96.2",
+    "generatorConfig": {
+        "namespaceExport": "Dinari",
+        "packageJson": {
+            "name": "@dinari/api-sdk"
+        },
+        "noSerdeLayer": false,
+        "generateSubpackageExports": true,
+        "inlinePathParameters": true
+    },
+    "originGitCommit": "82cca81d4db1a8df10a9988de3d7cee216e0fc7a",
+    "originGitCommitIsDirty": true,
+    "invokedBy": "ci",
+    "requestedVersion": "1.0.0",
+    "ciProvider": "github",
+    "sdkVersion": "1.0.0"
+}
