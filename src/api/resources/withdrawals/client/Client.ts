@@ -89,7 +89,7 @@ export class WithdrawalsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/withdrawal_requests`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/withdrawal_requests`,
             ),
             method: "GET",
             headers: _headers,
@@ -194,7 +194,7 @@ export class WithdrawalsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/withdrawal_requests`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/withdrawal_requests`,
             ),
             method: "POST",
             headers: _headers,
@@ -299,7 +299,7 @@ export class WithdrawalsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/withdrawal_requests/${core.url.encodePathParam(withdrawalRequestId)}`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/withdrawal_requests/${core.url.encodePathParam(withdrawalRequestId, errors.DinariError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -396,7 +396,7 @@ export class WithdrawalsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/withdrawals`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/withdrawals`,
             ),
             method: "GET",
             headers: _headers,
@@ -496,7 +496,7 @@ export class WithdrawalsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/withdrawals/${core.url.encodePathParam(withdrawalId)}`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/withdrawals/${core.url.encodePathParam(withdrawalId, errors.DinariError)}`,
             ),
             method: "GET",
             headers: _headers,

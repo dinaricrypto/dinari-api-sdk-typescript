@@ -78,7 +78,7 @@ export class KycClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/entities/${core.url.encodePathParam(entityId)}/kyc`,
+                `api/v2/entities/${core.url.encodePathParam(entityId, errors.DinariError)}/kyc`,
             ),
             method: "GET",
             headers: _headers,
@@ -172,7 +172,7 @@ export class KycClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/entities/${core.url.encodePathParam(entityId)}/kyc`,
+                `api/v2/entities/${core.url.encodePathParam(entityId, errors.DinariError)}/kyc`,
             ),
             method: "POST",
             headers: _headers,
@@ -274,7 +274,7 @@ export class KycClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/entities/${core.url.encodePathParam(entityId)}/kyc/${core.url.encodePathParam(kycId)}/document`,
+                `api/v2/entities/${core.url.encodePathParam(entityId, errors.DinariError)}/kyc/${core.url.encodePathParam(kycId, errors.DinariError)}/document`,
             ),
             method: "GET",
             headers: _headers,
@@ -370,7 +370,7 @@ export class KycClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/entities/${core.url.encodePathParam(request.entityId)}/kyc/${core.url.encodePathParam(request.kycId)}/document`,
+                `api/v2/entities/${core.url.encodePathParam(request.entityId, errors.DinariError)}/kyc/${core.url.encodePathParam(request.kycId, errors.DinariError)}/document`,
             ),
             method: "POST",
             headers: _headers,
@@ -477,7 +477,7 @@ export class KycClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/entities/${core.url.encodePathParam(entityId)}/kyc/url`,
+                `api/v2/entities/${core.url.encodePathParam(entityId, errors.DinariError)}/kyc/url`,
             ),
             method: "POST",
             headers: _headers,

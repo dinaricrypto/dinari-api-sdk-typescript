@@ -73,7 +73,7 @@ export class WalletsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/wallet`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/wallet`,
             ),
             method: "GET",
             headers: _headers,
@@ -164,7 +164,7 @@ export class WalletsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/wallet/external/nonce`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/wallet/external/nonce`,
             ),
             method: "GET",
             headers: _headers,
@@ -268,7 +268,7 @@ export class WalletsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/wallet/external`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/wallet/external`,
             ),
             method: "POST",
             headers: _headers,
@@ -377,7 +377,7 @@ export class WalletsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/wallet/internal`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/wallet/internal`,
             ),
             method: "POST",
             headers: _headers,

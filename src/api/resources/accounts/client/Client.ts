@@ -85,7 +85,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/entities/${core.url.encodePathParam(entityId)}/accounts`,
+                `api/v2/entities/${core.url.encodePathParam(entityId, errors.DinariError)}/accounts`,
             ),
             method: "GET",
             headers: _headers,
@@ -185,7 +185,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/entities/${core.url.encodePathParam(entityId)}/accounts`,
+                `api/v2/entities/${core.url.encodePathParam(entityId, errors.DinariError)}/accounts`,
             ),
             method: "POST",
             headers: _headers,
@@ -289,7 +289,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -365,7 +365,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/deactivate`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/deactivate`,
             ),
             method: "POST",
             headers: _headers,
@@ -451,7 +451,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/portfolio`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/portfolio`,
             ),
             method: "GET",
             headers: _headers,
@@ -550,7 +550,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/cash`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/cash`,
             ),
             method: "GET",
             headers: _headers,
@@ -653,7 +653,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/interest_payments`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/interest_payments`,
             ),
             method: "GET",
             headers: _headers,
@@ -772,7 +772,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/dividend_payments`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/dividend_payments`,
             ),
             method: "GET",
             headers: _headers,
@@ -875,7 +875,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/faucet`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/faucet`,
             ),
             method: "POST",
             headers: _headers,
@@ -975,7 +975,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/activities/brokerage`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/activities/brokerage`,
             ),
             method: "GET",
             headers: _headers,
@@ -1084,7 +1084,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/token_transfers`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/token_transfers`,
             ),
             method: "GET",
             headers: _headers,
@@ -1191,7 +1191,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/token_transfers`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/token_transfers`,
             ),
             method: "POST",
             headers: _headers,
@@ -1300,7 +1300,7 @@ export class AccountsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/token_transfers/${core.url.encodePathParam(transferId)}`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/token_transfers/${core.url.encodePathParam(transferId, errors.DinariError)}`,
             ),
             method: "GET",
             headers: _headers,

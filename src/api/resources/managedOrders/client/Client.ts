@@ -82,7 +82,7 @@ export class ManagedOrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_requests/market_buy`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_requests/market_buy`,
             ),
             method: "POST",
             headers: _headers,
@@ -207,7 +207,7 @@ export class ManagedOrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_requests/market_sell`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_requests/market_sell`,
             ),
             method: "POST",
             headers: _headers,
@@ -331,7 +331,7 @@ export class ManagedOrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_requests/limit_buy`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_requests/limit_buy`,
             ),
             method: "POST",
             headers: _headers,
@@ -455,7 +455,7 @@ export class ManagedOrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_requests/limit_sell`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_requests/limit_sell`,
             ),
             method: "POST",
             headers: _headers,

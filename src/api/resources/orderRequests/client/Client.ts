@@ -89,7 +89,7 @@ export class OrderRequestsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_requests`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_requests`,
             ),
             method: "GET",
             headers: _headers,
@@ -189,7 +189,7 @@ export class OrderRequestsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_requests/${core.url.encodePathParam(orderRequestId)}`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_requests/${core.url.encodePathParam(orderRequestId, errors.DinariError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -283,7 +283,7 @@ export class OrderRequestsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_requests/eip155/permit`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_requests/eip155/permit`,
             ),
             method: "POST",
             headers: _headers,
@@ -397,7 +397,7 @@ export class OrderRequestsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_requests/eip155`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_requests/eip155`,
             ),
             method: "POST",
             headers: _headers,
@@ -510,7 +510,7 @@ export class OrderRequestsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_requests/eip155/permit_transaction`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_requests/eip155/permit_transaction`,
             ),
             method: "POST",
             headers: _headers,

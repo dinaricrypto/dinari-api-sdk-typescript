@@ -210,7 +210,7 @@ export class CorporateActionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId)}/splits`,
+                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId, errors.DinariError)}/splits`,
             ),
             method: "GET",
             headers: _headers,
@@ -312,7 +312,7 @@ export class CorporateActionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId)}/dividends`,
+                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId, errors.DinariError)}/dividends`,
             ),
             method: "GET",
             headers: _headers,
