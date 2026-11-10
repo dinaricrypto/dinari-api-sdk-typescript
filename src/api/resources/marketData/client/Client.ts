@@ -175,7 +175,7 @@ export class MarketDataClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/market_data/alloys/${core.url.encodePathParam(alloyId)}/current_price`,
+                `api/v2/market_data/alloys/${core.url.encodePathParam(alloyId, errors.DinariError)}/current_price`,
             ),
             method: "GET",
             headers: _headers,
@@ -264,7 +264,7 @@ export class MarketDataClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/market_data/alloys/${core.url.encodePathParam(alloyId)}/historical_prices/`,
+                `api/v2/market_data/alloys/${core.url.encodePathParam(alloyId, errors.DinariError)}/historical_prices/`,
             ),
             method: "GET",
             headers: _headers,
@@ -471,7 +471,7 @@ export class MarketDataClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId)}/current_price`,
+                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId, errors.DinariError)}/current_price`,
             ),
             method: "GET",
             headers: _headers,
@@ -564,7 +564,7 @@ export class MarketDataClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId)}/current_quote`,
+                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId, errors.DinariError)}/current_quote`,
             ),
             method: "GET",
             headers: _headers,
@@ -671,7 +671,7 @@ export class MarketDataClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId)}/historical_prices/`,
+                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId, errors.DinariError)}/historical_prices/`,
             ),
             method: "GET",
             headers: _headers,
@@ -775,7 +775,7 @@ export class MarketDataClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId)}/news`,
+                `api/v2/market_data/stocks/${core.url.encodePathParam(stockId, errors.DinariError)}/news`,
             ),
             method: "GET",
             headers: _headers,

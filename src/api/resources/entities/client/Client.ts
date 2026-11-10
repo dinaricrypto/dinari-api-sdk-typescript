@@ -346,7 +346,7 @@ export class EntitiesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/entities/${core.url.encodePathParam(entityId)}`,
+                `api/v2/entities/${core.url.encodePathParam(entityId, errors.DinariError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -423,7 +423,7 @@ export class EntitiesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/entities/${core.url.encodePathParam(entityId)}`,
+                `api/v2/entities/${core.url.encodePathParam(entityId, errors.DinariError)}`,
             ),
             method: "PATCH",
             headers: _headers,

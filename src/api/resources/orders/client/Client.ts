@@ -223,7 +223,7 @@ export class OrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/orders`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/orders`,
             ),
             method: "GET",
             headers: _headers,
@@ -323,7 +323,7 @@ export class OrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/orders/${core.url.encodePathParam(orderId)}`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/orders/${core.url.encodePathParam(orderId, errors.DinariError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -416,7 +416,7 @@ export class OrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/orders/${core.url.encodePathParam(orderId)}/cancel`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/orders/${core.url.encodePathParam(orderId, errors.DinariError)}/cancel`,
             ),
             method: "POST",
             headers: _headers,
@@ -544,7 +544,7 @@ export class OrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/orders/cancel`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/orders/cancel`,
             ),
             method: "POST",
             headers: _headers,
@@ -664,7 +664,7 @@ export class OrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_fulfillments`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_fulfillments`,
             ),
             method: "GET",
             headers: _headers,
@@ -779,7 +779,7 @@ export class OrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/orders/${core.url.encodePathParam(orderId)}/fulfillments`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/orders/${core.url.encodePathParam(orderId, errors.DinariError)}/fulfillments`,
             ),
             method: "GET",
             headers: _headers,
@@ -879,7 +879,7 @@ export class OrdersClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.DinariEnvironment.Production,
-                `api/v2/accounts/${core.url.encodePathParam(accountId)}/order_fulfillments/${core.url.encodePathParam(orderFulfillmentId)}`,
+                `api/v2/accounts/${core.url.encodePathParam(accountId, errors.DinariError)}/order_fulfillments/${core.url.encodePathParam(orderFulfillmentId, errors.DinariError)}`,
             ),
             method: "GET",
             headers: _headers,
