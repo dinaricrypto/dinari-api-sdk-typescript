@@ -1,22 +1,7 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
-
-export { Dinari as default } from './client';
-
-export { type Uploadable, toFile } from './core/uploads';
-export { APIPromise } from './core/api-promise';
-export { Dinari, type ClientOptions } from './client';
-export {
-  DinariError,
-  APIError,
-  APIConnectionError,
-  APIConnectionTimeoutError,
-  APIUserAbortError,
-  NotFoundError,
-  ConflictError,
-  RateLimitError,
-  BadRequestError,
-  AuthenticationError,
-  InternalServerError,
-  PermissionDeniedError,
-  UnprocessableEntityError,
-} from './core/error';
+export * as Dinari from "./api/index.js";
+export type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
+export { DinariClient } from "./Client.js";
+export { DinariEnvironment } from "./environments.js";
+export { DinariError, DinariTimeoutError } from "./errors/index.js";
+export * from "./exports.js";
+export * as serialization from "./serialization/index.js";
