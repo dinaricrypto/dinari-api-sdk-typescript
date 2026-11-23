@@ -69,8 +69,8 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@dinari/api-sdk",
-            "X-Fern-SDK-Version": "1.0.0",
-            "User-Agent": "@dinari/api-sdk/1.0.0",
+            "X-Fern-SDK-Version": "1.0.2",
+            "User-Agent": "@dinari/api-sdk/1.0.2",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
             "X-API-Secret-Key": options?.apiSecretKey ?? process.env?.DINARI_API_SECRET_KEY,
