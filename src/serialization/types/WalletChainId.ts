@@ -17,6 +17,7 @@ export const WalletChainId: core.serialization.Schema<serializers.WalletChainId.
         "eip155:56",
         "eip155:5042",
         "eip155:1329",
+        "eip155:4217",
         "eip155:11155111",
         "eip155:421614",
         "eip155:84532",
@@ -27,6 +28,7 @@ export const WalletChainId: core.serialization.Schema<serializers.WalletChainId.
         "eip155:97",
         "eip155:5042002",
         "eip155:1328",
+        "eip155:42431",
         "eip155:202110",
         "eip155:179205",
         "eip155:179202",
@@ -47,6 +49,7 @@ export declare namespace WalletChainId {
         | "eip155:56"
         | "eip155:5042"
         | "eip155:1329"
+        | "eip155:4217"
         | "eip155:11155111"
         | "eip155:421614"
         | "eip155:84532"
@@ -57,6 +60,7 @@ export declare namespace WalletChainId {
         | "eip155:97"
         | "eip155:5042002"
         | "eip155:1328"
+        | "eip155:42431"
         | "eip155:202110"
         | "eip155:179205"
         | "eip155:179202"
